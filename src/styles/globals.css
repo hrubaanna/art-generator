@@ -101,6 +101,30 @@ li h3 {
   text-align: center;
 }
 
+.div-language {
+  text-align: center;
+}
+
+.btn-language {
+  font-size: 1.2rem;
+  padding: 10px 14px;
+  margin: 2% 4%;
+  display: inline;
+  max-height: 5em;
+}
+
+.sampleDalle1 {
+  float: right;
+  object-fit: none;  
+  object-position: left;
+}
+
+.sampleDalle2 {
+  position: relative;
+  left: 5%;
+  bottom: 7em;
+}
+
 .input {
   display: block;
   margin: auto;

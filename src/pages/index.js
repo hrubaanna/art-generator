@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 const { finalDalleAssembled } = require('../Components/assembler_Obj');
 import { Facts } from '../Components/dataFile';
+import Image from 'next/image';
 
 /**
  * Page that lures the user in
@@ -24,11 +25,16 @@ class OpeningPage extends React.Component {
     }
     
     changeLanguage = (e) => {
-        finalDalleAssembled.language = e.target.value;
-        this.setState({language: e.target.value});
+        finalDalleAssembled.language = e.target.id;
+        this.setState({language: e.target.id});
         console.log(finalDalleAssembled.language);
     }
-
+    //https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/1200px-United-kingdom_flag_icon_round.svg.png
+    //<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/1200px-United-kingdom_flag_icon_round.svg.png"></img>
+    //DE flag: https://cdn-icons-png.flaticon.com/512/197/197571.png
+    //ENG flag: https://cdn-icons-png.flaticon.com/512/197/197374.png
+    //CZ flag: https://cdn-icons-png.flaticon.com/512/197/197576.png
+    //<img className="DALLE_example" id={'DALLE1'} src={require("./Images/CZ_flag.png")}></img>
     render() {
         return(
             <div>
@@ -37,17 +43,18 @@ class OpeningPage extends React.Component {
                 <p>{Facts.introText[finalDalleAssembled.language]}</p>
 
                 <div className="div-language">
-                        <button className="btn btn-language" value={'ENG'} onClick={this.changeLanguage}> 
-                            ENG
-                        </button>
-                        <button className="btn btn-language" value={'CZ'} onClick={this.changeLanguage}> 
-                            CZ
-                        </button>
-                        <button className="btn btn-language" value={'DE'} onClick={this.changeLanguage}>
-                            DE
-                        </button>
+                    
+                        <img className="btn-language" id={'DE'} onClick={this.changeLanguage} src="/Images/DE_flag.png"></img>
+                        <img className="btn-language" id={'ENG'} onClick={this.changeLanguage} src="/Images/ENG_flag.png"></img>
+                        <img className="btn-language" id={'CZ'} onClick={this.changeLanguage} src="/Images/CZ_flag.png"></img>
+                        
                 </div>
-                
+
+                <div className="div-sampleImage">
+                    <Image id={'sampleDalle1'} src="/TestPhotos/DALLE_1.png" alt="dalle1" width="500em" height="500em" />
+                    <Image id={'sampleDalle2'} src="/TestPhotos/DALLE_2.png" alt="dalle2" width="500em" height="500em" />
+                </div>
+
                 <p>{Facts.introNudge[finalDalleAssembled.language]}</p>
 
                 <Link href={'/dialoguePage'}>
