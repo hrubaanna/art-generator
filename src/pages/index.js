@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 const { finalDalleAssembled } = require('../Components/assembler_Obj');
+import { Facts } from '../Components/dataFile';
 
 /**
  * Page that lures the user in
@@ -13,8 +14,18 @@ const { finalDalleAssembled } = require('../Components/assembler_Obj');
 
 class OpeningPage extends React.Component {
 
+    state = {
+        language: finalDalleAssembled.language,
+        buttons: {
+            ENG: 'Begin',
+            CZ: 'Začít',
+            DE: 'Anfangen',
+        }
+    }
+    
     changeLanguage = (e) => {
-        finalDalleAssembled.language = e.target.value
+        finalDalleAssembled.language = e.target.value;
+        this.setState({language: e.target.value});
         console.log(finalDalleAssembled.language);
     }
 
@@ -22,29 +33,28 @@ class OpeningPage extends React.Component {
         return(
             <div>
 
-                <h1>Art Generator</h1>
-                <p>Welcome to Art Generator, where everyone can create masterpieces 
-                    alike the great artists of history. Step-by-step, I will lead 
-                    you through an artist's creative journey, which will help you 
-                    create your own original artwork. From now on, anyone can be an artist!</p>
-                <p>Create a new custom piece of art</p>
-                <Link href={'/dialoguePage'}>
-                    <button className='btn' value={'ENG'} onClick={this.changeLanguage} id='btn-ENG'>
-                        Begin 
-                    </button>
-                </Link>
-                <Link href={'/dialoguePage'}>
-                    <button className='btn' value={'CZ'} onClick={this.changeLanguage} id='btn-CZ'>
-                        Začít
-                    </button>
-                </Link>
-                <Link href={'/dialoguePage'}>
-                    <button className='btn' value={'DE'} onClick={this.changeLanguage} id='btn-DE'>
-                        Anfangen
-                    </button>
-                </Link>
-                
+                <h1>{Facts.projectHeading[finalDalleAssembled.language]}</h1>
+                <p>{Facts.introText[finalDalleAssembled.language]}</p>
 
+                <div className="div-language">
+                        <button className="btn btn-language" value={'ENG'} onClick={this.changeLanguage}> 
+                            ENG
+                        </button>
+                        <button className="btn btn-language" value={'CZ'} onClick={this.changeLanguage}> 
+                            CZ
+                        </button>
+                        <button className="btn btn-language" value={'DE'} onClick={this.changeLanguage}>
+                            DE
+                        </button>
+                </div>
+                
+                <p>{Facts.introNudge[finalDalleAssembled.language]}</p>
+
+                <Link href={'/dialoguePage'}>
+                    <button className='btn'>
+                        {this.state.buttons[finalDalleAssembled.language]}
+                    </button>
+                </Link>
 
             </div>
                 

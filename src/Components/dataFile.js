@@ -30,6 +30,23 @@ var Facts = {
         'Viele Künstler, die jetzt mit Computern arbeiten, integrieren diese Technologie in ihre Praxis als nur ein Werkzeug unter vielen, das sie austauschbar verwenden können. Viele definieren sich nicht mehr als Praktiker eines bestimmten Mediums.'],
     },
 
+    projectHeading: {
+        ENG: 'Art Generator',
+        CZ: 'CZ Heading',
+        DE: 'DE heading'
+    },
+
+    introText: {
+        ENG: 'From now on, anyone can be an artist!',
+        CZ: 'CZ subtitle',
+        DE: 'DE subtitle'
+    },
+
+    introNudge: {
+        ENG: 'Create a new custom piece of art',
+        CZ: 'CZ create',
+        DE: 'DE create'
+    },
 
     stage_names: {
         ENG: { 
