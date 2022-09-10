@@ -57,24 +57,6 @@ class DalleComponent extends React.Component {
             this.setState({error: true});
         }
     }
-
-    getTask = () => {
-        // task-7EDiVVlG84i9cZswtT2kPYFJ
-        // task-7EDiVVlG84i9cZswtT2kPYFJ
-        // task-7EDiVVlG84i9cZswtT2kPYFJ
-        // testing what the task id returns
-        fetch(`/api/dalleTask?k=${this.state.token}&q=task-7EDiVVlG84i9cZswtT2kPYFJ`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(res => res.json())
-            .then((data) => {
-                //log the image path of the first result
-                console.log(data.result.generations.data[0].generation.image_path);
-            })
-      }
     
     // selects which image you picked and hides the rest, while enlarging the remaining one and adding finalStyling component
     displayFavorite = (e) => {
@@ -92,8 +74,7 @@ class DalleComponent extends React.Component {
 
         document.querySelectorAll('img').forEach((element) => {
             if(element.id != e.target.id) {
-                element.style.display = "none";
-                //element.className = "imgNotSelected";
+                element.remove();
             }
         })
         
@@ -106,8 +87,6 @@ class DalleComponent extends React.Component {
     render() {
         return(
             <div>
-
-                <button onClick={this.getTask}></button>
 
             <h3>{this.props.langText}</h3>
             

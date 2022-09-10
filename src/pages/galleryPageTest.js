@@ -20,8 +20,6 @@ class GalleryPageTest extends React.Component {
         }, 2000)
     }
 
-
-
     getDBArt = () => {
         //get the artwork saved in mongo DB
         let artData = [];
@@ -63,10 +61,11 @@ class GalleryPageTest extends React.Component {
         let galleryList = document.createElement("ul");
         this.state.artObjects.forEach(artpiece => {
             let galleryItem = document.createElement("li");
+            galleryItem.className = "gallery-item";
             galleryItem.innerHTML = `
-            <img className='final-image' src=${artpiece.img_link} />
-            <img className='signature-image' src=${artpiece.signature} />
-            <p className='art-content'>${artpiece.content}</p>
+            <img class='final-image' src=${artpiece.img_link} />
+            <img class='signature-image' src=${artpiece.signature} />
+            <p class='art-content'>${artpiece.content}</p>
             `;
             galleryList.appendChild(galleryItem);
         });
@@ -75,10 +74,8 @@ class GalleryPageTest extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Gallery Page Test</h1>
-                {/* <input type="text"></input> */}
-            </div>
+            <div />
+            
         )
     }
 }

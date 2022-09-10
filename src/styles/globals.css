@@ -271,7 +271,16 @@ code {
   position: relative;
   left: 70%;
   bottom: 7em;
-  width: 5em;
+  width: 8em;
+  max-height: 4em;
+}
+
+.art-content {
+  padding: 8% 25% 8% 5%;
+  margin-left: 15em;
+  background-color: whitesmoke;
+  font-size: 0.4em;
+  text-align: left;
 }
 
 #query_div {
@@ -286,4 +295,10 @@ code {
 .ongoing_query {
   display: inline-block;
   margin: auto;
+}
+
+.gallery-item {
+  display: inline-grid;
+  margin: 5%;
+  width: 34%;
 }

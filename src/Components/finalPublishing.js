@@ -50,7 +50,7 @@ class FinalPublishing extends React.Component {
             CZ: 'Nyní jste skutečným umělcem, který společně vytváří novou uměleckou formu pomocí štětce umělé inteligence.',
             DE: 'DE Du bist ein Kunstmacher'
         },
-
+        signature_color: 'black',
         
     }
 
@@ -99,7 +99,7 @@ class FinalPublishing extends React.Component {
           currently_selected: false,
           //TODO: get value of selected img
           selected_pos: this.props.selected_img_pos,
-
+          signature_color: this.state.signature_color,
         }
       
         //save the artpiece
@@ -130,6 +130,11 @@ class FinalPublishing extends React.Component {
         document.querySelector(".signatureScheme").style.display = "none";
         //document.querySelector(".publish-buttons").style.display = "block";
         document.querySelector('#gallery-publish').style.display = 'block';
+    }
+
+    changeSignatureColor = () => {
+        querySelector(".signature-image").style.filter = "invert(100%)";
+        this.state.signature_color === "black" ? this.setState({signature_color: "white"}) : this.setState({signature_color: "black"});
     }
 
     // showEmailInput = () => {
@@ -190,6 +195,7 @@ class FinalPublishing extends React.Component {
 
                 <div id='gallery-publish'>
                     <p>{this.state.publishQ[this.props.lang]}</p>
+                    <button className="btn" onClick={this.changeSignatureColor}> change signature color </button>
                     <button className="btn" onClick={this.addArt}>{this.state.DoPublish[this.props.lang]}</button>
                     <button className="btn" onClick={this.cancelPublish}>{this.state.NotPublish[this.props.lang]}</button>
                 </div>
