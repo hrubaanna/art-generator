@@ -251,7 +251,7 @@ class DialoguePage extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="selectionTitle">
+        <h1 className="selection-title">
           {" "}
           {this.state.stage === 0
             ? Facts.stage_names[this.state.language]["medium"]
