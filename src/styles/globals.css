@@ -128,17 +128,17 @@ li h3 {
 }
 
 .intro-text {
+  margin-top: 15%;
   display: block;
   text-align: center;
 }
 .project-head {
-  font-size: 2rem;
+  font-size: 10rem;
   font-weight: 600;
-  margin-top: 15%;
 }
 
 .click-to-begin {
-  margin-top: 50%;
+  margin-top: 30%;
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;

@@ -51,9 +51,12 @@ class OpeningPage extends React.Component {
   };
 
   displayBackgroundImages = () => {
-    document
-      .getElementById("main")
-      .append(this.displayFloatingImages("TestPhotos/DALLE_1.png"));
+    let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
+    imgNames.forEach((imgName) => {
+      document
+        .getElementById("main")
+        .append(this.displayFloatingImages("TestPhotos/" + imgName));
+    });
   };
 
   displayFloatingImages = (image_src) => {
