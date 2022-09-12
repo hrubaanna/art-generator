@@ -61,23 +61,28 @@ class DalleComponent extends React.Component {
     this.setState({ final_image_src: e.target.src });
     this.setState({ selected_img_pos: e.target.value });
 
-    console.log(`value: ${e.target.id}`);
-    console.log(this.state.selected_img_pos);
+    //remove all photos from screen
+    document.querySelectorAll(".card").forEach((card) => {
+      card.style.display = "none";
+    });
 
-    // e.target.style.transition = "transform 0.5s ease";
+    //create new img element
+    const newImg = document.createElement("img");
+    newImg.src = e.target.src;
+    newImg.className = "final-img";
+    newImg.setAttribute(
+      "style",
+      "width: 15em; height: 15em; margin: auto; display: block; border-radius: 10px"
+    );
+    newImg.style.transition = "transform 0.5s ease";
+    //append new img element to the div grid
+    document.querySelector(".grid").appendChild(newImg);
+
     // e.target.transform = "scale(1.3)";
     // e.target.className = "finalChoice";
-    // console.log(e.target.src)
-
-    document.querySelectorAll("img").forEach((element) => {
-      if (element.id != e.target.id) {
-        element.remove();
-      }
-    });
 
     //remove other elements from page
     document.querySelector("h1").style.display = "none";
-    document.querySelector("#fact").style.display = "none";
   };
 
   render() {
@@ -90,7 +95,8 @@ class DalleComponent extends React.Component {
 
           this.state.loading == false &&
           this.state.error == false &&
-          this.state.result_provided == false ? (
+          this.state.result_provided == false &&
+          this.state.image_selected == false ? (
             <button
               id="btn-finish-assemble"
               className="btn"
@@ -114,23 +120,23 @@ class DalleComponent extends React.Component {
 
         {this.state.loading && <p>Loading</p>}
 
-        <div className="grid">
-          {this.state.result.map((result, index) => {
-            return (
-              //RODO. hide card
-              <div className="card" onClick={this.displayFavorite}>
-                <img
-                  id={index}
-                  src={result.generation.image_path}
-                  alt=""
-                  className="imgPreview"
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {this.state.image_selected ? (
+        {!this.state.image_selected ? (
+          <div className="grid">
+            {this.state.result.map((result, index) => {
+              return (
+                //RODO. hide card
+                <div className="card" onClick={this.displayFavorite}>
+                  <img
+                    id={index}
+                    src={result.generation.image_path}
+                    alt=""
+                    className="imgPreview"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
           <FinalPublishing
             finalImage={this.state.final_image_src}
             query={this.state.query}
@@ -138,7 +144,7 @@ class DalleComponent extends React.Component {
             selected_img_pos={this.state.selected_img_pos}
             lang={this.props.lang}
           ></FinalPublishing>
-        ) : null}
+        )}
       </div>
     );
   }
