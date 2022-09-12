@@ -103,7 +103,7 @@ li h3 {
   padding: 10px 14px;
   margin: 2% 5%;
   display: inline;
-  color: rgb(248, 225, 203);
+  color: #f8e1cb;
   font-family: "Work Sans", sans-serif;
   font-size: 25px;
   font-weight: 200;
@@ -127,21 +127,34 @@ li h3 {
   max-height: 5em;
 }
 
-.intro-text {
-  margin-top: 15%;
-  display: block;
-  text-align: center;
-}
-.project-head {
-  font-size: 10rem;
-  font-weight: 600;
+#main {
+  justify-content: center;
+  padding-left: 8em;
+  padding-top: 20em;
 }
 
-.click-to-begin {
-  margin-top: 30%;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+.intro-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 25px;
+  background: rgba(255, 255, 250, 0.4);
+  width: 30em;
+  height: 26em;
+  /*padding: 20px;*/
+}
+#project-head {
+  font-size: 5rem;
+  text-align: left;
+  font-weight: 400;
+  animation: fadeIn 2s;
+}
+
+#click-to-begin {
+  font-size: 1.5rem;
+  font-weight: 400;
+  display: none;
 }
 
 .input {

@@ -16,21 +16,34 @@ import Image from "next/image";
 class OpeningPage extends React.Component {
   state = {
     language: finalDalleAssembled.language,
-    projectHeading: ["YOU x DALLE2", "YOU x DALLE2", "YOU x DALLE2"],
-    projectHeading2: ["Become an Artist", "Staň se umělcem", "Künstler werden"],
+    projectHeading2: ["YOU x DALLE2", "YOU x DALLE2", "YOU x DALLE2"],
+    projectHeading: [
+      "CREATE ART WITH ARTIFICIAL INTELLIGENCE",
+      "VYTVOŘ UMĚNÍ S UMĚLOU INTELIGENCÍ",
+      "KUNST MIT KUENSTLICHER INTELLIGENZ ERSCHAFFEN",
+    ],
     introText: [
       "Click anywhere to Begin",
       "Klikni kamkoli a začni",
       "Kliken und Anfangen",
     ],
     introIndex: 0,
-    INTERVAL_LENGTH: 4000,
+    INTERVAL_LENGTH: 5000,
     intro_interval: null,
   };
 
   componentDidMount() {
     this.displayIntro();
     this.displayBackgroundImages();
+    let element = document.querySelector("#__next");
+    //element.style.backgroundColor = "rgba(255,255,250,1)";
+    element.setAttribute(
+      "style",
+      "min-height: 100vh; background-color:rgba(255,255,250,0.5); "
+    );
+    element.addEventListener("click", () => {
+      this.changeScreen();
+    });
   }
 
   changeLanguage = (e) => {
@@ -39,13 +52,50 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
+  fadeOutElement = (element) => {
+    var op = 1; // initial opacity
+    var timer = setInterval(function () {
+      if (op <= 0.05) {
+        clearInterval(timer);
+        element.style.display = "none";
+      }
+      element.style.opacity = op;
+      element.style.filter = "alpha(opacity=" + op * 100 + ")";
+      op -= op * 0.1;
+    }, 30);
+  };
+
+  fadeInElement = (element) => {
+    var op = 0.1; // initial opacity
+    element.style.display = "flex";
+    var timer = setInterval(function () {
+      if (op >= 1) {
+        clearInterval(timer);
+      }
+      element.style.opacity = op;
+      element.style.filter = "alpha(opacity=" + op * 100 + ")";
+      op += op * 0.1;
+    }, 10);
+  };
+
   displayIntro = () => {
     //Every X miliseconds change index for language of intro text
+    let waitTime = 2000; //ms
     this.state.intro_interval = setInterval(() => {
       if (this.state.introIndex == 2) {
-        this.setState({ introIndex: 0 });
+        let element = document.querySelector("#project-head");
+        this.fadeOutElement(element);
+        setTimeout(() => {
+          this.setState({ introIndex: 0 });
+          this.fadeInElement(element);
+        }, waitTime);
       } else {
-        this.setState({ introIndex: (this.state.introIndex += 1) });
+        let element = document.querySelector("#project-head");
+        this.fadeOutElement(element);
+        setTimeout(() => {
+          this.setState({ introIndex: (this.state.introIndex += 1) });
+          this.fadeInElement(element);
+        }, waitTime);
       }
     }, this.state.INTERVAL_LENGTH);
   };
@@ -82,17 +132,29 @@ class OpeningPage extends React.Component {
     introTexts.forEach((element) => {
       element.style.display = "none";
     });
+    document
+      .querySelector("#__next")
+      .setAttribute(
+        "style",
+        "min-height: 100vh; background-color:rgba(255,255,250,0); "
+      );
+    document.querySelectorAll(".floating-image").forEach((element) => {
+      element.style.display = "none";
+    });
+    clearInterval(this.state.intro_interval);
   };
 
   render() {
     return (
-      <div id="main" onClick={this.changeScreen}>
-        <h1 className="intro-text" id={"project-head"}>
-          {this.state.projectHeading[this.state.introIndex]}
-        </h1>
-        <p className="intro-text" id={"click-to-begin"}>
-          {this.state.introText[this.state.introIndex]}
-        </p>
+      <div id="main">
+        <div className="intro-text">
+          <h1 id={"project-head"}>
+            {this.state.projectHeading[this.state.introIndex]}
+          </h1>
+          <p id={"click-to-begin"}>
+            {this.state.introText[this.state.introIndex]}
+          </p>
+        </div>
 
         <div className="div-language">
           <Link href={"/dialoguePage"}>
