@@ -74,12 +74,20 @@ import { Facts, Prompts } from './dataFile';
         
         let firstSet = this.generateHints();
 
-        for(let i = 0; i < firstSet.length; i++) {
+        for(let i = 0; i < firstSet.length-3; i++) {
             let para = document.createElement('p');
             para.className = "hint";
             para.innerHTML = firstSet[i];
             this.state.hint_elements.push(para);
-            document.querySelector('.cloud').appendChild(para);
+            if (i<=1){
+                document.querySelector('#leftCloud').append(para);       
+            }
+            else if(i<=4){
+                document.querySelector('#middleCloud').append(para);
+            }
+            else{
+                document.querySelector('#rightCloud').append(para);
+            }
         }
 
         this.state.hint_elements.forEach(element => {
@@ -126,13 +134,11 @@ import { Facts, Prompts } from './dataFile';
 
     render() {
         return(
-            <div>
-                <div className="cloud">
-                
-                </div>
+            <div className='hintDiv'>
+                <div id='leftCloud'></div>
+                <div id='middleCloud'></div>
+                <div id='rightCloud'></div>
             </div>
-
-            
         )
     } 
 

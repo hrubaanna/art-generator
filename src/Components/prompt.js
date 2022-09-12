@@ -38,7 +38,7 @@ import { Prompts } from "./dataFile";
 
         return(
             <div>
-                <p>{this.selectText(medium, stage, language)}</p>
+                <p className="facts">{this.selectText(medium, stage, language)}</p>
             </div>
             
         )

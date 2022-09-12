@@ -195,17 +195,11 @@ const { responses, assembleResponse, storeResponse, assembleFinalDalle, finalDal
     }
 
     render() {
-
         return(
             <div>
-               <h1> {this.state.stage === 0 ? Facts.stage_names[this.state.language]['medium'] : null}
+                <h1 className="selectionTitle"> {this.state.stage === 0 ? Facts.stage_names[this.state.language]['medium'] : null}
                 { this.state.stage > 0 ? Facts.stage_names[this.state.language][this.state.medium][this.state.stage - 1] : null}</h1>
-
-
-                <HintCloud medium={this.state.medium} stage={this.state.stage} language={this.state.language}/>
-
-                <Prompt medium={this.state.medium} stage={this.state.stage} language={this.state.language}/>
-
+               
                 {
                     this.state.stage === 0 ?
                     // Buttons to select a medium
@@ -216,8 +210,11 @@ const { responses, assembleResponse, storeResponse, assembleFinalDalle, finalDal
                     </div>
                     
                     : 
-
+                    
                     <div>
+
+                        { <HintCloud className="hintCloud" medium={this.state.medium} stage={this.state.stage} language={this.state.language}/>}                                                   
+
                         <div id="query_div">
                             <p className="ongoing_query" id="assembled_query"></p>
                             <p className="ongoing_query" id="current_selection"></p>
@@ -228,7 +225,6 @@ const { responses, assembleResponse, storeResponse, assembleFinalDalle, finalDal
                             value = {this.state.buttons.forward[this.state.language]}
                         />
                     </div>
-                    
                 }
                 
                 <Link href={'/loadingPage'}>
@@ -237,10 +233,12 @@ const { responses, assembleResponse, storeResponse, assembleFinalDalle, finalDal
                     </button>
                 </Link>
                 
+                <Prompt medium={this.state.medium} stage={this.state.stage} language={this.state.language}/>
+                
             </div>
             
         )
-    } 
+    }
 
 }
 
