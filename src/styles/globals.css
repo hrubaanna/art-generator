@@ -103,8 +103,8 @@ li h3 {
   padding: 10px 14px;
   margin: 2% 5%;
   display: inline;
-  color:rgb(248, 225, 203); 
-  font-family: 'Work Sans', sans-serif;
+  color: rgb(248, 225, 203);
+  font-family: "Work Sans", sans-serif;
   font-size: 25px;
   font-weight: 200;
   margin-top: 15%;
@@ -223,8 +223,8 @@ code {
 
 #btn-result {
   display: none;
-  color:rgb(248, 225, 203); 
-  font-family: 'Work Sans', sans-serif;
+  color: rgb(248, 225, 203);
+  font-family: "Work Sans", sans-serif;
   font-size: 25px;
   font-weight: 200;
   margin-top: 2%;
@@ -364,14 +364,8 @@ code {
   font-weight: 600;
 }
 
-<<<<<<< HEAD
-
-.selection-title{
-  font-family:'Work Sans', sans-serif ;
-=======
-.selectionTitle {
+.selection-title {
   font-family: "Work Sans", sans-serif;
->>>>>>> 54cb84f2d0376c7bbcce97d04de45dd2b7cad288
   color: rgb(248, 225, 203);
   opacity: 1;
   font-weight: bold;
@@ -408,8 +402,8 @@ code {
 #rightCloud {
   width: 100%;
   padding-top: 2.2rem;
-} 
- 
+}
+
 #btn-next-stage {
   color: rgb(248, 225, 203);
   font-family: "Work Sans", sans-serif;
@@ -423,10 +417,9 @@ code {
   margin: 5%;
   width: 34%;
 }
-<<<<<<< HEAD
 
-.final-query{
-  font-family:'Work Sans', sans-serif ;
+.final-query {
+  font-family: "Work Sans", sans-serif;
   color: rgb(248, 225, 203);
   opacity: 1;
   font-weight: bold;
@@ -437,19 +430,16 @@ code {
   font-style: italic;
 }
 
-#btn-finish-assemble{
+#btn-finish-assemble {
   font-size: 1.2rem;
   padding: 10px 14px;
   display: inline;
-  color:rgb(248, 225, 203); 
-  font-family: 'Work Sans', sans-serif;
+  color: rgb(248, 225, 203);
+  font-family: "Work Sans", sans-serif;
   font-size: 25px;
   font-weight: 200;
   margin: auto;
   margin-top: 12%;
   margin-bottom: 12%;
   display: flex;
-
 }
-=======
->>>>>>> 54cb84f2d0376c7bbcce97d04de45dd2b7cad288
