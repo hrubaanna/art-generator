@@ -30,6 +30,7 @@ class OpeningPage extends React.Component {
 
   componentDidMount() {
     this.displayIntro();
+    this.displayBackgroundImages();
   }
 
   changeLanguage = (e) => {
@@ -49,6 +50,26 @@ class OpeningPage extends React.Component {
     }, this.state.INTERVAL_LENGTH);
   };
 
+  displayBackgroundImages = () => {
+    document
+      .getElementById("main")
+      .append(this.displayFloatingImages("TestPhotos/DALLE_1.png"));
+  };
+
+  displayFloatingImages = (image_src) => {
+    let float = document.createElement("div");
+    let size = 10; // assume image is squared
+    float.className = "floating-wrapper";
+    float.innerHTML = `<img src=${image_src} width="100%" class="floating-image"></img>`;
+    float.style.position = "absolute";
+    float.style.width = size + "vw";
+    float.style.height = size + "vh";
+    float.style.left = Math.random() * 80 + size + "vw";
+    float.style.top = Math.random() * 80 + size + "vh";
+    float.style.zIndex = -1;
+    return float;
+  };
+
   changeScreen = () => {
     let langButtons = document.querySelectorAll(".btn-language");
     let introTexts = document.querySelectorAll(".intro-text");
@@ -62,7 +83,7 @@ class OpeningPage extends React.Component {
 
   render() {
     return (
-      <div onClick={this.changeScreen}>
+      <div id="main" onClick={this.changeScreen}>
         <h1 className="intro-text" id={"project-head"}>
           {this.state.projectHeading[this.state.introIndex]}
         </h1>
