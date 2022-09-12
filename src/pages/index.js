@@ -17,8 +17,9 @@ class OpeningPage extends React.Component {
 
     state = {
         language: finalDalleAssembled.language,
+        projectHeading: ['YOU x DALLE2', 'YOU x DALLE2', 'YOU x DALLE2'],
+        projectHeading2: ['Become an Artist', 'Staň se umělcem', 'Künstler werden'],
         introText: ['Click anywhere to Begin', 'Klikni kamkoli a začni', 'Kliken und Anfangen'],
-        projectHeading: ['Become an Artist', 'Staň se umělcem', 'Künstler werden'],
         introIndex: 0,
         INTERVAL_LENGTH: 4000,
         intro_interval: null,
@@ -35,8 +36,8 @@ class OpeningPage extends React.Component {
     }
 
     displayIntro = () => {
+        //Every X miliseconds change index for language of intro text
         this.state.intro_interval = setInterval(() => {
-            //change index for language of intro text
             if (this.state.introIndex == 2){
                 this.setState({introIndex: 0})
             }
@@ -48,27 +49,19 @@ class OpeningPage extends React.Component {
 
     changeScreen = () => {
         let langButtons = document.querySelectorAll('.btn-language');
+        let introTexts = document.querySelectorAll('.intro-text');
         langButtons.forEach(element => {
             element.style.display = 'inline';})
-        //.style.display = 'inline';
+        introTexts.forEach(element => {
+            element.style.display = 'none';})
     }
-
-    //https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/1200px-United-kingdom_flag_icon_round.svg.png
-    //<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/1200px-United-kingdom_flag_icon_round.svg.png"></img>
-    //DE flag: https://cdn-icons-png.flaticon.com/512/197/197571.png
-    //ENG flag: https://cdn-icons-png.flaticon.com/512/197/197374.png
-    //CZ flag: https://cdn-icons-png.flaticon.com/512/197/197576.png
-    //<img className="DALLE_example" id={'DALLE1'} src={require("./Images/CZ_flag.png")}></img>
-    /**
-    * create element which will hold the Begin prompt
-    */
 
     render() {
         return(
             <div onClick={this.changeScreen}> 
                 
-                <h1>{this.state.projectHeading[this.state.introIndex]}</h1>
-                <p className='intro-text'>{this.state.introText[this.state.introIndex]}</p>
+                <h1 className='intro-text' id={'project-head'}>{this.state.projectHeading[this.state.introIndex]}</h1>
+                <p className='intro-text' id={'click-to-begin'}>{this.state.introText[this.state.introIndex]}</p>
 
                 <div className="div-language">
                     <Link href={'/dialoguePage'}>

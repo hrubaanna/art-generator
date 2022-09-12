@@ -108,21 +108,27 @@ li h3 {
 .btn-language {
   font-size: 1.2rem;
   padding: 10px 14px;
-  margin: 2% 4%;
+  margin: 20% 4%;
   display: none;
   max-height: 5em;
 }
 
-.sampleDalle1 {
-  float: right;
-  object-fit: none;  
-  object-position: left;
+.intro-text {
+  display: block;
+  text-align: center;
+  
+}
+.project-head {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 15%;
 }
 
-.sampleDalle2 {
-  position: relative;
-  left: 5%;
-  bottom: 7em;
+.click-to-begin{
+  margin-top: 50%;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .input {
