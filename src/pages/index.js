@@ -21,7 +21,15 @@ class OpeningPage extends React.Component {
             ENG: 'Begin',
             CZ: 'Začít',
             DE: 'Anfangen',
-        }
+        },
+        introText: ['Begin', 'Začít', 'Anfangen'],
+        introIndex: 0,
+        INTERVAL_LENGTH: 4000,
+        intro_interval: null,
+    }
+
+    componentDidMount() {
+        this.displayIntro();
     }
     
     changeLanguage = (e) => {
@@ -29,16 +37,43 @@ class OpeningPage extends React.Component {
         this.setState({language: e.target.id});
         console.log(finalDalleAssembled.language);
     }
+
+    displayIntro = () => {
+        this.state.intro_interval = setInterval(() => {
+            //change index for language of intro text
+            if (this.state.introIndex == 2){
+                this.setState({introIndex: 0})
+            }
+            else {
+                this.setState({introIndex: this.state.introIndex += 1})
+            }
+        }, this.state.INTERVAL_LENGTH);
+    }
+
+    changeScreen = () => {
+        let langButtons = document.querySelectorAll('.btn-language');
+        langButtons.forEach(element => {
+            console.log(element) ;
+            element.style.display = 'inline';})
+        //.style.display = 'inline';
+    }
+
     //https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/1200px-United-kingdom_flag_icon_round.svg.png
     //<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/1200px-United-kingdom_flag_icon_round.svg.png"></img>
     //DE flag: https://cdn-icons-png.flaticon.com/512/197/197571.png
     //ENG flag: https://cdn-icons-png.flaticon.com/512/197/197374.png
     //CZ flag: https://cdn-icons-png.flaticon.com/512/197/197576.png
     //<img className="DALLE_example" id={'DALLE1'} src={require("./Images/CZ_flag.png")}></img>
+    /**
+    * create element which will hold the Begin prompt
+    */
+
     render() {
         return(
-            <div>
+            <div onClick={this.changeScreen}> 
 
+                <h1 className='intro-text'>{this.state.introText[this.state.introIndex]}</h1>
+                
                 <h1>{Facts.projectHeading[finalDalleAssembled.language]}</h1>
                 <p>{Facts.introText[finalDalleAssembled.language]}</p>
 
@@ -55,6 +90,7 @@ class OpeningPage extends React.Component {
                 </div>
 
                 <p>{Facts.introNudge[finalDalleAssembled.language]}</p>
+        
 
             </div>
                 

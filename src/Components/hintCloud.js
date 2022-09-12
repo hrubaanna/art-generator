@@ -79,7 +79,7 @@ import { Facts, Prompts } from './dataFile';
             para.className = "hint";
             para.innerHTML = firstSet[i];
             this.state.hint_elements.push(para);
-            document.querySelector('div').appendChild(para);
+            document.querySelector('.cloud').appendChild(para);
         }
 
         this.state.hint_elements.forEach(element => {
