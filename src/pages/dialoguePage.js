@@ -76,6 +76,7 @@ class DialoguePage extends React.Component {
         DE: "Fertig",
       },
     },
+    RESET_TIME: 600000000,
   };
 
   //when page loads, start timer for 30 seconds, reset state
@@ -84,7 +85,7 @@ class DialoguePage extends React.Component {
       //return to start page
       this.resetState();
       Router.push("/");
-    }, 1200000);
+    }, this.state.RESET_TIME);
   }
 
   //reset state to initial values
@@ -113,7 +114,7 @@ class DialoguePage extends React.Component {
 
       this.resetState();
       Router.push("/");
-    }, 600000);
+    }, this.state.RESET_TIME);
 
     /***
      * Button to next stage:

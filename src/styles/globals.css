@@ -318,6 +318,7 @@ code {
 
 .final-image {
   z-index: 1;
+  margin: auto;
 }
 
 .imgNotSelected {
@@ -442,9 +443,4 @@ code {
   margin-top: 12%;
   margin-bottom: 12%;
   display: flex;
-}
-
-.favorite-img {
-  max-width: 5em;
-  max-height: 5em;
 }
