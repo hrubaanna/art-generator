@@ -43,11 +43,11 @@ const { Facts } = require('../Components/dataFile.js');
 
         return(
             <div>
-               <h1> {this.state.headings[finalDalleAssembled.language]} </h1>
+               <h1 className="selection-title"> {this.state.headings[finalDalleAssembled.language]} </h1>
 
                 <DalleComponent text={finalDalleAssembled.textENG} langText={finalDalleAssembled.textDECZ} lang={finalDalleAssembled.language}/>
 
-               <h3 id="fact"> { this.state.funFact } </h3>
+               <h3 className="facts"> { this.state.funFact } </h3>
 
             </div>
             

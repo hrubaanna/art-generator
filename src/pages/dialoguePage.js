@@ -197,7 +197,7 @@ const { responses, assembleResponse, storeResponse, assembleFinalDalle, finalDal
     render() {
         return(
             <div>
-                <h1 className="selectionTitle"> {this.state.stage === 0 ? Facts.stage_names[this.state.language]['medium'] : null}
+                <h1 className="selection-title"> {this.state.stage === 0 ? Facts.stage_names[this.state.language]['medium'] : null}
                 { this.state.stage > 0 ? Facts.stage_names[this.state.language][this.state.medium][this.state.stage - 1] : null}</h1>
                
                 {

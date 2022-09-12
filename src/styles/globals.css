@@ -95,6 +95,12 @@ li h3 {
   padding: 10px 14px;
   margin: 2% 5%;
   display: inline;
+  color:rgb(248, 225, 203); 
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 15%;
+  margin-bottom: 15%;
 }
 
 .div-medium {
@@ -204,6 +210,11 @@ code {
 
 #btn-result {
   display: none;
+  color:rgb(248, 225, 203); 
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 2%;
 }
 
 #fact {
@@ -341,7 +352,7 @@ code {
 }
 
 
-.selectionTitle{
+.selection-title{
   font-family:'Work Sans', sans-serif ;
   color: rgb(248, 225, 203);
   opacity: 1;
@@ -394,4 +405,31 @@ width: 100%;
   display: inline-grid;
   margin: 5%;
   width: 34%;
+}
+
+.final-query{
+  font-family:'Work Sans', sans-serif ;
+  color: rgb(248, 225, 203);
+  opacity: 1;
+  font-weight: bold;
+  font-size: 25px;
+  padding-bottom: 5px;
+  margin-bottom: 5%;
+  margin-top: 3%;
+  font-style: italic;
+}
+
+#btn-finish-assemble{
+  font-size: 1.2rem;
+  padding: 10px 14px;
+  display: inline;
+  color:rgb(248, 225, 203); 
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  margin: auto;
+  margin-top: 12%;
+  margin-bottom: 12%;
+  display: flex;
+
 }

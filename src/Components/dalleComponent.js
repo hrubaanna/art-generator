@@ -89,13 +89,13 @@ class DalleComponent extends React.Component {
         return(
             <div>
 
-            <h3>{this.props.langText}</h3>
+            <h3 className="final-query">{this.props.langText}</h3>
             
             {
                 //hide the Get Result button after the query has been sent
 
                 this.state.loading == false && this.state.error == false && this.state.result_provided == false ?
-                <button className="btn" onClick={this.getDalle2}> {this.state.button[this.props.lang]} </button>
+                <button id="btn-finish-assemble" className="btn" onClick={this.getDalle2}> {this.state.button[this.props.lang]} </button>
                 : null
             }
 
