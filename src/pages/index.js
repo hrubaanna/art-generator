@@ -43,25 +43,18 @@ class OpeningPage extends React.Component {
                 <p>{Facts.introText[finalDalleAssembled.language]}</p>
 
                 <div className="div-language">
-                    
+                    <Link href={'/dialoguePage'}>
                         <img className="btn-language" id={'DE'} onClick={this.changeLanguage} src="/Images/DE_flag.png"></img>
+                    </Link>
+                    <Link href={'/dialoguePage'}>
                         <img className="btn-language" id={'ENG'} onClick={this.changeLanguage} src="/Images/ENG_flag.png"></img>
+                    </Link>
+                    <Link href={'/dialoguePage'}>
                         <img className="btn-language" id={'CZ'} onClick={this.changeLanguage} src="/Images/CZ_flag.png"></img>
-                        
-                </div>
-
-                <div className="div-sampleImage">
-                    <Image id={'sampleDalle1'} src="/TestPhotos/DALLE_1.png" alt="dalle1" width="500em" height="500em" />
-                    <Image id={'sampleDalle2'} src="/TestPhotos/DALLE_2.png" alt="dalle2" width="500em" height="500em" />
+                    </Link>
                 </div>
 
                 <p>{Facts.introNudge[finalDalleAssembled.language]}</p>
-
-                <Link href={'/dialoguePage'}>
-                    <button className='btn'>
-                        {this.state.buttons[finalDalleAssembled.language]}
-                    </button>
-                </Link>
 
             </div>
                 
