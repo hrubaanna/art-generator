@@ -23,7 +23,8 @@ class DalleComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({token: 'sess-ACAi73JHw0p4uzU8M4kzAT1lZm7DVamU6PeyUvkI'})
+        console.log(process.env.DALLE_TOKEN)
+        this.setState({token: process.env.DALLE_TOKEN})
         this.setState({query: this.props.text})
     }
 
@@ -33,7 +34,7 @@ class DalleComponent extends React.Component {
             this.setState({loading: true});
             this.setState({error: false});
             
-            fetch(`/api/dalle2?k=${this.state.token}&q=${this.state.query}`, {
+            fetch(`/api/dalle2?q=${this.state.query}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

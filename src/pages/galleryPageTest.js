@@ -6,7 +6,6 @@ class GalleryPageTest extends React.Component {
         art: [],
         artObjects: [],
         DBLoaded: false,
-        token: 'sess-ACAi73JHw0p4uzU8M4kzAT1lZm7DVamU6PeyUvkI',
     }
 
     //get art
@@ -39,7 +38,7 @@ class GalleryPageTest extends React.Component {
 
         //get the task for each art piece
         this.state.art.forEach(artpiece => {
-            fetch(`/api/dalleTask?k=${this.state.token}&q=${artpiece.task_id}`, {
+            fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
                 method: "GET", 
                 headers: {
                     'Content-Type': 'application/json'
