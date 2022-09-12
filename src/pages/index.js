@@ -17,12 +17,8 @@ class OpeningPage extends React.Component {
 
     state = {
         language: finalDalleAssembled.language,
-        buttons: {
-            ENG: 'Begin',
-            CZ: 'Začít',
-            DE: 'Anfangen',
-        },
-        introText: ['Begin', 'Začít', 'Anfangen'],
+        introText: ['Click anywhere to Begin', 'Klikni kamkoli a začni', 'Kliken und Anfangen'],
+        projectHeading: ['Become an Artist', 'Staň se umělcem', 'Künstler werden'],
         introIndex: 0,
         INTERVAL_LENGTH: 4000,
         intro_interval: null,
@@ -53,7 +49,6 @@ class OpeningPage extends React.Component {
     changeScreen = () => {
         let langButtons = document.querySelectorAll('.btn-language');
         langButtons.forEach(element => {
-            console.log(element) ;
             element.style.display = 'inline';})
         //.style.display = 'inline';
     }
@@ -71,11 +66,9 @@ class OpeningPage extends React.Component {
     render() {
         return(
             <div onClick={this.changeScreen}> 
-
-                <h1 className='intro-text'>{this.state.introText[this.state.introIndex]}</h1>
                 
-                <h1>{Facts.projectHeading[finalDalleAssembled.language]}</h1>
-                <p>{Facts.introText[finalDalleAssembled.language]}</p>
+                <h1>{this.state.projectHeading[this.state.introIndex]}</h1>
+                <p className='intro-text'>{this.state.introText[this.state.introIndex]}</p>
 
                 <div className="div-language">
                     <Link href={'/dialoguePage'}>
@@ -88,8 +81,6 @@ class OpeningPage extends React.Component {
                         <img className="btn-language" id={'CZ'} onClick={this.changeLanguage} src="/Images/CZ_flag.png"></img>
                     </Link>
                 </div>
-
-                <p>{Facts.introNudge[finalDalleAssembled.language]}</p>
         
 
             </div>
