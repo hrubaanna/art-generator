@@ -1,60 +1,64 @@
 import React from "react";
-import Image from "next/image";
+import SignatureCanvas from "react-signature-canvas";
 
 class TestPage extends React.Component {
-  showFavorite = (e) => {
-    let img = e.target;
-    document.querySelectorAll("img").forEach((photo) => {
-      if (photo.id != e.target.id) {
-        console.log(photo);
-        photo.style.display = "none";
-      }
-    });
-    img.setAttribute(
-      "style",
-      "width: 5em; height: 5em; margin: auto; display: block;"
-    );
-    img.className = "favorite-img";
-    document.querySelector(".card").appendChild(img);
+  state = {
+    signature_color: "black",
+  };
+
+  showFavorite = (e) => {};
+
+  sigPad = {};
+
+  clear = () => {
+    this.sigPad.clear();
+  };
+
+  changeSignatureColor = () => {
+    if (this.state.signature_color === "black") {
+      this.setState({ signature_color: "white" });
+      document.querySelector(".signature-image").style.filter = "invert(100%)";
+    } else {
+      this.setState({ signature_color: "black" });
+      document.querySelector(".signature-image").style.filter = "invert(0%)";
+    }
+  };
+
+  saveSignature = () => {
+    //place signature image on canvas
+    let signatureImage = document.createElement("img");
+    //set source as the signature image
+    signatureImage.src = this.sigPad.getTrimmedCanvas().toDataURL("image/png");
+    signatureImage.setAttribute("class", "signature-image");
+
+    document.querySelector("div").appendChild(signatureImage);
+
+    document
+      .querySelector("img")
+      .setAttribute(
+        "style",
+        "margin: auto; display: block; border-radius: 10px;"
+      );
   };
 
   render() {
     return (
       <div>
-        <div className="card">
-          {/* TODO: test removing photo as in Dalle Component, test changing signature color to inverted */}
-
-          <Image
-            onClick={this.showFavorite}
-            id="0"
-            value="0"
-            src="/TestPhotos/DALLE_2.png"
-            width="500em"
-            height="500em"
-            className="test-img"
-          />
-          <Image
-            id="1"
-            src="/TestPhotos/DALLE_2.png"
-            width="500em"
-            height="500em"
-            className="test-img"
-          />
-          <Image
-            id="2"
-            src="/TestPhotos/DALLE_2.png"
-            width="500em"
-            height="500em"
-            className="test-img"
-          />
-          <Image
-            id="3"
-            src="/TestPhotos/DALLE_2.png"
-            width="500em"
-            height="500em"
-            className="test-img"
-          />
-        </div>
+        <img src="/TestPhotos/DALLE_1.png"></img>
+        <SignatureCanvas
+          canvasProps={{
+            width: 400,
+            height: 250,
+            className: "sigCanvas",
+          }}
+          ref={(ref) => {
+            this.sigPad = ref;
+          }}
+          penColor="black"
+        />
+        <button onClick={this.saveSignature}>Save</button>
+        <button onClick={this.clear}>Clear</button>
+        <button onClick={this.changeSignatureColor}>Change Color</button>
       </div>
     );
   }

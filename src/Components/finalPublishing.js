@@ -59,13 +59,16 @@ class FinalPublishing extends React.Component {
   };
 
   saveSignature = () => {
-    document.querySelector(".signatureScheme").style.display = "none";
     //document.querySelector(".publish-buttons").style.display = "block";
     document.querySelector("#gallery-publish").style.display = "block";
 
     //show signature on image
     let finalImage = document.createElement("img");
     finalImage.src = this.props.finalImage;
+    finalImage.setAttribute(
+      "style",
+      "margin: auto; display: block; border-radius: 10px;"
+    );
     finalImage.setAttribute("className", "final-image");
 
     //place final image on canvas
@@ -75,9 +78,12 @@ class FinalPublishing extends React.Component {
     let signatureImage = document.createElement("img");
     //set source as the signature image
     signatureImage.src = this.sigPad.getTrimmedCanvas().toDataURL("image/png");
-    signatureImage.setAttribute("className", "signature-image");
-
+    signatureImage.setAttribute("class", "signature-image");
+    signatureImage.style.display = "block";
+    console.log(signatureImage);
     document.querySelector("#gallery-publish").appendChild(signatureImage);
+
+    document.querySelector(".signatureScheme").style.display = "none";
   };
 
   //add photo to gallery database, show the gallery on the page
@@ -130,10 +136,13 @@ class FinalPublishing extends React.Component {
   };
 
   changeSignatureColor = () => {
-    querySelector(".signature-image").style.filter = "invert(100%)";
-    this.state.signature_color === "black"
-      ? this.setState({ signature_color: "white" })
-      : this.setState({ signature_color: "black" });
+    if (this.state.signature_color === "black") {
+      this.setState({ signature_color: "white" });
+      document.querySelector(".signature-image").style.filter = "invert(100%)";
+    } else {
+      this.setState({ signature_color: "black" });
+      document.querySelector(".signature-image").style.filter = "invert(0%)";
+    }
   };
 
   // showEmailInput = () => {
@@ -202,11 +211,10 @@ class FinalPublishing extends React.Component {
 
         <div id="gallery-publish">
           <p>{this.state.publishQ[this.props.lang]}</p>
-          <button className="btn" onClick={this.changeSignatureColor}>
-            {" "}
-            change signature color{" "}
+          <button className="btn btn-final" onClick={this.changeSignatureColor}>
+            change signature color
           </button>
-          <button className="btn" onClick={this.addArt}>
+          <button className="btn btn-final" onClick={this.addArt}>
             {this.state.DoPublish[this.props.lang]}
           </button>
           <button className="btn" onClick={this.cancelPublish}>
