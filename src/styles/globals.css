@@ -160,15 +160,25 @@ li h3 {
 .cloud {
   display: block;
   margin: auto;
-  text-align: center;
 }
 
 .hint {
-  float: left;
-  padding-left: 2%;
   font-weight: 200;
   animation: fadeIn 1s;
   cursor: crosshair;
+  padding-right: 0.5%;
+  padding-left: 0.5%;
+  border-radius: 25px;
+  border: 2px solid rgba(248, 225, 203, 0.4) ;
+  margin-left:5%;
+  margin-right:5%;
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
+  color:rgb(248, 225, 203);
+  margin: 0 auto;
+  max-width: 100%;
+  margin-bottom:2rem;
+  width: 200px;
 }
 
 .hint:hover {
@@ -309,16 +319,75 @@ code {
 
 #query_div {
   text-align: center;
+  margin: auto;
+  width: 100%;
+  margin-top: 0%;
 }
 
 #current_selection {
   margin-left: 1%;
-  color: aqua;
+  color: rgba(248, 225, 203, 1);
+  font-style: italic;
 }
 
 .ongoing_query {
   display: inline-block;
   margin: auto;
+  padding-bottom:0.3% ;
+  border-bottom: 2px solid rgba(248, 225, 203, 0.7) ;
+  color: rgba(248, 225, 203, 0.6);
+  font-weight: 600;
+  
+}
+
+
+.selectionTitle{
+  font-family:'Work Sans', sans-serif ;
+  color: rgb(248, 225, 203);
+  opacity: 1;
+  font-weight: bold;
+  font-size: 40px;
+  padding-bottom: 30px;
+  margin-bottom: 2%;
+  margin-top: 6%;
+}
+
+.facts{
+  font-family: 'Work Sans', sans-serif;
+  opacity: 0.8;
+  color:rgb(248, 225, 203) ;
+
+}
+
+.hintDiv{
+  height: 170px;
+  vertical-align: middle;
+  display: flex;
+  justify-content: space-evenly;
+  width: 65%;
+  margin: auto;
+}
+
+#middleCloud{
+width: 100%;
+}
+
+#leftCloud{
+  width: 100%;
+  padding-top: 2.2rem;
+}
+
+#rightCloud{
+  width: 100%;
+  padding-top: 2.2rem;
+}
+
+#btn-next-stage{
+  color:rgb(248, 225, 203); 
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 2%;
 }
 
 .gallery-item {

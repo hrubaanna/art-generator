@@ -3,17 +3,19 @@ import Image from 'next/image';
 
 class TestPage extends React.Component {
 
-    printEnv = () => {
-        console.log(process.env.NEXT_PUBLIC_DALLE_TOKEN)
-    }
-
     render() {
         return(
             <div>
                 <div className="card">
 
                     {/* TODO: test removing photo as in Dalle Component, test changing signature color to inverted */}
-                    <img id='0' src="/Images/DE_flag.png" alt="" className="imgPreview" onClick={this.printEnv}/>
+                    
+                    <Image id='0' src="/TestPhotos/DALLE_2.png" width="500em" height="500em" className="test-img" />
+                    <Image id='1' src="/TestPhotos/DALLE_2.png" width="500em" height="500em" className="test-img" />
+                    <Image id='2' src="/TestPhotos/DALLE_2.png" width="500em" height="500em" className="test-img" />
+                    <Image id='3' src="/TestPhotos/DALLE_2.png" width="500em" height="500em" className="test-img" />
+                    
+                    
                 </div>
                 
             </div>
