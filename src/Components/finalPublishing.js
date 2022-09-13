@@ -166,6 +166,7 @@ class FinalPublishing extends React.Component {
   };
 
   render() {
+    // TODO: remove arpiece description, buttons next to each other
     return (
       <div>
         <div className="signatureScheme">
