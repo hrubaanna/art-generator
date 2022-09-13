@@ -128,25 +128,37 @@ class OpeningPage extends React.Component {
   };
 
   displayIntroText = () => {
+    this.setState({ intro_interval: setInterval(this.changeIntroText, 3000) });
+
+    //both pulse, not through js, through css
+    //change both language at the same time
     //Every X miliseconds change index for language of intro text
-    let waitTime = 2000; //ms
-    this.state.intro_interval = setInterval(() => {
-      if (this.state.introIndex == 2) {
-        let element = document.querySelector("#project-heading");
-        this.fadeOutElement(element, 30);
-        setTimeout(() => {
-          this.setState({ introIndex: 0 });
-          this.fadeInElement(element, 10, 0.1);
-        }, waitTime);
-      } else {
-        let element = document.querySelector("#project-heading");
-        this.fadeOutElement(element, 30, 0.1);
-        setTimeout(() => {
-          this.setState({ introIndex: (this.state.introIndex += 1) });
-          this.fadeInElement(element, 10);
-        }, waitTime);
-      }
-    }, this.state.INTERVAL_LENGTH);
+    // let waitTime = 2000; //ms
+    // this.state.intro_interval = setInterval(() => {
+    //   if (this.state.introIndex == 2) {
+    //     let element = document.querySelector("#project-heading");
+    //     this.fadeOutElement(element, 30);
+    //     setTimeout(() => {
+    //       this.setState({ introIndex: 0 });
+    //       this.fadeInElement(element, 10, 0.1);
+    //     }, waitTime);
+    //   } else {
+    //     let element = document.querySelector("#project-heading");
+    //     this.fadeOutElement(element, 30, 0.1);
+    //     setTimeout(() => {
+    //       this.setState({ introIndex: (this.state.introIndex += 1) });
+    //       this.fadeInElement(element, 10);
+    //     }, waitTime);
+    //   }
+    // }, this.state.INTERVAL_LENGTH);
+  };
+
+  changeIntroText = () => {
+    if (this.state.introIndex == 2) {
+      this.setState({ introIndex: 0 });
+    } else {
+      this.setState({ introIndex: (this.state.introIndex += 1) });
+    }
   };
 
   displayBackgroundImages = () => {
@@ -240,13 +252,15 @@ class OpeningPage extends React.Component {
           <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
         </video>
 
-        <div id={"project-heading-wrapper"}>
-          <span id="project-heading">
-            {this.state.projectHeading[this.state.introIndex]}
-          </span>
-        </div>
-        <div id={"click-to-begin"}>
-          {this.state.introText[this.state.introIndex]}
+        <div id="overlay-text">
+          <div id={"project-heading-wrapper"}>
+            <span id="project-heading">
+              {this.state.projectHeading[this.state.introIndex]}
+            </span>
+          </div>
+          <div id={"click-to-begin"}>
+            {this.state.introText[this.state.introIndex]}
+          </div>
         </div>
 
         <div className="div-language">

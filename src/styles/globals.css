@@ -169,6 +169,47 @@ li h3 {
   display: table;
 }
 
+@-webkit-keyframes color_change_heading {
+  from {
+    color: rgba(180, 180, 180, 0);
+  }
+  to {
+    color: rgba(248, 225, 203, 0.4);
+  }
+}
+@-moz-keyframes color_change_heading {
+  from {
+    color: rgba(180, 180, 180, 0);
+  }
+  to {
+    color: rgba(248, 225, 203, 0.4);
+  }
+}
+@-ms-keyframes color_change_heading {
+  from {
+    color: rgba(180, 180, 180, 0);
+  }
+  to {
+    color: rgba(248, 225, 203, 0.4);
+  }
+}
+@-o-keyframes color_change_heading {
+  from {
+    color: rgba(180, 180, 180, 0) een;
+  }
+  to {
+    color: rgba(248, 225, 203, 0.4);
+  }
+}
+@keyframes color_change_heading {
+  from {
+    color: rgba(180, 180, 180, 0);
+  }
+  to {
+    color: rgba(248, 225, 203, 0.4);
+  }
+}
+
 #project-heading {
   position: absolute;
   display: table-cell;
@@ -187,10 +228,15 @@ li h3 {
   line-height: 1.25em;
   font-weight: 300;
   font-family: "Work Sans", sans-serif;
-  animation: fadeIn 2s;
+
+  -webkit-animation: color_change_heading 1.5s infinite alternate;
+  -moz-animation: color_change_heading 1.5s infinite alternate;
+  -ms-animation: color_change_heading 1.5s infinite alternate;
+  -o-animation: color_change_heading 1.5s infinite alternate;
+  animation: color_change_heading 1.5s infinite alternate;
 }
 
-@-webkit-keyframes color_change {
+@-webkit-keyframes color_change_click {
   from {
     color: rgba(248, 225, 203, 0.4);
   }
@@ -198,7 +244,7 @@ li h3 {
     color: rgba(180, 180, 180, 0.2);
   }
 }
-@-moz-keyframes color_change {
+@-moz-keyframes color_change_click {
   from {
     color: rgba(248, 225, 203, 0.4);
   }
@@ -206,7 +252,7 @@ li h3 {
     color: rgba(180, 180, 180, 0.2);
   }
 }
-@-ms-keyframes color_change {
+@-ms-keyframes color_change_click {
   from {
     color: rgba(248, 225, 203, 0.4);
   }
@@ -214,7 +260,7 @@ li h3 {
     color: rgba(180, 180, 180, 0.2);
   }
 }
-@-o-keyframes color_change {
+@-o-keyframes color_change_click {
   from {
     color: rgba(248, 225, 203, 0.4);
   }
@@ -222,7 +268,7 @@ li h3 {
     color: rgba(180, 180, 180, 0.2) een;
   }
 }
-@keyframes color_change {
+@keyframes color_change_click {
   from {
     color: rgba(248, 225, 203, 0.4);
   }
@@ -238,11 +284,11 @@ li h3 {
   color: rgba(248, 225, 203, 0.4);
   font-size: 3rem;
   font-weight: 400;
-  -webkit-animation: color_change 1s infinite alternate;
-  -moz-animation: color_change 1s infinite alternate;
-  -ms-animation: color_change 1s infinite alternate;
-  -o-animation: color_change 1s infinite alternate;
-  animation: color_change 1s infinite alternate;
+  -webkit-animation: color_change_click 1s infinite alternate;
+  -moz-animation: color_change_click 1s infinite alternate;
+  -ms-animation: color_change_click 1s infinite alternate;
+  -o-animation: color_change_click 1s infinite alternate;
+  animation: color_change_click 1s infinite alternate;
 }
 
 #background-images {
