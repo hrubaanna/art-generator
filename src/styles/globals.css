@@ -207,6 +207,17 @@ li h3 {
   animation: color_change 1s infinite alternate;
 }
 
+#background-images {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 25vw 25vw;
+  grid-row: 50vh 50vh;
+}
+
 .input {
   display: block;
   margin: auto;
