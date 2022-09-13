@@ -28,12 +28,15 @@ class OpeningPage extends React.Component {
       "kliken und Anfangen",
     ],
     introIndex: 0,
-    INTERVAL_LENGTH: 5000,
     intro_interval: null,
     art: [],
     artObjects: [],
     DBLoaded: false,
     introDisplayed: true,
+
+    // constants
+    IMAGE_SPAWN_DURATION: 1000,
+    INTERVAL_LENGTH: 5000,
   };
 
   componentDidMount() {
@@ -177,25 +180,29 @@ class OpeningPage extends React.Component {
   };
 
   displayBackgroundImages = () => {
-    const IMAGE_SPAWN_INTERVAL = 5000;
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
+    console.log(this.state.artObjects);
     let imgPosition = 0;
+    let previousPosition = this.displayFloatingImages(
+      "TestPhotos/" + imgNames[imgPosition],
+      previousPosition
+    );
     let timer = setInterval(() => {
       if (this.state.introDisplayed == false) {
         clearInterval(timer);
         return;
       }
-      this.displayFloatingImages(
+      previousPosition = this.displayFloatingImages(
         "TestPhotos/" + imgNames[imgPosition],
-        imgPosition
+        previousPosition
       );
       if (imgPosition == 3) {
         imgPosition = 0;
       } else {
         imgPosition += 1;
       }
-    }, IMAGE_SPAWN_INTERVAL);
+    }, this.state.IMAGE_SPAWN_DURATION);
   };
 
   removeBackgroundGrid = () => {
@@ -212,29 +219,21 @@ class OpeningPage extends React.Component {
     for (let i = 0; i < 4; i++) {
       let wrapper = document.createElement("div");
       wrapper.id = "floating-wrapper-" + i;
-      wrapper.style.paddingRight = "10vh";
-      wrapper.style.paddingBottom = "10vh";
-      wrapper.style.zIndex = -1;
+      wrapper.className = "floating-wrapper";
       document.getElementById("background-images").append(wrapper);
     }
   };
 
-  displayFloatingImages = (source, position) => {
-    const FADEIN_SPEED = 100;
-    const GROW_SPEED = 1000;
-
-    const FADEIN_DURATION = 5000;
-
-    let wrapper = document.getElementById(`floating-wrapper-${position}`);
-
-    // remove previous image
-    if (
-      wrapper.contains(document.getElementById(`floating-image-${position}`))
-    ) {
-      wrapper.removeChild(
-        document.getElementById(`floating-image-${position}`)
-      );
+  displayFloatingImages = (source, previousPosition) => {
+    function getRandomPosition() {
+      let x = Math.floor(Math.random() * 4);
+      if (x == previousPosition) {
+        return getRandomPosition();
+      }
+      return x;
     }
+    let position = getRandomPosition();
+    let wrapper = document.getElementById(`floating-wrapper-${position}`);
 
     // create new image
     let image = document.createElement("img");
@@ -247,10 +246,6 @@ class OpeningPage extends React.Component {
     image.style.top = Math.random() * 100 + "%";
     image.style.opacity = 0;
     wrapper.append(image);
-    // image.animate([{ scale: 1.0 }, { scale: 2.0 }], {
-    //   duration: FADEIN_DURATION,
-    //   fill: "forwards",
-    // });
     image.animate(
       [
         { opacity: "0" },
@@ -259,29 +254,29 @@ class OpeningPage extends React.Component {
         },
       ],
       {
-        duration: FADEIN_DURATION,
+        duration: this.state.IMAGE_SPAWN_DURATION / 2,
         direction: "alternate",
         iterations: "2",
       }
     );
+    image.animate(
+      [
+        { scale: "1.0", translate: "-10vw, 10vw" },
+        {
+          scale: "2.0",
+          translate: "-20vw, 20vw",
+        },
+      ],
+      {
+        duration: this.state.IMAGE_SPAWN_DURATION,
+        fill: "forwards",
+      }
+    );
 
-    // image.animate(
-    //   [
-    //     { scale: "1.0" },
-    //     {
-    //       opacity: "2.0",
-    //     },
-    //   ],
-    //   {
-    //     duration: FADEIN_DURATION,
-    //     direction: "forwards",
-    //   }
-    // );
-
-    // animate spawning of image
-    // this.fadeInElement(image, FADEIN_SPEED, 0);
-    // this.growElement(image, GROW_SPEED, 1.5, 0.001);
-    return image;
+    setTimeout(() => {
+      wrapper.removeChild(image);
+    }, this.state.IMAGE_SPAWN_DURATION);
+    return position;
   };
 
   changeScreen = () => {
