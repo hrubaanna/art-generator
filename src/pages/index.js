@@ -28,16 +28,18 @@ class OpeningPage extends React.Component {
       "kliken und Anfangen",
     ],
     introIndex: 0,
-    INTERVAL_LENGTH: 5000,
     intro_interval: null,
     art: [],
     artObjects: [],
     DBLoaded: false,
     introDisplayed: true,
+
+    // constants
+    IMAGE_SPAWN_DURATION: 1000,
+    INTERVAL_LENGTH: 5000,
   };
 
   componentDidMount() {
-    //load art objects from DB, then start changing text
     this.loadArt();
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
@@ -99,6 +101,47 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
+  fadeOutElement = (element, interval) => {
+    var op = 1; // initial opacity
+    var timer = setInterval(function () {
+      if (op <= 0.05) {
+        clearInterval(timer);
+        element.style.display = "none";
+      }
+      element.style.opacity = op;
+      element.style.filter = "alpha(opacity=" + op * 100 + ")";
+      op -= op * 0.1;
+    }, interval);
+  };
+
+  fadeInElement = (element, interval, initialOpacity) => {
+    var op = initialOpacity;
+    element.style.display = "flex";
+    var timer = setInterval(function () {
+      if (op >= 1) {
+        clearInterval(timer);
+      }
+      element.style.opacity = op;
+      element.style.filter = "alpha(opacity=" + op * 100 + ")";
+      if (op == 0) {
+        op += 0.05;
+      } else {
+        op += op * 0.1;
+      }
+    }, interval);
+  };
+
+  growElement = (element, interval, finalScale, growFactor) => {
+    let scale = 1.0;
+    var timer = setInterval(function () {
+      if (scale >= finalScale) {
+        clearInterval(timer);
+      }
+      element.style.transform = "scale(" + scale + ")";
+      scale += growFactor;
+    }, interval);
+  };
+
   displayIntro = () => {
     //start oscillating introductory text and projecting dalle images
     this.displayIntroText();
@@ -129,22 +172,27 @@ class OpeningPage extends React.Component {
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
+    console.log(this.state.artObjects);
     let imgPosition = 0;
+    let previousPosition = this.displayFloatingImages(
+      "TestPhotos/" + imgNames[imgPosition],
+      previousPosition
+    );
     let timer = setInterval(() => {
       if (this.state.introDisplayed == false) {
         clearInterval(timer);
         return;
       }
-      this.displayFloatingImages(
+      previousPosition = this.displayFloatingImages(
         "TestPhotos/" + imgNames[imgPosition],
-        imgPosition
+        previousPosition
       );
       if (imgPosition == 3) {
         imgPosition = 0;
       } else {
         imgPosition += 1;
       }
-    }, 2000);
+    }, this.state.IMAGE_SPAWN_DURATION);
   };
 
   removeBackgroundGrid = () => {
@@ -161,36 +209,64 @@ class OpeningPage extends React.Component {
     for (let i = 0; i < 4; i++) {
       let wrapper = document.createElement("div");
       wrapper.id = "floating-wrapper-" + i;
-      wrapper.style.paddingRight = "10vh";
-      wrapper.style.paddingBottom = "10vh";
-      wrapper.style.zIndex = -1;
+      wrapper.className = "floating-wrapper";
       document.getElementById("background-images").append(wrapper);
     }
   };
 
-  displayFloatingImages = (source, position) => {
-    let wrapper = document.getElementById(`floating-wrapper-${position}`);
-
-    // remove previous image
-    if (
-      wrapper.contains(document.getElementById(`floating-image-${position}`))
-    ) {
-      wrapper.removeChild(
-        document.getElementById(`floating-image-${position}`)
-      );
+  displayFloatingImages = (source, previousPosition) => {
+    function getRandomPosition() {
+      let x = Math.floor(Math.random() * 4);
+      if (x == previousPosition) {
+        return getRandomPosition();
+      }
+      return x;
     }
+    let position = getRandomPosition();
+    let wrapper = document.getElementById(`floating-wrapper-${position}`);
 
     // create new image
     let image = document.createElement("img");
     image.src = source;
+    image.className = "floating-image";
     image.style.width = "10vw"; // assume image is squared
     image.id = `floating-image-${position}`;
-    wrapper.append(image);
     image.style.position = "relative";
     image.style.left = Math.random() * 100 + "%";
     image.style.top = Math.random() * 100 + "%";
-    // this.fadeInElement(float, 100, 0);
-    return image;
+    image.style.opacity = 0;
+    wrapper.append(image);
+    image.animate(
+      [
+        { opacity: "0" },
+        {
+          opacity: "1",
+        },
+      ],
+      {
+        duration: this.state.IMAGE_SPAWN_DURATION / 2,
+        direction: "alternate",
+        iterations: "2",
+      }
+    );
+    image.animate(
+      [
+        { scale: "1.0", translate: "-10vw, 10vw" },
+        {
+          scale: "2.0",
+          translate: "-20vw, 20vw",
+        },
+      ],
+      {
+        duration: this.state.IMAGE_SPAWN_DURATION,
+        fill: "forwards",
+      }
+    );
+
+    setTimeout(() => {
+      wrapper.removeChild(image);
+    }, this.state.IMAGE_SPAWN_DURATION);
+    return position;
   };
 
   changeScreen = () => {
