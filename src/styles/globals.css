@@ -9,6 +9,7 @@ body {
   font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 #video-background {
@@ -145,6 +146,11 @@ li h3 {
 
 #main {
   justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  height: 100vh;
+  background-color: rgba(51, 51, 153, 0.6);
 }
 
 .intro-text {
@@ -159,8 +165,11 @@ li h3 {
   /*padding: 20px;*/
 }
 #project-head {
+  width: 30%;
+  position: absolute;
+  left: 10%;
+  padding: 10%;
   background: rgba(180, 180, 180, 0.2);
-  padding: 1em 0em;
   color: rgba(248, 225, 203, 0.7);
   font-size: 7rem;
   font-weight: 300;
@@ -222,6 +231,17 @@ li h3 {
   -ms-animation: color_change 1s infinite alternate;
   -o-animation: color_change 1s infinite alternate;
   animation: color_change 1s infinite alternate;
+}
+
+#background-images {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 25vw 25vw;
+  grid-row: 50vh 50vh;
 }
 
 .input {

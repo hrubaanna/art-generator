@@ -33,19 +33,13 @@ class OpeningPage extends React.Component {
     art: [],
     artObjects: [],
     DBLoaded: false,
+    introDisplayed: true,
   };
 
   componentDidMount() {
     this.loadArt();
     this.displayIntro();
-    this.displayBackgroundImages();
-    let element = document.querySelector("#main");
-    //element.style.backgroundColor = "rgba(255,255,250,1)";
-    element.setAttribute(
-      "style",
-      "min-height: 100vh; background-color:rgba(51, 51, 153, 0.6); "
-    );
-    element.addEventListener("click", () => {
+    document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
     });
   }
@@ -102,7 +96,7 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
-  fadeOutElement = (element) => {
+  fadeOutElement = (element, interval) => {
     var op = 1; // initial opacity
     var timer = setInterval(function () {
       if (op <= 0.05) {
@@ -112,11 +106,11 @@ class OpeningPage extends React.Component {
       element.style.opacity = op;
       element.style.filter = "alpha(opacity=" + op * 100 + ")";
       op -= op * 0.1;
-    }, 30);
+    }, interval);
   };
 
-  fadeInElement = (element) => {
-    var op = 0.1; // initial opacity
+  fadeInElement = (element, interval, initialOpacity) => {
+    var op = initialOpacity;
     element.style.display = "flex";
     var timer = setInterval(function () {
       if (op >= 1) {
@@ -125,55 +119,106 @@ class OpeningPage extends React.Component {
       element.style.opacity = op;
       element.style.filter = "alpha(opacity=" + op * 100 + ")";
       op += op * 0.1;
-    }, 10);
+    }, interval);
   };
 
   displayIntro = () => {
+    this.displayIntroText();
+    this.displayBackgroundImages();
+  };
+
+  displayIntroText = () => {
     //Every X miliseconds change index for language of intro text
     let waitTime = 2000; //ms
     this.state.intro_interval = setInterval(() => {
       if (this.state.introIndex == 2) {
         let element = document.querySelector("#project-head");
-        this.fadeOutElement(element);
+        this.fadeOutElement(element, 30);
         setTimeout(() => {
           this.setState({ introIndex: 0 });
-          this.fadeInElement(element);
+          this.fadeInElement(element, 10, 0.1);
         }, waitTime);
       } else {
         let element = document.querySelector("#project-head");
-        this.fadeOutElement(element);
+        this.fadeOutElement(element, 30, 0.1);
         setTimeout(() => {
           this.setState({ introIndex: (this.state.introIndex += 1) });
-          this.fadeInElement(element);
+          this.fadeInElement(element, 10);
         }, waitTime);
       }
     }, this.state.INTERVAL_LENGTH);
   };
 
   displayBackgroundImages = () => {
+    this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
-    imgNames.forEach((imgName) => {
-      document
-        .getElementById("main")
-        .append(this.displayFloatingImages("TestPhotos/" + imgName));
-    });
+    let imgPosition = 0;
+    let timer = setInterval(() => {
+      if (this.state.introDisplayed == false) {
+        clearInterval(timer);
+      }
+      this.displayFloatingImages(
+        "TestPhotos/" + imgNames[imgPosition],
+        imgPosition
+      );
+      if (imgPosition == 3) {
+        imgPosition = 0;
+      } else {
+        imgPosition += 1;
+      }
+    }, 2000);
   };
 
-  displayFloatingImages = (image_src) => {
-    let float = document.createElement("div");
-    let size = 10; // assume image is squared
-    float.className = "floating-wrapper";
-    float.innerHTML = `<img src=${image_src} width="100%" class="floating-image"></img>`;
-    float.style.position = "absolute";
-    float.style.width = size + "vw";
-    float.style.height = size + "vh";
-    float.style.left = Math.random() * 80 + size + "vw";
-    float.style.top = Math.random() * 80 + size + "vh";
-    float.style.zIndex = -1;
-    return float;
+  removeBackgroundGrid = () => {
+    document.getElementById("background-images").remove();
+  };
+
+  spawnBackgroundGrid = () => {
+    // spawn grid
+    let wrapper = document.createElement("div");
+    wrapper.id = "background-images";
+    document.getElementById("main").append(wrapper);
+
+    // fill the grid
+    for (let i = 0; i < 4; i++) {
+      let wrapper = document.createElement("div");
+      wrapper.id = "floating-wrapper-" + i;
+      wrapper.style.paddingRight = "10vh";
+      wrapper.style.paddingBottom = "10vh";
+      wrapper.style.zIndex = -1;
+      document.getElementById("background-images").append(wrapper);
+    }
+  };
+
+  displayFloatingImages = (source, position) => {
+    let wrapper = document.getElementById(`floating-wrapper-${position}`);
+
+    // remove previous image
+    if (
+      wrapper.contains(document.getElementById(`floating-image-${position}`))
+    ) {
+      wrapper.removeChild(
+        document.getElementById(`floating-image-${position}`)
+      );
+    }
+
+    // create new image
+    console.log(position);
+    let image = document.createElement("img");
+    image.src = source;
+    image.style.width = "10vw"; // assume image is squared
+    image.id = `floating-image-${position}`;
+    wrapper.append(image);
+    image.style.position = "relative";
+    image.style.left = Math.random() * 100 + "%";
+    image.style.top = Math.random() * 100 + "%";
+    // this.fadeInElement(float, 100, 0);
+    return image;
   };
 
   changeScreen = () => {
+    this.state.introDisplayed = false;
+    this.removeBackgroundGrid();
     let langButtons = document.querySelectorAll(".btn-language");
     let introTexts = document.querySelectorAll(".intro-text");
     langButtons.forEach((element) => {
