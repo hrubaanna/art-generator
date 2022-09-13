@@ -146,9 +146,6 @@ li h3 {
 
 #main {
   justify-content: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
   height: 100vh;
   background-color: rgba(51, 51, 153, 0.6);
 }
@@ -165,9 +162,7 @@ li h3 {
   /*padding: 20px;*/
 }
 #project-head {
-  width: 30%;
-  position: absolute;
-  left: 10%;
+  width: 50%;
   padding: 10%;
   background: rgba(180, 180, 180, 0.2);
   color: rgba(248, 225, 203, 0.7);
@@ -241,7 +236,7 @@ li h3 {
   height: 100vh;
   display: grid;
   grid-template-columns: 25vw 25vw;
-  grid-row: 50vh 50vh;
+  grid-template-rows: 50vh 50vh;
 }
 
 .input {

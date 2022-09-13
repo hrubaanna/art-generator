@@ -156,6 +156,7 @@ class OpeningPage extends React.Component {
     let timer = setInterval(() => {
       if (this.state.introDisplayed == false) {
         clearInterval(timer);
+        return;
       }
       this.displayFloatingImages(
         "TestPhotos/" + imgNames[imgPosition],
@@ -203,7 +204,6 @@ class OpeningPage extends React.Component {
     }
 
     // create new image
-    console.log(position);
     let image = document.createElement("img");
     image.src = source;
     image.style.width = "10vw"; // assume image is squared
@@ -220,19 +220,13 @@ class OpeningPage extends React.Component {
     this.state.introDisplayed = false;
     this.removeBackgroundGrid();
     let langButtons = document.querySelectorAll(".btn-language");
-    let introTexts = document.querySelectorAll(".intro-text");
+    document.getElementById("project-head").style.display = "none";
+    document.getElementById("click-to-begin").style.display = "none";
     langButtons.forEach((element) => {
       element.style.display = "inline";
     });
-    introTexts.forEach((element) => {
-      element.style.display = "none";
-    });
-    document
-      .querySelector("#main")
-      .setAttribute(
-        "style",
-        "min-height: 100vh; background-color:rgba(255,255,250,0); "
-      );
+    document.getElementById("main").style.backgroundColor =
+      "rgba(51, 51, 153, 0)";
     document.querySelectorAll(".floating-image").forEach((element) => {
       element.style.display = "none";
     });
@@ -246,13 +240,11 @@ class OpeningPage extends React.Component {
           <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
         </video>
 
-        <div className="intro-text">
-          <h1 id={"project-head"}>
-            {this.state.projectHeading[this.state.introIndex]}
-          </h1>
-          <p id={"click-to-begin"}>
-            {this.state.introText[this.state.introIndex]}
-          </p>
+        <div id={"project-head"}>
+          {this.state.projectHeading[this.state.introIndex]}
+        </div>
+        <div id={"click-to-begin"}>
+          {this.state.introText[this.state.introIndex]}
         </div>
 
         <div className="div-language">
