@@ -23,16 +23,20 @@ class OpeningPage extends React.Component {
       "Kunst mit Kuentslicher Intelligenz erschaffen",
     ],
     introText: [
-      "Click anywhere to Begin",
-      "Klikni kamkoli a začni",
-      "Kliken und Anfangen",
+      "click anywhere to begin",
+      "klikni kamkoli a začni",
+      "kliken und Anfangen",
     ],
     introIndex: 0,
     INTERVAL_LENGTH: 5000,
     intro_interval: null,
+    art: [],
+    artObjects: [],
+    DBLoaded: false,
   };
 
   componentDidMount() {
+    this.loadArt();
     this.displayIntro();
     this.displayBackgroundImages();
     let element = document.querySelector("#main");
@@ -45,6 +49,51 @@ class OpeningPage extends React.Component {
       this.changeScreen();
     });
   }
+
+  getDBRandomArt = () => {
+    //get the artwork saved in mongo DB
+    let artData = [];
+
+    fetch(`/api/artwork?q=random-art`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        artData = data;
+        this.setState({ art: artData });
+        this.setState({ DBLoaded: true });
+      });
+  };
+
+  getArtFromTasks = () => {
+    //get the task for each art piece
+    this.state.art.forEach((artpiece) => {
+      fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          let artObj = {
+            img_link:
+              data.result.generations.data[artpiece.selected_pos].generation
+                .image_path,
+            content: artpiece.content,
+            signature: artpiece.signature,
+          };
+          this.state.artObjects.push(artObj);
+        });
+    });
+  };
+
+  loadArt = () => {
+    this.getDBRandomArt();
+    setTimeout(() => {
+      this.getArtFromTasks();
+    }, 1000);
+  };
 
   changeLanguage = (e) => {
     finalDalleAssembled.language = e.target.id;
