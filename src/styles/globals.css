@@ -236,7 +236,7 @@ li h3 {
   bottom: 2em;
   right: 5em;
   color: rgba(248, 225, 203, 0.4);
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-weight: 400;
   -webkit-animation: color_change 1s infinite alternate;
   -moz-animation: color_change 1s infinite alternate;
