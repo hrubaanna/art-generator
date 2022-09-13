@@ -35,37 +35,20 @@ async function addArt(req, res) {
 }
 
 async function getArt(req, res) {
-  if (req.query.q === "all-art") {
-    try {
-      let { db } = await connectToDatabase();
-      const art = await db
-        .collection("art")
-        .find({})
-        .sort({ createdAt: -1 })
-        .limit(20)
-        .toArray();
+  try {
+    let { db } = await connectToDatabase();
+    const art = await db
+      .collection("art")
+      .find({})
+      .sort({ createdAt: -1 })
+      .limit(20)
+      .toArray();
 
-      res.json(art);
-    } catch (error) {
-      return res.json({
-        message: new Error(error).message,
-        success: false,
-      });
-    }
-  } else if (req.query.q == "random-art") {
-    try {
-      let { db } = await connectToDatabase();
-      const art = await db
-        .collection("art")
-        .aggregate([{ $sample: { size: 4 } }])
-        .toArray();
-
-      res.json(art);
-    } catch (error) {
-      return res.json({
-        message: new Error(error).message,
-        success: false,
-      });
-    }
+    res.json(art);
+  } catch (error) {
+    return res.json({
+      message: new Error(error).message,
+      success: false,
+    });
   }
 }

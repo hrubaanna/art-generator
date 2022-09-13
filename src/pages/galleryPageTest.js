@@ -1,6 +1,6 @@
 import React from "react";
 
-class GalleryPage extends React.Component {
+class GalleryPageTest extends React.Component {
   state = {
     art: [],
     artObjects: [],
@@ -22,7 +22,7 @@ class GalleryPage extends React.Component {
     //get the artwork saved in mongo DB
     let artData = [];
 
-    fetch(`/api/artwork?q=all-art`, {
+    fetch(`/api/artwork`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -76,4 +76,4 @@ class GalleryPage extends React.Component {
   }
 }
 
-export default GalleryPage;
+export default GalleryPageTest;

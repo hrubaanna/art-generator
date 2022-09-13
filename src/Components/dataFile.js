@@ -57,12 +57,12 @@ var Facts = {
     ENG: {
       medium: "Select a Medium",
       painting: [
-        "Painting Types",
-        "Painting Content",
-        "Painting Setting",
-        "Emotions",
-        "Looks and Techniques",
-        "Art Styles",
+        "Choose a painting type",
+        "Choose painting content",
+        "Choose a painting setting",
+        "Choose an emotion",
+        "Choose a look or technique",
+        "Choose an art style",
       ],
       sculpture: [
         "Sculpture Type",
