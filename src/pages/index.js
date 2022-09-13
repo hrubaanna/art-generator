@@ -118,7 +118,22 @@ class OpeningPage extends React.Component {
       }
       element.style.opacity = op;
       element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      op += op * 0.1;
+      if (op == 0) {
+        op += 0.05;
+      } else {
+        op += op * 0.1;
+      }
+    }, interval);
+  };
+
+  growElement = (element, interval, finalScale, growFactor) => {
+    let scale = 1.0;
+    var timer = setInterval(function () {
+      if (scale >= finalScale) {
+        clearInterval(timer);
+      }
+      element.style.transform = "scale(" + scale + ")";
+      scale += growFactor;
     }, interval);
   };
 
@@ -150,6 +165,7 @@ class OpeningPage extends React.Component {
   };
 
   displayBackgroundImages = () => {
+    const IMAGE_SPAWN_INTERVAL = 5000;
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
     let imgPosition = 0;
@@ -167,7 +183,7 @@ class OpeningPage extends React.Component {
       } else {
         imgPosition += 1;
       }
-    }, 2000);
+    }, IMAGE_SPAWN_INTERVAL);
   };
 
   removeBackgroundGrid = () => {
@@ -192,6 +208,11 @@ class OpeningPage extends React.Component {
   };
 
   displayFloatingImages = (source, position) => {
+    const FADEIN_SPEED = 100;
+    const GROW_SPEED = 1000;
+
+    const FADEIN_DURATION = 5000;
+
     let wrapper = document.getElementById(`floating-wrapper-${position}`);
 
     // remove previous image
@@ -206,13 +227,48 @@ class OpeningPage extends React.Component {
     // create new image
     let image = document.createElement("img");
     image.src = source;
+    image.className = "floating-image";
     image.style.width = "10vw"; // assume image is squared
     image.id = `floating-image-${position}`;
-    wrapper.append(image);
     image.style.position = "relative";
     image.style.left = Math.random() * 100 + "%";
     image.style.top = Math.random() * 100 + "%";
-    // this.fadeInElement(float, 100, 0);
+    image.style.opacity = 0;
+    wrapper.append(image);
+    // image.animate([{ scale: 1.0 }, { scale: 2.0 }], {
+    //   duration: FADEIN_DURATION,
+    //   fill: "forwards",
+    // });
+    image.animate(
+      [
+        { opacity: "0" },
+        {
+          opacity: "1",
+        },
+      ],
+      {
+        duration: FADEIN_DURATION,
+        direction: "alternate",
+        iterations: "2",
+      }
+    );
+
+    // image.animate(
+    //   [
+    //     { scale: "1.0" },
+    //     {
+    //       opacity: "2.0",
+    //     },
+    //   ],
+    //   {
+    //     duration: FADEIN_DURATION,
+    //     direction: "forwards",
+    //   }
+    // );
+
+    // animate spawning of image
+    // this.fadeInElement(image, FADEIN_SPEED, 0);
+    // this.growElement(image, GROW_SPEED, 1.5, 0.001);
     return image;
   };
 

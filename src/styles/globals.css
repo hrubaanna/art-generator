@@ -255,6 +255,10 @@ li h3 {
   grid-template-columns: 25vw 25vw;
   grid-template-rows: 50vh 50vh;
 }
+/* 
+.floating-image {
+  animate
+} */
 
 .input {
   display: block;
