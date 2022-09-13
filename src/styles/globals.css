@@ -279,8 +279,8 @@ li h3 {
 
 #click-to-begin {
   position: fixed;
-  bottom: 2em;
-  right: 5em;
+  bottom: 5%;
+  right: 10%;
   color: rgba(248, 225, 203, 0.4);
   font-size: 3rem;
   font-weight: 400;
@@ -301,10 +301,13 @@ li h3 {
   grid-template-columns: 25vw 25vw;
   grid-template-rows: 50vh 50vh;
 }
-/* 
-.floating-image {
-  animate
-} */
+
+.floating-wrapper {
+  z-index: -1;
+  padding-top: 10vw;
+  padding-bottom: 10vw;
+  padding-right: 10vw;
+}
 
 .input {
   display: block;
