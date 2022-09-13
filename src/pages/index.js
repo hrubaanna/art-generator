@@ -18,9 +18,9 @@ class OpeningPage extends React.Component {
     language: finalDalleAssembled.language,
     projectHeading2: ["YOU x DALLE2", "YOU x DALLE2", "YOU x DALLE2"],
     projectHeading: [
-      "CREATE ART WITH ARTIFICIAL INTELLIGENCE",
-      "VYTVOŘ UMĚNÍ S UMĚLOU INTELIGENCÍ",
-      "KUNST MIT KUENSTLICHER INTELLIGENZ ERSCHAFFEN",
+      "Create Art with Artificial Intelligence",
+      "Vytvoř umění s umělou inteligencí",
+      "Kunst mit Kuentslicher Intelligenz erschaffen",
     ],
     introText: [
       "Click anywhere to Begin",

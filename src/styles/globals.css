@@ -257,8 +257,7 @@ li h3 {
   border: 2px solid rgba(248, 225, 203, 0.4);
   margin-left: 5%;
   margin-right: 5%;
-  padding-top: 0.3rem;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem 0.3rem 0.5rem 0.3rem;
   color: rgb(248, 225, 203);
   margin: 0 auto;
   max-width: 100%;
