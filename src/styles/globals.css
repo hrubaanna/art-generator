@@ -128,6 +128,9 @@ li h3 {
 
 #main {
   justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 .intro-text {
@@ -142,8 +145,11 @@ li h3 {
   /*padding: 20px;*/
 }
 #project-head {
+  width: 30%;
+  position: absolute;
+  left: 10%;
+  padding: 10%;
   background: rgba(180, 180, 180, 0.2);
-  padding: 1em 0em;
   color: rgba(248, 225, 203, 0.7);
   font-size: 7rem;
   font-weight: 300;
