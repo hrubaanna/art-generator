@@ -83,6 +83,7 @@ class DalleComponent extends React.Component {
 
     //remove other elements from page
     document.querySelector("h1").style.display = "none";
+    document.querySelector(".facts").style.display = "none";
   };
 
   render() {

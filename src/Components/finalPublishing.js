@@ -123,6 +123,7 @@ class FinalPublishing extends React.Component {
       //TODO: send photo to DB and to gallery
       document.querySelector("#gallery-publish").style.display = "none";
       document.querySelector("#final-goodbye").style.display = "block";
+      document.querySelector(".final-query").style.display = "none";
     } else {
       // set the error
       console.log("error");

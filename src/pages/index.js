@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
-import { Facts } from "../Components/dataFile";
+import Head from "next/head";
 import Image from "next/image";
 
 /**
@@ -35,11 +35,11 @@ class OpeningPage extends React.Component {
   componentDidMount() {
     this.displayIntro();
     this.displayBackgroundImages();
-    let element = document.querySelector("#__next");
+    let element = document.querySelector("#main");
     //element.style.backgroundColor = "rgba(255,255,250,1)";
     element.setAttribute(
       "style",
-      "min-height: 100vh; background-color:rgba(255,255,250,0.5); "
+      "min-height: 100vh; background-color:rgba(51, 51, 153, 0.6); "
     );
     element.addEventListener("click", () => {
       this.changeScreen();
@@ -133,7 +133,7 @@ class OpeningPage extends React.Component {
       element.style.display = "none";
     });
     document
-      .querySelector("#__next")
+      .querySelector("#main")
       .setAttribute(
         "style",
         "min-height: 100vh; background-color:rgba(255,255,250,0); "
@@ -147,6 +147,10 @@ class OpeningPage extends React.Component {
   render() {
     return (
       <div id="main">
+        <video autoplay muted loop id="video-background">
+          <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
+        </video>
+
         <div className="intro-text">
           <h1 id={"project-head"}>
             {this.state.projectHeading[this.state.introIndex]}
@@ -182,6 +186,17 @@ class OpeningPage extends React.Component {
             ></img>
           </Link>
         </div>
+        <style jsx global>{`
+          html,
+          body {
+            padding: 0;
+            margin: 0;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+        `}</style>
       </div>
     );
   }
