@@ -132,14 +132,14 @@ class OpeningPage extends React.Component {
     let waitTime = 2000; //ms
     this.state.intro_interval = setInterval(() => {
       if (this.state.introIndex == 2) {
-        let element = document.querySelector("#project-head");
+        let element = document.querySelector("#project-heading");
         this.fadeOutElement(element, 30);
         setTimeout(() => {
           this.setState({ introIndex: 0 });
           this.fadeInElement(element, 10, 0.1);
         }, waitTime);
       } else {
-        let element = document.querySelector("#project-head");
+        let element = document.querySelector("#project-heading");
         this.fadeOutElement(element, 30, 0.1);
         setTimeout(() => {
           this.setState({ introIndex: (this.state.introIndex += 1) });
@@ -171,7 +171,7 @@ class OpeningPage extends React.Component {
   };
 
   removeBackgroundGrid = () => {
-    document.getElementById("background-images").remove();
+    document.getElementById("background-images").style.display = "none";
   };
 
   spawnBackgroundGrid = () => {
@@ -220,7 +220,7 @@ class OpeningPage extends React.Component {
     this.state.introDisplayed = false;
     this.removeBackgroundGrid();
     let langButtons = document.querySelectorAll(".btn-language");
-    document.getElementById("project-head").style.display = "none";
+    document.getElementById("project-heading").style.display = "none";
     document.getElementById("click-to-begin").style.display = "none";
     langButtons.forEach((element) => {
       element.style.display = "inline";
@@ -240,8 +240,10 @@ class OpeningPage extends React.Component {
           <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
         </video>
 
-        <div id={"project-head"}>
-          {this.state.projectHeading[this.state.introIndex]}
+        <div id={"project-heading-wrapper"}>
+          <span id="project-heading">
+            {this.state.projectHeading[this.state.introIndex]}
+          </span>
         </div>
         <div id={"click-to-begin"}>
           {this.state.introText[this.state.introIndex]}

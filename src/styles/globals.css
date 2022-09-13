@@ -161,15 +161,32 @@ li h3 {
   height: 26em;
   /*padding: 20px;*/
 }
-#project-head {
+
+#project-heading-wrapper {
+  height: 100%;
   width: 50%;
-  padding: 10%;
+  position: absolute;
+  display: table;
+}
+
+#project-heading {
+  position: absolute;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80%;
+  padding: 5%;
+  margin: auto;
+  left: 0;
+  right: 0;
   background: rgba(180, 180, 180, 0.2);
   color: rgba(248, 225, 203, 0.7);
-  font-size: 7rem;
+  font-size: 7em;
+  line-height: 1.25em;
   font-weight: 300;
   font-family: "Work Sans", sans-serif;
-  text-align: left;
   animation: fadeIn 2s;
 }
 
