@@ -102,8 +102,8 @@ class FinalPublishing extends React.Component {
       created_at: new Date().toISOString(),
       currently_selected: false,
       //TODO: get value of selected img
-      selected_pos: this.props.selected_img_pos,
       signature_color: this.state.signature_color,
+      selected_pos: this.props.selected_img_pos,
     };
 
     //save the artpiece

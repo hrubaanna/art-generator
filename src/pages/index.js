@@ -36,7 +36,7 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
-    this.loadArt();
+    this.getDBRandomArt();
     this.displayIntro();
     this.displayBackgroundImages();
     let element = document.querySelector("#main");
@@ -61,6 +61,7 @@ class OpeningPage extends React.Component {
       .then((data) => {
         artData = data;
         this.setState({ art: artData });
+        console.log(this.state.art);
         this.setState({ DBLoaded: true });
       });
   };
@@ -196,7 +197,7 @@ class OpeningPage extends React.Component {
   render() {
     return (
       <div id="main">
-        <video autoplay muted loop id="video-background">
+        <video autoPlay muted loop id="video-background">
           <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
         </video>
 
