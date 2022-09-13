@@ -39,14 +39,7 @@ class OpeningPage extends React.Component {
   componentDidMount() {
     this.getDBRandomArt();
     this.displayIntro();
-    this.displayBackgroundImages();
-    let element = document.querySelector("#main");
-    //element.style.backgroundColor = "rgba(255,255,250,1)";
-    element.setAttribute(
-      "style",
-      "min-height: 100vh; background-color:rgba(51, 51, 153, 0.6); "
-    );
-    element.addEventListener("click", () => {
+    document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
     });
   }
@@ -130,6 +123,11 @@ class OpeningPage extends React.Component {
   };
 
   displayIntro = () => {
+    this.displayIntroText();
+    this.displayBackgroundImages();
+  };
+
+  displayIntroText = () => {
     //Every X miliseconds change index for language of intro text
     let waitTime = 2000; //ms
     this.state.intro_interval = setInterval(() => {
