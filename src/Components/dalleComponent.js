@@ -12,7 +12,7 @@ class DalleComponent extends React.Component {
     image_selected: false,
     final_image_src: "",
     task_id: "",
-    selected_img_pos: "",
+    selected_img_pos: "1",
     button: {
       ENG: "Generate Artwork",
       CZ: "Vytvořit dílo",
@@ -59,7 +59,7 @@ class DalleComponent extends React.Component {
   displayFavorite = (e) => {
     this.setState({ image_selected: true });
     this.setState({ final_image_src: e.target.src });
-    this.setState({ selected_img_pos: e.target.value });
+    this.setState({ selected_img_pos: e.target.id });
 
     //remove all photos from screen
     document.querySelectorAll(".card").forEach((card) => {
