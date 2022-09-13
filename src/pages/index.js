@@ -37,6 +37,7 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
+    //load art objects from DB, then start changing text
     this.loadArt();
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
@@ -84,6 +85,7 @@ class OpeningPage extends React.Component {
   };
 
   loadArt = () => {
+    //load 4 random dalle art pieces from the DB, store in artObjctes
     this.getDBRandomArt();
     setTimeout(() => {
       this.getArtFromTasks();
@@ -91,69 +93,32 @@ class OpeningPage extends React.Component {
   };
 
   changeLanguage = (e) => {
+    //when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
     this.setState({ language: e.target.id });
     console.log(finalDalleAssembled.language);
   };
 
-  fadeOutElement = (element, interval) => {
-    var op = 1; // initial opacity
-    var timer = setInterval(function () {
-      if (op <= 0.05) {
-        clearInterval(timer);
-        element.style.display = "none";
-      }
-      element.style.opacity = op;
-      element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      op -= op * 0.1;
-    }, interval);
-  };
-
-  fadeInElement = (element, interval, initialOpacity) => {
-    var op = initialOpacity;
-    element.style.display = "flex";
-    var timer = setInterval(function () {
-      if (op >= 1) {
-        clearInterval(timer);
-      }
-      element.style.opacity = op;
-      element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      op += op * 0.1;
-    }, interval);
-  };
-
   displayIntro = () => {
+    //start oscillating introductory text and projecting dalle images
     this.displayIntroText();
     this.displayBackgroundImages();
   };
 
   displayIntroText = () => {
-    this.setState({ intro_interval: setInterval(this.changeIntroText, 3000) });
-
-    //both pulse, not through js, through css
-    //change both language at the same time
-    //Every X miliseconds change index for language of intro text
-    // let waitTime = 2000; //ms
-    // this.state.intro_interval = setInterval(() => {
-    //   if (this.state.introIndex == 2) {
-    //     let element = document.querySelector("#project-heading");
-    //     this.fadeOutElement(element, 30);
-    //     setTimeout(() => {
-    //       this.setState({ introIndex: 0 });
-    //       this.fadeInElement(element, 10, 0.1);
-    //     }, waitTime);
-    //   } else {
-    //     let element = document.querySelector("#project-heading");
-    //     this.fadeOutElement(element, 30, 0.1);
-    //     setTimeout(() => {
-    //       this.setState({ introIndex: (this.state.introIndex += 1) });
-    //       this.fadeInElement(element, 10);
-    //     }, waitTime);
-    //   }
-    // }, this.state.INTERVAL_LENGTH);
+    //set an interval to change the introductory text between different languages
+    this.setState({
+      intro_interval: setInterval(() => {
+        this.changeIntroText;
+        document.getElementById("overlay-text").className = "";
+        document.getElementById("overlay-text").className =
+          "animate_change_heading";
+      }, 3000),
+    });
   };
 
   changeIntroText = () => {
+    //cycle index from 0 to 2, then back to 0
     if (this.state.introIndex == 2) {
       this.setState({ introIndex: 0 });
     } else {
@@ -229,6 +194,7 @@ class OpeningPage extends React.Component {
   };
 
   changeScreen = () => {
+    //when the screen is clicked, remove current content and display only flags to select language
     this.state.introDisplayed = false;
     this.removeBackgroundGrid();
     let langButtons = document.querySelectorAll(".btn-language");

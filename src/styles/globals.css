@@ -228,7 +228,9 @@ li h3 {
   line-height: 1.25em;
   font-weight: 300;
   font-family: "Work Sans", sans-serif;
+}
 
+.animate_change_heading {
   -webkit-animation: color_change_heading 1.5s infinite alternate;
   -moz-animation: color_change_heading 1.5s infinite alternate;
   -ms-animation: color_change_heading 1.5s infinite alternate;
@@ -282,7 +284,7 @@ li h3 {
   bottom: 2em;
   right: 5em;
   color: rgba(248, 225, 203, 0.4);
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 400;
   -webkit-animation: color_change_click 1s infinite alternate;
   -moz-animation: color_change_click 1s infinite alternate;
