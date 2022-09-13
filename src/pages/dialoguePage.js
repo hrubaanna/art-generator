@@ -65,15 +65,15 @@ class DialoguePage extends React.Component {
         },
       },
       forward: {
-        ENG: "Next",
-        CZ: "Další",
-        DE: "Nächste",
+        ENG: "next",
+        CZ: "další",
+        DE: "nächste",
       },
 
       results: {
-        ENG: "Finish",
-        CZ: "Hotovo",
-        DE: "Fertig",
+        ENG: "finish",
+        CZ: "hotovo",
+        DE: "fertig",
       },
     },
     RESET_TIME: 600000000,
