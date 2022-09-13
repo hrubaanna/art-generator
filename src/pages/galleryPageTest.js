@@ -50,6 +50,7 @@ class GalleryPageTest extends React.Component {
                 .image_path,
             content: artpiece.content,
             signature: artpiece.signature,
+            signature_color: artpiece.signature_color,
           };
           this.state.artObjects.push(artObj);
         });
@@ -58,15 +59,25 @@ class GalleryPageTest extends React.Component {
 
   showArt = () => {
     let galleryList = document.createElement("ul");
-    this.state.artObjects.forEach((artpiece) => {
+    this.state.artObjects.forEach((artpiece, index) => {
+      //create images and add them to the gallery
+
       let galleryItem = document.createElement("li");
       galleryItem.className = "gallery-item";
       galleryItem.innerHTML = `
             <img class='final-image' src=${artpiece.img_link} />
-            <img class='signature-image' src=${artpiece.signature} />
             <p class='art-content'>${artpiece.content}</p>
             `;
       galleryList.appendChild(galleryItem);
+
+      let signatureImg = document.createElement("img");
+      signatureImg.className = "signature-image";
+      signatureImg.src = artpiece.signature;
+      if (artpiece.signature_color === "white") {
+        signatureImg.style.filter = "invert(100%)";
+      }
+
+      galleryItem.appendChild(signatureImg);
     });
     document.body.appendChild(galleryList);
   };

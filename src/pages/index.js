@@ -36,7 +36,7 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
-    this.getDBRandomArt();
+    this.loadArt();
     this.displayIntro();
     this.displayBackgroundImages();
     let element = document.querySelector("#main");
