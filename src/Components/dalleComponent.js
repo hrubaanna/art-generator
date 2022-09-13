@@ -119,7 +119,15 @@ class DalleComponent extends React.Component {
           <p> your query could not be processed at this time </p>
         ) : null}
 
-        {this.state.loading && <p>Loading</p>}
+        {this.state.loading && (
+          <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
 
         {!this.state.image_selected ? (
           <div className="grid">
