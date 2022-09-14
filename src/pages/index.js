@@ -39,7 +39,7 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
-    this.getDBRandomArt();
+    this.loadArt();
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
@@ -96,7 +96,6 @@ class OpeningPage extends React.Component {
     //when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
     this.setState({ language: e.target.id });
-    console.log(finalDalleAssembled.language);
   };
 
   displayIntro = () => {

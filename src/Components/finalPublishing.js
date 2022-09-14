@@ -178,7 +178,7 @@ class FinalPublishing extends React.Component {
             <div>
               <SignatureCanvas
                 canvasProps={{
-                  width: 400,
+                  width: 520,
                   height: 250,
                   className: "sigCanvas",
                 }}
