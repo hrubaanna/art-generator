@@ -42,6 +42,7 @@ class DalleComponent extends React.Component {
           //fixed bug by adding .data to the end of the result
           this.setState({ result: data.result.data });
           this.setState({ loading: false });
+          //
           this.setState({ result_provided: true });
           this.setState({ task_id: data.result.data[0].task_id });
         })
@@ -83,6 +84,7 @@ class DalleComponent extends React.Component {
 
     //remove other elements from page
     document.querySelector("h1").style.display = "none";
+    document.querySelector(".final-query").style.display = "none";
     document.querySelector(".facts").style.display = "none";
   };
 
@@ -116,7 +118,7 @@ class DalleComponent extends React.Component {
            }  */}
 
         {this.state.error ? (
-          <p> your query could not be processed at this time </p>
+          <p class="error"> your query could not be processed at this time </p>
         ) : null}
 
         {this.state.loading && (
@@ -130,20 +132,23 @@ class DalleComponent extends React.Component {
         )}
 
         {!this.state.image_selected ? (
-          <div className="grid">
-            {this.state.result.map((result, index) => {
-              return (
-                //RODO. hide card
-                <div className="card" onClick={this.displayFavorite}>
-                  <img
-                    id={index}
-                    src={result.generation.image_path}
-                    alt=""
-                    className="imgPreview"
-                  />
-                </div>
-              );
-            })}
+          <div>
+            <p onClick={this.displayFavorite}>get me forward</p>
+            <div className="grid">
+              {this.state.result.map((result, index) => {
+                return (
+                  //TODO. hide card
+                  <div className="card" onClick={this.displayFavorite}>
+                    <img
+                      id={index}
+                      src={result.generation.image_path}
+                      alt=""
+                      className="imgPreview"
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ) : (
           <FinalPublishing

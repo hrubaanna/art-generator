@@ -10,19 +10,19 @@ class FinalPublishing extends React.Component {
       DE: "Fügen Sie Ihrem Kunstwerk eine Signatur hinzu",
     },
     signatureAdd: {
-      ENG: "Add Signature",
-      CZ: "Přidat podpis",
-      DE: "Signatur hinzufügen",
+      ENG: "add signature",
+      CZ: "přidat podpis",
+      DE: "signatur hinzufügen",
     },
     signatureClear: {
-      ENG: "Clear Signature",
-      CZ: "Vymazat podpis",
-      DE: "Signatur löschen",
+      ENG: "clear signature",
+      CZ: "vymazat podpis",
+      DE: "signatur löschen",
     },
     skip: {
-      ENG: "Skip",
-      CZ: "Přeskočit",
-      DE: "Überspringen",
+      ENG: "skip",
+      CZ: "přeskočit",
+      DE: "ueberspringen",
     },
     publishQ: {
       ENG: "Do you want to display your artwork in the Albertina Gallery among the other great artists?",
@@ -169,8 +169,11 @@ class FinalPublishing extends React.Component {
     // TODO: remove arpiece description, buttons next to each other
     return (
       <div>
+        {/* <img src={this.props.finalImage} /> */}
         <div className="signatureScheme">
-          <h1>{this.state.signatureText[this.props.lang]}</h1>
+          <h1 className="selection-title">
+            {this.state.signatureText[this.props.lang]}
+          </h1>
           <div id="canvas-container">
             <div>
               <SignatureCanvas
@@ -186,13 +189,21 @@ class FinalPublishing extends React.Component {
               />
             </div>
           </div>
-          <button className="btn" onClick={this.saveSignature}>
+          <button
+            className="btn"
+            id="btn-signature"
+            onClick={this.saveSignature}
+          >
             {this.state.signatureAdd[this.props.lang]}
           </button>
-          <button className="btn" onClick={this.clear}>
+          <button className="btn" id="btn-signature" onClick={this.clear}>
             {this.state.signatureClear[this.props.lang]}
           </button>
-          <button className="btn" onClick={this.hideSignature}>
+          <button
+            className="btn"
+            id="btn-signature"
+            onClick={this.hideSignature}
+          >
             {this.state.skip[this.props.lang]}
           </button>
         </div>

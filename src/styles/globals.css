@@ -144,6 +144,27 @@ li h3 {
   animation: fadeIn 1s;
 }
 
+.signatureScheme {
+  /* margin: auto; */
+  text-align: center;
+}
+
+#btn-signature {
+  display: inline;
+  color: rgb(255 254 254 / 86%);
+  background-color: rgba(248, 225, 203, 0.4);
+  padding: 0.5em 2em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 2%;
+  animation: fadeIn 1s;
+  /* margin-left: 3%;
+  margin-right: 3%; */
+  margin: 1.5em 1.5em;
+}
+
 #main {
   justify-content: center;
   height: 100vh;
@@ -553,6 +574,9 @@ code {
   font-family: "Work Sans", sans-serif;
   opacity: 0.8;
   color: rgb(248, 225, 203);
+  margin-left: 7em;
+  margin-right: 7em;
+  animation: fadeIn 2s;
 }
 
 .hintDiv {
@@ -585,6 +609,7 @@ code {
 }
 
 .final-query {
+  display: block;
   font-family: "Work Sans", sans-serif;
   color: rgb(248, 225, 203);
   opacity: 1;
@@ -608,6 +633,10 @@ code {
   margin-top: 12%;
   margin-bottom: 12%;
   display: flex;
+}
+
+.error {
+  color: rgb(248, 225, 203);
 }
 
 /* Loading icon */

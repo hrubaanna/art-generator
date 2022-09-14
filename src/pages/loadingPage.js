@@ -39,7 +39,7 @@ class LoadingPage extends React.Component {
         ];
       this.setState({ funFact: randomFact });
       this.state.funFact = randomFact;
-    }, 8000);
+    }, 5500);
   };
 
   render() {
