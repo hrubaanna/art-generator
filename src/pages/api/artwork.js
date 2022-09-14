@@ -35,13 +35,14 @@ async function addArt(req, res) {
 }
 
 async function getArt(req, res) {
+  //get a random number of art docs from the database
+  let numDocs = parseInt(req.query.q);
   try {
     let { db } = await connectToDatabase();
     const art = await db
       .collection("art")
-      .find({})
+      .aggregate([{ $sample: { size: numDocs } }])
       .sort({ createdAt: -1 })
-      .limit(20)
       .toArray();
 
     res.json(art);

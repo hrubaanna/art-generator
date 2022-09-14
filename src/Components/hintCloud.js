@@ -19,11 +19,16 @@ class HintCloud extends React.Component {
   state = {
     NUM_FACTS: 10,
     INTERVAL_LENGTH: 7000,
-    STAGE_INTERVAL_LENGTH: 1000,
+    STAGE_INTERVAL_LENGTH: 500,
     current_stage: 0,
     hint_elements: [],
     hint_interval: null,
     stage_interval: null,
+    confirmButtonText: {
+      ENG: "confirm choice",
+      CZ: "potvrdit výběr",
+      DE: "Auswahl bestätigen",
+    },
   };
 
   componentDidMount() {
@@ -97,6 +102,9 @@ class HintCloud extends React.Component {
         //show the selected word in the query field
         document.querySelector("#current_selection").innerHTML =
           element.innerHTML;
+        //change text on btn-next-stage to 'confirm choice'
+        document.querySelector("#btn-next-stage").textContent =
+          this.state.confirmButtonText[this.props.language];
       });
     });
   };

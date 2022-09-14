@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
-import Head from "next/head";
-import Image from "next/image";
 
 /**
  * Page that lures the user in
@@ -37,10 +35,11 @@ class OpeningPage extends React.Component {
     // constants
     IMAGE_SPAWN_DURATION: 8000,
     INTERVAL_LENGTH: 5000,
+    NUM_IMAGES_IN_BATCH: "4",
   };
 
   componentDidMount() {
-    this.loadArt();
+    this.getDBRandomArt();
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
@@ -51,14 +50,13 @@ class OpeningPage extends React.Component {
     //get the artwork saved in mongo DB
     let artData = [];
 
-    fetch(`/api/artwork?q=random-art`, {
+    fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
         artData = data;
         this.setState({ art: artData });
-        console.log(this.state.art);
         this.setState({ DBLoaded: true });
       });
   };
@@ -101,17 +99,6 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
-  growElement = (element, interval, finalScale, growFactor) => {
-    let scale = 1.0;
-    var timer = setInterval(function () {
-      if (scale >= finalScale) {
-        clearInterval(timer);
-      }
-      element.style.transform = "scale(" + scale + ")";
-      scale += growFactor;
-    }, interval);
-  };
-
   displayIntro = () => {
     //start oscillating introductory text and projecting dalle images
     this.displayIntroText();
@@ -139,20 +126,36 @@ class OpeningPage extends React.Component {
     }
   };
 
+  getImageLinks = () => {
+    // load new images from the database
+
+    //get the image links from the artObjects
+    let imgLinks = this.state.artObjects.forEach((artObj) => {
+      return artObj.img_link;
+    });
+  };
+
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
+    this.loadArt();
     console.log(this.state.artObjects);
+    // let imgLinks = this.state.artObjects.forEach((artObj) => {
+    //   return artObj.img_link;
+    // });
     let imgPosition = 0;
     let previousPosition = this.displayFloatingImages(
       "TestPhotos/" + imgNames[imgPosition],
       previousPosition
     );
+
     let timer = setInterval(() => {
+      // don't display images when not on intro page
       if (this.state.introDisplayed == false) {
         clearInterval(timer);
         return;
       }
+
       previousPosition = this.displayFloatingImages(
         "TestPhotos/" + imgNames[imgPosition],
         previousPosition
