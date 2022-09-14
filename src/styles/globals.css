@@ -136,7 +136,9 @@ li h3 {
 #btn-next-stage {
   color: rgb(255 254 254 / 86%);
   background-color: rgba(248, 225, 203, 0.18);
-  padding: 0.5em 2em;
+  /* padding: 0.5em 2em; */
+  width: 9em;
+  height: 1.7em;
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
   font-size: 1.5em;
@@ -585,6 +587,14 @@ code {
   border-bottom: 2px solid rgba(248, 225, 203, 0.7);
   color: rgba(248, 225, 203, 0.6);
   font-weight: 600;
+}
+
+#query-div {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  margin-top: 0%;
+  margin-bottom: 5%;
 }
 
 .selection-title {

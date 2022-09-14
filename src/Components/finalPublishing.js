@@ -169,7 +169,7 @@ class FinalPublishing extends React.Component {
     // TODO: remove arpiece description, buttons next to each other
     return (
       <div>
-        <img src={this.props.finalImage} />
+        {/* <img src={this.props.finalImage} /> */}
         <div className="signatureScheme">
           <h1 className="selection-title">
             {this.state.signatureText[this.props.lang]}
