@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { resolve } from "styled-jsx/css";
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
 
 /**
@@ -39,68 +40,114 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
-    this.getDBRandomArt();
     this.displayIntro();
-    document.querySelector("#main").addEventListener("click", () => {
+
+    document.getElementById("main").addEventListener("click", () => {
       this.changeScreen();
     });
   }
 
   getDBRandomArt = () => {
-    //get the artwork saved in mongo DB
-    let artData = [];
+    return new Promise((resolve, reject) => {
+      let artData = [];
 
-    fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        artData = data;
-        this.setState({ art: artData });
-        this.setState({ DBLoaded: true });
-      });
-  };
-
-  getArtFromTasks = () => {
-    //get the task for each art piece
-    this.state.art.forEach((artpiece) => {
-      fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       })
         .then((res) => res.json())
         .then((data) => {
-          let artObj = {
-            img_link:
-              data.result.generations.data[artpiece.selected_pos].generation
-                .image_path,
-            content: artpiece.content,
-            signature: artpiece.signature,
-          };
-          this.state.artObjects.push(artObj);
+          artData = data;
+          this.setState({ art: artData });
+          this.setState({ DBLoaded: true });
+          console.log(artData);
+        });
+
+      // let artData = [];
+      // // get the artwork saved in mongo DB
+      // fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
+      //   method: "GET",
+      // })
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     artData = data;
+      //     console.log(artData);
+      //     this.setState({ art: artData });
+      //     this.setState({ DBLoaded: true });
+      //     console.log("end of getDBRandomArt");
+      //     console.log(this.state.art);
+      //     console.log(this.state.DBLoaded);
+      //     resolve();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     reject();
+      //   });
+    });
+  };
+
+  getArtFromTasks = () => {
+    return new Promise((resolve, reject) => {
+      // get the task for each art piece
+      console.log("inside getartfrom tasks");
+      this.state.art.forEach((artpiece) => {
+        console.log("inside getartfrom tasks foreach");
+        fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            let artObj = {
+              img_link:
+                data.result.generations.data[artpiece.selected_pos].generation
+                  .image_path,
+              content: artpiece.content,
+              signature: artpiece.signature,
+            };
+            console.log(artObj);
+            this.state.artObjects.push(artObj);
+            console.log("pushed art object");
+            // if (this.state.artObjects.length == this.state.art.length) {
+            //   console.log("resolved getArtFromTasks");
+            //   resolve();
+            // }
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    });
+  };
+
+  getImageLinks = () => {
+    // load new images from the database
+    return new Promise((resolve, reject) => {
+      // load random dalle art pieces from the DB, store in artObjctes
+      this.getDBRandomArt()
+        .then(() => {
+          this.getArtFromTasks();
+        })
+        .then(() => {
+          console.log("done getImageLinks");
+          console.log(this.state.artObjects);
+          resolve();
         });
     });
   };
 
-  loadArt = () => {
-    //load 4 random dalle art pieces from the DB, store in artObjctes
-    this.getDBRandomArt();
-    setTimeout(() => {
-      this.getArtFromTasks();
-    }, 1000);
-  };
-
   changeLanguage = (e) => {
-    //when user clicks given element, change language into id of the element
+    // when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
     this.setState({ language: e.target.id });
     console.log(finalDalleAssembled.language);
   };
 
   displayIntro = () => {
-    //start oscillating introductory text and projecting dalle images
+    // start oscillating introductory text and projecting dalle images
     this.displayIntroText();
     this.displayBackgroundImages();
   };
@@ -126,46 +173,48 @@ class OpeningPage extends React.Component {
     }
   };
 
-  getImageLinks = () => {
-    // load new images from the database
-
-    //get the image links from the artObjects
-    let imgLinks = this.state.artObjects.forEach((artObj) => {
-      return artObj.img_link;
-    });
-  };
-
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
-    let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
-    this.loadArt();
-    console.log(this.state.artObjects);
-    // let imgLinks = this.state.artObjects.forEach((artObj) => {
-    //   return artObj.img_link;
-    // });
-    let imgPosition = 0;
-    let previousPosition = this.displayFloatingImages(
-      "TestPhotos/" + imgNames[imgPosition],
-      previousPosition
-    );
 
-    let timer = setInterval(() => {
-      // don't display images when not on intro page
-      if (this.state.introDisplayed == false) {
-        clearInterval(timer);
-        return;
-      }
+    console.log("before getting image links");
+    this.getImageLinks().then(() => {
+      console.log("finished image links");
+      console.log(this.state.artObjects);
+      this.displayFloatingImages(this.state.artObjects[0].img_link, null);
+    });
 
-      previousPosition = this.displayFloatingImages(
-        "TestPhotos/" + imgNames[imgPosition],
-        previousPosition
-      );
-      if (imgPosition == 3) {
-        imgPosition = 0;
-      } else {
-        imgPosition += 1;
-      }
-    }, this.state.IMAGE_SPAWN_DURATION);
+    // repeatedly display the rest of the images
+    //   let index = 1;
+
+    //   let timer = setInterval(() => {
+    //     // don't display images when not on intro page
+    //     if (this.state.introDisplayed == false) {
+    //       clearInterval(timer);
+    //       return;
+    //     }
+
+    //     if ((index = 0)) {
+    //       previousPosition = this.getImageLinks().then(() => {
+    //         this.displayFloatingImages(
+    //           this.state.artObjects[index].img_link,
+    //           previousPosition
+    //         );
+    //       });
+    //       index++;
+    //     } else if (index == this.state.NUM_IMAGES_IN_BATCH - 1) {
+    //       previousPosition = this.displayFloatingImages(
+    //         this.state.artObjects[index].img_link,
+    //         previousPosition
+    //       );
+    //       index = 0;
+    //     } else {
+    //       previousPosition = this.displayFloatingImages(
+    //         this.state.artObjects[index].img_link,
+    //         previousPosition
+    //       );
+    //       index++;
+    //     }
+    //   }, this.state.IMAGE_SPAWN_DURATION);
   };
 
   removeBackgroundGrid = () => {
