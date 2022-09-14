@@ -39,7 +39,6 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
-    this.loadArt();
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
@@ -265,6 +264,7 @@ class OpeningPage extends React.Component {
       element.style.display = "none";
     });
     clearInterval(this.state.intro_interval);
+    document.querySelector("#project-heading-wrapper").style.display = "none";
   };
 
   render() {
