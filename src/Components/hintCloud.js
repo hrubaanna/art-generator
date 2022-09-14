@@ -105,6 +105,10 @@ class HintCloud extends React.Component {
         //change text on btn-next-stage to 'confirm choice'
         document.querySelector("#btn-next-stage").textContent =
           this.state.confirmButtonText[this.props.language];
+        //change forward button color to confirm styling
+        console.log(document.querySelector("#btn-next-stage"));
+        document.getElementById("btn-next-stage").style.backgroundColor =
+          "rgba(248, 225, 203, 0.4)";
       });
     });
   };

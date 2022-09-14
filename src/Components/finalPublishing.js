@@ -30,12 +30,12 @@ class FinalPublishing extends React.Component {
       DE: "DE(Chcete své dílo vystavit v Galerii Albertina mezi uznávanými umělci?)",
     },
     DoPublish: {
-      ENG: "Publish to Gallery",
+      ENG: "publish to gallery",
       CZ: "Vystavit v galerii",
       DE: "DE Vystavit v galerii",
     },
     NotPublish: {
-      ENG: "Do not publish",
+      ENG: "do not publish",
       CZ: "Nevystavovat",
       DE: "DE Nevystavovat",
     },
@@ -190,21 +190,16 @@ class FinalPublishing extends React.Component {
             </div>
           </div>
           <button
-            className="btn"
-            id="btn-signature"
-            onClick={this.saveSignature}
-          >
-            {this.state.signatureAdd[this.props.lang]}
-          </button>
-          <button className="btn" id="btn-signature" onClick={this.clear}>
-            {this.state.signatureClear[this.props.lang]}
-          </button>
-          <button
-            className="btn"
-            id="btn-signature"
+            className="btn btn-signature-cancel"
             onClick={this.hideSignature}
           >
             {this.state.skip[this.props.lang]}
+          </button>
+          <button className="btn btn-signature-cancel" onClick={this.clear}>
+            {this.state.signatureClear[this.props.lang]}
+          </button>
+          <button className="btn btn-signature" onClick={this.saveSignature}>
+            {this.state.signatureAdd[this.props.lang]}
           </button>
         </div>
 
@@ -227,22 +222,21 @@ class FinalPublishing extends React.Component {
             {this.state.publishQ[this.props.lang]}
           </p>
           <button
-            className="btn"
-            id="btn-signature"
+            className="btn btn-signature-cancel"
+            id="changeSigColor"
             onClick={this.changeSignatureColor}
           >
             change signature color
           </button>
           <div>
-            <button className="btn" id="btn-signature" onClick={this.addArt}>
-              {this.state.DoPublish[this.props.lang]}
-            </button>
             <button
-              className="btn"
-              id="btn-signature"
+              className="btn btn-signature-cancel"
               onClick={this.cancelPublish}
             >
               {this.state.NotPublish[this.props.lang]}
+            </button>
+            <button className="btn btn-signature" onClick={this.addArt}>
+              {this.state.DoPublish[this.props.lang]}
             </button>
           </div>
         </div>

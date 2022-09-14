@@ -135,11 +135,11 @@ li h3 {
 
 #btn-next-stage {
   color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.4);
+  background-color: rgba(248, 225, 203, 0.18);
   padding: 0.5em 2em;
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
-  font-size: 25px;
+  font-size: 1.5em;
   font-weight: 200;
   margin-top: 2%;
   animation: fadeIn 1s;
@@ -150,20 +150,44 @@ li h3 {
   text-align: center;
 }
 
-#btn-signature {
+.btn-signature {
   display: inline;
   color: rgb(255 254 254 / 86%);
   background-color: rgba(248, 225, 203, 0.4);
   padding: 0.5em 1.2em;
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
-  font-size: 25px;
+  font-size: 1.5em;
   font-weight: 200;
   margin-top: 2%;
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
   margin: 1.2em 1.2em;
+}
+
+#changeSigColor {
+  padding: 0.4em 1em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.1em;
+}
+
+.btn-signature-cancel {
+  display: inline;
+  color: rgb(255 254 254 / 86%);
+  background-color: rgba(248, 225, 203, 0.18);
+  padding: 0.5em 1.2em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 200;
+  margin-top: 2%;
+  animation: fadeIn 1s;
+  /* margin-left: 3%;
+  margin-right: 3%; */
+  margin: 1.2em 1.2em;
+  /* border: 0.1em solid rgba(248, 225, 203, 0.4); */
 }
 
 #main {
@@ -420,7 +444,7 @@ code {
   padding: 0.5em 2em;
   border-radius: 0.5em;
   font-family: "Work Sans", sans-serif;
-  font-size: 25px;
+  font-size: 1.5em;
   font-weight: 200;
   margin-top: 2%;
   /* animation: fadeIn 1s; */
@@ -469,11 +493,6 @@ code {
   border-radius: 10px;
 }
 
-#canvas-container {
-  width: 100%;
-  text-align: center;
-}
-
 .sigCanvas {
   border-radius: 30px;
   border: 0px solid white;
@@ -494,7 +513,7 @@ code {
 }
 
 #publish {
-  font-size: 25px;
+  font-size: 1.5em;
 }
 
 #final-goodbye {
@@ -504,7 +523,8 @@ code {
 #canvas-container {
   width: 37%;
   text-align: center;
-  border: 2px solid white;
+  border: 2px solid rgba(248, 225, 203, 0.4);
+  background-color: #ca908a1f;
   border-radius: 30px;
   padding: 0px;
   margin: auto;
@@ -622,7 +642,7 @@ code {
   color: rgb(248, 225, 203);
   opacity: 1;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.5em;
   padding-bottom: 5px;
   margin-bottom: 5%;
   margin-top: 3%;
@@ -635,7 +655,7 @@ code {
   display: inline;
   color: rgb(248, 225, 203);
   font-family: "Work Sans", sans-serif;
-  font-size: 25px;
+  font-size: 1.5em;
   font-weight: 200;
   margin: auto;
   margin-top: 12%;
@@ -690,7 +710,7 @@ code {
 }
 
 .loader span:nth-child(4) {
-  filter: blur(25px);
+  filter: blur(1.53em);
 }
 
 .loader span:nth-child(5) {

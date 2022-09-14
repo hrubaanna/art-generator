@@ -110,6 +110,9 @@ class DialoguePage extends React.Component {
     //update forward button text
     document.querySelector("#btn-next-stage").innerHTML =
       this.state.buttons.forward[this.state.language];
+    //restore forward button color
+    document.getElementById("btn-next-stage").style.backgroundColor =
+      "rgba(248, 225, 203, 0.18)";
 
     //hide forward button, create a submit button
     this.checkSubmitStage(currentStage);
