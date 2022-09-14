@@ -21,7 +21,7 @@ class DalleComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log(process.env.DALLE_TOKEN);
+    console.log("token:", process.env.DALLE_TOKEN);
     this.setState({ token: process.env.DALLE_TOKEN });
     this.setState({ query: this.props.text });
     setTimeout(() => {
@@ -121,11 +121,14 @@ class DalleComponent extends React.Component {
            }  */}
 
         {this.state.error ? (
-          <p class="error"> your query could not be processed at this time </p>
+          <p className="error">
+            {" "}
+            your query could not be processed at this time{" "}
+          </p>
         ) : null}
 
         {this.state.loading && (
-          <div class="loader">
+          <div className="loader">
             <span></span>
             <span></span>
             <span></span>
