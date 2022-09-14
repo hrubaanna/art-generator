@@ -35,7 +35,7 @@ class OpeningPage extends React.Component {
     introDisplayed: true,
 
     // constants
-    IMAGE_SPAWN_DURATION: 1000,
+    IMAGE_SPAWN_DURATION: 8000,
     INTERVAL_LENGTH: 5000,
   };
 
@@ -197,15 +197,19 @@ class OpeningPage extends React.Component {
 
     // create new image
     let image = document.createElement("img");
+    let size = 10;
     image.src = source;
     image.className = "floating-image";
-    image.style.width = "10vw"; // assume image is squared
+    image.style.width = `${size}vw`; // assume image is squared
     image.id = `floating-image-${position}`;
     image.style.position = "relative";
     image.style.left = Math.random() * 100 + "%";
     image.style.top = Math.random() * 100 + "%";
     image.style.opacity = 0;
     wrapper.append(image);
+
+    // animate image
+    let duration = this.state.IMAGE_SPAWN_DURATION * 1.2;
     image.animate(
       [
         { opacity: "0" },
@@ -214,28 +218,32 @@ class OpeningPage extends React.Component {
         },
       ],
       {
-        duration: this.state.IMAGE_SPAWN_DURATION / 2,
+        duration: duration / 2,
         direction: "alternate",
         iterations: "2",
       }
     );
     image.animate(
       [
-        { scale: "1.0", translate: "-10vw, 10vw" },
+        {
+          scale: "1.0",
+          transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
+        },
         {
           scale: "2.0",
-          translate: "-20vw, 20vw",
+          transform: `translate(-${size}vw, ${size}vw)`,
         },
       ],
       {
-        duration: this.state.IMAGE_SPAWN_DURATION,
+        duration: duration,
         fill: "forwards",
       }
     );
 
+    // remove image after animation
     setTimeout(() => {
       wrapper.removeChild(image);
-    }, this.state.IMAGE_SPAWN_DURATION);
+    }, duration);
     return position;
   };
 
