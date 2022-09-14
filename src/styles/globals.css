@@ -154,7 +154,7 @@ li h3 {
   display: inline;
   color: rgb(255 254 254 / 86%);
   background-color: rgba(248, 225, 203, 0.4);
-  padding: 0.5em 2em;
+  padding: 0.5em 1.2em;
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
   font-size: 25px;
@@ -163,7 +163,7 @@ li h3 {
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
-  margin: 1.5em 1.5em;
+  margin: 1.2em 1.2em;
 }
 
 #main {
@@ -490,6 +490,11 @@ code {
 
 #gallery-publish {
   display: none;
+  text-align: center;
+}
+
+#publish {
+  font-size: 25px;
 }
 
 #final-goodbye {

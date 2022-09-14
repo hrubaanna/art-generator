@@ -169,7 +169,7 @@ class FinalPublishing extends React.Component {
     // TODO: remove arpiece description, buttons next to each other
     return (
       <div>
-        {/* <img src={this.props.finalImage} /> */}
+        <img src={this.props.finalImage} />
         <div className="signatureScheme">
           <h1 className="selection-title">
             {this.state.signatureText[this.props.lang]}
@@ -223,16 +223,28 @@ class FinalPublishing extends React.Component {
                 </div> */}
 
         <div id="gallery-publish">
-          <p>{this.state.publishQ[this.props.lang]}</p>
-          <button className="btn btn-final" onClick={this.changeSignatureColor}>
+          <p className="selection-title" id="publish">
+            {this.state.publishQ[this.props.lang]}
+          </p>
+          <button
+            className="btn"
+            id="btn-signature"
+            onClick={this.changeSignatureColor}
+          >
             change signature color
           </button>
-          <button className="btn btn-final" onClick={this.addArt}>
-            {this.state.DoPublish[this.props.lang]}
-          </button>
-          <button className="btn" onClick={this.cancelPublish}>
-            {this.state.NotPublish[this.props.lang]}
-          </button>
+          <div>
+            <button className="btn" id="btn-signature" onClick={this.addArt}>
+              {this.state.DoPublish[this.props.lang]}
+            </button>
+            <button
+              className="btn"
+              id="btn-signature"
+              onClick={this.cancelPublish}
+            >
+              {this.state.NotPublish[this.props.lang]}
+            </button>
+          </div>
         </div>
 
         <div id="final-goodbye">
