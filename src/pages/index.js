@@ -101,17 +101,6 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
-  growElement = (element, interval, finalScale, growFactor) => {
-    let scale = 1.0;
-    var timer = setInterval(function () {
-      if (scale >= finalScale) {
-        clearInterval(timer);
-      }
-      element.style.transform = "scale(" + scale + ")";
-      scale += growFactor;
-    }, interval);
-  };
-
   displayIntro = () => {
     //start oscillating introductory text and projecting dalle images
     this.displayIntroText();
@@ -139,20 +128,35 @@ class OpeningPage extends React.Component {
     }
   };
 
+  getImageLinks = () => {
+    // load new images from the database
+
+    //get the image links from the artObjects
+    let imgLinks = this.state.artObjects.forEach((artObj) => {
+      return artObj.img_link;
+    });
+  };
+
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
     console.log(this.state.artObjects);
+    // let imgLinks = this.state.artObjects.forEach((artObj) => {
+    //   return artObj.img_link;
+    // });
     let imgPosition = 0;
     let previousPosition = this.displayFloatingImages(
       "TestPhotos/" + imgNames[imgPosition],
       previousPosition
     );
+
     let timer = setInterval(() => {
+      // don't display images when not on intro page
       if (this.state.introDisplayed == false) {
         clearInterval(timer);
         return;
       }
+
       previousPosition = this.displayFloatingImages(
         "TestPhotos/" + imgNames[imgPosition],
         previousPosition
