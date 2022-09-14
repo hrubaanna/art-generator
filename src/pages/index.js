@@ -33,7 +33,7 @@ class OpeningPage extends React.Component {
     introDisplayed: true,
 
     // constants
-    IMAGE_SPAWN_DURATION: 1000,
+    IMAGE_SPAWN_DURATION: 8000,
     INTERVAL_LENGTH: 5000,
     NUM_IMAGES_IN_BATCH: "4",
   };
@@ -100,47 +100,6 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
-  fadeOutElement = (element, interval) => {
-    var op = 1; // initial opacity
-    var timer = setInterval(function () {
-      if (op <= 0.05) {
-        clearInterval(timer);
-        element.style.display = "none";
-      }
-      element.style.opacity = op;
-      element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      op -= op * 0.1;
-    }, interval);
-  };
-
-  fadeInElement = (element, interval, initialOpacity) => {
-    var op = initialOpacity;
-    element.style.display = "flex";
-    var timer = setInterval(function () {
-      if (op >= 1) {
-        clearInterval(timer);
-      }
-      element.style.opacity = op;
-      element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      if (op == 0) {
-        op += 0.05;
-      } else {
-        op += op * 0.1;
-      }
-    }, interval);
-  };
-
-  growElement = (element, interval, finalScale, growFactor) => {
-    let scale = 1.0;
-    var timer = setInterval(function () {
-      if (scale >= finalScale) {
-        clearInterval(timer);
-      }
-      element.style.transform = "scale(" + scale + ")";
-      scale += growFactor;
-    }, interval);
-  };
-
   displayIntro = () => {
     //start oscillating introductory text and projecting dalle images
     this.displayIntroText();
@@ -168,20 +127,35 @@ class OpeningPage extends React.Component {
     }
   };
 
+  getImageLinks = () => {
+    // load new images from the database
+
+    //get the image links from the artObjects
+    let imgLinks = this.state.artObjects.forEach((artObj) => {
+      return artObj.img_link;
+    });
+  };
+
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
     console.log(this.state.artObjects);
+    // let imgLinks = this.state.artObjects.forEach((artObj) => {
+    //   return artObj.img_link;
+    // });
     let imgPosition = 0;
     let previousPosition = this.displayFloatingImages(
       "TestPhotos/" + imgNames[imgPosition],
       previousPosition
     );
+
     let timer = setInterval(() => {
+      // don't display images when not on intro page
       if (this.state.introDisplayed == false) {
         clearInterval(timer);
         return;
       }
+
       previousPosition = this.displayFloatingImages(
         "TestPhotos/" + imgNames[imgPosition],
         previousPosition
@@ -226,15 +200,19 @@ class OpeningPage extends React.Component {
 
     // create new image
     let image = document.createElement("img");
+    let size = 10;
     image.src = source;
     image.className = "floating-image";
-    image.style.width = "10vw"; // assume image is squared
+    image.style.width = `${size}vw`; // assume image is squared
     image.id = `floating-image-${position}`;
     image.style.position = "relative";
     image.style.left = Math.random() * 100 + "%";
     image.style.top = Math.random() * 100 + "%";
     image.style.opacity = 0;
     wrapper.append(image);
+
+    // animate image
+    let duration = this.state.IMAGE_SPAWN_DURATION * 1.2;
     image.animate(
       [
         { opacity: "0" },
@@ -243,28 +221,32 @@ class OpeningPage extends React.Component {
         },
       ],
       {
-        duration: this.state.IMAGE_SPAWN_DURATION / 2,
+        duration: duration / 2,
         direction: "alternate",
         iterations: "2",
       }
     );
     image.animate(
       [
-        { scale: "1.0", translate: "-10vw, 10vw" },
+        {
+          scale: "1.0",
+          transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
+        },
         {
           scale: "2.0",
-          translate: "-20vw, 20vw",
+          transform: `translate(-${size}vw, ${size}vw)`,
         },
       ],
       {
-        duration: this.state.IMAGE_SPAWN_DURATION,
+        duration: duration,
         fill: "forwards",
       }
     );
 
+    // remove image after animation
     setTimeout(() => {
       wrapper.removeChild(image);
-    }, this.state.IMAGE_SPAWN_DURATION);
+    }, duration);
     return position;
   };
 
