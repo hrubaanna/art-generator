@@ -40,6 +40,7 @@ const {
 class DialoguePage extends React.Component {
   state = {
     stage: 0,
+    hintCloudUpdated: false,
     medium: "",
     numStages: 7,
     query: "",
@@ -65,9 +66,9 @@ class DialoguePage extends React.Component {
         },
       },
       forward: {
-        ENG: "next",
-        CZ: "další",
-        DE: "nächste",
+        ENG: "skip stage",
+        CZ: "přeskočit fázi",
+        DE: "überspringen",
       },
 
       results: {
@@ -103,46 +104,42 @@ class DialoguePage extends React.Component {
   incrementStage = () => {
     let currentStage = this.state.stage;
 
-    //reset timer in each stage, if user is inactive at any stage for 30 seconds, reset state and start over
-    clearTimeout(this.state.timer);
+    //start the timer to check for user inactivity
+    this.resetTimer();
 
-    this.state.timer = setTimeout(() => {
-      //return to start page
-      alert(
-        "You have been inactive for 30 seconds. Please restart the process."
-      );
-
-      this.resetState();
-      Router.push("/");
-    }, this.state.RESET_TIME);
-
-    /***
-     * Button to next stage:
-     * is enabled only if the current stage is less than last,
-     * at last stage is replaced by submit button which redirects to loading page.
-     *
-     * Text field is emptied and value stored.
-     */
+    //update forward button text
+    document.querySelector("#btn-next-stage").innerHTML =
+      this.state.buttons.forward[this.state.language];
 
     //hide forward button, create a submit button
-    if (currentStage === this.state.numStages - 2) {
-      //hide forward button
-      document.querySelector("#btn-next-stage").style.display = "none";
+    this.checkSubmitStage(currentStage);
 
-      //show submit button
-      document.querySelector("#btn-result").style.display = "block";
-    }
-
+    let userInput = document.querySelector("#current_selection").innerHTML;
     //get text from input field and store it in the query array
-    let input = document.querySelector("#current_selection").innerHTML;
-    //TODO: change to fit the correct structure
-    this.setState({ query: input });
+    this.storeInputOnPage(userInput);
 
-    /****
-     * Feed input to assembler
-     */
+    //feed input to assembler
+    this.addToAssembler(userInput);
+
+    //get assembled query so far, show it on page
+    let assembledQuery = assembleResponse(
+      responses,
+      this.state.medium,
+      this.state.language
+    );
+
+    document.querySelector("#assembled_query").innerHTML = assembledQuery;
+
+    //empty the input field
+    document.querySelector("#current_selection").innerHTML = "";
+
+    //increase stage by 1
+    this.setState({ stage: currentStage + 1 });
+  };
+
+  addToAssembler = (userInput) => {
+    //add current input to assembler
     if (this.state.stage !== 0) {
-      let userInput = document.querySelector("#current_selection").innerHTML;
       //store response in prefered language
       storeResponse(
         userInput,
@@ -179,20 +176,38 @@ class DialoguePage extends React.Component {
         );
       }
     }
+  };
 
-    //get assembled query so far, show it on page, clear #current_selection
-    let assembledQuery = assembleResponse(
-      responses,
-      this.state.medium,
-      this.state.language
-    );
-    document.querySelector("#assembled_query").innerHTML = assembledQuery;
+  storeInputOnPage = (userInput) => {
+    //get text from input field and store it in the query array
+    this.setState({ query: userInput });
+  };
 
-    //empty the input field
-    document.querySelector("#current_selection").innerHTML = "";
+  checkSubmitStage = (currentStage) => {
+    //if user is on the last stage, change button text
+    //hide forward button, create a submit button
+    if (currentStage === this.state.numStages - 2) {
+      //hide forward button
+      document.querySelector("#btn-next-stage").style.display = "none";
 
-    //increase stage by 1
-    this.setState({ stage: currentStage + 1 });
+      //show submit button
+      document.querySelector("#btn-result").style.display = "block";
+    }
+  };
+
+  resetTimer = () => {
+    //reset timer in each stage, if user is inactive at any stage for 30 seconds, reset state and start over
+    clearTimeout(this.state.timer);
+
+    this.state.timer = setTimeout(() => {
+      //return to start page
+      alert(
+        "You have been inactive for 30 seconds. Please restart the process."
+      );
+
+      this.resetState();
+      Router.push("/");
+    }, this.state.RESET_TIME);
   };
 
   //set medium to the value of the selected button
@@ -305,16 +320,17 @@ class DialoguePage extends React.Component {
 
             <div id="query_div">
               <p className="ongoing_query" id="assembled_query"></p>
+
               <p className="ongoing_query" id="current_selection"></p>
             </div>
-
-            <input
+            <button
               className="btn"
               id="btn-next-stage"
               type="submit"
               onClick={this.incrementStage}
-              value={this.state.buttons.forward[this.state.language]}
-            />
+            >
+              {this.state.buttons.forward[this.state.language]}
+            </button>
           </div>
         )}
 
