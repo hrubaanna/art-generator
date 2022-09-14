@@ -24,6 +24,9 @@ class DalleComponent extends React.Component {
     console.log(process.env.DALLE_TOKEN);
     this.setState({ token: process.env.DALLE_TOKEN });
     this.setState({ query: this.props.text });
+    setTimeout(() => {
+      this.getDalle2();
+    }, 1000);
   }
 
   getDalle2 = () => {
@@ -93,7 +96,7 @@ class DalleComponent extends React.Component {
       <div>
         <h3 className="final-query">{this.props.langText}</h3>
 
-        {
+        {/* {
           //hide the Get Result button after the query has been sent
 
           this.state.loading == false &&
@@ -109,7 +112,7 @@ class DalleComponent extends React.Component {
               {this.state.button[this.props.lang]}{" "}
             </button>
           ) : null
-        }
+        } */}
 
         {/* {
                 //TODO: change background color one the results are provided (this code is not working)

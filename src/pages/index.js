@@ -39,7 +39,6 @@ class OpeningPage extends React.Component {
   };
 
   componentDidMount() {
-    this.getDBRandomArt();
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
@@ -96,7 +95,6 @@ class OpeningPage extends React.Component {
     //when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
     this.setState({ language: e.target.id });
-    console.log(finalDalleAssembled.language);
   };
 
   displayIntro = () => {
@@ -266,6 +264,7 @@ class OpeningPage extends React.Component {
       element.style.display = "none";
     });
     clearInterval(this.state.intro_interval);
+    document.querySelector("#project-heading-wrapper").style.display = "none";
   };
 
   render() {

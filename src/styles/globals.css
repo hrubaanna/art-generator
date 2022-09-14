@@ -525,8 +525,8 @@ code {
 #canvas-container {
   width: 37%;
   text-align: center;
-  border: 2px solid rgba(248, 225, 203, 0.4);
-  background-color: #ca908a1f;
+  border: 1px solid rgba(248, 225, 203, 0.4);
+  background-color: #fff3f11f;
   border-radius: 30px;
   padding: 0px;
   margin: auto;
