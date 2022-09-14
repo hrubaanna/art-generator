@@ -101,36 +101,6 @@ class OpeningPage extends React.Component {
     console.log(finalDalleAssembled.language);
   };
 
-  fadeOutElement = (element, interval) => {
-    var op = 1; // initial opacity
-    var timer = setInterval(function () {
-      if (op <= 0.05) {
-        clearInterval(timer);
-        element.style.display = "none";
-      }
-      element.style.opacity = op;
-      element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      op -= op * 0.1;
-    }, interval);
-  };
-
-  fadeInElement = (element, interval, initialOpacity) => {
-    var op = initialOpacity;
-    element.style.display = "flex";
-    var timer = setInterval(function () {
-      if (op >= 1) {
-        clearInterval(timer);
-      }
-      element.style.opacity = op;
-      element.style.filter = "alpha(opacity=" + op * 100 + ")";
-      if (op == 0) {
-        op += 0.05;
-      } else {
-        op += op * 0.1;
-      }
-    }, interval);
-  };
-
   growElement = (element, interval, finalScale, growFactor) => {
     let scale = 1.0;
     var timer = setInterval(function () {
