@@ -22,7 +22,7 @@ class GalleryPageTest extends React.Component {
     //get the artwork saved in mongo DB
     let artData = [];
 
-    fetch(`/api/artwork`, {
+    fetch(`/api/artwork?q=2`, {
       method: "GET",
     })
       .then((res) => res.json())
