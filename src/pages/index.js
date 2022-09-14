@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
-import Head from "next/head";
-import Image from "next/image";
 
 /**
  * Page that lures the user in
@@ -37,10 +35,12 @@ class OpeningPage extends React.Component {
     // constants
     IMAGE_SPAWN_DURATION: 1000,
     INTERVAL_LENGTH: 5000,
+    NUM_IMAGES_IN_BATCH: "4",
   };
 
   componentDidMount() {
-    this.loadArt();
+    this.getDBRandomArt();
+    console.log(this.state.art);
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
@@ -51,14 +51,13 @@ class OpeningPage extends React.Component {
     //get the artwork saved in mongo DB
     let artData = [];
 
-    fetch(`/api/artwork?q=random-art`, {
+    fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
         artData = data;
         this.setState({ art: artData });
-        console.log(this.state.art);
         this.setState({ DBLoaded: true });
       });
   };
