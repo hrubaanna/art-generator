@@ -20,6 +20,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   animation: fadeIn 2s;
+  scale: 1.05;
 }
 
 h1,
@@ -147,6 +148,7 @@ li h3 {
 #main {
   justify-content: center;
   height: 100vh;
+  width: 100vw;
   background-color: rgba(51, 51, 153, 0.6);
 }
 
