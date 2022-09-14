@@ -303,7 +303,8 @@ li h3 {
   height: 100vh;
   display: grid;
   grid-template-columns: 25vw 25vw;
-  grid-template-rows: 50vh 50vh;
+  grid-template-rows: 40vh 40vh;
+  padding-bottom: 20vh;
 }
 
 .floating-wrapper {

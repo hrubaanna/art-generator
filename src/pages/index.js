@@ -40,7 +40,6 @@ class OpeningPage extends React.Component {
 
   componentDidMount() {
     this.getDBRandomArt();
-    console.log(this.state.art);
     this.displayIntro();
     document.querySelector("#main").addEventListener("click", () => {
       this.changeScreen();
@@ -139,6 +138,7 @@ class OpeningPage extends React.Component {
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
     let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
+    this.loadArt();
     console.log(this.state.artObjects);
     // let imgLinks = this.state.artObjects.forEach((artObj) => {
     //   return artObj.img_link;
