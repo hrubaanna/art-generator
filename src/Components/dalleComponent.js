@@ -21,7 +21,7 @@ class DalleComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log("token:", process.env.DALLE_TOKEN);
+    //console.log(`token: ${process.env.DALLE_TOKEN}`);
     this.setState({ token: process.env.DALLE_TOKEN });
     this.setState({ query: this.props.text });
     setTimeout(() => {
@@ -139,7 +139,7 @@ class DalleComponent extends React.Component {
 
         {!this.state.image_selected ? (
           <div>
-            <p onClick={this.displayFavorite}>get me forward</p>
+            {/* <p onClick={this.displayFavorite}>get me forward</p> */}
             <div className="grid">
               {this.state.result.map((result, index) => {
                 return (

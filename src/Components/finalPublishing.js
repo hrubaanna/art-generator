@@ -67,12 +67,12 @@ class FinalPublishing extends React.Component {
     finalImage.src = this.props.finalImage;
     finalImage.setAttribute(
       "style",
-      "margin: auto; display: block; border-radius: 10px;"
+      "margin: auto; display: block; border-radius: 10px; width: 26em;"
     );
     finalImage.setAttribute("className", "final-image");
 
     //place final image on canvas
-    document.querySelector("#gallery-publish").appendChild(finalImage);
+    document.querySelector("#finalImagewithSignature").appendChild(finalImage);
 
     //place signature image on canvas
     let signatureImage = document.createElement("img");
@@ -81,7 +81,9 @@ class FinalPublishing extends React.Component {
     signatureImage.setAttribute("class", "signature-image");
     signatureImage.style.display = "block";
     console.log(signatureImage);
-    document.querySelector("#gallery-publish").appendChild(signatureImage);
+    document
+      .querySelector("#finalImagewithSignature")
+      .appendChild(signatureImage);
 
     document.querySelector(".signatureScheme").style.display = "none";
   };
@@ -228,6 +230,7 @@ class FinalPublishing extends React.Component {
           >
             change signature color
           </button>
+          <div id="finalImagewithSignature" />
           <div>
             <button
               className="btn btn-signature-cancel"
