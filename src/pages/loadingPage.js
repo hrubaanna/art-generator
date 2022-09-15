@@ -45,7 +45,7 @@ class LoadingPage extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="selection-title">
+        <h1 className="selection-title" id="generate-art">
           {" "}
           {this.state.headings[finalDalleAssembled.language]}{" "}
         </h1>

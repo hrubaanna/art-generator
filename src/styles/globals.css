@@ -515,7 +515,17 @@ code {
 }
 
 #publish {
-  font-size: 1.5em;
+  font-size: 2.3em;
+  margin-bottom: -1%;
+  margin-top: -1%;
+}
+
+#generate-art {
+  display: block;
+}
+
+#signature-page {
+  display: inline;
 }
 
 #final-goodbye {
@@ -546,7 +556,7 @@ code {
 }
 
 #finalImagewithSignature {
-  margin-bottom: -4%;
+  margin-bottom: -2%;
 }
 
 .imgNotSelected {
@@ -557,8 +567,8 @@ code {
 .signature-image {
   z-index: 2;
   position: relative;
-  left: 57%;
-  bottom: 4.5em;
+  left: 58%;
+  bottom: 2.5em;
   width: 6em;
   max-height: 4em;
 }

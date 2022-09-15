@@ -14,9 +14,9 @@ class DalleComponent extends React.Component {
     task_id: "",
     selected_img_pos: "1",
     button: {
-      ENG: "Generate Artwork",
-      CZ: "Vytvořit dílo",
-      DE: "Generieren",
+      ENG: "Generating Artwork",
+      CZ: "Dílo se vytváří",
+      DE: "Ihre Grafik wird generiert",
     },
   };
 
@@ -48,6 +48,8 @@ class DalleComponent extends React.Component {
           //
           this.setState({ result_provided: true });
           this.setState({ task_id: data.result.data[0].task_id });
+          //hide 'Generating artwork' heading when results are provided
+          document.querySelector("#generate-art").style.display = "none";
         })
         .catch((err) => {
           console.log(err);
@@ -94,6 +96,11 @@ class DalleComponent extends React.Component {
   render() {
     return (
       <div>
+        {/* show select heading when results are provided*/}
+        {this.state.result_provided && !this.state.image_selected ? (
+          <h1 className="selection-title">Select your favourite artwork</h1>
+        ) : null}
+
         <h3 className="final-query">{this.props.langText}</h3>
 
         {/* {

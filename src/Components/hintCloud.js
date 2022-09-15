@@ -27,7 +27,7 @@ class HintCloud extends React.Component {
     confirmButtonText: {
       ENG: "confirm choice",
       CZ: "potvrdit výběr",
-      DE: "Auswahl bestätigen",
+      DE: "bestätigen",
     },
   };
 

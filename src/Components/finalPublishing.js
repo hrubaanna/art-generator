@@ -67,7 +67,7 @@ class FinalPublishing extends React.Component {
     finalImage.src = this.props.finalImage;
     finalImage.setAttribute(
       "style",
-      "margin: auto; display: block; border-radius: 10px; width: 26em;"
+      "margin: auto; display: block; border-radius: 10px; width: 28em;"
     );
     finalImage.setAttribute("className", "final-image");
 
@@ -170,8 +170,8 @@ class FinalPublishing extends React.Component {
   render() {
     // TODO: remove arpiece description, buttons next to each other
     return (
-      <div>
-        {/* <img src={this.props.finalImage} /> */}
+      <div id="signature-page">
+        {/* <img className="final-image" src={this.props.finalImage} /> */}
         <div className="signatureScheme">
           <h1 className="selection-title">
             {this.state.signatureText[this.props.lang]}
