@@ -131,7 +131,8 @@ class DialoguePage extends React.Component {
       this.state.language
     );
 
-    document.querySelector("#assembled-query").innerHTML = assembledQuery;
+    document.getElementById("assembled-query").innerHTML = assembledQuery;
+    document.getElementById("assembled-query").style.marginRight = "1%";
 
     //empty the input field
     document.querySelector("#current-selection").innerHTML = "";

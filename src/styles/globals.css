@@ -587,10 +587,6 @@ code {
   text-align: left;
 }
 
-#assembled-query {
-  margin-right: 1%;
-}
-
 #current-selection {
   color: rgba(248, 225, 203, 1);
   font-style: italic;
