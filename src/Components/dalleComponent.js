@@ -14,16 +14,19 @@ class DalleComponent extends React.Component {
     task_id: "",
     selected_img_pos: "1",
     button: {
-      ENG: "Generate Artwork",
-      CZ: "Vytvořit dílo",
-      DE: "Generieren",
+      ENG: "Generating Artwork",
+      CZ: "Dílo se vytváří",
+      DE: "Ihre Grafik wird generiert",
     },
   };
 
   componentDidMount() {
-    console.log(process.env.DALLE_TOKEN);
+    //console.log(`token: ${process.env.DALLE_TOKEN}`);
     this.setState({ token: process.env.DALLE_TOKEN });
     this.setState({ query: this.props.text });
+    setTimeout(() => {
+      this.getDalle2();
+    }, 1000);
   }
 
   getDalle2 = () => {
@@ -45,6 +48,8 @@ class DalleComponent extends React.Component {
           //
           this.setState({ result_provided: true });
           this.setState({ task_id: data.result.data[0].task_id });
+          //hide 'Generating artwork' heading when results are provided
+          document.querySelector("#generate-art").style.display = "none";
         })
         .catch((err) => {
           console.log(err);
@@ -91,9 +96,14 @@ class DalleComponent extends React.Component {
   render() {
     return (
       <div>
+        {/* show select heading when results are provided*/}
+        {this.state.result_provided && !this.state.image_selected ? (
+          <h1 className="selection-title">Select your favourite artwork</h1>
+        ) : null}
+
         <h3 className="final-query">{this.props.langText}</h3>
 
-        {
+        {/* {
           //hide the Get Result button after the query has been sent
 
           this.state.loading == false &&
@@ -109,7 +119,7 @@ class DalleComponent extends React.Component {
               {this.state.button[this.props.lang]}{" "}
             </button>
           ) : null
-        }
+        } */}
 
         {/* {
                 //TODO: change background color one the results are provided (this code is not working)
@@ -118,11 +128,14 @@ class DalleComponent extends React.Component {
            }  */}
 
         {this.state.error ? (
-          <p class="error"> your query could not be processed at this time </p>
+          <p className="error">
+            {" "}
+            your query could not be processed at this time{" "}
+          </p>
         ) : null}
 
         {this.state.loading && (
-          <div class="loader">
+          <div className="loader">
             <span></span>
             <span></span>
             <span></span>
@@ -133,7 +146,7 @@ class DalleComponent extends React.Component {
 
         {!this.state.image_selected ? (
           <div>
-            <p onClick={this.displayFavorite}>get me forward</p>
+            {/* <p onClick={this.displayFavorite}>get me forward</p> */}
             <div className="grid">
               {this.state.result.map((result, index) => {
                 return (
