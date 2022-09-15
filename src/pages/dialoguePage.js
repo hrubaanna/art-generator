@@ -117,7 +117,7 @@ class DialoguePage extends React.Component {
     //hide forward button, create a submit button
     this.checkSubmitStage(currentStage);
 
-    let userInput = document.querySelector("#current_selection").innerHTML;
+    let userInput = document.querySelector("#current-selection").innerHTML;
     //get text from input field and store it in the query array
     this.storeInputOnPage(userInput);
 
@@ -131,10 +131,10 @@ class DialoguePage extends React.Component {
       this.state.language
     );
 
-    document.querySelector("#assembled_query").innerHTML = assembledQuery;
+    document.querySelector("#assembled-query").innerHTML = assembledQuery;
 
     //empty the input field
-    document.querySelector("#current_selection").innerHTML = "";
+    document.querySelector("#current-selection").innerHTML = "";
 
     //increase stage by 1
     this.setState({ stage: currentStage + 1 });
@@ -222,7 +222,7 @@ class DialoguePage extends React.Component {
   //get text from final input stage and assemble it into final query for dalle
   finishAssembling = () => {
     if (this.state.stage == this.state.numStages - 1) {
-      let input = document.querySelector("#current_selection").innerHTML;
+      let input = document.querySelector("#current-selection").innerHTML;
       //store response in prefered language
       storeResponse(
         input,
@@ -321,10 +321,10 @@ class DialoguePage extends React.Component {
               />
             }
 
-            <div id="query_div">
-              <p className="ongoing_query" id="assembled_query"></p>
+            <div id="query-div">
+              <div className="ongoing-query" id="assembled-query"></div>
 
-              <p className="ongoing_query" id="current_selection"></p>
+              <div className="ongoing-query" id="current-selection"></div>
             </div>
             <button
               className="btn"

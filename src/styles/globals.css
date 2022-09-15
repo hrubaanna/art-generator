@@ -587,34 +587,28 @@ code {
   text-align: left;
 }
 
-#query_div {
-  text-align: center;
-  margin: auto;
-  width: 100%;
-  margin-top: 0%;
+#assembled-query {
+  margin-right: 1%;
 }
 
-#current_selection {
-  margin-left: 1%;
+#current-selection {
   color: rgba(248, 225, 203, 1);
   font-style: italic;
 }
 
-.ongoing_query {
+.ongoing-query {
   display: inline-block;
-  margin: auto;
-  padding-bottom: 0.3%;
   border-bottom: 2px solid rgba(248, 225, 203, 0.7);
   color: rgba(248, 225, 203, 0.6);
   font-weight: 600;
+  font-size: 1.2em;
 }
 
 #query-div {
+  padding-top: 3em;
   text-align: center;
-  margin: auto;
   width: 100%;
-  margin-top: 0%;
-  margin-bottom: 5%;
+  height: 1.2em;
 }
 
 .selection-title {
@@ -630,8 +624,8 @@ code {
 
 .facts {
   font-family: "Work Sans", sans-serif;
-  opacity: 0.8;
-  color: rgb(248, 225, 203);
+  opacity: 1;
+  color: rgb(248, 225, 203, 0.8);
   margin-left: 7em;
   margin-right: 7em;
   animation: fadeIn 2s;
@@ -639,25 +633,16 @@ code {
 
 .hintDiv {
   height: 15em;
-  vertical-align: middle;
   display: flex;
-  justify-content: space-evenly;
   width: 65%;
   margin: auto;
+  justify-content: center;
 }
 
-#middleCloud {
-  width: 100%;
-}
-
-#leftCloud {
-  width: 100%;
-  padding-top: 2.2rem;
-}
-
-#rightCloud {
-  width: 100%;
-  padding-top: 2.2rem;
+.hintDiv div {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0 1em 0 1em;
 }
 
 .gallery-item {

@@ -100,7 +100,7 @@ class HintCloud extends React.Component {
     this.state.hint_elements.forEach((element) => {
       element.addEventListener("click", () => {
         //show the selected word in the query field
-        document.querySelector("#current_selection").innerHTML =
+        document.querySelector("#current-selection").innerHTML =
           element.innerHTML;
         //change text on btn-next-stage to 'confirm choice'
         document.querySelector("#btn-next-stage").textContent =
