@@ -84,13 +84,17 @@ class OpeningPage extends React.Component {
   };
 
   loadArt = () => {
-    //load 4 random dalle art pieces from the DB, store in artObjctes
-    this.getDBRandomArt();
-    setTimeout(() => {
-      this.getArtFromTasks();
-    }, 1000);
+    return new Promise((resolve, reject) => {
+      //load 4 random dalle art pieces from the DB, store in artObjctes
+      this.getDBRandomArt();
+      setTimeout(() => {
+        this.getArtFromTasks();
+        setTimeout(() => {
+          resolve();
+        }, 5000);
+      }, 1000);
+    });
   };
-
   changeLanguage = (e) => {
     //when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
@@ -124,46 +128,17 @@ class OpeningPage extends React.Component {
     }
   };
 
-  getImageLinks = () => {
-    // load new images from the database
-
-    //get the image links from the artObjects
-    let imgLinks = this.state.artObjects.forEach((artObj) => {
-      return artObj.img_link;
-    });
-  };
-
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
-    let imgNames = ["DALLE_1.png", "DALLE_2.png", "DALLE_3.png", "DALLE_4.png"];
-    this.loadArt();
-    console.log(this.state.artObjects);
-    // let imgLinks = this.state.artObjects.forEach((artObj) => {
-    //   return artObj.img_link;
-    // });
-    let imgPosition = 0;
-    let previousPosition = this.displayFloatingImages(
-      "TestPhotos/" + imgNames[imgPosition],
-      previousPosition
-    );
-
-    let timer = setInterval(() => {
-      // don't display images when not on intro page
-      if (this.state.introDisplayed == false) {
-        clearInterval(timer);
-        return;
-      }
-
-      previousPosition = this.displayFloatingImages(
-        "TestPhotos/" + imgNames[imgPosition],
-        previousPosition
-      );
-      if (imgPosition == 3) {
-        imgPosition = 0;
-      } else {
-        imgPosition += 1;
-      }
-    }, this.state.IMAGE_SPAWN_DURATION);
+    this.loadArt().then(() => {
+      this.displayFloatingImages(this.state.artObjects.pop().img_link, null);
+      setInterval(() => {
+        this.displayFloatingImages(this.state.artObjects.pop().img_link, null);
+        if (this.state.artObjects.length == 0) {
+          this.loadArt();
+        }
+      }, this.state.IMAGE_SPAWN_DURATION);
+    });
   };
 
   removeBackgroundGrid = () => {
