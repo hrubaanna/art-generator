@@ -46,7 +46,7 @@ class OpeningPage extends React.Component {
   }
 
   getDBRandomArt = () => {
-    //get the artwork saved in mongo DB
+    // get the artwork saved in mongo DB
     let artData = [];
 
     fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
@@ -57,11 +57,14 @@ class OpeningPage extends React.Component {
         artData = data;
         this.setState({ art: artData });
         this.setState({ DBLoaded: true });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
   getArtFromTasks = () => {
-    //get the task for each art piece
+    // get the task for each art piece
     this.state.art.forEach((artpiece) => {
       fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
         method: "GET",
@@ -79,36 +82,41 @@ class OpeningPage extends React.Component {
             signature: artpiece.signature,
           };
           this.state.artObjects.push(artObj);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     });
   };
 
   loadArt = () => {
     return new Promise((resolve, reject) => {
-      //load 4 random dalle art pieces from the DB, store in artObjctes
+      // load 4 random dalle art pieces from the DB, store in artObjctes
       this.getDBRandomArt();
       setTimeout(() => {
         this.getArtFromTasks();
         setTimeout(() => {
+          console.log(this.state.art);
+          console.log(this.state.artObjects);
           resolve();
         }, 5000);
-      }, 1000);
+      }, 10000);
     });
   };
   changeLanguage = (e) => {
-    //when user clicks given element, change language into id of the element
+    // when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
     this.setState({ language: e.target.id });
   };
 
   displayIntro = () => {
-    //start oscillating introductory text and projecting dalle images
+    // start oscillating introductory text and projecting dalle images
     this.displayIntroText();
     this.displayBackgroundImages();
   };
 
   displayIntroText = () => {
-    //set an interval to change the introductory text between different languages
+    // set an interval to change the introductory text between different languages
     this.setState({
       intro_interval: setInterval(() => {
         this.changeIntroText;
@@ -120,7 +128,7 @@ class OpeningPage extends React.Component {
   };
 
   changeIntroText = () => {
-    //cycle index from 0 to 2, then back to 0
+    // cycle index from 0 to 2, then back to 0
     if (this.state.introIndex == 2) {
       this.setState({ introIndex: 0 });
     } else {
