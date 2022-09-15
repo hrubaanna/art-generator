@@ -253,6 +253,12 @@ li h3 {
   font-family: "Work Sans", sans-serif;
 }
 
+/* @media screen and (max-width: 900px) {
+  #project-heading {
+    font-size: 4em;
+  }
+} */
+
 .animate_change_heading {
   -webkit-animation: color_change_heading 1.5s infinite alternate;
   -moz-animation: color_change_heading 1.5s infinite alternate;
