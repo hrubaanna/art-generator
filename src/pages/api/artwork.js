@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 }
 
-//create a new art in the database
+// create a new art in the database
 async function addArt(req, res) {
   try {
     // connect to the database
@@ -35,7 +35,7 @@ async function addArt(req, res) {
 }
 
 async function getArt(req, res) {
-  //get a random number of art docs from the database
+  // get a random number of art docs from the database
   let numDocs = parseInt(req.query.q);
   try {
     let { db } = await connectToDatabase();
