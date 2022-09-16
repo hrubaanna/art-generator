@@ -33,8 +33,7 @@ class OpeningPage extends React.Component {
     introDisplayed: true,
 
     // constants
-    IMAGE_SPAWN_DURATION: 8000,
-    INTERVAL_LENGTH: 5000,
+    IMAGE_SPAWN_DURATION: 5000,
     NUM_IMAGES_IN_BATCH: "4",
   };
 
@@ -46,61 +45,70 @@ class OpeningPage extends React.Component {
   }
 
   getDBRandomArt = () => {
-    // get the artwork saved in mongo DB
-    let artData = [];
-
-    fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        artData = data;
-        this.setState({ art: artData });
-        this.setState({ DBLoaded: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  getArtFromTasks = () => {
-    // get the task for each art piece
-    this.state.art.forEach((artpiece) => {
-      fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+    return new Promise((resolve, reject) => {
+      // get the artwork saved in mongo DB
+      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       })
         .then((res) => res.json())
         .then((data) => {
-          let artObj = {
-            img_link:
-              data.result.generations.data[artpiece.selected_pos].generation
-                .image_path,
-            content: artpiece.content,
-            signature: artpiece.signature,
-          };
-          this.state.artObjects.push(artObj);
+          this.setState({ art: data }, () => {
+            resolve();
+            this.setState({ DBLoaded: true });
+          });
         })
         .catch((err) => {
           console.log(err);
+          reject("error in getDBRandomArt");
         });
+    });
+  };
+
+  getArtFromTasks = () => {
+    return new Promise((resolve, reject) => {
+      // get the task for each art piece
+      this.state.art.forEach((artpiece) => {
+        fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            let artObj = {
+              img_link:
+                data.result.generations.data[artpiece.selected_pos].generation
+                  .image_path,
+              content: artpiece.content,
+              signature: artpiece.signature,
+            };
+            this.state.artObjects.push(artObj);
+            if (this.state.artObjects.length === this.state.art.length) {
+              resolve();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            reject("error in getArtFromTasks");
+          });
+      });
     });
   };
 
   loadArt = () => {
     return new Promise((resolve, reject) => {
       // load 4 random dalle art pieces from the DB, store in artObjctes
-      this.getDBRandomArt();
-      setTimeout(() => {
-        this.getArtFromTasks();
-        setTimeout(() => {
-          console.log(this.state.art);
-          console.log(this.state.artObjects);
-          resolve();
-        }, 5000);
-      }, 10000);
+      this.getDBRandomArt().then(() => {
+        this.getArtFromTasks()
+          .then(() => {
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject("error in loadArt");
+          });
+      });
     });
   };
   changeLanguage = (e) => {
@@ -138,15 +146,27 @@ class OpeningPage extends React.Component {
 
   displayBackgroundImages = () => {
     this.spawnBackgroundGrid();
-    this.loadArt().then(() => {
-      this.displayFloatingImages(this.state.artObjects.pop().img_link, null);
-      setInterval(() => {
-        this.displayFloatingImages(this.state.artObjects.pop().img_link, null);
-        if (this.state.artObjects.length == 0) {
-          this.loadArt();
-        }
-      }, this.state.IMAGE_SPAWN_DURATION);
-    });
+    this.loadArt()
+      .then(() => {
+        let previousPosition = this.displayFloatingImages(
+          this.state.artObjects.pop().img_link,
+          null
+        );
+        setInterval(() => {
+          // TODO: change so that it waits for loadArt before displaying once again
+          previousPosition = this.displayFloatingImages(
+            this.state.artObjects.pop().img_link,
+            previousPosition
+          );
+          if (this.state.artObjects.length == 0) {
+            this.loadArt();
+          }
+        }, this.state.IMAGE_SPAWN_DURATION);
+      })
+      .catch((err) => {
+        console.log(err);
+        // TODO: load downloaded images because of some API failure
+      });
   };
 
   removeBackgroundGrid = () => {
