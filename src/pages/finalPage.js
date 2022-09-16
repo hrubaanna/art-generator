@@ -3,11 +3,7 @@ import FinalPublishing from "../Components/finalPublishing";
 
 class FinalPage extends React.Component {
   render() {
-    return (
-      <div>
-        <FinalPublishing> </FinalPublishing>{" "}
-      </div>
-    );
+    return <div></div>;
   }
 }
 

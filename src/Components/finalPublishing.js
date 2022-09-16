@@ -50,6 +50,8 @@ class FinalPublishing extends React.Component {
       DE: "DE Du bist ein Kunstmacher",
     },
     signature_color: "black",
+    publishClicked: false,
+    wantToPublish: false,
   };
 
   sigPad = {};
@@ -85,7 +87,7 @@ class FinalPublishing extends React.Component {
       .querySelector("#finalImagewithSignature")
       .appendChild(signatureImage);
 
-    document.querySelector(".signatureScheme").style.display = "none";
+    document.querySelector(".signature-scheme").style.display = "none";
   };
 
   //add photo to gallery database, show the gallery on the page
@@ -130,10 +132,12 @@ class FinalPublishing extends React.Component {
       // set the error
       console.log("error");
     }
+
+    this.setState({ publishClicked: true });
   };
 
   hideSignature = () => {
-    document.querySelector(".signatureScheme").style.display = "none";
+    document.querySelector(".signature-scheme").style.display = "none";
     //document.querySelector(".publish-buttons").style.display = "block";
     document.querySelector("#gallery-publish").style.display = "block";
   };
@@ -164,6 +168,7 @@ class FinalPublishing extends React.Component {
 
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
+
     Router.push("/");
   };
 
@@ -172,7 +177,7 @@ class FinalPublishing extends React.Component {
     return (
       <div id="signature-page">
         {/* <img className="final-image" src={this.props.finalImage} /> */}
-        <div className="signatureScheme">
+        <div className="signature-scheme">
           <h1 className="selection-title">
             {this.state.signatureText[this.props.lang]}
           </h1>
@@ -219,30 +224,44 @@ class FinalPublishing extends React.Component {
                     </form>
                 </div> */}
 
-        <div id="gallery-publish">
-          <p className="selection-title" id="publish">
-            {this.state.publishQ[this.props.lang]}
-          </p>
-          <button
-            className="btn btn-signature-cancel"
-            id="changeSigColor"
-            onClick={this.changeSignatureColor}
-          >
-            change signature color
-          </button>
-          <div id="finalImagewithSignature" />
-          <div>
+        {!this.state.publishClicked ? (
+          <div id="gallery-publish">
+            <p className="selection-title" id="publish">
+              {this.state.publishQ[this.props.lang]}
+            </p>
             <button
               className="btn btn-signature-cancel"
-              onClick={this.cancelPublish}
+              id="changeSigColor"
+              onClick={this.changeSignatureColor}
             >
-              {this.state.NotPublish[this.props.lang]}
+              change signature color
             </button>
-            <button className="btn btn-signature" onClick={this.addArt}>
-              {this.state.DoPublish[this.props.lang]}
-            </button>
+            <div id="finalImagewithSignature" />
+            <div>
+              <button
+                className="btn btn-signature-cancel"
+                onClick={this.cancelPublish}
+              >
+                {this.state.NotPublish[this.props.lang]}
+              </button>
+              <button className="btn btn-signature" onClick={this.addArt}>
+                {this.state.DoPublish[this.props.lang]}
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <EmailForm
+            finalImage={this.state.final_image_src}
+            query={this.state.query}
+            task_id={this.state.task_id}
+            selected_img_pos={this.state.selected_img_pos}
+            lang={this.props.lang}
+            wantToPublish={this.state.wantToPublish}
+            //todo: figure out how to go to email form after clicking publish
+            //should it actually publish in the email component,
+            //or should it publish here and then go to email form?
+          ></EmailForm>
+        )}
 
         <div id="final-goodbye">
           <h1>{this.state.thanks[this.props.lang]}</h1>

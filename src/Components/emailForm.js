@@ -1,11 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
+import Router, { withRouter } from "next/router";
 
 export default function EmailForm() {
   //const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [formIsVisible, setFormIsVisible] = useState(false);
+  const titleText = {
+    ENG: "Would you like to receive an email of your piece?",
+    CZ: "Chcete dostat email s vaším dílem?",
+    DE: "Möchten Sie eine E-Mail mit Ihrem Stück erhalten?",
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,40 +39,59 @@ export default function EmailForm() {
         setMessage("");
       }
     });
+    Router.push("/finalPage");
+  };
+
+  const showEmailInput = () => {
+    setFormIsVisible(true);
   };
 
   return (
-    <div>
-      <form>
-        <formGroup>
-          <label for="email">Email</label>
+    <div className="signature-scheme">
+      {!formIsVisible ? (
+        <div>
+          <h1 className="selection-title">{titleText[this.props.lang]}</h1>
+          <Link href={"/finalPage"}>
+            <button className="btn btn-signature-cancel">No</button>
+          </Link>
+          <button className="btn btn-signature" onClick={showEmailInput}>
+            Yes
+          </button>
+        </div>
+      ) : (
+        <form className="form">
+          <formGroup>
+            <input
+              className="input"
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              name="email"
+              id="email"
+              placeholder="Enter email"
+            ></input>
+          </formGroup>
+          {/* <formGroup>
+            <label htmlFor="message">Message</label>
+            <input
+              className="input"
+              type="text"
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+              name="message"
+            />
+          </formGroup> */}
           <input
-            type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
+            className="btn btn-signature"
+            type="submit"
+            onClick={(e) => {
+              handleSubmit(e);
             }}
-            name="email"
-            id="email"
-            placeholder="Enter email"
-          ></input>
-        </formGroup>
-        <formGroup>
-          <label htmlFor="message">Message</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-            name="message"
           />
-        </formGroup>
-        <input
-          type="submit"
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
-        />
-      </form>
+        </form>
+      )}
     </div>
   );
 }
