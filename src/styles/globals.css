@@ -3,6 +3,8 @@
 * perhaps highlight words in word cloud to suggest they are clickable
 */
 
+/* General elements style */
+
 body {
   background: rgb(168, 90, 94);
   margin: 0;
@@ -10,29 +12,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-}
-
-#overlay-text {
-  z-index: 3;
-}
-
-#video-background-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(51, 51, 153, 0.6);
-  pointer-events: none;
-}
-
-#video-background {
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  animation: fadeIn 2s;
-  scale: 1.05;
 }
 
 h1,
@@ -85,129 +64,37 @@ li h3 {
   text-align: center;
 }
 
-.btn {
-  background-color: rgba(39, 39, 39, 0.1);
-  border-radius: 8px;
-  border-width: 0;
-  color: #333333;
-  cursor: crosshair;
-  display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  list-style: none;
-  display: block;
-  margin: auto;
-  padding: 10px 12px;
-  text-align: center;
-  transition: all 200ms;
-  white-space: nowrap;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
+/* General classes */
 
-.btn:hover {
-  background-color: rgba(39, 39, 39, 0.2);
-}
-
-.btn-medium {
-  display: inline;
-  font-size: 1.5rem;
-  font-weight: 200;
-  border-radius: 1em;
-  border: 0.1em solid rgba(248, 225, 203, 0.4);
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 2rem;
-  padding: 0.5rem 0.3rem 0.5rem 0.3rem;
-  color: rgb(248, 225, 203);
-  max-width: 100%;
-  width: 200px;
-  animation: fadeIn 1s;
-}
-
-.div-medium {
-  text-align: center;
-}
-
-.div-language {
-  text-align: center;
-}
-
-.btn-language {
-  font-size: 1.2rem;
-  padding: 10px 14px;
-  margin: 20% 4%;
-  display: none;
-  max-height: 5em;
-}
-
-#btn-next-stage {
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.18);
-  /* padding: 0.5em 2em; */
-  width: 9em;
-  height: 1.7em;
-  border-radius: 10em;
-  font-family: "Work Sans", sans-serif;
-  font-size: 1.5em;
-  font-weight: 200;
-  margin-top: 2%;
-  animation: fadeIn 1s;
-}
-
-.signature-scheme {
-  /* margin: auto; */
-  text-align: center;
-}
-
-.btn-signature {
-  display: inline;
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.4);
-  padding: 0.5em 1.2em;
-  border-radius: 10em;
-  font-family: "Work Sans", sans-serif;
-  font-size: 1.5em;
-  font-weight: 200;
-  margin-top: 2%;
-  animation: fadeIn 1s;
-  /* margin-left: 3%;
-  margin-right: 3%; */
-  margin: 1.2em 1.2em;
-}
-
-#changeSigColor {
-  padding: 0.4em 1em;
-  border-radius: 10em;
-  font-family: "Work Sans", sans-serif;
-  font-size: 1.1em;
-}
-
-.btn-signature-cancel {
-  display: inline;
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.18);
-  padding: 0.5em 1.2em;
-  border-radius: 10em;
-  font-family: "Work Sans", sans-serif;
-  font-size: 1.5em;
-  font-weight: 200;
-  margin-top: 2%;
-  animation: fadeIn 1s;
-  /* margin-left: 3%;
-  margin-right: 3%; */
-  margin: 1.2em 1.2em;
-  /* border: 0.1em solid rgba(248, 225, 203, 0.4); */
-}
+/* Landing Page */
 
 #main {
   justify-content: center;
   height: 100vh;
   width: 100vw;
+}
+
+#video-background-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(51, 51, 153, 0.6);
+  pointer-events: none;
+}
+
+#video-background {
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  animation: fadeIn 2s;
+  scale: 1.05;
+}
+
+#overlay-text {
+  z-index: 3;
 }
 
 .intro-text {
@@ -401,6 +288,125 @@ li h3 {
   padding-right: 5vw;
   padding-bottom: 20vw;
   padding-left: 10vw;
+}
+
+.btn {
+  background-color: rgba(39, 39, 39, 0.1);
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: crosshair;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  list-style: none;
+  display: block;
+  margin: auto;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background-color: rgba(39, 39, 39, 0.2);
+}
+
+.btn-medium {
+  display: inline;
+  font-size: 1.5rem;
+  font-weight: 200;
+  border-radius: 1em;
+  border: 0.1em solid rgba(248, 225, 203, 0.4);
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+  color: rgb(248, 225, 203);
+  max-width: 100%;
+  width: 200px;
+  animation: fadeIn 1s;
+}
+
+.div-medium {
+  text-align: center;
+}
+
+.div-language {
+  text-align: center;
+}
+
+.btn-language {
+  font-size: 1.2rem;
+  padding: 10px 14px;
+  margin: 20% 4%;
+  display: none;
+  max-height: 5em;
+}
+
+#btn-next-stage {
+  color: rgb(255 254 254 / 86%);
+  background-color: rgba(248, 225, 203, 0.18);
+  /* padding: 0.5em 2em; */
+  width: 9em;
+  height: 1.7em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 200;
+  margin-top: 2%;
+  animation: fadeIn 1s;
+}
+
+.signature-scheme {
+  /* margin: auto; */
+  text-align: center;
+}
+
+.btn-signature {
+  display: inline;
+  color: rgb(255 254 254 / 86%);
+  background-color: rgba(248, 225, 203, 0.4);
+  padding: 0.5em 1.2em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 200;
+  margin-top: 2%;
+  animation: fadeIn 1s;
+  /* margin-left: 3%;
+  margin-right: 3%; */
+  margin: 1.2em 1.2em;
+}
+
+#changeSigColor {
+  padding: 0.4em 1em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.1em;
+}
+
+.btn-signature-cancel {
+  display: inline;
+  color: rgb(255 254 254 / 86%);
+  background-color: rgba(248, 225, 203, 0.18);
+  padding: 0.5em 1.2em;
+  border-radius: 10em;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 200;
+  margin-top: 2%;
+  animation: fadeIn 1s;
+  /* margin-left: 3%;
+  margin-right: 3%; */
+  margin: 1.2em 1.2em;
+  /* border: 0.1em solid rgba(248, 225, 203, 0.4); */
 }
 
 .input {
