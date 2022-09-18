@@ -33,7 +33,7 @@ class OpeningPage extends React.Component {
     introDisplayed: true,
 
     // constants
-    IMAGE_SPAWN_DURATION: 5000,
+    IMAGE_SPAWN_DURATION: 4000,
     NUM_IMAGES_IN_BATCH: 4,
   };
 
@@ -230,7 +230,8 @@ class OpeningPage extends React.Component {
     gridPosition.appendChild(wrapper);
 
     // animate image
-    let duration = this.state.IMAGE_SPAWN_DURATION * 1.2;
+    let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
+    // TODO: rewrite this to use CSS animation in css file
     wrapper.animate(
       [
         { opacity: "0" },
@@ -257,6 +258,21 @@ class OpeningPage extends React.Component {
       ],
       {
         duration: duration,
+        fill: "forwards",
+      }
+    );
+
+    wrapper.animate(
+      [
+        {
+          filter: `blur(2px)`,
+        },
+        {
+          filter: `blur(0px)`,
+        },
+      ],
+      {
+        duration: duration * 0.75,
         fill: "forwards",
       }
     );
