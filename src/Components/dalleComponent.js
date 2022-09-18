@@ -82,7 +82,7 @@ class DalleComponent extends React.Component {
     );
     newImg.style.transition = "transform 0.5s ease";
     //append new img element to the div grid
-    document.querySelector(".grid").appendChild(newImg);
+    document.querySelector(".dalle-grid").appendChild(newImg);
 
     // e.target.transform = "scale(1.3)";
     // e.target.className = "finalChoice";
@@ -147,7 +147,7 @@ class DalleComponent extends React.Component {
         {!this.state.image_selected ? (
           <div>
             {/* <p onClick={this.displayFavorite}>get me forward</p> */}
-            <div className="grid">
+            <div className="dalle-grid">
               {this.state.result.map((result, index) => {
                 return (
                   //TODO. hide card

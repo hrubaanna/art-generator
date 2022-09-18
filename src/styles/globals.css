@@ -519,13 +519,11 @@ code {
   }
 }
 
-.grid {
+.dalle-grid {
   display: flex;
-  padding-left: 5.5rem;
   align-items: center;
-  justify-content: right;
+  justify-content: center;
   flex-wrap: wrap;
-  max-width: 1200px;
 }
 
 .card {
