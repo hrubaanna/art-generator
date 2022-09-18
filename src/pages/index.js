@@ -34,14 +34,18 @@ class OpeningPage extends React.Component {
 
     // constants
     IMAGE_SPAWN_DURATION: 5000,
-    NUM_IMAGES_IN_BATCH: "4",
+    NUM_IMAGES_IN_BATCH: 4,
   };
 
   componentDidMount() {
     this.displayIntro();
-    document.querySelector("#main").addEventListener("click", () => {
-      this.changeScreen();
-    });
+    document.getElementById("main").addEventListener(
+      "click",
+      () => {
+        this.changeScreen();
+      },
+      { once: true }
+    );
   }
 
   getDBRandomArt = () => {
@@ -111,6 +115,7 @@ class OpeningPage extends React.Component {
       });
     });
   };
+
   changeLanguage = (e) => {
     // when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
@@ -127,7 +132,7 @@ class OpeningPage extends React.Component {
     // set an interval to change the introductory text between different languages
     this.setState({
       intro_interval: setInterval(() => {
-        this.changeIntroText;
+        this.changeIntroText();
         document.getElementById("overlay-text").className = "";
         document.getElementById("overlay-text").className =
           "animate_change_heading";
@@ -149,17 +154,21 @@ class OpeningPage extends React.Component {
     this.loadArt()
       .then(() => {
         let previousPosition = this.displayFloatingImages(
-          this.state.artObjects.pop().img_link,
+          this.state.artObjects.pop(),
           null
         );
-        setInterval(() => {
-          // TODO: change so that it waits for loadArt before displaying once again
-          previousPosition = this.displayFloatingImages(
-            this.state.artObjects.pop().img_link,
-            previousPosition
-          );
-          if (this.state.artObjects.length == 0) {
-            this.loadArt();
+        let intervalID = setInterval(() => {
+          if (this.state.introDisplayed) {
+            // TODO: change so that it waits for loadArt before displaying once again
+            previousPosition = this.displayFloatingImages(
+              this.state.artObjects.pop(),
+              previousPosition
+            );
+            if (this.state.artObjects.length == 0) {
+              this.loadArt();
+            }
+          } else if (this.state.introDisplayed == false) {
+            clearTimeout(intervalID);
           }
         }, this.state.IMAGE_SPAWN_DURATION);
       })
@@ -167,10 +176,6 @@ class OpeningPage extends React.Component {
         console.log(err);
         // TODO: load downloaded images because of some API failure
       });
-  };
-
-  removeBackgroundGrid = () => {
-    document.getElementById("background-images").style.display = "none";
   };
 
   spawnBackgroundGrid = () => {
@@ -182,13 +187,13 @@ class OpeningPage extends React.Component {
     // fill the grid
     for (let i = 0; i < 4; i++) {
       let wrapper = document.createElement("div");
-      wrapper.id = "floating-wrapper-" + i;
-      wrapper.className = "floating-wrapper";
+      wrapper.id = "floating-grid-" + i;
+      wrapper.className = "floating-grid";
       document.getElementById("background-images").append(wrapper);
     }
   };
 
-  displayFloatingImages = (source, previousPosition) => {
+  displayFloatingImages = (artObject, previousPosition) => {
     function getRandomPosition() {
       let x = Math.floor(Math.random() * 4);
       if (x == previousPosition) {
@@ -197,24 +202,36 @@ class OpeningPage extends React.Component {
       return x;
     }
     let position = getRandomPosition();
-    let wrapper = document.getElementById(`floating-wrapper-${position}`);
+    let gridPosition = document.getElementById(`floating-grid-${position}`);
 
     // create new image
+    let wrapper = document.createElement("div");
+    wrapper.className = "floating-wrapper";
+    wrapper.style.left = Math.random() * 100 + "%";
+    wrapper.style.top = Math.random() * 100 + "%";
+
     let image = document.createElement("img");
     let size = 10;
-    image.src = source;
+    image.src = artObject.img_link;
     image.className = "floating-image";
     image.style.width = `${size}vw`; // assume image is squared
     image.id = `floating-image-${position}`;
-    image.style.position = "relative";
-    image.style.left = Math.random() * 100 + "%";
-    image.style.top = Math.random() * 100 + "%";
-    image.style.opacity = 0;
-    wrapper.append(image);
+
+    let signature = document.createElement("img");
+    signature.className = "floating-signature";
+    signature.src = artObject.signature;
+    if (artObject.signature_color === "white") {
+      signature.style.filter = "invert(100%)";
+    }
+
+    // add image to grid
+    wrapper.appendChild(signature);
+    wrapper.appendChild(image);
+    gridPosition.appendChild(wrapper);
 
     // animate image
     let duration = this.state.IMAGE_SPAWN_DURATION * 1.2;
-    image.animate(
+    wrapper.animate(
       [
         { opacity: "0" },
         {
@@ -227,7 +244,7 @@ class OpeningPage extends React.Component {
         iterations: "2",
       }
     );
-    image.animate(
+    wrapper.animate(
       [
         {
           scale: "1.0",
@@ -246,22 +263,22 @@ class OpeningPage extends React.Component {
 
     // remove image after animation
     setTimeout(() => {
-      wrapper.removeChild(image);
+      gridPosition.removeChild(wrapper);
     }, duration);
     return position;
   };
 
   changeScreen = () => {
-    //when the screen is clicked, remove current content and display only flags to select language
+    // when the screen is clicked, remove current content and display only flags to select language
     this.state.introDisplayed = false;
-    this.removeBackgroundGrid();
+    document.getElementById("background-images").remove();
     let langButtons = document.querySelectorAll(".btn-language");
     document.getElementById("project-heading").style.display = "none";
     document.getElementById("click-to-begin").style.display = "none";
     langButtons.forEach((element) => {
       element.style.display = "inline";
     });
-    document.getElementById("main").style.backgroundColor =
+    document.getElementById("video-background-overlay").style.backgroundColor =
       "rgba(51, 51, 153, 0)";
     document.querySelectorAll(".floating-image").forEach((element) => {
       element.style.display = "none";
@@ -273,9 +290,11 @@ class OpeningPage extends React.Component {
   render() {
     return (
       <div id="main">
-        <video autoPlay muted loop id="video-background">
-          <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
-        </video>
+        <div id="video-background-overlay">
+          <video autoPlay muted loop id="video-background">
+            <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
+          </video>
+        </div>
 
         <div id="overlay-text">
           <div id={"project-heading-wrapper"}>
