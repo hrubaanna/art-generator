@@ -134,20 +134,20 @@ class DalleComponent extends React.Component {
           </p>
         ) : null}
 
-        {this.state.loading && (
-          <div className="loader">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        )}
-
         {!this.state.image_selected ? (
           <div>
             {/* <p onClick={this.displayFavorite}>get me forward</p> */}
             <div className="dalle-grid">
+              {this.state.loading && (
+                <div className="loader">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              )}
+
               {this.state.result.map((result, index) => {
                 return (
                   //TODO. hide card
