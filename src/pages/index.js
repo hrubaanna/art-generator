@@ -272,7 +272,7 @@ class OpeningPage extends React.Component {
         },
       ],
       {
-        duration: duration * 0.75,
+        duration: duration * 0.25,
         fill: "forwards",
       }
     );
@@ -280,7 +280,7 @@ class OpeningPage extends React.Component {
     // remove image after animation
     setTimeout(() => {
       gridPosition.removeChild(wrapper);
-    }, duration);
+    }, duration * 1.5);
     return position;
   };
 
