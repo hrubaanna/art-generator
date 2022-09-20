@@ -6,7 +6,7 @@ import Router, { withRouter } from "next/router";
 export default function EmailForm() {
   //const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [formIsVisible, setFormIsVisible] = useState(false);
   const titleText = {
@@ -20,7 +20,7 @@ export default function EmailForm() {
     console.log("Sending");
     let data = {
       email,
-      message,
+      name,
       src: "../../../public/TestPhotos/DALLE_1.png",
     };
     fetch("/api/contact", {
@@ -36,7 +36,7 @@ export default function EmailForm() {
         console.log("Response succeeded!");
         setSubmitted(true);
         setEmail("");
-        setMessage("");
+        setName("");
       }
     });
     Router.push("/finalPage");
@@ -50,7 +50,10 @@ export default function EmailForm() {
     <div className="signature-scheme">
       {!formIsVisible ? (
         <div>
-          <h1 className="selection-title">{titleText[this.props.lang]}</h1>
+          {/* add into selection-title for lang options {titleText[this.props.lang]} */}
+          <h1 className="selection-title">
+            Would you like to receive an email of your piece?
+          </h1>
           <Link href={"/finalPage"}>
             <button className="btn btn-signature-cancel">No</button>
           </Link>
@@ -72,24 +75,27 @@ export default function EmailForm() {
               placeholder="Enter email"
             ></input>
           </formGroup>
-          {/* <formGroup>
-            <label htmlFor="message">Message</label>
+          <formGroup>
             <input
               className="input"
               type="text"
               onChange={(e) => {
-                setMessage(e.target.value);
+                setName(e.target.value);
               }}
-              name="message"
+              placeholder="Enter name (optional)"
+              name="name"
+              id="name"
             />
-          </formGroup> */}
-          <input
-            className="btn btn-signature"
-            type="submit"
-            onClick={(e) => {
-              handleSubmit(e);
-            }}
-          />
+          </formGroup>
+          <Link href={"/finalPage"}>
+            <input
+              className="btn btn-signature"
+              type="submit"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            />
+          </Link>
         </form>
       )}
     </div>
