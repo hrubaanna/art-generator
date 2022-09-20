@@ -137,7 +137,7 @@ class DalleComponent extends React.Component {
         {!this.state.image_selected ? (
           <div>
             {/* <p onClick={this.displayFavorite}>get me forward</p> */}
-            <div className="dalle-grid">
+            <div className="grid">
               {this.state.loading && (
                 <div className="loader">
                   <span></span>

@@ -382,7 +382,7 @@ li h3 {
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
-  margin: 1.2em 1.2em;
+  margin: 1.2em 0.6em;
 }
 
 #changeSigColor {
@@ -405,7 +405,7 @@ li h3 {
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
-  margin: 1.2em 1.2em;
+  margin: 1.2em 0.6em;
   /* border: 0.1em solid rgba(248, 225, 203, 0.4); */
 }
 
@@ -519,12 +519,13 @@ code {
   }
 }
 
-.dalle-grid {
+.grid {
   display: flex;
+  padding-left: 5.5rem;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   flex-wrap: wrap;
-  height: 296px;
+  max-width: 1200px;
 }
 
 .card {
@@ -571,7 +572,18 @@ code {
 }
 
 #signature-page {
-  display: inline;
+  display: flex;
+  position: absolute;
+  vertical-align: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-flow: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  justify-content: center;
 }
 
 #final-goodbye {
@@ -579,7 +591,7 @@ code {
 }
 
 #canvas-container {
-  width: 37%;
+  width: 83%;
   text-align: center;
   border: 1px solid rgba(248, 225, 203, 0.4);
   background-color: #fff3f11f;
@@ -597,8 +609,9 @@ code {
 
 .final-image {
   z-index: 1;
-  margin: auto;
-  width: 22em;
+  margin: 1em;
+  width: 28em;
+  border-radius: 10px;
 }
 
 #finalImagewithSignature {
@@ -610,13 +623,22 @@ code {
   display: none;
 }
 
-.signature-image {
+/* .signature-image {
   z-index: 2;
   position: relative;
   left: 58%;
   bottom: 2.5em;
   width: 6em;
   max-height: 4em;
+} */
+
+.signature-image {
+  z-index: 2;
+  position: relative;
+  left: 70%;
+  bottom: 7.8em;
+  max-height: 65%;
+  max-width: 23%;
 }
 
 .art-content {

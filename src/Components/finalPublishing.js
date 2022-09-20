@@ -1,6 +1,7 @@
 import React from "react";
 import SignatureCanvas from "react-signature-canvas";
 import Router, { withRouter } from "next/router";
+import EmailForm from "./emailForm";
 
 class FinalPublishing extends React.Component {
   state = {
@@ -100,49 +101,8 @@ class FinalPublishing extends React.Component {
     this.setState({ signatureChosen: true });
   };
 
-  //add photo to gallery database, show the gallery on the page
-  addArt = async (e) => {
-    e.preventDefault();
-
-    let artpiece = {
-      task_id: this.props.task_id,
-      selected_img_pos: this.props.selected_img_pos,
-      signature: this.state.signatureSrc,
-      content: this.props.query,
-      //TODO: add email and name
-      name: "not yet added",
-      email: "not yet added",
-      //add source of signature
-      created_at: new Date().toISOString(),
-      currently_selected: false,
-      //TODO: get value of selected img
-      signature_color: this.state.signatureColor,
-      selected_pos: this.props.selected_img_pos,
-    };
-
-    //save the artpiece
-    let response = await fetch("/api/artwork", {
-      method: "POST",
-      body: JSON.stringify(artpiece),
-    });
-
-    // get the data
-    let data = await response.json();
-
-    if (data.success) {
-      // reset the fields
-      console.log("success");
-      // set the message
-
-      //TODO: send photo to DB and to gallery
-      document.querySelector("#gallery-publish").style.display = "none";
-      document.querySelector("#final-goodbye").style.display = "block";
-      document.querySelector(".final-query").style.display = "none";
-    } else {
-      // set the error
-      console.log("error");
-    }
-
+  confirmPublish = () => {
+    this.setState({ wantToPublish: true });
     this.setState({ publishClicked: true });
   };
 
@@ -179,8 +139,7 @@ class FinalPublishing extends React.Component {
 
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
-
-    Router.push("/");
+    this.setState({ publishClicked: true });
   };
 
   render() {
@@ -206,6 +165,7 @@ class FinalPublishing extends React.Component {
                       this.sigPad = ref;
                     }}
                     penColor="black"
+                    minWidth={3}
                   />
                 </div>
               </div>
@@ -252,7 +212,7 @@ class FinalPublishing extends React.Component {
               id="changeSigColor"
               onClick={this.changeSignatureColor}
             >
-              {this.state.signatureColor[this.props.lang]}
+              {this.state.changeSigColor[this.props.lang]}
             </button>
             <div id="finalImagewithSignature" />
             <div>
@@ -262,19 +222,25 @@ class FinalPublishing extends React.Component {
               >
                 {this.state.NotPublish[this.props.lang]}
               </button>
-              <button className="btn btn-signature" onClick={this.addArt}>
+              <button
+                className="btn btn-signature"
+                onClick={this.confirmPublish}
+              >
                 {this.state.DoPublish[this.props.lang]}
               </button>
             </div>
           </div>
         ) : (
           <EmailForm
-            finalImage={this.state.final_image_src}
-            query={this.state.query}
-            task_id={this.state.task_id}
-            selected_img_pos={this.state.selected_img_pos}
+            task_id={this.props.task_id}
+            signatureSrc={this.state.signatureSrc}
+            query={this.props.query}
+            signatureColor={this.state.signatureColor}
+            selected_img_pos={this.props.selected_img_pos}
+            finalImage={this.props.final_image_src}
             lang={this.props.lang}
             wantToPublish={this.state.wantToPublish}
+
             //todo: figure out how to go to email form after clicking publish
             //should it actually publish in the email component,
             //or should it publish here and then go to email form?
