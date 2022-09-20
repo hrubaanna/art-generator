@@ -50,6 +50,7 @@ class DalleComponent extends React.Component {
           this.setState({ task_id: data.result.data[0].task_id });
           //hide 'Generating artwork' heading when results are provided
           document.querySelector("#generate-art").style.display = "none";
+          document.querySelector(".facts").style.display = "none";
         })
         .catch((err) => {
           console.log(err);
@@ -82,7 +83,7 @@ class DalleComponent extends React.Component {
     );
     newImg.style.transition = "transform 0.5s ease";
     //append new img element to the div grid
-    document.querySelector(".dalle-grid").appendChild(newImg);
+    document.querySelector(".grid").appendChild(newImg);
 
     // e.target.transform = "scale(1.3)";
     // e.target.className = "finalChoice";
@@ -90,7 +91,6 @@ class DalleComponent extends React.Component {
     //remove other elements from page
     document.querySelector("h1").style.display = "none";
     document.querySelector(".final-query").style.display = "none";
-    document.querySelector(".facts").style.display = "none";
   };
 
   render() {

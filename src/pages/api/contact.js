@@ -11,6 +11,9 @@ export default function (req, res) {
     secure: true,
   });
 
+  const greetingBlock =
+    req.body.name === "" ? "Hello, " : `Hello ${req.body.name},`;
+
   const mailData = {
     from: "01aesthetics@email.cz",
     to: req.body.email,
@@ -18,10 +21,11 @@ export default function (req, res) {
     subject: `Message From Anna`,
     html: `
     <div style="background-color: rgba(51, 51, 153, 0.6)">
+    
       <h1
         style="padding-top: 2%; text-align: center; color: rgb(248, 225, 203)"
       >
-        Message From Anna
+        ${greetingBlock}
       </h1>
       <h2 style="margin-top: 5%; text-align: center">
         Thank you for using the <em> 01 Aesthetics X Dalle </em> art generator

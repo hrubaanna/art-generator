@@ -9,6 +9,11 @@ class FinalPublishing extends React.Component {
       CZ: "Přidat k dílu podpis",
       DE: "Fügen Sie Ihrem Kunstwerk eine Signatur hinzu",
     },
+    changeSigColor: {
+      ENG: "Change signature color",
+      CZ: "Změnit barvu podpisu",
+      DE: "Ändern Sie die Signaturfarbe",
+    },
     signatureAdd: {
       ENG: "add signature",
       CZ: "přidat podpis",
@@ -49,8 +54,10 @@ class FinalPublishing extends React.Component {
       CZ: "Nyní jste skutečným umělcem, který společně vytváří novou uměleckou formu pomocí štětce umělé inteligence.",
       DE: "DE Du bist ein Kunstmacher",
     },
-    signature_color: "black",
+    signatureColor: "black",
     publishClicked: false,
+    signatureChosen: false,
+    signatureSrc: "",
     wantToPublish: false,
   };
 
@@ -80,6 +87,9 @@ class FinalPublishing extends React.Component {
     let signatureImage = document.createElement("img");
     //set source as the signature image
     signatureImage.src = this.sigPad.getTrimmedCanvas().toDataURL("image/png");
+    this.state.signatureSrc = this.sigPad
+      .getTrimmedCanvas()
+      .toDataURL("image/png");
     signatureImage.setAttribute("class", "signature-image");
     signatureImage.style.display = "block";
     console.log(signatureImage);
@@ -87,7 +97,7 @@ class FinalPublishing extends React.Component {
       .querySelector("#finalImagewithSignature")
       .appendChild(signatureImage);
 
-    document.querySelector(".signature-scheme").style.display = "none";
+    this.setState({ signatureChosen: true });
   };
 
   //add photo to gallery database, show the gallery on the page
@@ -97,7 +107,7 @@ class FinalPublishing extends React.Component {
     let artpiece = {
       task_id: this.props.task_id,
       selected_img_pos: this.props.selected_img_pos,
-      signature: this.sigPad.getTrimmedCanvas().toDataURL("image/png"),
+      signature: this.state.signatureSrc,
       content: this.props.query,
       //TODO: add email and name
       name: "not yet added",
@@ -106,7 +116,7 @@ class FinalPublishing extends React.Component {
       created_at: new Date().toISOString(),
       currently_selected: false,
       //TODO: get value of selected img
-      signature_color: this.state.signature_color,
+      signature_color: this.state.signatureColor,
       selected_pos: this.props.selected_img_pos,
     };
 
@@ -137,17 +147,18 @@ class FinalPublishing extends React.Component {
   };
 
   hideSignature = () => {
-    document.querySelector(".signature-scheme").style.display = "none";
+    this.setState({ signatureChosen: true });
+    // document.querySelector(".signature-scheme").style.display = "none";
     //document.querySelector(".publish-buttons").style.display = "block";
     document.querySelector("#gallery-publish").style.display = "block";
   };
 
   changeSignatureColor = () => {
-    if (this.state.signature_color === "black") {
-      this.setState({ signature_color: "white" });
+    if (this.state.signatureColor === "black") {
+      this.setState({ signatureColor: "white" });
       document.querySelector(".signature-image").style.filter = "invert(100%)";
     } else {
-      this.setState({ signature_color: "black" });
+      this.setState({ signatureColor: "black" });
       document.querySelector(".signature-image").style.filter = "invert(0%)";
     }
   };
@@ -175,40 +186,47 @@ class FinalPublishing extends React.Component {
   render() {
     // TODO: remove arpiece description, buttons next to each other
     return (
-      <div id="signature-page">
-        {/* <img className="final-image" src={this.props.finalImage} /> */}
-        <div className="signature-scheme">
-          <h1 className="selection-title">
-            {this.state.signatureText[this.props.lang]}
-          </h1>
-          <div id="canvas-container">
-            <div>
-              <SignatureCanvas
-                canvasProps={{
-                  width: 520,
-                  height: 250,
-                  className: "sigCanvas",
-                }}
-                ref={(ref) => {
-                  this.sigPad = ref;
-                }}
-                penColor="black"
-              />
+      <div>
+        {!this.state.signatureChosen ? (
+          <div id="signature-page">
+            <img className="final-image" src={this.props.finalImage} />
+            <div className="signature-scheme">
+              <h1 className="selection-title">
+                {this.state.signatureText[this.props.lang]}
+              </h1>
+              <div id="canvas-container">
+                <div>
+                  <SignatureCanvas
+                    canvasProps={{
+                      width: 518,
+                      height: 250,
+                      className: "sigCanvas",
+                    }}
+                    ref={(ref) => {
+                      this.sigPad = ref;
+                    }}
+                    penColor="black"
+                  />
+                </div>
+              </div>
+              <button
+                className="btn btn-signature-cancel"
+                onClick={this.hideSignature}
+              >
+                {this.state.skip[this.props.lang]}
+              </button>
+              <button className="btn btn-signature-cancel" onClick={this.clear}>
+                {this.state.signatureClear[this.props.lang]}
+              </button>
+              <button
+                className="btn btn-signature"
+                onClick={this.saveSignature}
+              >
+                {this.state.signatureAdd[this.props.lang]}
+              </button>
             </div>
           </div>
-          <button
-            className="btn btn-signature-cancel"
-            onClick={this.hideSignature}
-          >
-            {this.state.skip[this.props.lang]}
-          </button>
-          <button className="btn btn-signature-cancel" onClick={this.clear}>
-            {this.state.signatureClear[this.props.lang]}
-          </button>
-          <button className="btn btn-signature" onClick={this.saveSignature}>
-            {this.state.signatureAdd[this.props.lang]}
-          </button>
-        </div>
+        ) : null}
 
         {/* TODO: send the photo through email
                 <div className="publish-buttons">
@@ -234,7 +252,7 @@ class FinalPublishing extends React.Component {
               id="changeSigColor"
               onClick={this.changeSignatureColor}
             >
-              change signature color
+              {this.state.signatureColor[this.props.lang]}
             </button>
             <div id="finalImagewithSignature" />
             <div>
