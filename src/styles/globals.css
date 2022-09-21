@@ -365,8 +365,12 @@ li h3 {
 }
 
 .signature-scheme {
-  /* margin: auto; */
   text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100em;
 }
 
 .btn-signature {
@@ -414,11 +418,8 @@ li h3 {
 }
 
 .email-form {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 80em;
+  position: block;
+  margin-top: 11em;
 }
 
 .input {
@@ -436,21 +437,21 @@ li h3 {
   border-radius: 17px;
   padding: 9px 12px;
   line-height: 1.4;
-  color: red;
-  font-size: 16px;
+  color: rgb(248, 225, 203);
+  font-size: 23px;
   font-weight: 400;
   height: 40px;
   transition: all 0.2s ease;
 }
 
 .input:hover {
-  box-shadow: 0 0 0 0 #fff inset, #a24e78 0 0 0 2px;
+  background: rgba(180, 180, 180, 0.3);
 }
 
 .input:focus {
   background: rgb(144, 144, 144, 0.3);
   outline: 0;
-  box-shadow: 0 0 0 0 #fff inset, #a24e78 0 0 0 3px;
+  box-shadow: 0 0 0 0 #fff inset, rgb(248, 225, 203) 0 0 0 1.5px;
 }
 
 .cloud {
@@ -816,4 +817,9 @@ code {
 
 .form {
   display: inline;
+}
+
+::placeholder {
+  /* Most modern browsers support this now. */
+  color: rgb(248, 225, 203, 0.4);
 }
