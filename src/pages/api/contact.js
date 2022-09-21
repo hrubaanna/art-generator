@@ -17,8 +17,7 @@ export default function (req, res) {
   const mailData = {
     from: "01aesthetics@email.cz",
     to: req.body.email,
-    //subject: `Message From ${req.body.name}`,
-    subject: `Message From Anna`,
+    subject: `Your Artwork from 01 Aesthetics`,
     html: `
     <div style="background-color: rgba(51, 51, 153, 0.6)">
     
@@ -32,9 +31,9 @@ export default function (req, res) {
       </h2>
       <p style="text-align: center">Take a look at the piece you created!</p>
       <p style="text-align: center; color: rgb(248, 225, 203)">
-        "Botanical illustration of alien houseplant underwater, apocalyptic,
-        sci-fi, in the style of Joan Miro."
+        "${req.body.query}."
       </p>
+      <p>${req.body.src}</p>
       <img
         style="margin: auto; display: block"
         src="${req.body.src}"

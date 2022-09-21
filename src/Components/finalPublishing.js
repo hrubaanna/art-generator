@@ -188,20 +188,6 @@ class FinalPublishing extends React.Component {
           </div>
         ) : null}
 
-        {/* TODO: send the photo through email
-                <div className="publish-buttons">
-                    <div className="email-buttons">
-                        <p className="email-prompt">Do you wish to receive your artwork through email?</p>
-                        <button className="btn email-prompt" onClick={this.showEmailInput}>Send to Email</button>
-                        <button className="btn email-prompt" onClick={this.hideEmailInput}>No thank you</button>
-                    </div>
-
-                    <form className="email-input">
-                        <input className="input" type="text" placeholder="Enter email"></input>
-                        <button className="btn" onClick={this.sendEmail}>Submit</button>
-                    </form>
-                </div> */}
-
         {!this.state.publishClicked ? (
           <div id="gallery-publish">
             <p className="selection-title" id="publish">
@@ -237,7 +223,7 @@ class FinalPublishing extends React.Component {
             query={this.props.query}
             signatureColor={this.state.signatureColor}
             selected_img_pos={this.props.selected_img_pos}
-            finalImage={this.props.final_image_src}
+            finalImage={this.props.finalImage}
             lang={this.props.lang}
             wantToPublish={this.state.wantToPublish}
 

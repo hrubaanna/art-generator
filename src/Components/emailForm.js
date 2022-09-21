@@ -18,13 +18,15 @@ export default function EmailForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    publishFinalPiece();
+    setTimeout(() => {
+      publishFinalPiece();
+    }, 2000);
 
-    console.log("Sending");
     let data = {
       email,
       name,
       src: props.finalImage,
+      query: props.query,
     };
     fetch("/api/contact", {
       method: "POST",
@@ -46,6 +48,8 @@ export default function EmailForm(props) {
   };
 
   const showEmailInput = () => {
+    console.log("wanted to publish:");
+    console.log(props.wantToPublish);
     setFormIsVisible(true);
   };
 
@@ -65,8 +69,8 @@ export default function EmailForm(props) {
       signature: props.signatureSrc,
       content: props.query,
       //TODO: add email and name
-      name: "not yet added",
-      email: "not yet added",
+      name: name,
+      email: email,
       //add source of signature
       created_at: new Date().toISOString(),
       currently_selected: false,
@@ -96,12 +100,10 @@ export default function EmailForm(props) {
 
   return (
     <div className="signature-scheme">
+      {/* add into selection-title for lang options {titleText[this.props.lang]} */}
+      <h1 className="selection-title">{titleText[props.lang]}</h1>
       {!formIsVisible ? (
         <div>
-          {/* add into selection-title for lang options {titleText[this.props.lang]} */}
-          <h1 className="selection-title">
-            Would you like to receive an email of your piece?
-          </h1>
           <Link href={"/finalPage"}>
             <button
               className="btn btn-signature-cancel"
