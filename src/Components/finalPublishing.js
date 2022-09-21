@@ -60,6 +60,7 @@ class FinalPublishing extends React.Component {
     signatureChosen: false,
     signatureSrc: "",
     wantToPublish: false,
+    penWidth: 3.6,
   };
 
   sigPad = {};
@@ -142,6 +143,10 @@ class FinalPublishing extends React.Component {
     this.setState({ publishClicked: true });
   };
 
+  sliderChange = (e) => {
+    this.setState({ penWidth: e });
+  };
+
   render() {
     // TODO: remove arpiece description, buttons next to each other
     return (
@@ -164,19 +169,21 @@ class FinalPublishing extends React.Component {
                     ref={(ref) => {
                       this.sigPad = ref;
                     }}
+                    minWidth={this.state.penWidth}
+                    maxWidth={this.state.penWidth}
+                    dotSize={this.state.penWidth}
                     penColor="black"
-                    minWidth={3}
                   />
                 </div>
               </div>
+              <button className="btn btn-signature-cancel" onClick={this.clear}>
+                {this.state.signatureClear[this.props.lang]}
+              </button>
               <button
                 className="btn btn-signature-cancel"
                 onClick={this.hideSignature}
               >
                 {this.state.skip[this.props.lang]}
-              </button>
-              <button className="btn btn-signature-cancel" onClick={this.clear}>
-                {this.state.signatureClear[this.props.lang]}
               </button>
               <button
                 className="btn btn-signature"
@@ -184,6 +191,20 @@ class FinalPublishing extends React.Component {
               >
                 {this.state.signatureAdd[this.props.lang]}
               </button>
+              <div>
+                <h2 className="intensityTitle">Set Intesity of pen</h2>
+                <input
+                  type="range"
+                  id="testRange"
+                  min="0.8"
+                  max="6.4"
+                  defaultValue={this.state.penWidth}
+                  onChange={(e) => {
+                    this.sliderChange(e.target.value);
+                  }}
+                  step="any"
+                ></input>
+              </div>
             </div>
           </div>
         ) : null}

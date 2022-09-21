@@ -12,35 +12,59 @@ export default function (req, res) {
   });
 
   const greetingBlock =
-    req.body.name === "" ? "Hello, " : `Hello ${req.body.name},`;
+    req.body.name === "" ? "Hello, " : `Dear ${req.body.name},`;
 
   const mailData = {
     from: "01aesthetics@email.cz",
     to: req.body.email,
     subject: `Your Artwork from 01 Aesthetics`,
     html: `
-    <div style="background-color: rgba(51, 51, 153, 0.6)">
+    <div
+      style="
+      background-color: #aebdca;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      "
+    >
+    <div 
+      style="
+        background-color: #7895b2;
+        width: 70%;
+        margin: auto;
+        display: block;
+      "
+    >
     
       <h1
-        style="padding-top: 2%; text-align: center; color: rgb(248, 225, 203)"
+        style="padding-top: 2%; text-align: center; color: #f5efe6"
       >
         ${greetingBlock}
       </h1>
-      <h2 style="margin-top: 5%; text-align: center">
+      <h2 style="margin-top: 5%; text-align: center; color: #e8dfca">
         Thank you for using the <em> 01 Aesthetics X Dalle </em> art generator
       </h2>
-      <p style="text-align: center">Take a look at the piece you created!</p>
-      <p style="text-align: center; color: rgb(248, 225, 203)">
+      <hr style="width: 70%" />
+      <p style="text-align: center; color: #cabc9f">Take a look at the piece you created:</p>
+      <p 
+        style="
+          text-align: center;
+          color: #e8dfca;
+          max-width: 70%;
+          margin: auto;
+        "
+      >
         "${req.body.query}."
       </p>
-      <p>${req.body.src}</p>
       <img
-        style="margin: auto; display: block"
+        style="margin: auto; display: block; padding: 5%; border-radius: 15%"
         src="${req.body.src}"
         alt="Generated Art"
         height="30%"
         width="30%"
       />
+      </div>
+    
+    </div>
     `,
   };
 
