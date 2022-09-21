@@ -14,6 +14,16 @@ export default function EmailForm(props) {
     CZ: "Chcete dostat email s vaším dílem?",
     DE: "Möchten Sie eine E-Mail mit Ihrem Stück erhalten?",
   };
+  const buttonTextYes = {
+    ENG: "Yes",
+    CZ: "Ano",
+    DE: "ja",
+  };
+  const buttonTextNo = {
+    ENG: "No",
+    CZ: "Ne",
+    DE: "nein",
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,7 +111,7 @@ export default function EmailForm(props) {
   return (
     <div className="email-scheme">
       {/* add into selection-title for lang options {titleText[this.props.lang]} */}
-      {/* <h1 className="selection-title">{titleText[props.lang]}</h1> */}
+      <h1 className="selection-title">{titleText[props.lang]}</h1>
       {!formIsVisible ? (
         <div>
           <Link href={"/finalPage"}>
@@ -110,7 +120,7 @@ export default function EmailForm(props) {
               id="send-email"
               onClick={publishFinalPiece}
             >
-              No
+              {buttonTextNo[props.lang]}
             </button>
           </Link>
           <button
@@ -118,7 +128,7 @@ export default function EmailForm(props) {
             id="send-email"
             onClick={showEmailInput}
           >
-            Yes
+            {buttonTextYes[props.lang]}
           </button>
         </div>
       ) : (
