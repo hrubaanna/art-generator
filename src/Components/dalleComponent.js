@@ -124,7 +124,7 @@ class DalleComponent extends React.Component {
     // e.target.className = "finalChoice";
 
     //remove other elements from page
-    document.querySelector("h1").style.display = "none";
+    document.querySelector(".selection-title").style.display = "none";
     document.querySelector(".final-query").style.display = "none";
   };
 
