@@ -99,7 +99,7 @@ export default function EmailForm(props) {
   };
 
   return (
-    <div className="signature-scheme">
+    <div className="email-scheme">
       {/* add into selection-title for lang options {titleText[this.props.lang]} */}
       {/* <h1 className="selection-title">{titleText[props.lang]}</h1> */}
       {!formIsVisible ? (
