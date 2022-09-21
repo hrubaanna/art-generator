@@ -45,10 +45,9 @@ class LoadingPage extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="selection-title" id="generate-art">
-          {" "}
-          {this.state.headings[finalDalleAssembled.language]}{" "}
-        </h1>
+        <div className="selection-title" id="generate-art">
+          {this.state.headings[finalDalleAssembled.language]}
+        </div>
 
         <DalleComponent
           text={finalDalleAssembled.textENG}
@@ -56,7 +55,7 @@ class LoadingPage extends React.Component {
           lang={finalDalleAssembled.language}
         />
 
-        <h3 className="facts"> {this.state.funFact} </h3>
+        <div className="facts"> {this.state.funFact} </div>
       </div>
     );
   }

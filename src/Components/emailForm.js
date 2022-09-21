@@ -99,20 +99,25 @@ export default function EmailForm(props) {
   };
 
   return (
-    <div className="signature-scheme">
+    <div className="email-scheme">
       {/* add into selection-title for lang options {titleText[this.props.lang]} */}
-      <h1 className="selection-title">{titleText[props.lang]}</h1>
+      {/* <h1 className="selection-title">{titleText[props.lang]}</h1> */}
       {!formIsVisible ? (
         <div>
           <Link href={"/finalPage"}>
             <button
               className="btn btn-signature-cancel"
+              id="send-email"
               onClick={publishFinalPiece}
             >
               No
             </button>
           </Link>
-          <button className="btn btn-signature" onClick={showEmailInput}>
+          <button
+            className="btn btn-signature"
+            id="send-email"
+            onClick={showEmailInput}
+          >
             Yes
           </button>
         </div>
@@ -145,6 +150,7 @@ export default function EmailForm(props) {
           <Link href={"/finalPage"}>
             <input
               className="btn btn-signature"
+              id="send-email"
               type="submit"
               onClick={(e) => {
                 handleSubmit(e);

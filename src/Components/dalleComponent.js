@@ -6,7 +6,7 @@ class DalleComponent extends React.Component {
     token: "",
     query: "",
     result: [],
-    loading: false,
+    loadedImages: 0,
     error: false,
     result_provided: false,
     image_selected: false,
@@ -21,17 +21,13 @@ class DalleComponent extends React.Component {
   };
 
   componentDidMount() {
-    //console.log(`token: ${process.env.DALLE_TOKEN}`);
-    this.setState({ token: process.env.DALLE_TOKEN });
+    // console.log(`token: ${process.env.DALLE_TOKEN}`);
+    this.setState({ token: process.env.DALLE_TOKEN }, this.getDalle2);
     this.setState({ query: this.props.text });
-    setTimeout(() => {
-      this.getDalle2();
-    }, 1000);
   }
 
   getDalle2 = () => {
     if (this.state.query != "" && this.state.token != "") {
-      this.setState({ loading: true });
       this.setState({ error: false });
 
       fetch(`/api/dalle2?q=${this.state.query}`, {
@@ -42,24 +38,63 @@ class DalleComponent extends React.Component {
       })
         .then((res) => res.json())
         .then((data) => {
-          //fixed bug by adding .data to the end of the result
-          this.setState({ result: data.result.data });
-          this.setState({ loading: false });
-          //
+          this.setState({ result: data.result.data }, this.displayImages);
           this.setState({ result_provided: true });
           this.setState({ task_id: data.result.data[0].task_id });
-          //hide 'Generating artwork' heading when results are provided
-          document.querySelector("#generate-art").style.display = "none";
-          document.querySelector(".facts").style.display = "none";
+
+          // hide facts and change heading
+          document.querySelector(".facts").classList.add("short-fadeOut");
+          document.querySelector(".selection-title").innerHTML =
+            "Select your favourite artwork"; // TODO: missing translation
         })
         .catch((err) => {
           console.log(err);
-          this.setState({ error: true });
           this.setState({ loading: false });
+          this.setState({ error: true });
         });
     } else {
       this.setState({ error: true });
     }
+  };
+
+  displayImages = () => {
+    this.state.result.forEach((result) => {
+      // create image elements inside a card element
+      let card = document.createElement("div");
+      card.className = "dalle-card";
+      card.addEventListener("click", this.displayFavorite);
+      let img = document.createElement("img");
+      img.src = result.generation.image_path;
+      img.className = "imgPreview";
+      card.append(img);
+      document.querySelector(".dalle-grid").append(card);
+
+      // wait for all images to load
+      img.onload = () => {
+        this.setState({ loadedImages: this.state.loadedImages + 1 });
+        if (this.state.loadedImages === this.state.result.length - 1) {
+          let duration = 1000; // same as fadeIn effect on DALL-E images
+
+          // remove loader
+          let loader = document.querySelector(".loader");
+
+          // have to manually animate so as not to remove the previous animation, then remove
+          loader.animate([{ opacity: "1" }, { opacity: "0" }], {
+            duration: duration,
+            fill: "forwards",
+          });
+          setTimeout(() => {
+            loader.remove();
+          }, duration);
+
+          // show images
+          let imgs = document.querySelectorAll(".imgPreview");
+          imgs.forEach((i) => {
+            i.className += " imgPreview-show";
+          });
+        }
+      };
+    });
   };
 
   // selects which image you picked and hides the rest, while enlarging the remaining one and adding finalStyling component
@@ -69,7 +104,7 @@ class DalleComponent extends React.Component {
     this.setState({ selected_img_pos: e.target.id });
 
     //remove all photos from screen
-    document.querySelectorAll(".card").forEach((card) => {
+    document.querySelectorAll(".dalle-card").forEach((card) => {
       card.style.display = "none";
     });
 
@@ -83,25 +118,20 @@ class DalleComponent extends React.Component {
     );
     newImg.style.transition = "transform 0.5s ease";
     //append new img element to the div grid
-    document.querySelector(".grid").appendChild(newImg);
+    document.querySelector(".dalle-grid").appendChild(newImg);
 
     // e.target.transform = "scale(1.3)";
     // e.target.className = "finalChoice";
 
     //remove other elements from page
-    document.querySelector("h1").style.display = "none";
+    document.querySelector(".selection-title").style.display = "none";
     document.querySelector(".final-query").style.display = "none";
   };
 
   render() {
     return (
       <div>
-        {/* show select heading when results are provided*/}
-        {this.state.result_provided && !this.state.image_selected ? (
-          <h1 className="selection-title">Select your favourite artwork</h1>
-        ) : null}
-
-        <h3 className="final-query">{this.props.langText}</h3>
+        <div className="final-query">{this.props.langText}</div>
 
         {/* {
           //hide the Get Result button after the query has been sent
@@ -135,32 +165,13 @@ class DalleComponent extends React.Component {
         ) : null}
 
         {!this.state.image_selected ? (
-          <div>
-            {/* <p onClick={this.displayFavorite}>get me forward</p> */}
-            <div className="grid">
-              {this.state.loading && (
-                <div className="loader">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              )}
-
-              {this.state.result.map((result, index) => {
-                return (
-                  //TODO. hide card
-                  <div className="card" onClick={this.displayFavorite}>
-                    <img
-                      id={index}
-                      src={result.generation.image_path}
-                      alt=""
-                      className="imgPreview"
-                    />
-                  </div>
-                );
-              })}
+          <div className="dalle-grid">
+            <div className="loader">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </div>
         ) : (
