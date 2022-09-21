@@ -219,7 +219,7 @@ class OpeningPage extends React.Component {
     image.id = `floating-image-${position}`;
 
     let signature = document.createElement("img");
-    signature.className = "floating-signature";
+    signature.className = "signature-image";
     signature.src = artObject.signature;
     if (artObject.signature_color === "white") {
       signature.style.filter = "invert(100%)";

@@ -64,6 +64,10 @@ li h3 {
   text-align: center;
 }
 
+img {
+  border-radius: 10px;
+}
+
 /* General classes */
 
 /* Landing Page */
@@ -590,7 +594,7 @@ code {
 }
 
 .publish-buttons {
-  display: none;
+  display: block;
 }
 
 .email-input {
@@ -600,27 +604,25 @@ code {
 #gallery-publish {
   display: none;
   text-align: center;
+  animation: fadeIn 1s;
 }
 
-#publish {
-  font-size: 2.3em;
-  margin-bottom: -1%;
-  margin-top: -1%;
+#publish-title {
+  margin: 6% auto 0 auto;
+  max-width: 60%;
 }
 
 #signature-page {
   display: flex;
   position: absolute;
-  vertical-align: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  flex-flow: center;
   align-items: center;
   right: 0;
   top: 0;
   left: 0;
   bottom: 0;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 #final-goodbye {
@@ -646,13 +648,14 @@ code {
 
 .final-image {
   z-index: 1;
-  margin: 1em;
   width: 28em;
-  border-radius: 10px;
+  position: relative;
 }
 
-#finalImagewithSignature {
-  margin-bottom: -12.5em;
+.publish-image-wrapper {
+  position: relative;
+  margin: auto;
+  width: 28em;
 }
 
 .imgNotSelected {
@@ -671,9 +674,9 @@ code {
 
 .signature-image {
   z-index: 2;
-  position: relative;
-  left: 70%;
-  bottom: 7.8em;
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
   max-height: 65%;
   max-width: 23%;
 }

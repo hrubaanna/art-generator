@@ -11,9 +11,9 @@ class FinalPublishing extends React.Component {
       DE: "Fügen Sie Ihrem Kunstwerk eine Signatur hinzu",
     },
     changeSigColor: {
-      ENG: "Change signature color",
-      CZ: "Změnit barvu podpisu",
-      DE: "Ändern Sie die Signaturfarbe",
+      ENG: "change signature color",
+      CZ: "změnit barvu podpisu",
+      DE: "ändern Sie die Signaturfarbe",
     },
     signatureAdd: {
       ENG: "add signature",
@@ -83,7 +83,7 @@ class FinalPublishing extends React.Component {
     finalImage.setAttribute("className", "final-image");
 
     //place final image on canvas
-    document.querySelector("#finalImagewithSignature").appendChild(finalImage);
+    document.querySelector(".publish-image-wrapper").appendChild(finalImage);
 
     //place signature image on canvas
     let signatureImage = document.createElement("img");
@@ -96,7 +96,7 @@ class FinalPublishing extends React.Component {
     signatureImage.style.display = "block";
     console.log(signatureImage);
     document
-      .querySelector("#finalImagewithSignature")
+      .querySelector(".publish-image-wrapper")
       .appendChild(signatureImage);
 
     this.setState({ signatureChosen: true });
@@ -211,9 +211,9 @@ class FinalPublishing extends React.Component {
 
         {!this.state.publishClicked ? (
           <div id="gallery-publish">
-            <p className="selection-title" id="publish">
+            <div className="selection-title" id="publish-title">
               {this.state.publishQ[this.props.lang]}
-            </p>
+            </div>
             <button
               className="btn btn-signature-cancel"
               id="changeSigColor"
@@ -221,8 +221,8 @@ class FinalPublishing extends React.Component {
             >
               {this.state.changeSigColor[this.props.lang]}
             </button>
-            <div id="finalImagewithSignature" />
-            <div>
+            <div class="publish-image-wrapper" />
+            <div className="publish-buttons">
               <button
                 className="btn btn-signature-cancel"
                 onClick={this.cancelPublish}
