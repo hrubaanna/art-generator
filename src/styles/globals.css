@@ -390,7 +390,7 @@ img {
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
-  margin: 1.2em 0.6em;
+  margin: 0.8em 0.6em;
 }
 
 #changeSigColor {
@@ -398,6 +398,7 @@ img {
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
   font-size: 1.1em;
+  margin-bottom: auto;
 }
 
 .btn-signature-cancel {
@@ -413,7 +414,7 @@ img {
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
-  margin: 1.2em 0.6em;
+  margin: 0.8em 0.6em;
   /* border: 0.1em solid rgba(248, 225, 203, 0.4); */
 }
 
@@ -608,7 +609,7 @@ code {
 }
 
 #publish-title {
-  margin: 6% auto 0 auto;
+  margin: 4% auto 1.5% auto;
   max-width: 60%;
 }
 
@@ -648,7 +649,7 @@ code {
 
 .final-image {
   z-index: 1;
-  width: 28em;
+  width: 27em;
   position: relative;
 }
 
@@ -859,6 +860,8 @@ input[type="range"] {
   cursor: pointer;
   -webkit-appearance: none;
   width: 35%;
+  display: block;
+  margin: auto;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -944,6 +947,8 @@ input[type="range"]::-ms-track {
   font-size: 1.5rem;
   margin-bottom: 1%;
   color: rgb(248, 225, 203);
+  display: block;
+  margin: auto;
 }
 
 /* END OF SIGNATURE SLIDER */

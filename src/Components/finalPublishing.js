@@ -214,6 +214,8 @@ class FinalPublishing extends React.Component {
             <div className="selection-title" id="publish-title">
               {this.state.publishQ[this.props.lang]}
             </div>
+
+            <div class="publish-image-wrapper" />
             <button
               className="btn btn-signature-cancel"
               id="changeSigColor"
@@ -221,7 +223,6 @@ class FinalPublishing extends React.Component {
             >
               {this.state.changeSigColor[this.props.lang]}
             </button>
-            <div class="publish-image-wrapper" />
             <div className="publish-buttons">
               <button
                 className="btn btn-signature-cancel"
