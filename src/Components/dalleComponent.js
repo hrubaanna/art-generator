@@ -97,18 +97,19 @@ class DalleComponent extends React.Component {
     });
   };
 
-  // selects which image you picked and hides the rest, while enlarging the remaining one and adding finalStyling component
   displayFavorite = (e) => {
+    // selects which image you picked and hides the rest, while enlarging the remaining one and adding finalStyling component
     this.setState({ image_selected: true });
     this.setState({ final_image_src: e.target.src });
     this.setState({ selected_img_pos: e.target.id });
 
-    //remove all photos from screen
+    // remove all photos from screen
     document.querySelectorAll(".dalle-card").forEach((card) => {
       card.style.display = "none";
     });
+    document.querySelector(".facts").remove();
 
-    //create new img element
+    // create new img element
     const newImg = document.createElement("img");
     newImg.src = e.target.src;
     newImg.className = "final-img";
@@ -117,7 +118,7 @@ class DalleComponent extends React.Component {
       "width: 15em; height: 15em; margin: auto; display: block; border-radius: 10px"
     );
     newImg.style.transition = "transform 0.5s ease";
-    //append new img element to the div grid
+    // append new img element to the div grid
     document.querySelector(".dalle-grid").appendChild(newImg);
 
     // e.target.transform = "scale(1.3)";
