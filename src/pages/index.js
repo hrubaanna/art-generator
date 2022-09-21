@@ -209,6 +209,7 @@ class OpeningPage extends React.Component {
     wrapper.className = "floating-wrapper";
     wrapper.style.left = Math.random() * 100 + "%";
     wrapper.style.top = Math.random() * 100 + "%";
+    wrapper.style.visibility = "hidden";
 
     let image = document.createElement("img");
     let size = 10;
@@ -230,58 +231,62 @@ class OpeningPage extends React.Component {
     gridPosition.appendChild(wrapper);
 
     // animate image
-    let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
-    // TODO: rewrite this to use CSS animation in css file
-    wrapper.animate(
-      [
-        { opacity: "0" },
-        {
-          opacity: "1",
-        },
-      ],
-      {
-        duration: duration / 2,
-        direction: "alternate",
-        iterations: "2",
-      }
-    );
-    wrapper.animate(
-      [
-        {
-          scale: "1.0",
-          transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
-        },
-        {
-          scale: "2.0",
-          transform: `translate(-${size}vw, ${size}vw)`,
-        },
-      ],
-      {
-        duration: duration,
-        fill: "forwards",
-      }
-    );
+    image.onload = () => {
+      wrapper.style.visibility = "visible";
 
-    wrapper.animate(
-      [
+      let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
+      // TODO: rewrite this to use keyframes CSS animation in css file
+      wrapper.animate(
+        [
+          { opacity: "0" },
+          {
+            opacity: "1",
+          },
+        ],
         {
-          filter: `blur(2px)`,
-        },
+          duration: duration / 2,
+          direction: "alternate",
+          iterations: "2",
+        }
+      );
+      wrapper.animate(
+        [
+          {
+            scale: "1.0",
+            transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
+          },
+          {
+            scale: "2.0",
+            transform: `translate(-${size}vw, ${size}vw)`,
+          },
+        ],
         {
-          filter: `blur(0px)`,
-        },
-      ],
-      {
-        duration: duration * 0.25,
-        fill: "forwards",
-      }
-    );
+          duration: duration,
+          fill: "forwards",
+        }
+      );
 
-    // remove image after animation
-    setTimeout(() => {
-      gridPosition.removeChild(wrapper);
-    }, duration * 1.5);
-    return position;
+      wrapper.animate(
+        [
+          {
+            filter: `blur(2px)`,
+          },
+          {
+            filter: `blur(0px)`,
+          },
+        ],
+        {
+          duration: duration * 0.25,
+          fill: "forwards",
+        }
+      );
+
+      // remove image after animation
+      setTimeout(() => {
+        gridPosition.removeChild(wrapper);
+      }, duration * 1.5);
+      return position;
+    };
   };
 
   changeScreen = () => {
