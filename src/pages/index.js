@@ -293,10 +293,16 @@ class OpeningPage extends React.Component {
     // when the screen is clicked, remove current content and display only flags to select language
     this.state.introDisplayed = false;
     document.getElementById("background-images").remove();
-    let langButtons = document.querySelectorAll(".btn-language");
     document.getElementById("project-heading").style.display = "none";
     document.getElementById("click-to-begin").style.display = "none";
+    document.querySelector(".div-language").style.display = "flex";
+
+    let langButtons = document.querySelectorAll(".btn-language");
     langButtons.forEach((element) => {
+      element.style.display = "inline";
+    });
+    let textLangBtns = document.querySelectorAll(".textLangBtn");
+    textLangBtns.forEach((element) => {
       element.style.display = "inline";
     });
     document.getElementById("video-background-overlay").style.backgroundColor =
@@ -329,31 +335,68 @@ class OpeningPage extends React.Component {
         </div>
 
         <div className="div-language">
-          <Link href={"/dialoguePage"}>
-            <img
-              className="btn-language"
-              id={"DE"}
-              onClick={this.changeLanguage}
-              src="/Images/DE_flag.png"
-            ></img>
-          </Link>
-          <Link href={"/dialoguePage"}>
-            <img
-              className="btn-language"
-              id={"ENG"}
-              onClick={this.changeLanguage}
-              src="/Images/ENG_flag.png"
-            ></img>
-          </Link>
-          <Link href={"/dialoguePage"}>
-            <img
-              className="btn-language"
-              id={"CZ"}
-              onClick={this.changeLanguage}
-              src="/Images/CZ_flag.png"
-            ></img>
-          </Link>
+          <div className="div-language bars">
+            <Link href={"/dialoguePage"}>
+              <img
+                className="btn-language"
+                id={"DE"}
+                onClick={this.changeLanguage}
+                src="/Images/DE_flag.png"
+              ></img>
+            </Link>
+            <Link href={"/dialoguePage"}>
+              <div
+                className="textLangBtn"
+                id={"DE"}
+                onClick={this.changeLanguage}
+              >
+                {" "}
+                anfangen{" "}
+              </div>
+            </Link>
+          </div>
+          <div className="div-language bars">
+            <Link href={"/dialoguePage"}>
+              <img
+                className="btn-language"
+                id={"ENG"}
+                onClick={this.changeLanguage}
+                src="/Images/ENG_flag.png"
+              ></img>
+            </Link>
+            <Link href={"/dialoguePage"}>
+              <div
+                className="textLangBtn"
+                id={"ENG"}
+                onClick={this.changeLanguage}
+              >
+                {" "}
+                begin{" "}
+              </div>
+            </Link>
+          </div>
+          <div className="div-language bars">
+            <Link href={"/dialoguePage"}>
+              <img
+                className="btn-language"
+                id={"CZ"}
+                onClick={this.changeLanguage}
+                src="/Images/CZ_flag.png"
+              ></img>
+            </Link>
+            <Link href={"/dialoguePage"}>
+              <div
+                className="textLangBtn"
+                id={"CZ"}
+                onClick={this.changeLanguage}
+              >
+                {" "}
+                začít{" "}
+              </div>
+            </Link>
+          </div>
         </div>
+
         <style jsx global>{`
           html,
           body {
