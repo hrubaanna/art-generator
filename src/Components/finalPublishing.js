@@ -69,10 +69,7 @@ class FinalPublishing extends React.Component {
     this.sigPad.clear();
   };
 
-  saveSignature = () => {
-    //document.querySelector(".publish-buttons").style.display = "block";
-    document.querySelector("#gallery-publish").style.display = "block";
-
+  showFinalImage = () => {
     //show signature on image
     let finalImage = document.createElement("img");
     finalImage.src = this.props.finalImage;
@@ -84,6 +81,13 @@ class FinalPublishing extends React.Component {
 
     //place final image on canvas
     document.querySelector(".publish-image-wrapper").appendChild(finalImage);
+  };
+
+  saveSignature = () => {
+    //document.querySelector(".publish-buttons").style.display = "block";
+    document.querySelector("#gallery-publish").style.display = "block";
+
+    this.showFinalImage();
 
     //place signature image on canvas
     let signatureImage = document.createElement("img");
@@ -111,6 +115,7 @@ class FinalPublishing extends React.Component {
     this.setState({ signatureChosen: true });
     // document.querySelector(".signature-scheme").style.display = "none";
     //document.querySelector(".publish-buttons").style.display = "block";
+    this.showFinalImage();
     document.querySelector("#gallery-publish").style.display = "block";
   };
 

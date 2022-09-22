@@ -18,6 +18,11 @@ class DalleComponent extends React.Component {
       CZ: "Dílo se vytváří",
       DE: "Ihre Grafik wird generiert",
     },
+    errorText: {
+      ENG: "we are experiencing maintenance issues, please try again later",
+      CZ: "zaznamenáváme problémy s údržbou, zkuste to prosím znovu později",
+      DE: "wir haben Wartungsprobleme, bitte versuchen Sie es später erneut",
+    },
   };
 
   componentDidMount() {
@@ -159,13 +164,10 @@ class DalleComponent extends React.Component {
            }  */}
 
         {this.state.error ? (
-          <p className="error">
-            {" "}
-            your query could not be processed at this time{" "}
-          </p>
+          <p className="error"> {this.state.errorText[this.props.lang]} </p>
         ) : null}
 
-        {!this.state.image_selected ? (
+        {!this.state.image_selected && !this.state.error ? (
           <div className="dalle-grid">
             <div className="loader">
               <span></span>
@@ -175,7 +177,9 @@ class DalleComponent extends React.Component {
               <span></span>
             </div>
           </div>
-        ) : (
+        ) : null}
+
+        {this.state.image_selected ? (
           <FinalPublishing
             finalImage={this.state.final_image_src}
             query={this.state.query}
@@ -183,7 +187,7 @@ class DalleComponent extends React.Component {
             selected_img_pos={this.state.selected_img_pos}
             lang={this.props.lang}
           ></FinalPublishing>
-        )}
+        ) : null}
       </div>
     );
   }
