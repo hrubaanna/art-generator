@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import FloatingImages from "../Components/floatingImages";
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
 
 /**
@@ -27,14 +28,7 @@ class OpeningPage extends React.Component {
     ],
     introIndex: 0,
     intro_interval: null,
-    art: [],
-    artObjects: [],
-    DBLoaded: false,
     introDisplayed: true,
-
-    // constants
-    IMAGE_SPAWN_DURATION: 4000,
-    NUM_IMAGES_IN_BATCH: 4,
   };
 
   componentDidMount() {
@@ -48,74 +42,6 @@ class OpeningPage extends React.Component {
     );
   }
 
-  getDBRandomArt = () => {
-    return new Promise((resolve, reject) => {
-      // get the artwork saved in mongo DB
-      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          this.setState({ art: data }, () => {
-            resolve();
-            this.setState({ DBLoaded: true });
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          reject("error in getDBRandomArt");
-        });
-    });
-  };
-
-  getArtFromTasks = () => {
-    return new Promise((resolve, reject) => {
-      // get the task for each art piece
-      this.state.art.forEach((artpiece) => {
-        fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            let artObj = {
-              img_link:
-                data.result.generations.data[artpiece.selected_pos].generation
-                  .image_path,
-              content: artpiece.content,
-              signature: artpiece.signature,
-            };
-            this.state.artObjects.push(artObj);
-            if (this.state.artObjects.length === this.state.art.length) {
-              resolve();
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            reject("error in getArtFromTasks");
-          });
-      });
-    });
-  };
-
-  loadArt = () => {
-    return new Promise((resolve, reject) => {
-      // load 4 random dalle art pieces from the DB, store in artObjctes
-      this.getDBRandomArt().then(() => {
-        this.getArtFromTasks()
-          .then(() => {
-            resolve();
-          })
-          .catch((err) => {
-            console.log(err);
-            reject("error in loadArt");
-          });
-      });
-    });
-  };
-
   changeLanguage = (e) => {
     // when user clicks given element, change language into id of the element
     finalDalleAssembled.language = e.target.id;
@@ -125,7 +51,6 @@ class OpeningPage extends React.Component {
   displayIntro = () => {
     // start oscillating introductory text and projecting dalle images
     this.displayIntroText();
-    this.displayBackgroundImages();
   };
 
   displayIntroText = () => {
@@ -133,9 +58,6 @@ class OpeningPage extends React.Component {
     this.setState({
       intro_interval: setInterval(() => {
         this.changeIntroText();
-        document.getElementById("overlay-text").className = "";
-        document.getElementById("overlay-text").className =
-          "animate_change_heading";
       }, 3000),
     });
   };
@@ -149,189 +71,41 @@ class OpeningPage extends React.Component {
     }
   };
 
-  displayBackgroundImages = () => {
-    this.spawnBackgroundGrid();
-    this.loadArt()
-      .then(() => {
-        let previousPosition = this.displayFloatingImages(
-          this.state.artObjects.pop(),
-          null
-        );
-        let intervalID = setInterval(() => {
-          if (this.state.introDisplayed) {
-            // TODO: change so that it waits for loadArt before displaying once again
-            previousPosition = this.displayFloatingImages(
-              this.state.artObjects.pop(),
-              previousPosition
-            );
-            if (this.state.artObjects.length == 0) {
-              this.loadArt();
-            }
-          } else if (this.state.introDisplayed == false) {
-            clearTimeout(intervalID);
-          }
-        }, this.state.IMAGE_SPAWN_DURATION);
-      })
-      .catch((err) => {
-        console.log(err);
-        // TODO: load downloaded images because of some API failure
-      });
-  };
-
-  spawnBackgroundGrid = () => {
-    // spawn grid
-    let wrapper = document.createElement("div");
-    wrapper.id = "background-images";
-    document.getElementById("main").append(wrapper);
-
-    // fill the grid
-    for (let i = 0; i < 4; i++) {
-      let wrapper = document.createElement("div");
-      wrapper.id = "floating-grid-" + i;
-      wrapper.className = "floating-grid";
-      document.getElementById("background-images").append(wrapper);
-    }
-  };
-
-  displayFloatingImages = (artObject, previousPosition) => {
-    function getRandomPosition() {
-      let x = Math.floor(Math.random() * 4);
-      if (x == previousPosition) {
-        return getRandomPosition();
-      }
-      return x;
-    }
-    let position = getRandomPosition();
-    let gridPosition = document.getElementById(`floating-grid-${position}`);
-
-    // create new image
-    let wrapper = document.createElement("div");
-    wrapper.className = "floating-wrapper";
-    wrapper.style.left = Math.random() * 100 + "%";
-    wrapper.style.top = Math.random() * 100 + "%";
-    wrapper.style.visibility = "hidden";
-
-    let image = document.createElement("img");
-    let size = 10;
-    image.src = artObject.img_link;
-    image.className = "floating-image";
-    image.style.width = `${size}vw`; // assume image is squared
-    image.id = `floating-image-${position}`;
-
-    let signature = document.createElement("img");
-    signature.className = "signature-image";
-    signature.src = artObject.signature;
-    if (artObject.signature_color === "white") {
-      signature.style.filter = "invert(100%)";
-    }
-
-    // add image to grid
-    wrapper.appendChild(signature);
-    wrapper.appendChild(image);
-    gridPosition.appendChild(wrapper);
-
-    // animate image
-    image.onload = () => {
-      wrapper.style.visibility = "visible";
-
-      let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
-      // TODO: rewrite this to use keyframes CSS animation in css file
-      wrapper.animate(
-        [
-          { opacity: "0" },
-          {
-            opacity: "1",
-          },
-        ],
-        {
-          duration: duration / 2,
-          direction: "alternate",
-          iterations: "2",
-        }
-      );
-      wrapper.animate(
-        [
-          {
-            scale: "1.0",
-            transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
-          },
-          {
-            scale: "2.0",
-            transform: `translate(-${size}vw, ${size}vw)`,
-          },
-        ],
-        {
-          duration: duration,
-          fill: "forwards",
-        }
-      );
-
-      wrapper.animate(
-        [
-          {
-            filter: `blur(2px)`,
-          },
-          {
-            filter: `blur(0px)`,
-          },
-        ],
-        {
-          duration: duration * 0.25,
-          fill: "forwards",
-        }
-      );
-
-      // remove image after animation
-      setTimeout(() => {
-        gridPosition.removeChild(wrapper);
-      }, duration * 1.5);
-      return position;
-    };
-  };
-
   changeScreen = () => {
     // when the screen is clicked, remove current content and display only flags to select language
     this.state.introDisplayed = false;
-    document.getElementById("background-images").remove();
-    document.getElementById("project-heading").style.display = "none";
-    document.getElementById("click-to-begin").style.display = "none";
+    document.getElementById("background-images-landing").remove();
+    document.getElementById("project-heading-wrapper-landing").remove();
+    document.getElementById("click-to-begin").remove();
     document.querySelector(".div-language").style.display = "flex";
+    document.getElementById("overlay").style.background = "none";
+    clearInterval(this.state.intro_interval);
 
-    let langButtons = document.querySelectorAll(".btn-language");
-    langButtons.forEach((element) => {
-      element.style.display = "inline";
-    });
     let textLangBtns = document.querySelectorAll(".textLangBtn");
     textLangBtns.forEach((element) => {
       element.style.display = "inline";
     });
-    document.getElementById("video-background-overlay").style.backgroundColor =
-      "rgba(51, 51, 153, 0)";
-    document.querySelectorAll(".floating-image").forEach((element) => {
-      element.style.display = "none";
-    });
     clearInterval(this.state.intro_interval);
-    document.querySelector("#project-heading-wrapper").style.display = "none";
   };
 
   render() {
     return (
       <div id="main">
-        <div id="video-background-overlay">
+        <div id="overlay">
           <video autoPlay muted loop id="video-background">
             <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
           </video>
-        </div>
-
-        <div id="overlay-text">
-          <div id={"project-heading-wrapper"}>
-            <span id="project-heading">
+          <div id="project-heading-wrapper-landing">
+            <div className="project-heading">
               {this.state.projectHeading[this.state.introIndex]}
-            </span>
+            </div>
           </div>
-          <div id={"click-to-begin"}>
+          <div className="click-to" id="click-to-begin">
             {this.state.introText[this.state.introIndex]}
           </div>
+        </div>
+        <div id="background-images-landing">
+          <FloatingImages></FloatingImages>
         </div>
 
         <div className="div-language">
