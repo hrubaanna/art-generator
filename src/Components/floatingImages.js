@@ -1,3 +1,4 @@
+import { bodyStreamToNodeStream } from "next/dist/server/body-streams";
 import React from "react";
 
 class FloatingImages extends React.Component {
@@ -5,6 +6,7 @@ class FloatingImages extends React.Component {
     art: [],
     artObjects: [],
     DBLoaded: false,
+    intervalID: null,
 
     // constants
     IMAGE_SPAWN_DURATION: 4000,
@@ -12,7 +14,15 @@ class FloatingImages extends React.Component {
   };
 
   componentDidMount() {
+    this.setState({ art: [] });
+    this.setState({ artObjects: [] });
+    this.setState({ intervalID: null });
+
     this.displayBackgroundImages();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.state.intervalID);
   }
 
   getDBRandomArt = () => {
@@ -90,21 +100,23 @@ class FloatingImages extends React.Component {
           this.state.artObjects.pop(),
           null
         );
-        let intervalID = setInterval(() => {
-          let element = document.querySelector(".background-images");
-          if (typeof element != "undefined" && element != null) {
-            // TODO: change so that it waits for loadArt before displaying once again
-            previousPosition = this.displayFloatingImages(
-              this.state.artObjects.pop(),
-              previousPosition
-            );
-            if (this.state.artObjects.length == 0) {
-              this.loadArt();
+        this.setState({
+          intervalID: setInterval(() => {
+            let element = document.querySelector(".background-images");
+            if (typeof element != "undefined" && element != null) {
+              // TODO: change so that it waits for loadArt before displaying once again
+              previousPosition = this.displayFloatingImages(
+                this.state.artObjects.pop(),
+                previousPosition
+              );
+              if (this.state.artObjects.length == 0) {
+                this.loadArt();
+              }
+            } else {
+              clearTimeout(this.state.intervalID);
             }
-          } else {
-            clearTimeout(intervalID);
-          }
-        }, this.state.IMAGE_SPAWN_DURATION);
+          }, this.state.IMAGE_SPAWN_DURATION),
+        });
       })
       .catch((err) => {
         console.error(
@@ -123,24 +135,25 @@ class FloatingImages extends React.Component {
           false
         );
         let index = 1;
-        let intervalID = setInterval(() => {
-          let element = document.querySelector(".background-images");
-          if (typeof element != "undefined" && element != null) {
-            // TODO: change so that it waits for loadArt before displaying once again
-            previousPosition = this.displayFloatingImages(
-              artObjects[index],
-              previousPosition,
-              false
-            );
-            if ((index = 3)) {
-              index = 0;
+        this.setState({
+          intervalID: setInterval(() => {
+            let element = document.querySelector(".background-images");
+            if (typeof element != "undefined" && element != null) {
+              // TODO: change so that it waits for loadArt before displaying once again
+              previousPosition = this.displayFloatingImages(
+                artObjects[index],
+                previousPosition,
+                false
+              );
+              if (index == 3) {
+                index = 0;
+              }
+              index++;
+            } else {
+              clearTimeout(this.state.intervalID);
             }
-          } else {
-            clearTimeout(intervalID);
-          }
-          index++;
-        }, this.state.IMAGE_SPAWN_DURATION);
-        // TODO: load downloaded images because of some API failure
+          }, this.state.IMAGE_SPAWN_DURATION),
+        });
       });
   };
 
@@ -159,92 +172,99 @@ class FloatingImages extends React.Component {
     let position = getRandomPosition();
     let gridPosition = document.getElementById(`floating-grid-${position}`);
 
-    // create new image
-    let wrapper = document.createElement("div");
-    wrapper.className = "floating-wrapper";
-    wrapper.style.left = Math.random() * 100 + "%";
-    wrapper.style.top = Math.random() * 100 + "%";
-    wrapper.style.visibility = "hidden";
-
-    let image = document.createElement("img");
-    let size = 10;
-    image.src = artObject.img_link;
-    image.className = "floating-image";
-    image.style.width = `${size}vw`; // assume image is squared
-    image.id = `floating-image-${position}`;
-
-    if (includeSignature) {
-      let signature = document.createElement("img");
-      signature.className = "signature-image";
-      signature.src = artObject.signature;
-      if (artObject.signature_color === "white") {
-        signature.style.filter = "invert(100%)";
+    // spawn images only if the grid is on the screen
+    if (
+      document.body.contains(
+        document.getElementById(`floating-grid-${position}`)
+      )
+    ) {
+      // remove any children from gridPosition if present
+      while (gridPosition.firstChild) {
+        gridPosition.removeChild(gridPosition.firstChild);
       }
-      wrapper.appendChild(signature);
-    }
 
-    // add image to grid
-    wrapper.appendChild(image);
-    gridPosition.appendChild(wrapper);
+      // create new image
+      let wrapper = document.createElement("div");
+      wrapper.className = "floating-wrapper";
+      wrapper.style.left = Math.random() * 100 + "%";
+      wrapper.style.top = Math.random() * 100 + "%";
+      wrapper.style.visibility = "hidden";
 
-    // animate image
-    image.onload = () => {
-      wrapper.style.visibility = "visible";
+      let image = document.createElement("img");
+      let size = 10;
+      image.src = artObject.img_link;
+      image.className = "floating-image";
+      image.style.width = `${size}vw`; // assume image is squared
+      image.id = `floating-image-${position}`;
 
-      let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
-      // TODO: rewrite this to use keyframes CSS animation in css file
-      wrapper.animate(
-        [
-          { opacity: "0" },
-          {
-            opacity: "1",
-          },
-        ],
-        {
-          duration: duration / 2,
-          direction: "alternate",
-          iterations: "2",
+      if (includeSignature) {
+        let signature = document.createElement("img");
+        signature.className = "signature-image";
+        signature.src = artObject.signature;
+        if (artObject.signature_color === "white") {
+          signature.style.filter = "invert(100%)";
         }
-      );
-      wrapper.animate(
-        [
-          {
-            scale: "1.0",
-            transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
-          },
-          {
-            scale: "2.0",
-            transform: `translate(-${size}vw, ${size}vw)`,
-          },
-        ],
-        {
-          duration: duration,
-          fill: "forwards",
-        }
-      );
+        wrapper.appendChild(signature);
+      }
 
-      wrapper.animate(
-        [
-          {
-            filter: `blur(2px)`,
-          },
-          {
-            filter: `blur(0px)`,
-          },
-        ],
-        {
-          duration: duration * 0.25,
-          fill: "forwards",
-        }
-      );
+      // add image to grid
+      wrapper.appendChild(image);
+      gridPosition.appendChild(wrapper);
 
-      // remove image after animation
-      setTimeout(() => {
-        gridPosition.removeChild(wrapper);
-      }, duration * 1.5);
+      // animate image
+      image.onload = () => {
+        wrapper.style.visibility = "visible";
+
+        let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
+        // TODO: rewrite this to use keyframes CSS animation in css file
+        wrapper.animate(
+          [
+            { opacity: "0" },
+            {
+              opacity: "1",
+            },
+          ],
+          {
+            duration: duration / 2,
+            direction: "alternate",
+            iterations: "2",
+          }
+        );
+        wrapper.animate(
+          [
+            {
+              scale: "1.0",
+              transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
+            },
+            {
+              scale: "2.0",
+              transform: `translate(-${size}vw, ${size / 1.8}vw)`,
+            },
+          ],
+          {
+            duration: duration,
+            fill: "forwards",
+          }
+        );
+        wrapper.animate(
+          [
+            {
+              filter: `blur(2px)`,
+            },
+            {
+              filter: `blur(0px)`,
+            },
+          ],
+          {
+            duration: duration * 0.25,
+            fill: "forwards",
+          }
+        );
+      };
       return position;
-    };
+    }
   };
+
   render() {
     return (
       <div className="background-images">
