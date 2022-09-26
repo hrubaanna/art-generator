@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import FloatingImages from "../Components/floatingImages";
+import Router from "next/router";
 
 class FinalPage extends React.Component {
   state = {
@@ -19,7 +20,8 @@ class FinalPage extends React.Component {
     };
 
     setTimeout(() => {
-      // TODO: force user to go back to the beginning after X seconds
+      // force user to go back to the beginning after X seconds
+      Router.push("/");
     }, this.state.RESTART_INTERVAL);
     // TODO: add translations to final text
   }
