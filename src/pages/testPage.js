@@ -1,5 +1,6 @@
 import React from "react";
 import SignatureCanvas from "react-signature-canvas";
+import EmailForm from "../Components/emailForm";
 
 class TestPage extends React.Component {
   state = {

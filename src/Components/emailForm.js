@@ -7,7 +7,6 @@ export default function EmailForm(props) {
   //const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [formIsVisible, setFormIsVisible] = useState(false);
   const titleText = {
     ENG: "Would you like to receive an email of your piece?",
@@ -23,6 +22,11 @@ export default function EmailForm(props) {
     ENG: "No",
     CZ: "Ne",
     DE: "nein",
+  };
+  const spamWarning = {
+    ENG: "(Don't forget to check your spam folder)",
+    CZ: "(Nezapomeňte zkontrolovat složku se spamem)",
+    DE: "(Vergessen Sie nicht, Ihren Spam-Ordner zu überprüfen)",
   };
 
   const handleSubmit = (e) => {
@@ -86,7 +90,7 @@ export default function EmailForm(props) {
       currently_selected: false,
       //TODO: get value of selected img
       signature_color: props.signatureColor,
-      selected_pos: props.selected_img_pos,
+      selected_pos: props.selected_pos,
     };
 
     //save the artpiece
@@ -167,6 +171,12 @@ export default function EmailForm(props) {
               }}
             />
           </Link>
+          <p id="check-spam">
+            <i>
+              {" "}
+              (Don't forget to check your spam folder) {spamWarning[props.lang]}
+            </i>
+          </p>
         </form>
       )}
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import DalleComponent from "../Components/dalleComponent";
+import StartOverButton from "../Components/startOverButton";
 
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
 const { Facts } = require("../Components/dataFile.js");
@@ -56,6 +57,7 @@ class LoadingPage extends React.Component {
         />
 
         <div className="facts"> {this.state.funFact} </div>
+        <StartOverButton lang={finalDalleAssembled.language}></StartOverButton>
       </div>
     );
   }

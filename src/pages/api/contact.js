@@ -21,49 +21,49 @@ export default function (req, res) {
     html: `
     <div
       style="
-      background-color: #aebdca;
-      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color: #aebdca;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+          'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       "
     >
-    <div 
-      style="
-        background-color: #7895b2;
-        width: 70%;
-        margin: auto;
-        display: block;
-      "
-    >
-    
-      <h1
-        style="padding-top: 2%; text-align: center; color: #f5efe6"
-      >
-        ${greetingBlock}
-      </h1>
-      <h2 style="margin-top: 5%; text-align: center; color: #e8dfca">
-        Thank you for using the <em> 01 Aesthetics X Dalle </em> art generator
-      </h2>
-      <hr style="width: 70%" />
-      <p style="text-align: center; color: #cabc9f">Take a look at the piece you created:</p>
-      <p 
+      <div
         style="
-          text-align: center;
-          color: #e8dfca;
-          max-width: 70%;
+          background-color: #7895b2;
+          width: 70%;
           margin: auto;
+          display: block;
         "
       >
+        <h1 style="padding-top: 2%; text-align: center; color: #f5efe6">
+        ${greetingBlock}
+        </h1>
+        <h2 style="margin-top: 5%; text-align: center; color: #e8dfca">
+          Thank you for using the <em> 01 Aesthetics X DALL-E 2 </em> art
+          generator
+        </h2>
+        <hr style="width: 70%" />
+        <p style="text-align: center; color: #cabc9f">
+          Take a look at the piece you created:
+        </p>
+        <p
+          style="
+            text-align: center;
+            color: #e8dfca;
+            max-width: 70%;
+            margin: auto;
+          "
+        >
         "${req.body.query}."
-      </p>
-      <img
-        style="margin: auto; display: block; padding: 5%; border-radius: 15%"
-        src="${req.body.src}"
-        alt="Generated Art"
-        height="30%"
-        width="30%"
-      />
+        </p>
+        <img
+          style="margin: auto; display: block; padding: 5%; border-radius: 15%"
+          src="${req.body.src}"
+          alt="Generated Art"
+          height="30%"
+          width="30%"
+        />
+
       </div>
-    
     </div>
     `,
   };

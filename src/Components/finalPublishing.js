@@ -1,6 +1,5 @@
 import React from "react";
 import SignatureCanvas from "react-signature-canvas";
-import Router, { withRouter } from "next/router";
 import EmailForm from "./emailForm";
 
 class FinalPublishing extends React.Component {
@@ -244,7 +243,7 @@ class FinalPublishing extends React.Component {
             signatureSrc={this.state.signatureSrc}
             query={this.props.query}
             signatureColor={this.state.signatureColor}
-            selected_img_pos={this.props.selected_img_pos}
+            selected_pos={this.props.selected_pos}
             finalImage={this.props.finalImage}
             lang={this.props.lang}
             wantToPublish={this.state.wantToPublish}

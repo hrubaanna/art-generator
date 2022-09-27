@@ -2,13 +2,13 @@ import React from "react";
 import HintCloud from "../Components/hintCloud";
 import Prompt from "../Components/prompt";
 import Link from "next/link";
-import Router, { withRouter } from "next/router";
-import { useState } from "react";
 import { Facts, Prompts } from "../Components/dataFile";
+import StartOverButton from "../Components/startOverButton";
 
 const {
   responses,
   assembleResponse,
+  resetResponses,
   storeResponse,
   assembleFinalDalle,
   finalDalleAssembled,
@@ -82,6 +82,7 @@ class DialoguePage extends React.Component {
 
   //when page loads, start timer for 30 seconds, reset state
   componentDidMount() {
+    this.resetState();
     this.state.timer = setTimeout(() => {
       //return to start page
       this.resetState();
@@ -353,6 +354,8 @@ class DialoguePage extends React.Component {
           stage={this.state.stage}
           language={this.state.language}
         />
+
+        <StartOverButton lang={this.state.language}></StartOverButton>
       </div>
     );
   }

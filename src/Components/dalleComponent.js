@@ -12,7 +12,7 @@ class DalleComponent extends React.Component {
     image_selected: false,
     final_image_src: "",
     task_id: "",
-    selected_img_pos: "1",
+    selected_pos: "1",
     button: {
       ENG: "Generating Artwork",
       CZ: "Dílo se vytváří",
@@ -101,7 +101,7 @@ class DalleComponent extends React.Component {
     // selects which image you picked and hides the rest, while enlarging the remaining one and adding finalStyling component
     this.setState({ image_selected: true });
     this.setState({ final_image_src: e.target.src });
-    this.setState({ selected_img_pos: e.target.id });
+    this.setState({ selected_pos: e.target.id });
 
     // remove all photos from screen
     document.querySelectorAll(".dalle-card").forEach((card) => {
@@ -180,7 +180,7 @@ class DalleComponent extends React.Component {
             finalImage={this.state.final_image_src}
             query={this.state.query}
             task_id={this.state.task_id}
-            selected_img_pos={this.state.selected_img_pos}
+            selected_pos={this.state.selected_pos}
             lang={this.props.lang}
           ></FinalPublishing>
         )}

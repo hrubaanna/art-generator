@@ -21,29 +21,19 @@ var responses = {
 
     sculpture: {
       type: [], //add new as 'bronze'
-
       content: [], //add new as ' sculpture of ' + 'dragons'
-
       form: [], //add new as ', ' + 'organic'
-
       emotion: [], //add new as ', ' + 'expressive'
-
       looks: [], //add new as ', ' + 'lit from above'
-
       style: [],
     },
 
     photography: {
       content: [], // add new as 'A photograph of ' + 'alien cactus'
-
       setting: [], // add new as ' ' + 'in ancient city ruins'
-
       camera_angle: [], //add new as ', ' + 'close-up shot'
-
       camera_settings: [], //add new as ', ' + 'polaroid'
-
       lighting: [], //add new as ', ' + 'golden hour'
-
       emotion: [], //add new as ', ' + 'vital'
     },
   },
@@ -134,6 +124,72 @@ var responses = {
     },
   },
 };
+
+function resetResponses() {
+  //Reset all the responses to the original form of the object
+  responses.ENG.painting.type = "";
+  responses.ENG.painting.content = [];
+  responses.ENG.painting.setting = [];
+  responses.ENG.painting.emotion = [];
+  responses.ENG.painting.looks = [];
+  responses.ENG.painting.style = [];
+
+  responses.ENG.sculpture.type = [];
+  responses.ENG.sculpture.content = [];
+  responses.ENG.sculpture.form = [];
+  responses.ENG.sculpture.emotion = [];
+  responses.ENG.sculpture.looks = [];
+  responses.ENG.sculpture.style = [];
+
+  responses.ENG.photography.content = [];
+  responses.ENG.photography.setting = [];
+  responses.ENG.photography.camera_angle = [];
+  responses.ENG.photography.camera_settings = [];
+  responses.ENG.photography.lighting = [];
+  responses.ENG.photography.emotion = [];
+
+  responses.CZ.painting.type = "";
+  responses.CZ.painting.content = [];
+  responses.CZ.painting.setting = [];
+  responses.CZ.painting.emotion = [];
+  responses.CZ.painting.looks = [];
+  responses.CZ.painting.style = [];
+
+  responses.CZ.sculpture.type = [];
+  responses.CZ.sculpture.content = [];
+  responses.CZ.sculpture.form = [];
+  responses.CZ.sculpture.emotion = [];
+  responses.CZ.sculpture.looks = [];
+  responses.CZ.sculpture.style = [];
+
+  responses.CZ.photography.content = [];
+  responses.CZ.photography.setting = [];
+  responses.CZ.photography.camera_angle = [];
+  responses.CZ.photography.camera_settings = [];
+  responses.CZ.photography.lighting = [];
+  responses.CZ.photography.emotion = [];
+
+  responses.DE.painting.type = "";
+  responses.DE.painting.content = [];
+  responses.DE.painting.setting = [];
+  responses.DE.painting.emotion = [];
+  responses.DE.painting.looks = [];
+  responses.DE.painting.style = [];
+
+  responses.DE.sculpture.type = [];
+  responses.DE.sculpture.content = [];
+  responses.DE.sculpture.form = [];
+  responses.DE.sculpture.emotion = [];
+  responses.DE.sculpture.looks = [];
+  responses.DE.sculpture.style = [];
+
+  responses.DE.photography.content = [];
+  responses.DE.photography.setting = [];
+  responses.DE.photography.camera_angle = [];
+  responses.DE.photography.camera_settings = [];
+  responses.DE.photography.lighting = [];
+  responses.DE.photography.emotion = [];
+}
 
 var finalDalleAssembled = {
   language: "ENG",
@@ -368,6 +424,7 @@ function storeResponse(userInput, stage, responses, medium, language) {
 
 module.exports = {
   responses,
+  resetResponses,
   assembleFinalDalle,
   finalDalleAssembled,
   assembleResponse,
