@@ -5,13 +5,13 @@
 
 /* General elements style */
 
-html, body {
+/* html, body {
   overflow-x: hidden;
   overflow-y: hidden;
-}
+} */
 
 body {
-  position: relative;
+  /* position: relative; */
   background: rgb(168, 90, 94);
   margin: 0;
   font-family: "Work Sans", sans-serif;
