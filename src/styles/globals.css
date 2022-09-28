@@ -18,6 +18,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  touch-action: pan-x pan-y;
 }
 
 h1,
@@ -146,6 +147,10 @@ img {
 @media screen and (width <= 1250px) {
   .project-heading {
     font-size: 5.5em;
+  }
+
+  input {
+    font-size: 16px;
   }
 }
 

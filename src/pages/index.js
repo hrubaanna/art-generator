@@ -97,9 +97,6 @@ class OpeningPage extends React.Component {
   render() {
     return (
       <div id="main">
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no" />
-        </Head>
         <div id="overlay">
           <video autoPlay muted loop id="video-background">
             <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
