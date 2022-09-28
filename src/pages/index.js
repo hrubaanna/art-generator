@@ -78,6 +78,7 @@ class OpeningPage extends React.Component {
     document.getElementById("project-heading-wrapper-landing").remove();
     document.getElementById("click-to-begin").remove();
     document.querySelector(".div-language").style.display = "flex";
+    document.querySelector(".btn-language").style.display = "inline";
     document.getElementById("overlay").style.background = "none";
     clearInterval(this.state.intro_interval);
 
