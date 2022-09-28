@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import FloatingImages from "../Components/floatingImages";
 const { finalDalleAssembled } = require("../Components/assembler_Obj");
+import Head from 'next/head'
+
 
 /**
  * Page that lures the user in
@@ -95,6 +97,9 @@ class OpeningPage extends React.Component {
   render() {
     return (
       <div id="main">
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no" />
+        </Head>
         <div id="overlay">
           <video autoPlay muted loop id="video-background">
             <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
@@ -111,7 +116,6 @@ class OpeningPage extends React.Component {
         <div id="background-images-landing">
           <FloatingImages></FloatingImages>
         </div>
-
         <div className="div-language">
           <div className="div-language bars">
             <Link href={"/dialoguePage"}>
