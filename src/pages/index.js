@@ -85,6 +85,10 @@ class OpeningPage extends React.Component {
     textLangBtns.forEach((element) => {
       element.style.display = "inline";
     });
+    let LangBtns = document.querySelectorAll(".btn-language");
+    LangBtns.forEach((element) => {
+      element.style.display = "inline";
+    });
     clearInterval(this.state.intro_interval);
   };
 
