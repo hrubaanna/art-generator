@@ -11,6 +11,7 @@ const {
   assembleResponse,
   storeResponse,
   assembleFinalDalle,
+  resetResponses,
   finalDalleAssembled,
 } = require("../Components/assembler_Obj");
 
@@ -83,6 +84,9 @@ class DialoguePage extends React.Component {
   //when page loads, start timer to show timeout box
   componentDidMount() {
     if (this.state.stage) this.startInactiveTimer();
+    this.resetState();
+    resetResponses();
+    console.log(this.state.language);
   }
 
   //reset state to initial values
@@ -363,10 +367,7 @@ class DialoguePage extends React.Component {
           </button>
         </Link>
 
-        {this.state.stage < this.state.numStages - 1 ? (
-          //Exit button only appears before the last stage
-          <StartOverButton lang={this.state.language}></StartOverButton>
-        ) : null}
+        <StartOverButton lang={this.state.language}></StartOverButton>
       </div>
     );
   }

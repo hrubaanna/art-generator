@@ -80,16 +80,21 @@ class FloatingImages extends React.Component {
   loadArt = () => {
     return new Promise((resolve, reject) => {
       // load 4 random dalle art pieces from the DB, store in artObjctes
-      this.getDBRandomArt().then(() => {
-        this.getArtFromTasks()
-          .then(() => {
-            resolve();
-          })
-          .catch((err) => {
-            console.log(err);
-            reject("error in loadArt");
-          });
-      });
+      this.getDBRandomArt()
+        .then(() => {
+          this.getArtFromTasks()
+            .then(() => {
+              resolve();
+            })
+            .catch((err) => {
+              console.log(err);
+              reject("error in getArtFromTask");
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          reject("error in getDBRandomArt");
+        });
     });
   };
 

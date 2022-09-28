@@ -128,20 +128,6 @@ class FinalPublishing extends React.Component {
     }
   };
 
-  // showEmailInput = () => {
-  //     document.querySelector('.email-input').style.display = "block";
-  //     document.querySelector('.email-buttons').style.display = "none";
-  // }
-
-  // hideEmailInput = () => {
-  //     document.querySelector('.email-buttons').style.display = "none";
-  //     document.querySelector('#gallery-publish').style.display = "block";
-  // }
-
-  // sendEmail = () => {
-  //     document.querySelector('#gallery-publish').style.display = 'block';
-  // }
-
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
     this.setState({ publishClicked: true });
@@ -219,7 +205,7 @@ class FinalPublishing extends React.Component {
               {this.state.publishQ[this.props.lang]}
             </div>
 
-            <div class="publish-image-wrapper" />
+            <div className="publish-image-wrapper" />
             <button
               className="btn btn-signature-cancel"
               id="changeSigColor"

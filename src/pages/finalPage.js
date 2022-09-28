@@ -3,12 +3,29 @@ import Link from "next/link";
 import FloatingImages from "../Components/floatingImages";
 import Router from "next/router";
 
-const { resetResponses } = require("../Components/assembler_Obj");
+const { finalDalleAssembled } = require("../Components/assembler_Obj");
 
 class FinalPage extends React.Component {
   state = {
     display: true,
     restartTimeout: null,
+
+    //text translations
+    thankYou: {
+      ENG: "Thank you for participation!",
+      CZ: "Děkujeme za účast!",
+      DE: "Danke für die Teilnahme!",
+    },
+    artworkText: {
+      ENG: "Go checkout your artwork in the gallery!",
+      CZ: "Podívejte se na své umění v galerii!",
+      DE: "Schau dir dein Kunstwerk in der Galerie an!",
+    },
+    clickAnywhere: {
+      ENG: "Click anywhere to go to the beginning",
+      CZ: "Klikněte kamkoli, abyste se vrátili na začátek",
+      DE: "Klicken Sie irgendwohin, um zum Anfang zurückzukehren",
+    },
 
     // constants
     RESTART_INTERVAL: 20000,
@@ -16,6 +33,8 @@ class FinalPage extends React.Component {
   };
 
   componentDidMount() {
+    console.log(finalDalleAssembled.language);
+
     let img = document.getElementById("gallery-map");
     img.src = "TestPhotos/placeholder.png";
     img.onload = () => {
@@ -68,17 +87,16 @@ class FinalPage extends React.Component {
             <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
           </video>
           <div id="wrapper-final">
-            <div id="heading-final">Thank you for participation!</div>
-            {/* TODO: add translations to text */}
+            <div id="heading-final">
+              {this.state.thankYou[finalDalleAssembled.language]}
+            </div>
             <img id="gallery-map"></img>
             <div id="instructions-final">
-              Go checkout your artwork in the gallery!
+              {this.state.artworkText[finalDalleAssembled.language]}
             </div>
-            {/* TODO: add translations to text */}
           </div>
           <div className="click-to" id="click-to-restart">
-            Click anywhere to go to the beginning
-            {/* TODO: add translations to text */}
+            {this.state.clickAnywhere[finalDalleAssembled.language]}
           </div>
         </div>
 

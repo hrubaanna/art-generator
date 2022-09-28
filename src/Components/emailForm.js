@@ -114,11 +114,11 @@ export default function EmailForm(props) {
 
   return (
     <div className="email-scheme">
-      {/* add into selection-title for lang options {titleText[this.props.lang]} */}
       <h1 className="selection-title">{titleText[props.lang]}</h1>
+
       {!formIsVisible ? (
         <div>
-          <Link href={"/finalPage"}>
+          <Link href={`/finalPage`}>
             <button
               className="btn btn-signature-cancel"
               id="send-email"
@@ -161,7 +161,8 @@ export default function EmailForm(props) {
               id="name"
             />
           </formGroup>
-          <Link href={"/finalPage"}>
+
+          <Link href={`/finalPage`}>
             <input
               className="btn btn-signature"
               id="send-email"
@@ -171,11 +172,9 @@ export default function EmailForm(props) {
               }}
             />
           </Link>
+
           <p id="check-spam">
-            <i>
-              {" "}
-              (Don't forget to check your spam folder) {spamWarning[props.lang]}
-            </i>
+            <i> {spamWarning[props.lang]}</i>
           </p>
         </form>
       )}
