@@ -693,6 +693,7 @@ code {
   color: rgb(248, 225, 203, 0.8);
   margin: 1em 7em 3em 7em;
   animation: fadeIn 2s;
+  height: 2em;
 }
 
 .hintDiv {
