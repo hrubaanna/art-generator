@@ -75,13 +75,14 @@ class DialoguePage extends React.Component {
       },
     },
     renderTimeoutBox: false,
+
     //TODO: for production, change to 60 seconds
     RESET_TIME: 500000,
   };
 
   //when page loads, start timer to show timeout box
   componentDidMount() {
-    this.startInactiveTimer();
+    if (this.state.stage) this.startInactiveTimer();
   }
 
   //reset state to initial values
@@ -286,6 +287,12 @@ class DialoguePage extends React.Component {
             : null}
         </h1>
 
+        <Prompt
+          medium={this.state.medium}
+          stage={this.state.stage}
+          language={this.state.language}
+        />
+
         {this.state.renderTimeoutBox ? (
           <TimeoutBox
             lang={this.state.language}
@@ -355,12 +362,6 @@ class DialoguePage extends React.Component {
             {this.state.buttons.results[this.state.language]}
           </button>
         </Link>
-
-        <Prompt
-          medium={this.state.medium}
-          stage={this.state.stage}
-          language={this.state.language}
-        />
 
         {this.state.stage < this.state.numStages - 1 ? (
           //Exit button only appears before the last stage

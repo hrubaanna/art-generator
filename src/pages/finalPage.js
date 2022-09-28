@@ -3,6 +3,8 @@ import Link from "next/link";
 import FloatingImages from "../Components/floatingImages";
 import Router from "next/router";
 
+const { resetResponses } = require("../Components/assembler_Obj");
+
 class FinalPage extends React.Component {
   state = {
     display: true,
