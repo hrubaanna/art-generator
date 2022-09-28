@@ -5,13 +5,13 @@
 
 /* General elements style */
 
-/* html, body {
+html, body {
   overflow-x: hidden;
   overflow-y: hidden;
-} */
+  position: relative;
+}
 
 body {
-  /* position: relative; */
   background: rgb(168, 90, 94);
   margin: 0;
   font-family: "Work Sans", sans-serif;
@@ -80,6 +80,7 @@ img {
 #main {
   height: 100vh;
   width: 100vw;
+  position: fixed;
 }
 
 #overlay {
