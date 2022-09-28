@@ -694,6 +694,7 @@ code {
   margin: 1em 7em 3em 7em;
   animation: fadeIn 2s;
   height: 2em;
+  z-index: 4;
 }
 
 .hintDiv {
@@ -723,6 +724,8 @@ code {
   font-weight: bold;
   font-size: 1.5em;
   font-style: italic;
+  margin-left: 5em;
+  margin-right: 5em;
 }
 
 #btn-finish-assemble {
