@@ -32,8 +32,8 @@ class Prompt extends React.Component {
     const { medium, stage, language } = this.props;
 
     return (
-      <div className="facts">
-        <p>{this.selectText(medium, stage, language)}</p>
+      <div className="prompts">
+        {this.selectText(medium, stage, language)}
       </div>
     );
   }

@@ -287,6 +287,12 @@ class DialoguePage extends React.Component {
             : null}
         </h1>
 
+        <Prompt
+          medium={this.state.medium}
+          stage={this.state.stage}
+          language={this.state.language}
+        />
+
         {this.state.stage === 0 ? (
           // Buttons to select a medium
           <div className="div-medium">
@@ -348,12 +354,6 @@ class DialoguePage extends React.Component {
             {this.state.buttons.results[this.state.language]}
           </button>
         </Link>
-
-        <Prompt
-          medium={this.state.medium}
-          stage={this.state.stage}
-          language={this.state.language}
-        />
 
         <StartOverButton lang={this.state.language}></StartOverButton>
       </div>

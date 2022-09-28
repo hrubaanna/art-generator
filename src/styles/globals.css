@@ -39,7 +39,7 @@ p {
   text-align: center;
   font-size: 1.2rem;
   font-weight: 400;
-  max-width: 60%;
+  max-width: 80%;
 }
 
 li {
@@ -683,6 +683,14 @@ code {
   color: rgb(248, 225, 203, 0.8);
   margin-left: 7em;
   margin-right: 7em;
+  animation: fadeIn 2s;
+}
+
+.prompts {
+  font-size: 1.5rem;
+  text-align: center;
+  color: rgb(248, 225, 203, 0.8);
+  margin: 1em 7em 3em 7em;
   animation: fadeIn 2s;
 }
 
