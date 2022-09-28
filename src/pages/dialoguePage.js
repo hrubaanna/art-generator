@@ -4,11 +4,11 @@ import Prompt from "../Components/prompt";
 import Link from "next/link";
 import { Facts, Prompts } from "../Components/dataFile";
 import StartOverButton from "../Components/startOverButton";
+import TimeoutBox from "../Components/timeoutBox";
 
 const {
   responses,
   assembleResponse,
-  resetResponses,
   storeResponse,
   assembleFinalDalle,
   finalDalleAssembled,
@@ -33,9 +33,7 @@ const {
  *
  */
 
-//TODO: show response, as it is being assembled, on page
 //TODO: check format of input - e.g. 400 character limit
-//TODO: update stage names of h1 from dataFile instead of here
 
 class DialoguePage extends React.Component {
   state = {
@@ -70,24 +68,20 @@ class DialoguePage extends React.Component {
         CZ: "přeskočit fázi",
         DE: "überspringen",
       },
-
       results: {
         ENG: "finish",
         CZ: "hotovo",
         DE: "fertig",
       },
     },
-    RESET_TIME: 600000000,
+    renderTimeoutBox: false,
+    //TODO: for production, change to 60 seconds
+    RESET_TIME: 500000,
   };
 
-  //when page loads, start timer for 30 seconds, reset state
+  //when page loads, start timer to show timeout box
   componentDidMount() {
-    this.resetState();
-    this.state.timer = setTimeout(() => {
-      //return to start page
-      this.resetState();
-      Router.push("/");
-    }, this.state.RESET_TIME);
+    this.startInactiveTimer();
   }
 
   //reset state to initial values
@@ -106,7 +100,7 @@ class DialoguePage extends React.Component {
     let currentStage = this.state.stage;
 
     //start the timer to check for user inactivity
-    this.resetTimer();
+    this.startInactiveTimer();
 
     //update forward button text
     document.querySelector("#btn-next-stage").innerHTML =
@@ -200,21 +194,6 @@ class DialoguePage extends React.Component {
     }
   };
 
-  resetTimer = () => {
-    //reset timer in each stage, if user is inactive at any stage for 30 seconds, reset state and start over
-    clearTimeout(this.state.timer);
-
-    this.state.timer = setTimeout(() => {
-      //return to start page
-      alert(
-        "You have been inactive for 30 seconds. Please restart the process."
-      );
-
-      this.resetState();
-      Router.push("/");
-    }, this.state.RESET_TIME);
-  };
-
   //set medium to the value of the selected button
   selectMedium = (e) => {
     this.setState({ medium: e.target.value });
@@ -269,6 +248,26 @@ class DialoguePage extends React.Component {
     }
   };
 
+  handleTimeoutBoxUnmount = () => {
+    this.setState({ renderTimeoutBox: false });
+    console.log("timer reset from handleTimeoutBoxUnmount");
+    this.startInactiveTimer();
+  };
+
+  handleTimeoutBoxMount = () => {
+    this.setState({ renderTimeoutBox: true });
+    this.setState({ timer: null });
+  };
+
+  startInactiveTimer = () => {
+    clearTimeout(this.state.timer);
+
+    this.state.timer = setTimeout(() => {
+      //show the timeout box
+      this.handleTimeoutBoxMount();
+    }, this.state.RESET_TIME);
+  };
+
   render() {
     return (
       <div>
@@ -286,6 +285,14 @@ class DialoguePage extends React.Component {
               ]
             : null}
         </h1>
+
+        {this.state.renderTimeoutBox ? (
+          <TimeoutBox
+            lang={this.state.language}
+            unMountTimemoutBox={this.handleTimeoutBoxUnmount}
+            resetState={this.resetState}
+          ></TimeoutBox>
+        ) : null}
 
         {this.state.stage === 0 ? (
           // Buttons to select a medium
@@ -355,7 +362,10 @@ class DialoguePage extends React.Component {
           language={this.state.language}
         />
 
-        <StartOverButton lang={this.state.language}></StartOverButton>
+        {this.state.stage < this.state.numStages - 1 ? (
+          //Exit button only appears before the last stage
+          <StartOverButton lang={this.state.language}></StartOverButton>
+        ) : null}
       </div>
     );
   }

@@ -969,5 +969,40 @@ input[type="range"]::-ms-track {
   font-family: "Work Sans", sans-serif;
 }
 
-#instructions-final {
+/* TIMEOUT BOX SECTION */
+
+#timeout-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-width: 30%;
+  margin: auto;
+  padding: 2%;
+  border-radius: 5%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  border: 1px solid rgba(248, 225, 203, 0.8);
+  background-color: #16a085;
 }
+
+#timeout-box h1 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+#timeout-box p {
+  font-size: 1.5em;
+  color: #fff;
+  text-align: center;
+}
+
+#btn-timeout {
+  font-size: 2.2em;
+  margin: auto;
+  text-align: center;
+  display: block;
+  margin-bottom: 15%;
+}
+
+/* END OF TIMEOUT BOX SECTION */
