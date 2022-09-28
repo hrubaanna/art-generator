@@ -15,7 +15,7 @@ class TestPage extends React.Component {
     return (
       <div>
         <h1>Testing the TimeoutBox</h1>
-        <TimeoutBox></TimeoutBox>
+        <TimeoutBox lang="ENG"></TimeoutBox>
       </div>
     );
   }
