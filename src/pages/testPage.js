@@ -1,6 +1,5 @@
 import React from "react";
-import SignatureCanvas from "react-signature-canvas";
-import EmailForm from "../Components/emailForm";
+import TimeoutBox from "../Components/timeoutBox";
 
 class TestPage extends React.Component {
   state = {
@@ -15,10 +14,8 @@ class TestPage extends React.Component {
   render() {
     return (
       <div>
-        <img
-          src="/TestPhotos/DALLE_1.png"
-          onClick={this.changeBackground}
-        ></img>
+        <h1>Testing the TimeoutBox</h1>
+        <TimeoutBox></TimeoutBox>
       </div>
     );
   }
