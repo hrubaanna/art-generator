@@ -136,11 +136,11 @@ img {
   font-family: "Work Sans", sans-serif;
 }
 
-/* @media screen and (max-width: 900px) {
-  #project-heading {
-    font-size: 4em;
+@media screen and (width <= 1250px) {
+  .project-heading {
+    font-size: 5.5em;
   }
-} */
+}
 
 @keyframes pulsating-click {
   from {
@@ -361,7 +361,7 @@ img {
 
 .btn-restart {
   position: fixed;
-  bottom: 15%;
+  bottom: 6.5%;
   right: 18%;
   background-color: rgba(248, 225, 203, 0.1);
   color: rgb(255 254 254 / 86%);
@@ -369,6 +369,7 @@ img {
   font-family: "Work Sans", sans-serif;
   font-size: 1.5em;
   font-weight: 200;
+  padding: 10px 16px;
 }
 
 #send-email {
