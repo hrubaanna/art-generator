@@ -8,6 +8,11 @@ class HintCloudTest extends React.Component {
     last_hint_selected: 7,
     hintInterval: null,
     UPDATE_HINT_INTERVAL: 4000,
+    confirmButtonText: {
+      ENG: "confirm choice",
+      CZ: "potvrdit výběr",
+      DE: "bestätigen",
+    },
   };
 
   componentDidMount() {
@@ -16,6 +21,8 @@ class HintCloudTest extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.state.hintInterval);
+    //remove p elements from the page
+    this.removeHints();
   }
 
   componentDidUpdate(prevProps) {
@@ -46,6 +53,22 @@ class HintCloudTest extends React.Component {
       } else {
         document.querySelector("#rightCloud").append(element);
       }
+    });
+
+    //add event listener to hints to make them update the query
+    hint_elements.forEach((element) => {
+      element.addEventListener("click", () => {
+        console.log("clicked");
+        //show selected word in the query field
+        document.querySelector("#current-selection").innerHTML =
+          element.innerHTML;
+        //change text on btn-next-stage to 'confirm choice'
+        document.querySelector("#btn-next-stage").innerHTML =
+          this.state.confirmButtonText[this.props.language];
+        //change forward button color to confirm styling
+        document.getElementById("btn-next-stage").style.backgroundColor =
+          "rgba(248, 225, 203, 0.4)";
+      });
     });
   }
 
@@ -88,6 +111,8 @@ class HintCloudTest extends React.Component {
         Math.floor(Math.random() * this.state.hint_elements.length)
       ];
 
+    randomHint.style.pointerEvents = "none";
+
     setTimeout(() => {
       //replace it with the next unused hint
       randomHint.innerHTML =
@@ -95,13 +120,26 @@ class HintCloudTest extends React.Component {
     }, 1200);
 
     randomHint.style.backgroundColor = "rgb(248, 225, 203)";
+    randomHint.style.opacity = "0";
 
     setTimeout(() => {
       randomHint.style.backgroundColor = "rgba(39, 39, 39, 0.1)";
+      randomHint.style.opacity = "1";
     }, 1200);
+
+    setTimeout(() => {
+      randomHint.style.pointerEvents = "auto";
+    }, 1500);
 
     //increment the last hint selected
     this.state.last_hint_selected++;
+  }
+
+  removeHints() {
+    //remove hints from the page
+    this.state.hint_elements.forEach((element) => {
+      element.remove();
+    });
   }
 
   updateHints() {

@@ -1,5 +1,6 @@
 import React from "react";
 import HintCloud from "../Components/hintCloud";
+import HintCloudTest from "../Components/hintCloudTest";
 import Prompt from "../Components/prompt";
 import Link from "next/link";
 import { Facts, Prompts } from "../Components/dataFile";
@@ -332,7 +333,7 @@ class DialoguePage extends React.Component {
         ) : (
           <div>
             {
-              <HintCloud
+              <HintCloudTest
                 className="hintCloud"
                 medium={this.state.medium}
                 stage={this.state.stage}
