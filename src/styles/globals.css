@@ -9,7 +9,7 @@ html,
 body {
   overflow-x: hidden;
   overflow-y: hidden;
-  position: relative;
+  touch-action: none;
 }
 
 body {
@@ -352,7 +352,12 @@ img {
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
   font-size: 1.1em;
-  margin-bottom: auto;
+  margin: auto;
+  color: rgb(255 254 254 / 86%);
+  font-weight: 200;
+  margin-top: 3%;
+  background-color: rgba(248, 225, 203, 0.4);
+  animation: fadeIn 1s;
 }
 
 .btn-signature-cancel {
@@ -565,6 +570,7 @@ code {
   border-radius: 30px;
   border: 0px solid white;
   padding: 0px;
+  z-index: 1;
 }
 
 .publish-buttons {
@@ -611,6 +617,7 @@ code {
   border-radius: 30px;
   padding: 0px;
   margin: auto;
+  z-index: 50;
 }
 
 .sigCanvas {
@@ -636,15 +643,6 @@ code {
   z-index: 2;
   display: none;
 }
-
-/* .signature-image {
-  z-index: 2;
-  position: relative;
-  left: 58%;
-  bottom: 2.5em;
-  width: 6em;
-  max-height: 4em;
-} */
 
 .signature-image {
   z-index: 2;
@@ -688,7 +686,7 @@ code {
   color: rgb(248, 225, 203);
   font-weight: bold;
   font-size: 2.8em;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   margin-top: 6%;
   display: block;
 }
@@ -706,7 +704,7 @@ code {
   font-size: 1.5rem;
   text-align: center;
   color: rgb(248, 225, 203, 0.8);
-  margin: 1em 7em 3em 7em;
+  margin: 1em 7em 1em 7em;
   animation: fadeIn 2s;
   height: 2em;
   z-index: 4;
@@ -844,7 +842,7 @@ input[type="range"] {
   background-color: transparent;
   cursor: pointer;
   -webkit-appearance: none;
-  width: 35%;
+  width: 100%;
   display: block;
   margin: auto;
 }
@@ -937,6 +935,44 @@ input[type="range"]::-ms-track {
 }
 
 /* END OF SIGNATURE SLIDER */
+
+/* Image behind sigpad styling */
+.crop {
+  width: 46.3%;
+  height: 51.5%;
+  overflow: hidden;
+  z-index: -1;
+  position: absolute;
+  margin-left: 4.7%;
+  border-radius: 30px;
+}
+
+.crop img {
+  width: 1024px;
+  height: 1024px;
+  margin: -92% 0 0 -53%;
+}
+
+.signature-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.testToggle {
+  margin: 10%;
+}
+.toggleButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.signature-props {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2%;
+}
+/* END OF Image behind sigpad styling */
 
 #check-spam {
   color: rgb(248, 225, 203);

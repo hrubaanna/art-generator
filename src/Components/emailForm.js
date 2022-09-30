@@ -23,6 +23,21 @@ export default function EmailForm(props) {
     CZ: "Ne",
     DE: "nein",
   };
+  const placeholderEmail = {
+    ENG: "Enter email",
+    CZ: "Zadejte email",
+    DE: "Email eingeben",
+  };
+  const placeholderName = {
+    ENG: "Enter name (optional)",
+    CZ: "Zadejte jméno (dobrovolné)",
+    DE: "Namen eingeben (optional)",
+  };
+  const submitBtn = {
+    ENG: "Submit",
+    CZ: "Potvrdit",
+    DE: "Einreichen",
+  };
   const spamWarning = {
     ENG: "(Don't forget to check your spam folder)",
     CZ: "(Nezapomeňte zkontrolovat složku se spamem)",
@@ -144,7 +159,7 @@ export default function EmailForm(props) {
               }}
               name="email"
               id="email"
-              placeholder="Enter email"
+              placeholder={this.state.placeholderEmail[props.lang]}
             ></input>
           </formGroup>
           <formGroup>
@@ -154,7 +169,7 @@ export default function EmailForm(props) {
               onChange={(e) => {
                 setName(e.target.value);
               }}
-              placeholder="Enter name (optional)"
+              placeholder={this.state.placeholderName[props.lang]}
               name="name"
               id="name"
             />
@@ -165,6 +180,7 @@ export default function EmailForm(props) {
               className="btn btn-signature"
               id="send-email"
               type="submit"
+              value={this.state.submitBtn[props.lang]}
               onClick={(e) => {
                 handleSubmit(e);
               }}

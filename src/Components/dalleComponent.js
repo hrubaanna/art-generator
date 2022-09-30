@@ -23,6 +23,11 @@ class DalleComponent extends React.Component {
       CZ: "zaznamenáváme problémy s údržbou, zkuste to prosím znovu později",
       DE: "wir haben Wartungsprobleme, bitte versuchen Sie es später erneut",
     },
+    selectArt: {
+      ENG: "Select your favourite artwork",
+      CZ: "Vyberte si vaše oblíbené dílo",
+      DE: "Wählen Sie Ihr Lieblingskunstwerk aus",
+    },
   };
 
   componentDidMount() {
@@ -50,7 +55,7 @@ class DalleComponent extends React.Component {
           // hide facts and change heading
           document.querySelector(".facts").classList.add("short-fadeOut");
           document.querySelector(".selection-title").innerHTML =
-            "Select your favourite artwork"; // TODO: missing translation
+            this.state.selectArt[this.props.lang]; // TODO: missing translation
         })
         .catch((err) => {
           console.log(err);
