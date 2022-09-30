@@ -457,10 +457,6 @@ img {
   transition: all 2s;
 }
 
-.hint:hover {
-  color: #a24e78;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
