@@ -161,7 +161,7 @@ export default function EmailForm(props) {
               }}
               name="email"
               id="email"
-              placeholder={this.state.placeholderEmail[props.lang]}
+              placeholder={placeholderEmail[props.lang]}
             ></input>
           </formGroup>
           <formGroup>
@@ -171,7 +171,7 @@ export default function EmailForm(props) {
               onChange={(e) => {
                 setName(e.target.value);
               }}
-              placeholder={this.state.placeholderName[props.lang]}
+              placeholder={placeholderName[props.lang]}
               name="name"
               id="name"
             />
@@ -182,7 +182,7 @@ export default function EmailForm(props) {
               className="btn btn-signature"
               id="send-email"
               type="submit"
-              value={this.state.submitBtn[props.lang]}
+              value={submitBtn[props.lang]}
               onClick={(e) => {
                 handleSubmit(e);
               }}
