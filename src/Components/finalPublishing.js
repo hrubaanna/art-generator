@@ -60,6 +60,12 @@ class FinalPublishing extends React.Component {
       CZ: "Nyní jste skutečným umělcem, který společně vytváří novou uměleckou formu pomocí štětce umělé inteligence.",
       DE: "DE Du bist ein Kunstmacher",
     },
+    sigClass: {
+      ENG: "eng-class",
+      CZ: "cz-class",
+      DE: "de-class",
+    },
+
     signatureColor: "black",
     publishClicked: false,
     signatureChosen: false,
