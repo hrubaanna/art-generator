@@ -86,7 +86,6 @@ class DialoguePage extends React.Component {
     if (this.state.stage) this.startInactiveTimer();
     this.resetState();
     resetResponses();
-    console.log(this.state.language);
   }
 
   //reset state to initial values
@@ -96,7 +95,7 @@ class DialoguePage extends React.Component {
       medium: "",
       query: "",
       dalleInput: "",
-      language: "ENG",
+      language: this.state.language,
     });
   };
 

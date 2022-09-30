@@ -10,7 +10,12 @@ class FinalPublishing extends React.Component {
       CZ: "Přidat k dílu podpis",
       DE: "Fügen Sie Ihrem Kunstwerk eine Signatur hinzu",
     },
-    changeSigColor: {
+    sigIntensity: {
+      ENG: "Set pen intensity",
+      CZ: "Zvol tloušťku pera",
+      DE: "Stiftintensität einstellen",
+    },
+    sigColor: {
       ENG: "change signature color",
       CZ: "změnit barvu podpisu",
       DE: "ändern Sie die Signaturfarbe",
@@ -120,15 +125,29 @@ class FinalPublishing extends React.Component {
     document.querySelector("#gallery-publish").style.display = "block";
   };
 
-  changeSignatureColor = () => {
-    if (this.state.signatureColor === "black") {
-      this.setState({ signatureColor: "white" });
-      document.querySelector(".signature-image").style.filter = "invert(100%)";
-    } else {
-      this.setState({ signatureColor: "black" });
-      document.querySelector(".signature-image").style.filter = "invert(0%)";
-    }
-  };
+  // changeSignatureColor = () => {
+  //   if (this.state.signatureColor === "black") {
+  //     this.setState({ signatureColor: "white" });
+  //     //document.querySelector(".signature-image").style.filter = "invert(100%)";
+  //   } else {
+  //     this.setState({ signatureColor: "black" });
+  //     //document.querySelector(".signature-image").style.filter = "invert(0%)";
+  //   }
+  // };
+
+  // showEmailInput = () => {
+  //     document.querySelector('.email-input').style.display = "block";
+  //     document.querySelector('.email-buttons').style.display = "none";
+  // }
+
+  // hideEmailInput = () => {
+  //     document.querySelector('.email-buttons').style.display = "none";
+  //     document.querySelector('#gallery-publish').style.display = "block";
+  // }
+
+  // sendEmail = () => {
+  //     document.querySelector('#gallery-publish').style.display = 'block';
+  // }
 
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
@@ -162,7 +181,10 @@ class FinalPublishing extends React.Component {
               </h1>
               <div className="signature-props">
                 <div>
-                  <h2 className="intensityTitle">Set Intesity</h2>
+                  <h2 className="intensityTitle">
+                    {" "}
+                    {this.state.sigIntensity[this.props.lang]}{" "}
+                  </h2>
                   <input
                     type="range"
                     id="testRange"
@@ -176,7 +198,9 @@ class FinalPublishing extends React.Component {
                   ></input>
                 </div>
                 <div>
-                  <h2 className="intensityTitle">Set Color</h2>
+                  <h2 className="intensityTitle">
+                    {this.state.sigColor[this.props.lang]}
+                  </h2>
                   <div className="toggleButton">
                     <Switch
                       onChange={this.handleToggle}
@@ -275,7 +299,7 @@ class FinalPublishing extends React.Component {
               {this.state.publishQ[this.props.lang]}
             </div>
 
-            <div className="publish-image-wrapper" />
+            <div class="publish-image-wrapper" />
             <div className="publish-buttons">
               <button
                 className="btn btn-signature-cancel"

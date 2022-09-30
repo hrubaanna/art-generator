@@ -194,7 +194,8 @@ function resetResponses() {
 var finalDalleAssembled = {
   language: "ENG",
   textENG: "dalle ENG prompt",
-  textDECZ: "language preferrence prompt",
+  textDECZ:
+    "oil painting of a debating group of friends on a double deck bus in London, warm, cosy, good energy",
 };
 
 function assembleFinalDalle(text, langText) {
