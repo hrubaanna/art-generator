@@ -10,7 +10,12 @@ class FinalPublishing extends React.Component {
       CZ: "Přidat k dílu podpis",
       DE: "Fügen Sie Ihrem Kunstwerk eine Signatur hinzu",
     },
-    changeSigColor: {
+    sigIntensity: {
+      ENG: "set pen intensity",
+      CZ: "zvol tloušťku pera",
+      DE: "Stiftintensität einstellen",
+    },
+    sigColor: {
       ENG: "change signature color",
       CZ: "změnit barvu podpisu",
       DE: "ändern Sie die Signaturfarbe",
@@ -55,6 +60,12 @@ class FinalPublishing extends React.Component {
       CZ: "Nyní jste skutečným umělcem, který společně vytváří novou uměleckou formu pomocí štětce umělé inteligence.",
       DE: "DE Du bist ein Kunstmacher",
     },
+    sigClass: {
+      ENG: "eng-class",
+      CZ: "cz-class",
+      DE: "de-class",
+    },
+
     signatureColor: "black",
     publishClicked: false,
     signatureChosen: false,
@@ -84,6 +95,20 @@ class FinalPublishing extends React.Component {
     document.querySelector(".publish-image-wrapper").appendChild(finalImage);
   };
 
+  sliderChange = (e) => {
+    this.setState({ penWidth: e });
+  };
+
+  handleToggle = () => {
+    if (this.state.toggleChecked == false) {
+      this.setState({ toggleChecked: true });
+      this.setState({ signatureColor: "white" });
+    } else {
+      this.setState({ toggleChecked: false });
+      this.setState({ signatureColor: "black" });
+    }
+  };
+
   saveSignature = () => {
     //document.querySelector(".publish-buttons").style.display = "block";
     document.querySelector("#gallery-publish").style.display = "block";
@@ -107,11 +132,6 @@ class FinalPublishing extends React.Component {
     this.setState({ signatureChosen: true });
   };
 
-  confirmPublish = () => {
-    this.setState({ wantToPublish: true });
-    this.setState({ publishClicked: true });
-  };
-
   hideSignature = () => {
     this.setState({ signatureChosen: true });
     // document.querySelector(".signature-scheme").style.display = "none";
@@ -120,33 +140,14 @@ class FinalPublishing extends React.Component {
     document.querySelector("#gallery-publish").style.display = "block";
   };
 
-  changeSignatureColor = () => {
-    if (this.state.signatureColor === "black") {
-      this.setState({ signatureColor: "white" });
-      document.querySelector(".signature-image").style.filter = "invert(100%)";
-    } else {
-      this.setState({ signatureColor: "black" });
-      document.querySelector(".signature-image").style.filter = "invert(0%)";
-    }
+  confirmPublish = () => {
+    this.setState({ wantToPublish: true });
+    this.setState({ publishClicked: true });
   };
 
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
     this.setState({ publishClicked: true });
-  };
-
-  sliderChange = (e) => {
-    this.setState({ penWidth: e });
-  };
-
-  handleToggle = () => {
-    if (this.state.toggleChecked == false) {
-      this.setState({ toggleChecked: true });
-      this.setState({ signatureColor: "white" });
-    } else {
-      this.setState({ toggleChecked: false });
-      this.setState({ signatureColor: "black" });
-    }
   };
 
   render() {
@@ -162,7 +163,9 @@ class FinalPublishing extends React.Component {
               </h1>
               <div className="signature-props">
                 <div>
-                  <h2 className="intensityTitle">Set Intesity</h2>
+                  <h2 className="intensityTitle">
+                    {this.state.sigIntensity[this.props.lang]}
+                  </h2>
                   <input
                     type="range"
                     id="testRange"
@@ -176,7 +179,9 @@ class FinalPublishing extends React.Component {
                   ></input>
                 </div>
                 <div>
-                  <h2 className="intensityTitle">Set Color</h2>
+                  <h2 className="intensityTitle">
+                    {this.state.sigColor[this.props.lang]}
+                  </h2>
                   <div className="toggleButton">
                     <Switch
                       onChange={this.handleToggle}
