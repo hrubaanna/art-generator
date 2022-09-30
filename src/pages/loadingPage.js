@@ -57,7 +57,6 @@ class LoadingPage extends React.Component {
         />
 
         <div className="facts"> {this.state.funFact} </div>
-        <StartOverButton lang={finalDalleAssembled.language}></StartOverButton>
       </div>
     );
   }

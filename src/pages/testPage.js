@@ -1,5 +1,5 @@
 import React from "react";
-import HintCloudTest from "../Components/hintCloudTest";
+const { responses } = require("../Components/assembler_Obj");
 
 class TestPage extends React.Component {
   state = {
@@ -15,20 +15,18 @@ class TestPage extends React.Component {
   };
 
   changeStage = () => {
-    this.setState({ stage: ++this.state.stage });
+    document
+      .getElementById("2")
+      .setAttribute("src", responses.finalDalleImgSignature);
   };
 
   render() {
     return (
       <div>
         <h1>Testing the HintCloudTest</h1>
-        <HintCloudTest
-          className="hintCloud"
-          medium={this.state.medium}
-          stage={this.state.stage}
-          language={this.state.language}
-        />
-        <button onClick={this.changeStage}>next stage</button>
+
+        <img id="2"></img>
+        <button onClick={this.changeStage}>click me</button>
       </div>
     );
   }

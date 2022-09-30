@@ -133,6 +133,13 @@ class HintCloudTest extends React.Component {
 
     //increment the last hint selected
     this.state.last_hint_selected++;
+    //check if end of array has been reached, if so, start from the beginning
+    if (
+      this.state.current_stage_hints[this.state.last_hint_selected] == undefined
+    ) {
+      console.log("hint undefined");
+      this.state.last_hint_selected = 0;
+    }
   }
 
   removeHints() {

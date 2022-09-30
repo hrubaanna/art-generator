@@ -367,7 +367,9 @@ class DialoguePage extends React.Component {
           </button>
         </Link>
 
-        <StartOverButton lang={this.state.language}></StartOverButton>
+        {this.state.stage < this.state.numStages ? (
+          <StartOverButton lang={this.state.language}></StartOverButton>
+        ) : null}
       </div>
     );
   }

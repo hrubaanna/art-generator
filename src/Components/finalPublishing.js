@@ -3,6 +3,8 @@ import SignatureCanvas from "react-signature-canvas";
 import EmailForm from "./emailForm";
 import Switch from "react-switch";
 
+const { responses } = require("../Components/assembler_Obj");
+
 class FinalPublishing extends React.Component {
   state = {
     signatureText: {
@@ -143,11 +145,15 @@ class FinalPublishing extends React.Component {
   confirmPublish = () => {
     this.setState({ wantToPublish: true });
     this.setState({ publishClicked: true });
+    responses.finalDalleImgLink = this.props.finalImage;
+    responses.finalSignatureLink = this.state.signatureSrc;
   };
 
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
     this.setState({ publishClicked: true });
+    responses.finalDalleImgLink = this.props.finalImage;
+    responses.finalSignatureLink = this.state.signatureSrc;
   };
 
   render() {
@@ -241,35 +247,6 @@ class FinalPublishing extends React.Component {
                   {this.state.signatureAdd[this.props.lang]}
                 </button>
               </div>
-              {/* <div>
-                <h2 className="intensityTitle">Set Intesity and Color</h2>
-                <input
-                  type="range"
-                  id="testRange"
-                  min="0.8"
-                  max="6.4"
-                  defaultValue={this.state.penWidth}
-                  onChange={(e) => {
-                    this.sliderChange(e.target.value);
-                  }}
-                  step="any"
-                ></input>
-                <div className="toggleButton">
-                <Switch 
-                  onChange={this.handleToggle} 
-                  checked={this.state.toggleChecked} 
-                  offColor="#000000"
-                  onColor="#FFFFFF" 
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  height={30}
-                  width={80}
-                  onHandleColor="#f8e1cb"
-                  offHandleColor="#f8e1cb"
-                  borderRadius={20}
-                />  
-                </div>
-              </div> */}
             </div>
           </div>
         ) : null}

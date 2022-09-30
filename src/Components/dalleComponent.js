@@ -37,6 +37,8 @@ class DalleComponent extends React.Component {
   }
 
   getDalle2 = () => {
+    //Generate the images from the text
+
     if (this.state.query != "" && this.state.token != "") {
       this.setState({ error: false });
 
@@ -131,9 +133,6 @@ class DalleComponent extends React.Component {
     // append new img element to the div grid
     document.querySelector(".dalle-grid").appendChild(newImg);
 
-    // e.target.transform = "scale(1.3)";
-    // e.target.className = "finalChoice";
-
     //remove other elements from page
     document.querySelector(".selection-title").style.display = "none";
     document.querySelector(".final-query").style.display = "none";
@@ -143,30 +142,6 @@ class DalleComponent extends React.Component {
     return (
       <div>
         <div className="final-query">{this.props.langText}</div>
-
-        {/* {
-          //hide the Get Result button after the query has been sent
-
-          this.state.loading == false &&
-          this.state.error == false &&
-          this.state.result_provided == false &&
-          this.state.image_selected == false ? (
-            <button
-              id="btn-finish-assemble"
-              className="btn"
-              onClick={this.getDalle2}
-            >
-              {" "}
-              {this.state.button[this.props.lang]}{" "}
-            </button>
-          ) : null
-        } */}
-
-        {/* {
-                //TODO: change background color one the results are provided (this code is not working)
-                this.state.result_provided === true ? 
-                document.querySelector('body').style.backgroundColor = '#f5f5f5' : null
-           }  */}
 
         {this.state.error ? (
           <p className="error"> {this.state.errorText[this.props.lang]} </p>

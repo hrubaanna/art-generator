@@ -3,7 +3,10 @@ import Link from "next/link";
 import FloatingImages from "../Components/floatingImages";
 import Router from "next/router";
 
-const { finalDalleAssembled } = require("../Components/assembler_Obj");
+const {
+  finalDalleAssembled,
+  responses,
+} = require("../Components/assembler_Obj");
 
 class FinalPage extends React.Component {
   state = {
@@ -35,8 +38,8 @@ class FinalPage extends React.Component {
   componentDidMount() {
     console.log(finalDalleAssembled.language);
 
-    let img = document.getElementById("gallery-map");
-    img.src = "TestPhotos/placeholder.png";
+    let img = document.getElementById("final-page-gallery-img");
+    img.src = responses.finalDalleImgLink;
     img.onload = () => {
       document.getElementById("wrapper-final").className += " short-fadeIn";
       setTimeout(() => {
@@ -48,6 +51,10 @@ class FinalPage extends React.Component {
         }
       }, this.state.SPAWN_RESTART_BUTTON_INTERVAL);
     };
+    //TODO : make this work, so that signature also loads, currently
+    //it seems that the signature does not work as src but I dont know why
+    // let imgSig = document.getElementById("final-page-signature-img");
+    // imgSig.src = responses.finalDalleSignatureLink;
 
     document.getElementById("final-page").onclick = () => {
       this.returnToStart();
@@ -90,7 +97,8 @@ class FinalPage extends React.Component {
             <div id="heading-final">
               {this.state.thankYou[finalDalleAssembled.language]}
             </div>
-            <img id="gallery-map"></img>
+            <img id="final-page-gallery-img"></img>
+            <img id="final-page-signature-img"></img>
             <div id="instructions-final">
               {this.state.artworkText[finalDalleAssembled.language]}
             </div>
