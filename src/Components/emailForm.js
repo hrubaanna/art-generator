@@ -77,8 +77,6 @@ export default function EmailForm(props) {
   };
 
   const showEmailInput = () => {
-    console.log("wanted to publish:");
-    console.log(props.wantToPublish);
     setFormIsVisible(true);
   };
 

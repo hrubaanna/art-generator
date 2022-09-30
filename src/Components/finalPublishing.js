@@ -306,10 +306,6 @@ class FinalPublishing extends React.Component {
             finalImage={this.props.finalImage}
             lang={this.props.lang}
             wantToPublish={this.state.wantToPublish}
-
-            //todo: figure out how to go to email form after clicking publish
-            //should it actually publish in the email component,
-            //or should it publish here and then go to email form?
           ></EmailForm>
         )}
 
