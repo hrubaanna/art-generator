@@ -934,19 +934,23 @@ input[type="range"]::-ms-track {
 
 /* Image behind sigpad styling */
 .crop {
-  width: 46.3%;
-  height: 51.5%;
+  width: 55.7%;
+  height: 51.4%;
   overflow: hidden;
   z-index: -1;
   position: absolute;
-  margin-left: 4.7%;
+  margin-left: 5.65%;
   border-radius: 30px;
 }
 
 .crop img {
   width: 1024px;
   height: 1024px;
-  margin: -92% 0 0 -53%;
+  margin: -77% 0 0 -27%;
+}
+
+.signature-scheme {
+  width: 67%;
 }
 
 .signature-btns {
