@@ -990,6 +990,22 @@ input[type="range"]::-ms-track {
   height: 100%;
 }
 
+#background-images-final #floating-grid-0 {
+  padding: 10vw 30vw 0 10vw;
+}
+
+#background-images-final #floating-grid-1 {
+  padding: 10vw 10vw 0 30vw;
+}
+
+#background-images-final #floating-grid-2 {
+  padding: 0 30vw 10vw 10vw;
+}
+
+#background-images-final #floating-grid-3 {
+  padding: 0 10vw 10vw 30vw;
+}
+
 #click-to-restart {
   bottom: 5%;
   text-align: center;

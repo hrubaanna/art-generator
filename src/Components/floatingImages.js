@@ -167,14 +167,26 @@ class FloatingImages extends React.Component {
     previousPosition,
     includeSignature = true
   ) => {
-    function getRandomPosition() {
-      let x = Math.floor(Math.random() * 4);
+    function getRandomPosition(values) {
+      let x = Math.floor(Math.random() * values.length);
       if (x == previousPosition) {
-        return getRandomPosition();
+        return getRandomPosition(values);
       }
       return x;
     }
-    let position = getRandomPosition();
+
+    let position;
+    if (document.body.contains(document.getElementById("final-page"))) {
+      if (previousPosition % 2 == 0) {
+        // left side hence spawn to right side
+        position = getRandomPosition([1, 3]);
+      } else {
+        // right side hence spawn to left side
+        position = getRandomPosition([0, 2]);
+      }
+    } else {
+      position = getRandomPosition([0, 1, 2, 3]);
+    }
     let gridPosition = document.getElementById(`floating-grid-${position}`);
 
     // spawn images only if the grid is on the screen
@@ -222,49 +234,31 @@ class FloatingImages extends React.Component {
 
         let duration = this.state.IMAGE_SPAWN_DURATION * 1.5;
         // TODO: rewrite this to use keyframes CSS animation in css file
-        wrapper.animate(
-          [
-            { opacity: "0" },
-            {
-              opacity: "1",
-            },
-          ],
-          {
-            duration: duration / 2,
-            direction: "alternate",
-            iterations: "2",
-          }
-        );
-        wrapper.animate(
-          [
-            {
-              scale: "1.0",
-              transform: `translate(-${size / 2}vw, -${size / 2}vw)`,
-            },
-            {
-              scale: "2.0",
-              transform: `translate(-${size}vw, ${size / 1.8}vw)`,
-            },
-          ],
-          {
-            duration: duration,
-            fill: "forwards",
-          }
-        );
-        wrapper.animate(
-          [
-            {
-              filter: `blur(2px)`,
-            },
-            {
-              filter: `blur(0px)`,
-            },
-          ],
-          {
-            duration: duration * 0.25,
-            fill: "forwards",
-          }
-        );
+        wrapper.animate([{ opacity: "0" }, { opacity: "1" }], {
+          duration: duration / 2,
+          direction: "alternate",
+          iterations: "2",
+        });
+        wrapper.animate([{ scale: "1.0" }, { scale: "2.0" }], {
+          duration: duration,
+          fill: "forwards",
+        });
+        wrapper.animate([{ filter: `blur(2px)` }, { filter: `blur(0px)` }], {
+          duration: duration * 0.25,
+          fill: "forwards",
+        });
+
+        if (!document.body.contains(document.getElementById("final-page"))) {
+          wrapper.animate(
+            [
+              { transform: `translate(-${size / 2}vw, -${size / 2}vw)` },
+              { transform: `translate(-${size}vw, ${size / 1.8}vw)` },
+            ],
+            { duration: duration, fill: "forwards" }
+          );
+        } else {
+          wrapper.style.transform = `translate(-${size / 2}vw, -${size / 2}vw)`;
+        }
       };
       return position;
     }
