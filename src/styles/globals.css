@@ -378,16 +378,15 @@ img {
 }
 
 .btn-restart {
-  position: fixed;
-  bottom: 6.5%;
-  right: 18%;
+  position: absolute;
+  bottom: 6%;
+  right: 5%;
   background-color: rgba(248, 225, 203, 0.1);
   color: rgb(255 254 254 / 86%);
   border-radius: 10em;
   font-family: "Work Sans", sans-serif;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: 200;
-  padding: 10px 16px;
 }
 
 #send-email {
@@ -1020,10 +1019,11 @@ input[type="range"]::-ms-track {
 }
 
 #wrapper-final img {
-  position: relative;
-  width: 80%;
-  height: 400px;
+  /* position: relative; */
+  width: 12em;
+  height: 12em;
   margin: 5%;
+  margin-bottom: 1%;
 }
 
 #heading-final {
@@ -1031,6 +1031,18 @@ input[type="range"]::-ms-track {
   background: none;
   font-weight: 300;
   font-family: "Work Sans", sans-serif;
+}
+
+#final-page-gallery-img {
+  position: relative;
+  z-index: 1;
+}
+
+#final-page-signature-img {
+  position: absolute;
+  z-index: 2;
+  right: 15%;
+  bottom: 16.5%;
 }
 
 /* TIMEOUT BOX SECTION */
