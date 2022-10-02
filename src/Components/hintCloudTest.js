@@ -6,6 +6,8 @@ class HintCloudTest extends React.Component {
     hint_elements: [],
     current_stage_hints: [],
     last_hint_selected: 7,
+    selected_random_hint: null,
+    text_change_timeout: null,
     hintInterval: null,
     UPDATE_HINT_INTERVAL: 4000,
     confirmButtonText: {
@@ -28,6 +30,18 @@ class HintCloudTest extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.updateHints();
+      if (this.state.selected_random_hint !== null) {
+        //when stage is changes during transition, make the transition faster
+        //so it does not look like the hint is being replaced twice
+        console.log("stopping transition");
+        clearTimeout(this.state.text_change_timeout);
+        console.log(this.state.selected_random_hint);
+        this.state.selected_random_hint.style.transition = "all 0s";
+        this.state.selected_random_hint.style.backgroundColor =
+          "rgba(39, 39, 39, 0.1)";
+        this.state.selected_random_hint.style.opacity = "1";
+        this.state.selected_random_hint.style.transition = "all 2s";
+      }
     }
   }
 
@@ -58,7 +72,6 @@ class HintCloudTest extends React.Component {
     //add event listener to hints to make them update the query
     hint_elements.forEach((element) => {
       element.addEventListener("click", () => {
-        console.log("clicked");
         //show selected word in the query field
         document.querySelector("#current-selection").innerHTML =
           element.innerHTML;
@@ -113,14 +126,16 @@ class HintCloudTest extends React.Component {
 
     randomHint.style.pointerEvents = "none";
 
-    setTimeout(() => {
+    this.state.selected_random_hint = randomHint;
+
+    this.state.text_change_timeout = setTimeout(() => {
       //replace it with the next unused hint
       randomHint.innerHTML =
         this.state.current_stage_hints[this.state.last_hint_selected];
     }, 1200);
 
-    randomHint.style.backgroundColor = "rgb(248, 225, 203)";
     randomHint.style.opacity = "0";
+    randomHint.style.backgroundColor = "rgb(248, 225, 203)";
 
     setTimeout(() => {
       randomHint.style.backgroundColor = "rgba(39, 39, 39, 0.1)";
@@ -137,7 +152,6 @@ class HintCloudTest extends React.Component {
     if (
       this.state.current_stage_hints[this.state.last_hint_selected] == undefined
     ) {
-      console.log("hint undefined");
       this.state.last_hint_selected = 0;
     }
   }
@@ -166,7 +180,7 @@ class HintCloudTest extends React.Component {
       this.state.hintInterval = setInterval(() => {
         this.replaceHint();
       }, this.state.UPDATE_HINT_INTERVAL);
-    }, this.state.UPDATE_HINT_INTERVAL);
+    }, 1000);
   }
 
   render() {
