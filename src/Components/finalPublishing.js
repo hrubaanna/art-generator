@@ -146,14 +146,14 @@ class FinalPublishing extends React.Component {
     this.setState({ wantToPublish: true });
     this.setState({ publishClicked: true });
     responses.finalDalleImgLink = this.props.finalImage;
-    responses.finalSignatureLink = this.state.signatureSrc;
+    responses.finalDalleImgSignature = this.state.signatureSrc;
   };
 
   cancelPublish = () => {
     document.querySelector("#gallery-publish").style.display = "none";
     this.setState({ publishClicked: true });
     responses.finalDalleImgLink = this.props.finalImage;
-    responses.finalSignatureLink = this.state.signatureSrc;
+    responses.finalDalleImgSignature = this.state.signatureSrc;
   };
 
   render() {

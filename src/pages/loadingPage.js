@@ -46,6 +46,9 @@ class LoadingPage extends React.Component {
   render() {
     return (
       <div>
+        <video autoPlay muted loop id="video-background">
+          <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
+        </video>
         <div className="selection-title" id="generate-art">
           {this.state.headings[finalDalleAssembled.language]}
         </div>

@@ -54,6 +54,7 @@ class HintCloudTest extends React.Component {
         let hint_element = document.createElement("p");
         hint_element.innerHTML = hint;
         hint_element.className = "hint";
+        hint_element.id = index;
         hint_elements.push(hint_element);
       }
     });

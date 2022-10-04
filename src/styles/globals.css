@@ -89,7 +89,10 @@ img {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: rgba(51, 51, 153, 0.6);
+  /* background-color: rgba(51, 51, 153, 0.6); */
+  /* background-color: #d68342; */
+  background-color: #cf6396;
+  /* background-color: #c8a044; */
   pointer-events: none;
 }
 
@@ -131,7 +134,7 @@ img {
   text-align: left;
   top: 50%;
   transform: translateY(-50%);
-  width: 80%;
+  width: 97%;
   padding: 5%;
   margin: auto;
   left: 0;
@@ -244,15 +247,16 @@ img {
   margin: auto;
   padding: 10px 12px;
   text-align: center;
-  transition: all 200ms;
+  /* transition: all 200ms; */
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
-.btn:hover {
+.btn:active {
   background-color: rgba(39, 39, 39, 0.2);
+  transform: scale(0.9);
 }
 
 .btn-medium {
@@ -268,7 +272,9 @@ img {
   color: rgb(248, 225, 203);
   max-width: 100%;
   width: 8.4em;
+
   animation: fadeIn 1s;
+  /* transition: background-color 250ms, transform 400ms; */
 }
 
 .div-medium {
@@ -298,6 +304,8 @@ img {
   margin: 18% 2% 5% 2%;
   display: none;
   max-height: 5em;
+
+  animation: fadeIn 2s;
 }
 
 .textLangBtn {
@@ -305,6 +313,8 @@ img {
   margin: 0% 2% 5% 2%;
   color: rgb(248, 225, 203);
   font-size: 40px;
+
+  animation: fadeIn 2s;
 }
 
 #btn-next-stage {
@@ -318,7 +328,10 @@ img {
   font-size: 1.5em;
   font-weight: 200;
   margin-top: 2%;
+
   animation: fadeIn 1s;
+  /* animation-delay: -2s; */
+  /* transition: background-color 250ms, transform 400ms; */
 }
 
 .email-scheme {
@@ -344,6 +357,7 @@ img {
   animation: fadeIn 1s;
   /* margin-left: 3%;
   margin-right: 3%; */
+  transition: all 400ms;
   margin: 0.8em 0.6em;
 }
 
@@ -375,6 +389,7 @@ img {
   margin-right: 3%; */
   margin: 0.8em 0.6em;
   /* border: 0.1em solid rgba(248, 225, 203, 0.4); */
+  transition: all 400ms;
 }
 
 .btn-restart {
@@ -456,6 +471,11 @@ img {
   transition: all 2s;
 }
 
+.hint:active {
+  transform: scale(3);
+  color: rgba(11, 245, 15, 0.2);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -483,7 +503,7 @@ code {
   font-size: 1.5em;
   font-weight: 200;
   margin-top: 2%;
-  /* animation: fadeIn 1s; */
+  animation: fadeIn 2s;
 }
 
 #fact {
@@ -674,6 +694,7 @@ code {
   text-align: center;
   width: 100%;
   height: 1.2em;
+  margin-bottom: 2em;
 }
 
 .selection-title {
@@ -1036,10 +1057,10 @@ input[type="range"]::-ms-track {
 
 #wrapper-final img {
   /* position: relative; */
-  width: 12em;
-  height: 12em;
-  margin: 5%;
-  margin-bottom: 1%;
+  /* width: 12em;
+  height: 12em; */
+  /* margin: 5%;
+  margin-bottom: 1%; */
 }
 
 #heading-final {
@@ -1047,18 +1068,23 @@ input[type="range"]::-ms-track {
   background: none;
   font-weight: 300;
   font-family: "Work Sans", sans-serif;
+  margin-bottom: 2%;
 }
 
 #final-page-gallery-img {
   position: relative;
   z-index: 1;
+  width: 12em;
+  height: 12em;
 }
 
 #final-page-signature-img {
   position: absolute;
   z-index: 2;
-  right: 15%;
-  bottom: 16.5%;
+  right: 24.75%;
+  bottom: 19.3%;
+  width: 3em;
+  height: 1.5em;
 }
 
 /* TIMEOUT BOX SECTION */
@@ -1098,3 +1124,5 @@ input[type="range"]::-ms-track {
 }
 
 /* END OF TIMEOUT BOX SECTION */
+
+/* Hint cloud onClick animation */

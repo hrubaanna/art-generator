@@ -53,8 +53,8 @@ class FinalPage extends React.Component {
     };
     //TODO : make this work, so that signature also loads, currently
     //it seems that the signature does not work as src but I dont know why
-    // let imgSig = document.getElementById("final-page-signature-img");
-    // imgSig.src = responses.finalDalleSignatureLink;
+    let imgSig = document.getElementById("final-page-signature-img");
+    imgSig.src = responses.finalDalleImgSignature;
 
     document.getElementById("final-page").onclick = () => {
       this.returnToStart();
@@ -97,8 +97,11 @@ class FinalPage extends React.Component {
             <div id="heading-final">
               {this.state.thankYou[finalDalleAssembled.language]}
             </div>
-            <img id="final-page-gallery-img"></img>
-            <img id="final-page-signature-img"></img>
+            <div>
+              <img id="final-page-gallery-img"></img>
+              <img id="final-page-signature-img"></img>
+            </div>
+
             <div id="instructions-final">
               {this.state.artworkText[finalDalleAssembled.language]}
             </div>
