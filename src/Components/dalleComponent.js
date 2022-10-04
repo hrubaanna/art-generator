@@ -70,7 +70,7 @@ class DalleComponent extends React.Component {
   };
 
   displayImages = () => {
-    this.state.result.forEach((result) => {
+    this.state.result.forEach((result, index) => {
       // create image elements inside a card element
       let card = document.createElement("div");
       card.className = "dalle-card";
@@ -78,6 +78,7 @@ class DalleComponent extends React.Component {
       let img = document.createElement("img");
       img.src = result.generation.image_path;
       img.className = "imgPreview";
+      img.setAttribute("id", `${index}`);
       card.append(img);
       document.querySelector(".dalle-grid").append(card);
 
@@ -113,7 +114,11 @@ class DalleComponent extends React.Component {
     // selects which image you picked and hides the rest, while enlarging the remaining one and adding finalStyling component
     this.setState({ image_selected: true });
     this.setState({ final_image_src: e.target.src });
+    console.log(e.target.id);
     this.setState({ selected_pos: e.target.id });
+
+    console.log(`target id: ${e.target.id}`);
+    console.log(this.state.selected_pos);
 
     // remove all photos from screen
     document.querySelectorAll(".dalle-card").forEach((card) => {
