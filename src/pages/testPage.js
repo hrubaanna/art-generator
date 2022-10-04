@@ -14,10 +14,16 @@ class TestPage extends React.Component {
     document.querySelector("div").style.backgroundColor = "red";
   };
 
-  changeStage = () => {
-    document
-      .getElementById("2")
-      .setAttribute("src", responses.finalDalleImgSignature);
+  addImage = () => {
+    let image = document.createElement("img");
+    image.src = "https://i.imgur.com/1h1Y1YR.jpg";
+    document.querySelector("div").appendChild(image);
+    image.setAttribute("id", "1");
+    image.addEventListener("click", this.showId);
+  };
+
+  showId = (e) => {
+    console.log(e.target.id);
   };
 
   render() {
@@ -25,8 +31,7 @@ class TestPage extends React.Component {
       <div>
         <h1>Testing the HintCloudTest</h1>
 
-        <img id="2"></img>
-        <button onClick={this.changeStage}>click me</button>
+        <button onClick={this.addImage}> add image </button>
       </div>
     );
   }

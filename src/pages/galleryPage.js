@@ -13,9 +13,9 @@ class GalleryPage extends React.Component {
     setTimeout(() => {
       this.getAllArt();
     }, 1000);
-    setTimeout(() => {
-      this.showArt();
-    }, 2000);
+    // setTimeout(() => {
+    //   this.showArt();
+    // }, 2000);
   }
 
   getDBArt = () => {
@@ -44,15 +44,21 @@ class GalleryPage extends React.Component {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(artpiece);
+          console.log(artpiece.selected_pos);
+          console.log(data.result.generations.data[artpiece.selected_pos]);
           let artObj = {
-            img_link:
-              data.result.generations.data[artpiece.selected_pos].generation
-                .image_path,
-            content: artpiece.content,
-            signature: artpiece.signature,
-            signature_color: artpiece.signature_color,
+            img_link: null,
           };
-          this.state.artObjects.push(artObj);
+          // let artObj = {
+          //   img_link:
+          //     data.result.generations.data[artpiece.selected_pos].generation
+          //       .image_path,
+          //   content: artpiece.content,
+          //   signature: artpiece.signature,
+          //   signature_color: artpiece.signature_color,
+          // };
+          // this.state.artObjects.push(artObj);
         });
     });
   };
