@@ -57,10 +57,11 @@ class FloatingImages extends React.Component {
         })
           .then((res) => res.json())
           .then((data) => {
+            let selected_pos = parseInt(artpiece.selected_pos);
+            let img_link =
+              data.result.generations.data[selected_pos].generation;
             let artObj = {
-              img_link:
-                data.result.generations.data[artpiece.selected_pos].generation
-                  .image_path,
+              img_link: img_link.image_path,
               content: artpiece.content,
               signature: artpiece.signature,
             };
@@ -124,6 +125,7 @@ class FloatingImages extends React.Component {
         });
       })
       .catch((err) => {
+        console.error(err);
         console.error(
           "Couldn't load art from database. Loading pre-saved art."
         );
@@ -209,7 +211,12 @@ class FloatingImages extends React.Component {
 
       let image = document.createElement("img");
       let size = 10;
+
+      if (artObject.img_link == undefined) {
+        console.log(artObject);
+      }
       image.src = artObject.img_link;
+
       image.className = "floating-image";
       image.style.width = `${size}vw`; // assume image is squared
       image.id = `floating-image-${position}`;
@@ -218,9 +225,6 @@ class FloatingImages extends React.Component {
         let signature = document.createElement("img");
         signature.className = "signature-image";
         signature.src = artObject.signature;
-        if (artObject.signature_color === "white") {
-          signature.style.filter = "invert(100%)";
-        }
         wrapper.appendChild(signature);
       }
 

@@ -3,27 +3,73 @@ const { responses } = require("../Components/assembler_Obj");
 
 class TestPage extends React.Component {
   state = {
-    signature_color: "black",
-    medium: "painting",
-    stage: 1,
-    language: "ENG",
+    art: [],
+    artObjects: [],
+    DBLoaded: false,
+    NUM_IMAGES_IN_BATCH: 1,
   };
 
-  changeBackground = () => {
-    console.log("clicked");
-    document.querySelector("div").style.backgroundColor = "red";
+  displayBackgroundImages = (artObjects) => {
+    //show images at a random place on the screen
   };
 
-  addImage = () => {
-    let image = document.createElement("img");
-    image.src = "https://i.imgur.com/1h1Y1YR.jpg";
-    document.querySelector("div").appendChild(image);
-    image.setAttribute("id", "1");
-    image.addEventListener("click", this.showId);
+  loadImages = async () => {
+    //get NUM_IMAGES_IN_BATCH images, saved in artObjects
+    //which hold the img link and signature
+    let art = await this.getDBArt();
+    let artObjects = await this.getAllArt(art);
   };
 
-  showId = (e) => {
-    console.log(e.target.id);
+  getDBArt = async () => {
+    //get the artwork saved in mongo DB
+    let art = await fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ DBLoaded: true });
+        return data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    return art;
+  };
+
+  getAllArt = async (art) => {
+    //get the task for each art piece
+    let artObjects = [];
+
+    for (const artpiece of art) {
+      let artObj = await this.getArtObject(artpiece);
+      artObjects.push(artObj);
+    }
+    return artObjects;
+  };
+
+  getArtObject = async (artpiece) => {
+    //get art image links from the dalle task associated
+    //with each piece in the DB
+    let artObject = await fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        let artObj = {
+          img_link:
+            data.result.generations.data[artpiece.selected_pos].generation
+              .image_path,
+          signature: artpiece.signature,
+        };
+        return artObj;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    return artObject;
   };
 
   render() {
@@ -31,7 +77,7 @@ class TestPage extends React.Component {
       <div>
         <h1>Testing the HintCloudTest</h1>
 
-        <button onClick={this.addImage}> add image </button>
+        <button onClick={this.loadImages}> add image </button>
       </div>
     );
   }

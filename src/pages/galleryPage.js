@@ -1,85 +1,181 @@
+import { toHaveFocus } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 
-class GalleryPage extends React.Component {
+class GalleryPageTest extends React.Component {
   state = {
     art: [],
     artObjects: [],
     DBLoaded: false,
+    loadingTimeout: null,
+
+    NUM_IMAGES_IN_BATCH: 4,
   };
 
-  //get art
   componentDidMount() {
-    this.getDBArt();
-    setTimeout(() => {
-      this.getAllArt();
-    }, 1000);
-    setTimeout(() => {
-      this.showArt();
-    }, 2000);
+    this.setState({ art: [] });
+    this.setState({ artObjects: [] });
+
+    this.displayImages();
   }
 
-  getDBArt = () => {
-    //get the artwork saved in mongo DB
-    let artData = [];
+  displayImages = () => {
+    this.loadArt()
+      .then(() => {
+        //display images saved in artObjects
+        this.showArt();
+      })
+      .catch((err) => {
+        console.error(err);
 
-    fetch(`/api/artwork?q=2`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        artData = data;
-        this.setState({ art: artData });
-        this.setState({ DBLoaded: true });
+        //handle error by showing pre-saved images
       });
   };
 
-  getAllArt = () => {
-    //get the task for each art piece
-    this.state.art.forEach((artpiece) => {
-      fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          let artObj = {
-            img_link:
-              data.result.generations.data[artpiece.selected_pos].generation
-                .image_path,
-            content: artpiece.content,
-            signature: artpiece.signature,
-            signature_color: artpiece.signature_color,
-          };
-          this.state.artObjects.push(artObj);
+  loadArt = async () => {
+    return new Promise((resolve, reject) => {
+      // load random images from the DB, store in artObjects
+      this.getDBRandomArt()
+        .then(() => {
+          this.getArtFromTasks()
+            .then(() => {
+              resolve();
+            })
+            .catch((err) => {
+              console.log(err);
+              reject("error in getArtFromTask");
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          reject("error in getDBRandomArt");
         });
     });
   };
 
-  showArt = () => {
-    let galleryList = document.createElement("ul");
-    this.state.artObjects.forEach((artpiece, index) => {
-      //create images and add them to the gallery
-
-      let galleryItem = document.createElement("li");
-      galleryItem.className = "gallery-item";
-      galleryItem.innerHTML = `
-            <img class='final-image' src=${artpiece.img_link} />
-            <p class='art-content'>${artpiece.content}</p>
-            `;
-      galleryList.appendChild(galleryItem);
-
-      let signatureImg = document.createElement("img");
-      signatureImg.className = "signature-image";
-      signatureImg.src = artpiece.signature;
-      if (artpiece.signature_color === "white") {
-        signatureImg.style.filter = "invert(100%)";
-      }
-
-      galleryItem.appendChild(signatureImg);
+  getDBRandomArt = () => {
+    return new Promise((resolve, reject) => {
+      // get the artwork saved in mongo DB
+      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.setState({ art: data }, () => {
+            resolve();
+            this.setState({ DBLoaded: true });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          reject("error in getDBRandomArt");
+        });
     });
-    document.body.appendChild(galleryList);
+  };
+
+  getArtFromTasks = () => {
+    return new Promise((resolve, reject) => {
+      // get the task for each art piece
+      this.state.art.forEach((artpiece) => {
+        fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            let selected_pos = parseInt(artpiece.selected_pos);
+            let img_link =
+              data.result.generations.data[selected_pos].generation;
+            let artObj = {
+              img_link: img_link.image_path,
+              content: artpiece.content,
+              signature: artpiece.signature,
+            };
+
+            this.state.artObjects.push(artObj);
+            if (this.state.artObjects.length === this.state.art.length) {
+              resolve();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            reject("error in getArtFromTasks");
+          });
+      });
+    });
+  };
+
+  showArt = () => {
+    // display images saved in artObjects in the gallery
+
+    let numLoaded = 0;
+    let imagesToLoad = this.state.artObjects.length * 2;
+
+    let galleryList = document.createElement("ul");
+    galleryList.style.visibility = "hidden";
+
+    new Promise((resolve, reject) => {
+      this.state.artObjects.forEach((artpiece) => {
+        //create images and add them to the gallery
+
+        let galleryItem = document.createElement("li");
+        galleryItem.className = "gallery-item";
+        //final image photo
+        let galleryImage = document.createElement("img");
+        galleryImage.src = artpiece.img_link;
+        galleryImage.className = "final-image";
+        galleryItem.appendChild(galleryImage);
+
+        galleryImage.onload = () => {
+          numLoaded++;
+        };
+
+        //final image signature
+        let gallerySignature = document.createElement("img");
+        gallerySignature.src = artpiece.signature;
+        gallerySignature.className = "signature-image";
+        galleryItem.appendChild(gallerySignature);
+
+        gallerySignature.onload = () => {
+          numLoaded++;
+        };
+
+        //art content div
+        let arpieceContent = document.createElement("div");
+        arpieceContent.className = "art-content";
+        //content text
+        let contentText = document.createElement("p");
+        contentText.innerHTML = artpiece.content;
+        arpieceContent.appendChild(contentText);
+        //content author
+        let contentAuthour = document.createElement("p");
+        contentAuthour.innerHTML = `Author: ${this.getArtistName(artpiece)}`;
+        arpieceContent.appendChild(contentAuthour);
+
+        galleryItem.appendChild(arpieceContent);
+
+        galleryList.appendChild(galleryItem);
+      });
+      resolve();
+    }).then(() => {
+      //wait for images to load
+      this.state.loadingTimeout = setInterval(() => {
+        if (numLoaded === imagesToLoad) {
+          clearInterval(this.state.loadingTimeout);
+          document.body.appendChild(galleryList);
+          galleryList.style.visibility = "visible";
+        }
+      }, 500);
+    });
+  };
+
+  getArtistName = (artpiece) => {
+    if (artpiece.name == "not yet added" || artpiece.name == "") {
+      return "Anonymous";
+    } else {
+      return artpiece.name;
+    }
   };
 
   render() {
@@ -87,4 +183,4 @@ class GalleryPage extends React.Component {
   }
 }
 
-export default GalleryPage;
+export default GalleryPageTest;
