@@ -8,13 +8,13 @@ class GalleryPageTest extends React.Component {
     DBLoaded: false,
     loadingTimeout: null,
 
-    NUM_IMAGES_IN_BATCH: 4,
+    NUM_IMAGES_IN_BATCH: 2,
   };
 
   componentDidMount() {
     this.setState({ art: [] });
     this.setState({ artObjects: [] });
-
+    document.body.style.backgroundColor = "black";
     this.displayImages();
   }
 
@@ -115,8 +115,8 @@ class GalleryPageTest extends React.Component {
     let galleryList = document.createElement("ul");
     galleryList.style.visibility = "hidden";
 
-    new Promise((resolve, reject) => {
-      this.state.artObjects.forEach((artpiece) => {
+    new Promise((resolve) => {
+      this.state.artObjects.forEach((artpiece, index) => {
         //create images and add them to the gallery
 
         let galleryItem = document.createElement("li");
@@ -134,7 +134,7 @@ class GalleryPageTest extends React.Component {
         //final image signature
         let gallerySignature = document.createElement("img");
         gallerySignature.src = artpiece.signature;
-        gallerySignature.className = "signature-image";
+        gallerySignature.id = `signature-image-${index}`;
         galleryItem.appendChild(gallerySignature);
 
         gallerySignature.onload = () => {
@@ -143,13 +143,15 @@ class GalleryPageTest extends React.Component {
 
         //art content div
         let arpieceContent = document.createElement("div");
-        arpieceContent.className = "art-content";
+        arpieceContent.id = `art-content-${index}`;
         //content text
         let contentText = document.createElement("p");
+        contentText.className = "content-text";
         contentText.innerHTML = artpiece.content;
         arpieceContent.appendChild(contentText);
         //content author
         let contentAuthour = document.createElement("p");
+        contentAuthour.className = "content-author";
         contentAuthour.innerHTML = `Author: ${this.getArtistName(artpiece)}`;
         arpieceContent.appendChild(contentAuthour);
 
@@ -179,7 +181,7 @@ class GalleryPageTest extends React.Component {
   };
 
   render() {
-    return <div />;
+    return <div> </div>;
   }
 }
 

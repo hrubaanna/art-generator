@@ -9,75 +9,39 @@ class TestPage extends React.Component {
     NUM_IMAGES_IN_BATCH: 1,
   };
 
-  displayBackgroundImages = (artObjects) => {
-    //show images at a random place on the screen
-  };
-
-  loadImages = async () => {
-    //get NUM_IMAGES_IN_BATCH images, saved in artObjects
-    //which hold the img link and signature
-    let art = await this.getDBArt();
-    let artObjects = await this.getAllArt(art);
-  };
-
-  getDBArt = async () => {
-    //get the artwork saved in mongo DB
-    let art = await fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ DBLoaded: true });
-        return data;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    return art;
-  };
-
-  getAllArt = async (art) => {
-    //get the task for each art piece
-    let artObjects = [];
-
-    for (const artpiece of art) {
-      let artObj = await this.getArtObject(artpiece);
-      artObjects.push(artObj);
-    }
-    return artObjects;
-  };
-
-  getArtObject = async (artpiece) => {
-    //get art image links from the dalle task associated
-    //with each piece in the DB
-    let artObject = await fetch(`/api/dalleTask?q=${artpiece.task_id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        let artObj = {
-          img_link:
-            data.result.generations.data[artpiece.selected_pos].generation
-              .image_path,
-          signature: artpiece.signature,
-        };
-        return artObj;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    return artObject;
-  };
-
   render() {
     return (
       <div>
-        <h1>Testing the HintCloudTest</h1>
-
-        <button onClick={this.loadImages}> add image </button>
+        <ul>
+          <li className="gallery-item">
+            <img src="TestPhotos/DALLE_1.png" className="final-image"></img>
+            <img
+              src="data:image/png;base64,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"
+              className="signature-image"
+            ></img>
+            <div className="art-content">
+              <p className="content-text">
+                acrylic on canvas of bouquet of flowers on a corn field,
+                soothing, psychedelic
+              </p>
+              <p className="content-author">Author: undefined</p>
+            </div>
+          </li>
+          <li className="gallery-item">
+            <img src="TestPhotos/DALLE_2.png" className="final-image"></img>
+            <img
+              src="data:image/png;base64,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"
+              className="signature-image"
+            ></img>
+            <div className="art-content">
+              <p className="content-text">
+                acrylic on canvas of bouquet of flowers on a corn field,
+                soothing, psychedelic
+              </p>
+              <p className="content-author">Author: undefined</p>
+            </div>
+          </li>
+        </ul>
       </div>
     );
   }
