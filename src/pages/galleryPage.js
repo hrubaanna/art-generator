@@ -1,5 +1,6 @@
 import { toHaveFocus } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
+import Popup from "../Components/popup_size";
 
 class GalleryPageTest extends React.Component {
   state = {
@@ -9,6 +10,7 @@ class GalleryPageTest extends React.Component {
     loadingTimeout: null,
 
     NUM_IMAGES_IN_BATCH: 2,
+    popupTest: false,
   };
 
   componentDidMount() {
@@ -91,6 +93,7 @@ class GalleryPageTest extends React.Component {
               img_link: img_link.image_path,
               content: artpiece.content,
               signature: artpiece.signature,
+              name: artpiece.name,
             };
 
             this.state.artObjects.push(artObj);
@@ -121,6 +124,7 @@ class GalleryPageTest extends React.Component {
 
         let galleryItem = document.createElement("li");
         galleryItem.className = "gallery-item";
+        galleryItem.id = `gallery_item_${index}`;
         //final image photo
         let galleryImage = document.createElement("img");
         galleryImage.src = artpiece.img_link;
@@ -134,7 +138,7 @@ class GalleryPageTest extends React.Component {
         //final image signature
         let gallerySignature = document.createElement("img");
         gallerySignature.src = artpiece.signature;
-        gallerySignature.id = `signature-image-${index}`;
+        gallerySignature.id = `signature_image_${index}`;
         galleryItem.appendChild(gallerySignature);
 
         gallerySignature.onload = () => {
@@ -143,15 +147,15 @@ class GalleryPageTest extends React.Component {
 
         //art content div
         let arpieceContent = document.createElement("div");
-        arpieceContent.id = `art-content-${index}`;
+        arpieceContent.id = `art_content_${index}`;
         //content text
         let contentText = document.createElement("p");
-        contentText.className = "content-text";
+        contentText.className = "content_text";
         contentText.innerHTML = artpiece.content;
         arpieceContent.appendChild(contentText);
         //content author
         let contentAuthour = document.createElement("p");
-        contentAuthour.className = "content-author";
+        contentAuthour.className = "content_author";
         contentAuthour.innerHTML = `Author: ${this.getArtistName(artpiece)}`;
         arpieceContent.appendChild(contentAuthour);
 
@@ -164,11 +168,14 @@ class GalleryPageTest extends React.Component {
       //wait for images to load
       this.state.loadingTimeout = setInterval(() => {
         if (numLoaded === imagesToLoad) {
-          clearInterval(this.state.loadingTimeout);
           document.body.appendChild(galleryList);
           galleryList.style.visibility = "visible";
+          console.log("loaded");
+          this.setState({ popupTest: true });
+          clearInterval(this.state.loadingTimeout);
         }
       }, 500);
+      console.log(this.state.popupTest);
     });
   };
 
@@ -181,7 +188,13 @@ class GalleryPageTest extends React.Component {
   };
 
   render() {
-    return <div> </div>;
+    return (
+      <div>
+        {this.state.popupTest ? (
+          <Popup popupTest={this.state.popupTest} />
+        ) : null}
+      </div>
+    );
   }
 }
 

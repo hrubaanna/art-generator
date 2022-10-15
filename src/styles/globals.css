@@ -657,56 +657,65 @@ code {
   display: none;
 }
 
-#signature-image-0 {
+.signature-image {
+  z-index: 2;
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  max-height: 65%;
+  max-width: 23%;
+}
+
+#signature_image_0 {
   z-index: 3;
   position: absolute;
-  top: 68%;
-  left: 35%;
-  height: 8%;
-  width: 8%;
+  top: 85%;
+  right: 10%;
+  height: 12%;
+  width: 12%;
 }
-#signature-image-1 {
+#signature_image_1 {
   z-index: 3;
   position: absolute;
 
-  top: 68%;
-  right: 8%;
-  height: 8%;
-  width: 8%;
+  top: 85%;
+  right: 10%;
+  height: 12%;
+  width: 12%;
 }
 
-#art-content-0 {
+#art_content_0 {
   background-color: whitesmoke;
   z-index: 1;
   position: absolute;
-  top: 82%;
-  left: 18%;
+  top: 105%;
+  left: 30%;
 
   font-size: small;
   width: 30em;
   height: 8em;
 }
 
-#art-content-1 {
+#art_content_1 {
   background-color: whitesmoke;
   z-index: 1;
   position: absolute;
-  top: 82%;
-  left: 66%;
+  top: 105%;
+  left: 30%;
 
   font-size: small;
   width: 30em;
   height: 8em;
 }
 
-.content-text {
+.content_text {
   font-size: 0.8em;
   text-align: left;
   padding: 0;
   padding-top: 2em;
 }
 
-.content-author {
+.content_author {
   text-align: right;
   font-size: 0.7em;
   font-weight: 700;
@@ -782,10 +791,22 @@ code {
 .gallery-item {
   animation: fadeIn 1s;
   transition: all 200ms;
-  display: inline-grid;
+  /* display: inline-grid; */
+  position: absolute;
   margin: 5%;
-  width: 40%;
   padding: 0;
+}
+
+#gallery_item_0 {
+  width: 40%;
+  top: 2%;
+  left: 2%;
+}
+
+#gallery_item_1 {
+  width: 40%;
+  top: 2%;
+  right: 2%;
 }
 
 .final-query {

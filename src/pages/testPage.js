@@ -1,5 +1,6 @@
 import React from "react";
 const { responses } = require("../Components/assembler_Obj");
+import Popup from "../Components/popup_size";
 
 class TestPage extends React.Component {
   state = {
@@ -12,6 +13,7 @@ class TestPage extends React.Component {
   render() {
     return (
       <div>
+        <Popup></Popup>
         <ul>
           <li className="gallery-item">
             <img src="TestPhotos/DALLE_1.png" className="final-image"></img>
