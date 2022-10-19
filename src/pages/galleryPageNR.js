@@ -1,24 +1,31 @@
-import { toHaveFocus } from "@testing-library/jest-dom/dist/matchers";
-import React from "react";
-import Popup from "../Components/popup_size";
+// This page will be shown in Norimberk
+// it will display only one image at a time
 
-class GalleryPageTest extends React.Component {
+import React from "react";
+
+class GalleryPageNR extends React.Component {
   state = {
     art: [],
     artObjects: [],
     DBLoaded: false,
     loadingTimeout: null,
 
-    NUM_IMAGES_IN_BATCH: 2,
-    popupTest: false,
+    NUM_IMAGES_IN_BATCH: 1,
+    TIME_TO_RELOAD: 10000,
   };
 
   componentDidMount() {
     this.removePreviousImages();
     this.setState({ art: [] });
     this.setState({ artObjects: [] });
-    document.body.style.backgroundColor = "black";
+    document.body.style.backgroundColor = "#B8E8FC";
     this.displayImages();
+    setInterval(() => {
+      this.setState({ art: [] });
+      this.setState({ artObjects: [] });
+      this.displayImages();
+      this.removePreviousImages();
+    }, this.state.TIME_TO_RELOAD);
   }
 
   removePreviousImages = () => {
@@ -184,11 +191,9 @@ class GalleryPageTest extends React.Component {
           document.body.appendChild(galleryList);
           galleryList.style.visibility = "visible";
           console.log("loaded");
-          this.setState({ popupTest: true });
           clearInterval(this.state.loadingTimeout);
         }
       }, 500);
-      console.log(this.state.popupTest);
     });
   };
 
@@ -201,14 +206,8 @@ class GalleryPageTest extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        {this.state.popupTest ? (
-          <Popup popupTest={this.state.popupTest} />
-        ) : null}
-      </div>
-    );
+    return <div></div>;
   }
 }
 
-export default GalleryPageTest;
+export default GalleryPageNR;

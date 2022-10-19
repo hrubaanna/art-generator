@@ -221,7 +221,7 @@ class FloatingImages extends React.Component {
       image.style.width = `${size}vw`; // assume image is squared
       image.id = `floating-image-${position}`;
 
-      if (includeSignature) {
+      if (includeSignature && artObject.signature != "") {
         let signature = document.createElement("img");
         signature.className = "signature-image";
         signature.src = artObject.signature;

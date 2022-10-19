@@ -1189,3 +1189,28 @@ input[type="range"]::-ms-track {
 /* END OF TIMEOUT BOX SECTION */
 
 /* Hint cloud onClick animation */
+
+/* START Singature check page */
+.signature-check-list {
+  column-count: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-check {
+  border: 1px solid gray;
+  margin: 5%;
+  padding: 2%;
+  margin-left: 3%;
+  display: inline-flex;
+  align-items: center;
+  width: 90%;
+}
+
+.signature-check-img {
+  width: 90px;
+  height: auto;
+  padding-left: 15%;
+}
+
+/* END Singature check page */
