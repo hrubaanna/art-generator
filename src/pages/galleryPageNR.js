@@ -11,26 +11,27 @@ class GalleryPageNR extends React.Component {
     loadingTimeout: null,
 
     NUM_IMAGES_IN_BATCH: 1,
-    TIME_TO_RELOAD: 10000,
+    TIME_TO_RELOAD: 100000,
   };
 
   componentDidMount() {
-    this.removePreviousImages();
+    document.body.style.overflow = "visible";
+    this.removePreviousImage();
     this.setState({ art: [] });
     this.setState({ artObjects: [] });
-    document.body.style.backgroundColor = "#B8E8FC";
+    document.body.style.backgroundColor = "rgb(23, 54, 119)";
     this.displayImages();
     setInterval(() => {
+      this.removePreviousImage();
       this.setState({ art: [] });
       this.setState({ artObjects: [] });
       this.displayImages();
-      this.removePreviousImages();
     }, this.state.TIME_TO_RELOAD);
   }
 
-  removePreviousImages = () => {
+  removePreviousImage = () => {
     //if there were images previously shown on the screen, remove them
-    let images = document.getElementsByClassName("gallery-item");
+    let images = document.getElementsByClassName("gallery-item-NR");
     while (images.length > 0) {
       images[0].parentNode.removeChild(images[0]);
     }
@@ -137,51 +138,77 @@ class GalleryPageNR extends React.Component {
     new Promise((resolve) => {
       this.state.artObjects.forEach((artpiece, index) => {
         //create images and add them to the gallery
+        //if image already exists, just replace its src
+        if (document.getElementById(`gallery-item-NR`) === null) {
+          let galleryItem = document.createElement("li");
 
-        let galleryItem = document.createElement("li");
-        galleryItem.className = "gallery-item";
-        galleryItem.id = `gallery_item_${index}`;
-        //final image photo
-        let galleryImage = document.createElement("img");
-        galleryImage.src = artpiece.img_link;
-        galleryImage.className = "final-image";
-        galleryItem.appendChild(galleryImage);
+          galleryItem.className = "gallery-item-NR";
+          galleryItem.id = `gallery_item_NR`;
+          //final image photo
+          let galleryImage = document.createElement("img");
+          galleryImage.src = artpiece.img_link;
+          galleryImage.className = "final-image";
+          galleryItem.appendChild(galleryImage);
 
-        galleryImage.onload = () => {
-          numLoaded++;
-        };
-
-        //final image signature
-        if (artpiece.signature !== "") {
-          let gallerySignature = document.createElement("img");
-          gallerySignature.src = artpiece.signature;
-          gallerySignature.id = `signature_image_${index}`;
-          galleryItem.appendChild(gallerySignature);
-
-          gallerySignature.onload = () => {
+          galleryImage.onload = () => {
             numLoaded++;
           };
+          //final image signature
+          if (artpiece.signature !== "") {
+            let gallerySignature = document.createElement("img");
+            gallerySignature.src = artpiece.signature;
+            gallerySignature.id = `signature_image_NR`;
+            galleryItem.appendChild(gallerySignature);
+
+            gallerySignature.onload = () => {
+              numLoaded++;
+            };
+          } else {
+            numLoaded++;
+          }
+
+          //art content div
+          let arpieceContent = document.createElement("div");
+          arpieceContent.id = `art_content_${index}`;
+          //content text
+          let contentText = document.createElement("p");
+          contentText.className = "content_text";
+          contentText.innerHTML = artpiece.content;
+          arpieceContent.appendChild(contentText);
+          //content author
+          let contentAuthour = document.createElement("p");
+          contentAuthour.className = "content_author";
+          contentAuthour.innerHTML = `Author: ${this.getArtistName(artpiece)}`;
+          arpieceContent.appendChild(contentAuthour);
+
+          galleryItem.appendChild(arpieceContent);
+
+          galleryList.appendChild(galleryItem);
         } else {
-          numLoaded++;
+          //if image already exists, just replace its src and texts
+          let galleryImage = document.getElementClassName(`gallery_item_NR`);
+          let gallerySignature = document.getElementById(`signature_image_NR`);
+          let contentText = document.querySelector(".content_text");
+          let contentAuthour = document.querySelector(".content_author");
+
+          setTimeout(() => {
+            //replace the text and sources
+            galleryImage.src = artpiece.img_link;
+            gallerySignature.src = artpiece.signature;
+            contentText.innerHTML = artpiece.content;
+            contentAuthour.innerHTML = `Author: ${this.getArtistName(
+              artpiece
+            )}`;
+          }, 1200);
+
+          numLoaded += 2;
+
+          galleryImage.style.opacity = "0";
+
+          setTimeout(() => {
+            galleryImage.style.opacity = "1";
+          }, 1200);
         }
-
-        //art content div
-        let arpieceContent = document.createElement("div");
-        arpieceContent.id = `art_content_${index}`;
-        //content text
-        let contentText = document.createElement("p");
-        contentText.className = "content_text";
-        contentText.innerHTML = artpiece.content;
-        arpieceContent.appendChild(contentText);
-        //content author
-        let contentAuthour = document.createElement("p");
-        contentAuthour.className = "content_author";
-        contentAuthour.innerHTML = `Author: ${this.getArtistName(artpiece)}`;
-        arpieceContent.appendChild(contentAuthour);
-
-        galleryItem.appendChild(arpieceContent);
-
-        galleryList.appendChild(galleryItem);
       });
       resolve();
     }).then(() => {
@@ -190,7 +217,6 @@ class GalleryPageNR extends React.Component {
         if (numLoaded === imagesToLoad) {
           document.body.appendChild(galleryList);
           galleryList.style.visibility = "visible";
-          console.log("loaded");
           clearInterval(this.state.loadingTimeout);
         }
       }, 500);
@@ -206,7 +232,11 @@ class GalleryPageNR extends React.Component {
   };
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <img src={"TestPhotos/frame.png"} className="frame" />
+      </div>
+    );
   }
 }
 

@@ -453,7 +453,6 @@ img {
 .hint {
   font-weight: 200;
   animation: fadeIn 1s;
-  cursor: crosshair;
   padding-right: 0.5%;
   padding-left: 0.5%;
   border-radius: 1em;
@@ -688,8 +687,8 @@ code {
   background-color: whitesmoke;
   z-index: 1;
   position: absolute;
-  top: 105%;
-  left: 30%;
+  top: 112%;
+  left: 48%;
 
   font-size: small;
   width: 30em;
@@ -808,6 +807,39 @@ code {
   top: 2%;
   right: 2%;
 }
+
+/* START gallery page NR */
+.gallery-item-NR {
+  animation: fadeIn 1s;
+  position: relative;
+  margin-top: 30%;
+
+  transition: all 2s;
+}
+
+#gallery_item_NR {
+  width: 70%;
+}
+
+#signature_image_NR {
+  z-index: 3;
+  position: absolute;
+  top: 80%;
+  right: 10%;
+  height: 12%;
+  width: 12%;
+}
+
+.frame {
+  position: absolute;
+  z-index: 3;
+  top: 16.6%;
+  left: 16%;
+  height: 40%;
+  width: 72%;
+}
+
+/* END gallery page NR */
 
 .final-query {
   display: block;
@@ -1199,6 +1231,7 @@ input[type="range"]::-ms-track {
 
 .signature-check {
   border: 1px solid gray;
+  background-color: rgba(128, 128, 128, 0.16);
   margin: 5%;
   padding: 2%;
   margin-left: 3%;
