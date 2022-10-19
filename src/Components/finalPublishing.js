@@ -68,7 +68,6 @@ class FinalPublishing extends React.Component {
       DE: "de-class",
     },
 
-    signatureColor: "black",
     publishClicked: false,
     signatureChosen: false,
     signatureSrc: "",
@@ -104,10 +103,8 @@ class FinalPublishing extends React.Component {
   handleToggle = () => {
     if (this.state.toggleChecked == false) {
       this.setState({ toggleChecked: true });
-      this.setState({ signatureColor: "white" });
     } else {
       this.setState({ toggleChecked: false });
-      this.setState({ signatureColor: "black" });
     }
   };
 
@@ -223,7 +220,6 @@ class FinalPublishing extends React.Component {
                     minWidth={this.state.penWidth}
                     maxWidth={this.state.penWidth}
                     dotSize={this.state.penWidth}
-                    penColor={this.state.signatureColor}
                   />
                 </div>
               </div>
@@ -278,7 +274,6 @@ class FinalPublishing extends React.Component {
             task_id={this.props.task_id}
             signatureSrc={this.state.signatureSrc}
             query={this.props.query}
-            signatureColor={this.state.signatureColor}
             selected_pos={this.props.selected_pos}
             finalImage={this.props.finalImage}
             lang={this.props.lang}

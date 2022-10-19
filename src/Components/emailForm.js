@@ -102,7 +102,6 @@ export default function EmailForm(props) {
       created_at: new Date().toISOString(),
       currently_selected: false,
       //TODO: get value of selected img
-      signature_color: props.signatureColor,
       selected_pos: props.selected_pos,
     };
 
