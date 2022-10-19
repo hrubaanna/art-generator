@@ -100,7 +100,6 @@ export default function EmailForm(props) {
       email: email,
       //add source of signature
       created_at: new Date().toISOString(),
-      currently_selected: false,
       //TODO: get value of selected img
       selected_pos: props.selected_pos,
     };
