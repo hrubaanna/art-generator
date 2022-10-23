@@ -653,6 +653,7 @@
   #final-page-gallery-img {
     width: 7em;
     height: auto;
+    margin: 0 auto;
   }
 
   #final-page-signature-img {
@@ -1277,6 +1278,7 @@
   #final-page-gallery-img {
     width: 7em;
     height: auto;
+    margin: 0 auto;
   }
 
   #final-page-signature-img {
