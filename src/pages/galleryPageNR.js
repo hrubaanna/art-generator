@@ -1,6 +1,8 @@
 // This page will be shown in Norimberk
 // it will display only one image at a time
 
+//screen - 1080 x 1920
+
 import React from "react";
 
 class GalleryPageNR extends React.Component {
@@ -11,7 +13,7 @@ class GalleryPageNR extends React.Component {
     loadingTimeout: null,
 
     NUM_IMAGES_IN_BATCH: 2,
-    TIME_TO_RELOAD: 1000000,
+    TIME_TO_RELOAD: 10000,
   };
 
   componentDidMount() {
@@ -147,7 +149,7 @@ class GalleryPageNR extends React.Component {
           //final image photo
           let galleryImage = document.createElement("img");
           galleryImage.src = artpiece.img_link;
-          galleryImage.className = "final-image";
+          galleryImage.className = "final-image-NR";
           galleryImage.id = `final_image_${index}`;
           galleryItem.appendChild(galleryImage);
 
@@ -170,7 +172,7 @@ class GalleryPageNR extends React.Component {
 
           //art content div
           let arpieceContent = document.createElement("div");
-          arpieceContent.id = `art_content_${index}`;
+          arpieceContent.id = `art_content_NR_${index}`;
           //content text
           let contentText = document.createElement("p");
           contentText.className = "content_text";

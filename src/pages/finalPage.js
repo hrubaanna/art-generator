@@ -20,9 +20,9 @@ class FinalPage extends React.Component {
       DE: "Danke für die Teilnahme!",
     },
     artworkText: {
-      ENG: "Go checkout your artwork in the gallery!",
-      CZ: "Podívejte se na své umění v galerii!",
-      DE: "Schau dir dein Kunstwerk in der Galerie an!",
+      ENG: "Go checkout your artwork in Blindspot booth (7A)!",
+      CZ: "Podívejte se na své umění u Blindspot (7A)!",
+      DE: "Schauen Sie sich Ihr Kunstwerk im Blindspot-Stand (7A) an!",
     },
     clickAnywhere: {
       ENG: "Click anywhere to go to the beginning",

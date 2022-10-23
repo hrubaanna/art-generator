@@ -80,7 +80,7 @@ class FinalPublishing extends React.Component {
     penWidth: 3.6,
     canvasHeight: 400,
     canvasWidth: 800,
-    finalImgWidth: "28em",
+    finalImgWidth: "20em",
     toggleChecked: false,
     largeScree: true,
   };
@@ -103,7 +103,8 @@ class FinalPublishing extends React.Component {
       this.state.largeScreen = false;
       this.state.canvasHeight = 175;
       this.state.canvasWidth = 330;
-      document.querySelector(".final-image").style.width = "20em";
+    } else {
+      this.state.finalImgWidth = "28em";
     }
   };
 
@@ -114,7 +115,7 @@ class FinalPublishing extends React.Component {
     finalImage.setAttribute("class", "final-image");
     finalImage.setAttribute(
       "style",
-      `margin: auto; display: block; border-radius: 10px; width: 28em;`
+      `margin: auto; display: block; border-radius: 10px; width: ${this.state.finalImgWidth};`
     );
 
     //place final image on canvas

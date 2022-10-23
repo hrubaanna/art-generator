@@ -227,14 +227,19 @@ class FloatingImages extends React.Component {
       image.style.width = `${size}vw`; // assume image is squared
       image.id = `floating-image-${position}`;
 
-      if (
-        includeSignature &&
-        (artObject.signature != "" || artObject.signature == undefined)
-      ) {
-        let signature = document.createElement("img");
-        signature.className = "signature-image";
-        signature.src = artObject.signature;
-        wrapper.appendChild(signature);
+      try {
+        if (
+          includeSignature &&
+          (artObject?.signature != "" || artObject.signature == undefined)
+        ) {
+          let signature = document.createElement("img");
+          signature.className = "signature-image";
+          signature.src = artObject.signature;
+          wrapper.appendChild(signature);
+        }
+      } catch (err) {
+        console.error(err);
+        console.error("Error in displaying signature");
       }
 
       // add image to grid
