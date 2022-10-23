@@ -3,6 +3,56 @@
 * perhaps highlight words in word cloud to suggest they are clickable
 */
 
+/* Global variables */
+:root {
+  --global-color-primary: rgb(0, 171, 142);
+  --global-color-secondary: rgb(0, 141, 170);
+  --global-color-tertiary: rgb(0, 193, 213);
+
+  /* text */
+  --global-text-color: rgb(248, 225, 203);
+  --global-heading-color: rgba(248, 225, 203, 0.8);
+  --global-heading-pulseTo-color: rgba(248, 225, 203, 0.2);
+  --global-heading-background: rgba(180, 180, 180, 0.2);
+
+  /* buttons */
+  --global-btn-color: rgb(248, 225, 203);
+  --global-btn-background-color: rgba(39, 39, 39, 0.1);
+  --global-btn-border-color: rgba(248, 225, 203, 0.4);
+  --global-btn-active-color: rgba(39, 39, 39, 0.2);
+  --global-hint-active-color: rgba(11, 245, 15, 0.2);
+
+  --global-action-btn-color: rgb(255 254 254 / 86%);
+  --global-action-btn-background-color: rgba(248, 225, 203, 0.4);
+  --global-cancel-btn-background-color: rgba(248, 225, 203, 0.18);
+  --global-exit-btn-background-color: rgba(248, 225, 203, 0.1);
+
+  /* query */
+  --global-ongoing-query-color: rgba(248, 225, 203, 0.6);
+
+  /* input */
+  --global-input-color: rgb(248, 225, 203);
+  --global-input-background-color: rgba(180, 180, 180, 0.3);
+  --global-input-border-color: rgba(248, 225, 203, 0.4);
+}
+
+/* Original colours */
+/* background-color: rgba(51, 51, 153, 0.6); */
+/* background-color: #d68342; */
+/* background-color: #cf6396; */
+/* background-color: #c8a044; */
+
+/* Red velvet secondary*/
+/* rgb(168, 90, 94); */
+
+/* BLINDSPOT COLOUR SCHEME */
+/* Cyan */
+/* background-color: rgb(0, 171, 142);  */
+/* Blue */
+/* background-color: (0, 141, 170); */
+/* Combo */
+/* background-color: rgb(0, 193, 213); */
+
 /* Phones */
 @media screen and (min-width: 0px) and (max-width: 450px) {
   h1,
@@ -401,7 +451,7 @@
     font-size: 1.5em;
     margin: auto;
     width: 80%;
-    color: rgb(248, 225, 203);
+    color: var(--global-text-color);
   }
 
   .final-image {
@@ -618,7 +668,7 @@
     border-radius: 5%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    border: 1px solid rgba(248, 225, 203, 0.8);
+    border: 1px solid var(--global-heading-color);
   }
   #timeout-box h1 {
     font-size: 2em;
@@ -646,6 +696,7 @@
   }
 }
 
+/* Tablets  */
 @media screen and (min-width: 451px) and (max-width: 1024) {
   .project-heading {
     font-size: 5.5em;
@@ -656,6 +707,7 @@
   }
 }
 
+/* TVs and more */
 @media screen and (min-width: 1025px) {
   h1,
   h2 {
@@ -958,6 +1010,13 @@
   .sigCanvas {
     border-radius: 30px;
     padding: 0px;
+  }
+
+  .final-selection-title {
+    font-size: 1.5em;
+    margin: auto;
+    width: 80%;
+    color: var(--global-text-color);
   }
 
   #publish-title {
@@ -1293,7 +1352,7 @@
     border-radius: 5%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    border: 1px solid rgba(248, 225, 203, 0.8);
+    border: 1px solid var(--global-heading-color);
   }
   #timeout-box h1 {
     font-size: 2em;
@@ -1329,7 +1388,7 @@ body {
 }
 
 body {
-  background: rgb(168, 90, 94);
+  background: var(--global-color-secondary);
   margin: 0;
   font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1368,10 +1427,7 @@ li h3 {
 
 #overlay {
   position: absolute;
-  /* background-color: rgba(51, 51, 153, 0.6); */
-  /* background-color: #d68342; */
-  background-color: #cf6396;
-  /* background-color: #c8a044; */
+  background-color: var(--global-color-primary);
   pointer-events: none;
 }
 
@@ -1400,24 +1456,24 @@ li h3 {
   vertical-align: middle;
   text-align: left;
   margin: auto;
-  background: rgba(180, 180, 180, 0.2);
-  color: rgba(248, 225, 203, 0.8);
+  background: var(--global-heading-background);
+  color: var(--global-heading-color);
   font-family: "Work Sans", sans-serif;
 }
 
 @keyframes pulsating-click {
   from {
-    color: rgba(248, 225, 203, 0.8);
+    color: var(--global-heading-color);
   }
   to {
-    color: rgba(248, 225, 203, 0.2);
+    color: var(--global-heading-pulseTo-color);
   }
 }
 
 .click-to {
   position: fixed;
   z-index: 3;
-  color: rgba(248, 225, 203, 0.8);
+  color: var(--global-heading-color);
   animation: fadeIn 1s, pulsating-click 0.75s infinite alternate;
 }
 
@@ -1461,15 +1517,15 @@ li h3 {
 }
 
 .btn:active {
-  background-color: rgba(39, 39, 39, 0.2);
+  background-color: var(--global-btn-active-color);
   transform: scale(0.9);
 }
 
 .btn-medium {
   display: inline;
-  border: 0.1em solid rgba(248, 225, 203, 0.4);
+  border: 0.1em solid var(--global-btn-border-color);
   padding: 0.5rem 0.3rem 0.5rem 0.3rem;
-  color: rgb(248, 225, 203);
+  color: var(--global-btn-color);
   animation: fadeIn 1s;
 }
 
@@ -1498,13 +1554,13 @@ li h3 {
 
 .textLangBtn {
   display: none;
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
   animation: fadeIn 2s;
 }
 
 #btn-next-stage {
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.18);
+  color: var(--global-action-btn-color);
+  background-color: var(--global-cancel-btn-background-color);
   font-family: "Work Sans", sans-serif;
   animation: fadeIn 1s;
 }
@@ -1517,8 +1573,8 @@ li h3 {
 
 .btn-signature {
   display: inline;
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.4);
+  color: var(--global-action-btn-color);
+  background-color: var(--global-action-btn-background-color);
   font-family: "Work Sans", sans-serif;
   animation: fadeIn 1s;
   transition: all 400ms;
@@ -1527,15 +1583,15 @@ li h3 {
 #changeSigColor {
   font-family: "Work Sans", sans-serif;
   margin: auto;
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.4);
+  color: var(--global-action-btn-color);
+  background-color: var(--global-action-btn-background-color);
   animation: fadeIn 1s;
 }
 
 .btn-signature-cancel {
   display: inline;
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.18);
+  color: var(--global-action-btn-color);
+  background-color: var(--global-cancel-btn-background-color);
   font-family: "Work Sans", sans-serif;
   animation: fadeIn 1s;
   transition: all 400ms;
@@ -1543,8 +1599,8 @@ li h3 {
 
 .btn-restart {
   position: absolute;
-  background-color: rgba(248, 225, 203, 0.1);
-  color: rgb(255 254 254 / 86%);
+  background-color: var(--global-exit-btn-background-color);
+  color: var(--global-action-btn-color);
   font-family: "Work Sans", sans-serif;
 }
 
@@ -1557,17 +1613,17 @@ li h3 {
   margin: auto;
   margin-top: 2%;
   text-align: center;
-  border: 1px solid rgba(248, 225, 203, 0.4);
+  border: 1px solid var(--global-input-border-color);
   background-color: #fff3f11f;
-  background: rgba(180, 180, 180, 0.3);
+  background: var(--global-input-background-color);
   appearance: none;
   position: relative;
-  color: rgb(248, 225, 203);
+  color: var(--global-input-color);
   transition: all 0.2s ease;
 }
 
 .input:hover {
-  background: rgba(180, 180, 180, 0.3);
+  background: var(--global-input-background-color);
 }
 
 .input:focus {
@@ -1583,16 +1639,16 @@ li h3 {
 
 .hint {
   animation: fadeIn 1s;
-  border: 0.13em solid rgba(248, 225, 203, 0.4);
+  border: 0.13em solid var(--global-btn-border-color);
   padding: 0.5rem 0.3rem 0.5rem 0.3rem;
-  color: rgb(248, 225, 203);
-  background-color: rgba(39, 39, 39, 0.1);
+  color: var(--global-btn-color);
+  background-color: var(--global-btn-background-color);
   transition: all 2s;
 }
 
 .hint:active {
   transform: scale(3);
-  color: rgba(11, 245, 15, 0.2);
+  color: var(--global-hint-active-color);
 }
 
 code {
@@ -1614,8 +1670,8 @@ code {
 
 #btn-result {
   display: none;
-  color: rgb(255 254 254 / 86%);
-  background-color: rgba(248, 225, 203, 0.4);
+  color: var(--global-action-btn-color);
+  background-color: var(--global-action-btn-background-color);
   font-family: "Work Sans", sans-serif;
   animation: fadeIn 2s;
 }
@@ -1717,8 +1773,8 @@ code {
 
 #canvas-container {
   text-align: center;
-  border: 1px solid rgba(248, 225, 203, 0.4);
-  background-color: #fff3f11f;
+  border: 1px solid var(--global-input-border-color);
+  background-color: rgba(255, 243, 241, 0.122);
   padding: 0px;
   z-index: 50;
 }
@@ -1726,6 +1782,18 @@ code {
 .sigCanvas {
   padding: 0px;
   margin: auto;
+}
+
+.final-selection-title {
+  font-size: 1.5em;
+  margin: auto;
+  width: 80%;
+  color: var(--global-text-color);
+}
+
+#publish-title {
+  margin: 4% auto 1.5% auto;
+  max-width: 60%;
 }
 
 .final-image {
@@ -1806,7 +1874,7 @@ code {
 
 .ongoing-query {
   display: inline-block;
-  color: rgba(248, 225, 203, 0.6);
+  color: var(--global-ongoing-query-color);
 }
 
 #query-div {
@@ -1815,20 +1883,20 @@ code {
 
 .selection-title {
   text-align: center;
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
   font-weight: bold;
   display: block;
 }
 
 .facts {
   text-align: center;
-  color: rgb(248, 225, 203, 0.8);
+  color: var(--global-heading-color);
   animation: fadeIn 2s;
 }
 
 .prompts {
   text-align: center;
-  color: rgb(248, 225, 203, 0.8);
+  color: var(--global-heading-color);
   animation: fadeIn 2s;
   z-index: 4;
 }
@@ -1871,21 +1939,21 @@ code {
 .final-query {
   display: block;
   text-align: center;
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
   font-weight: bold;
   font-style: italic;
 }
 
 #btn-finish-assemble {
   display: inline;
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
   font-family: "Work Sans", sans-serif;
   margin: auto;
   display: flex;
 }
 
 .error {
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
 }
 
 /* Loading icon */
@@ -1896,7 +1964,13 @@ code {
   position: absolute;
   margin: auto;
   display: flex;
-  background: linear-gradient(#cf6489, #d28148, #cba33b);
+  /* background: linear-gradient(#cf6489, #d28148, #cba33b); */
+  /* Blindspot ColourScheme */
+  background: linear-gradient(
+    var(--global-color-primary),
+    var(--global-color-tertiary),
+    var(--global-color-secondary)
+  );
   animation: spin 1.2s linear infinite, fadeIn 1s;
 }
 
@@ -1911,7 +1985,13 @@ code {
 
 .loader span {
   position: absolute;
-  background: linear-gradient(#cf6489, #d28148, #cba33b);
+  /* background: linear-gradient(#cf6489, #d28148, #cba33b); */
+  /* Blindspot ColourScheme */
+  background: linear-gradient(
+    var(--global-color-primary),
+    var(--global-color-tertiary),
+    var(--global-color-secondary)
+  );
 }
 
 .loader span:nth-child(1) {
@@ -1945,7 +2025,7 @@ code {
 
 ::placeholder {
   /* Most modern browsers support this now. */
-  color: rgb(248, 225, 203, 0.4);
+  color: var(--global-input-border-color);
 }
 
 /* SIGNATURE SLIDER */
@@ -1978,7 +2058,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 2em;
   height: 2em;
   margin-top: 0;
-  background-color: rgb(248, 225, 203);
+  background-color: var(--global-input-color);
   border-radius: 1em;
   border: 2px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
@@ -2040,7 +2120,7 @@ input[type="range"]::-ms-track {
 }
 
 .intensityTitle {
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
   display: block;
   margin: auto;
 }
@@ -2066,7 +2146,7 @@ input[type="range"]::-ms-track {
 /* END OF Image behind sigpad styling */
 
 #check-spam {
-  color: rgb(248, 225, 203);
+  color: var(--global-text-color);
 }
 
 /* Final Page */
@@ -2088,8 +2168,8 @@ input[type="range"]::-ms-track {
   align-items: center;
   flex-direction: column;
   z-index: 3;
-  background: rgba(180, 180, 180, 0.2);
-  color: rgba(248, 225, 203, 0.8);
+  background: var(--global-heading-background);
+  color: var(--global-heading-color);
   text-align: center;
   opacity: 0;
 }
