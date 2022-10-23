@@ -54,7 +54,649 @@
 /* background-color: rgb(0, 193, 213); */
 
 /* Phones */
-@media screen and (min-width: 0px) and (max-width: 450px) {
+@media screen and (max-width: 389px) {
+  h1,
+  h2 {
+    margin-top: 10%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    margin-top: 4%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    max-width: 80%;
+  }
+
+  li {
+    /* background-color: rgba(180, 180, 180, 0.3); */
+    margin-bottom: 5%;
+    width: 35%;
+    border-radius: 2%;
+    padding: 3%;
+  }
+
+  li img {
+    width: 100%;
+    border-radius: 1%;
+  }
+
+  li h3 {
+    width: 100%;
+  }
+
+  img {
+    border-radius: 10px;
+  }
+
+  #main {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #overlay {
+    height: 100%;
+    width: 100%;
+  }
+
+  #video-background {
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    scale: 1.05;
+  }
+
+  .intro-text {
+    padding-left: 30em;
+    padding-top: 25em;
+    width: 30em;
+    height: 26em;
+    /*padding: 20px;*/
+  }
+
+  #project-heading-wrapper-landing {
+    height: 30%;
+    width: 120%;
+  }
+
+  .project-heading {
+    top: 110%;
+    transform: translateY(-50%);
+    width: 85%;
+    padding: 12%;
+    left: 0;
+    right: 0;
+    border-radius: 0.5em;
+    font-size: 2em;
+    line-height: 1.25em;
+    font-weight: 300;
+  }
+
+  .click-to {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 10%;
+  }
+
+  #click-to-begin {
+    bottom: 5%;
+    right: 5%;
+  }
+
+  #background-images-landing {
+    width: 50vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+  }
+
+  .background-images {
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+  }
+
+  .floating-wrapper {
+    opacity: 0;
+    width: 18vw;
+    height: 21vw;
+    left: 0;
+    top: 0;
+  }
+
+  .floating-image {
+    left: 0;
+    top: 0;
+    height: 12vh;
+  }
+
+  .floating-signature {
+    width: 4em;
+    bottom: 0;
+    right: 0;
+    width: 3em;
+  }
+
+  .floating-grid {
+    padding-top: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 20vw;
+    padding-left: 10vw;
+  }
+
+  .btn {
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 10px 12px;
+    margin: auto;
+  }
+
+  .btn-medium {
+    font-size: 1.5rem;
+    font-weight: 200;
+    border-radius: 1em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2rem;
+    padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+    max-width: 100%;
+    width: 8.4em;
+  }
+
+  .div-language {
+    margin: 15% 0;
+    flex-direction: column;
+  }
+
+  .bars {
+    margin: 6% 7%;
+  }
+
+  .btn-language {
+    font-size: 2.2em;
+    padding: 10px 14px;
+    margin: 23% 2% 8% 2%;
+    max-height: 2.2em;
+  }
+
+  .textLangBtn {
+    margin: -3% 2% 5% 2%;
+    font-size: 30px;
+  }
+
+  #btn-next-stage {
+    width: 9em;
+    height: 1.7em;
+    border-radius: 10em;
+    font-size: 1.5em;
+    font-weight: 200;
+    margin-top: 20%;
+  }
+
+  .email-scheme {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 28em;
+  }
+
+  #email {
+    top: 50px;
+  }
+
+  #name {
+    top: 60px;
+  }
+
+  .btn-signature {
+    padding: 0.5em 1.2em;
+    border-radius: 10em;
+    font-size: 1.5em;
+    font-weight: 200;
+    margin-top: 4%;
+  }
+
+  #changeSigColor {
+    padding: 0.4em 1em;
+    border-radius: 10em;
+    font-size: 1.1em;
+    font-weight: 200;
+    margin-top: 3%;
+  }
+
+  .btn-signature-cancel {
+    padding: 0.5em 1.2em;
+    border-radius: 10em;
+    font-size: 1.5em;
+    font-weight: 200;
+    margin-top: 4%;
+  }
+
+  .btn-restart {
+    bottom: 6%;
+    right: 5%;
+    border-radius: 10em;
+    font-size: 1.8em;
+    font-weight: 200;
+  }
+
+  .signature-btns {
+    display: grid;
+    margin: 1%;
+    justify-content: space-evenly;
+  }
+
+  #send-email {
+    font-size: 1.7em;
+    margin-top: 25%;
+  }
+
+  #check-spam {
+    width: 80%;
+  }
+
+  .email-form {
+    margin-top: 11em;
+  }
+
+  .input {
+    width: 60%;
+    border-radius: 17px;
+    padding: 9px 12px;
+    line-height: 1.4;
+    font-size: 23px;
+    font-weight: 400;
+    height: 40px;
+  }
+
+  .hint {
+    font-weight: 200;
+    padding-right: 0.5%;
+    padding-left: 0.5%;
+    border-radius: 1em;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+    width: 10em;
+  }
+
+  #btn-result {
+    padding: 0.5em 2em;
+    border-radius: 0.5em;
+    font-size: 1.5em;
+    font-weight: 200;
+    margin-top: 30%;
+  }
+
+  #fact {
+    margin-top: 3rem;
+    bottom: 1rem;
+    max-width: 70%;
+    font-weight: 300;
+  }
+
+  .dalle-grid {
+    margin: 5% 0 5% 0;
+  }
+
+  .dalle-card {
+    margin: 1rem;
+    border-radius: 10px;
+    max-width: 39%;
+  }
+
+  .imgPreview {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .sigCanvas {
+    border-radius: 30px;
+    padding: 0px;
+    height: 400px;
+    width: 800px;
+  }
+
+  #publish-title {
+    margin: 7% auto 5.5% auto;
+    max-width: 70%;
+    font-weight: 1.2em;
+  }
+
+  #canvas-container {
+    margin-top: 90px;
+    border-radius: 30px;
+    height: 400px;
+    width: 800px;
+  }
+
+  .publish-image-wrapper {
+    width: 26em;
+  }
+
+  .signature-image {
+    right: 14%;
+    bottom: 2%;
+    width: 17%;
+  }
+
+  #signature_image_0 {
+    top: 85%;
+    right: 10%;
+    height: 12%;
+    width: 12%;
+  }
+
+  #signature_image_1 {
+    top: 85%;
+    right: 10%;
+    height: 12%;
+    width: 12%;
+  }
+
+  .content_text {
+    font-size: 0.8em;
+    padding: 0;
+    padding-top: 2em;
+  }
+
+  .content_author {
+    font-size: 0.7em;
+    font-weight: 700;
+    padding-right: 30%;
+    padding: 0;
+    padding-top: 2em;
+  }
+
+  .ongoing-query {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  #current-selection {
+    color: rgb(224, 248, 203);
+    font-weight: 700;
+  }
+
+  #query-div {
+    padding-top: 3em;
+    width: 100%;
+    height: 1.2em;
+    margin-bottom: 2em;
+  }
+
+  .final-selection-title {
+    font-size: 1.5em;
+    margin: auto;
+    width: 80%;
+    color: var(--global-text-color);
+  }
+
+  .final-image {
+    width: 20em;
+  }
+
+  .selection-title {
+    font-size: 1.5em;
+    margin-top: 20%;
+  }
+
+  .facts {
+    visibility: hidden;
+  }
+
+  .prompts {
+    visibility: hidden;
+  }
+
+  .button-selection {
+    margin-top: 20%;
+  }
+
+  .hintDiv {
+    height: 15em;
+    margin-top: 12%;
+    margin-left: 15%;
+    width: 65%;
+  }
+
+  .hintDiv div {
+    padding: 0 1em 0 1em;
+  }
+
+  .gallery-item {
+    margin: 5%;
+    padding: 0;
+  }
+
+  #gallery_item_0 {
+    width: 40%;
+    top: 2%;
+    left: 2%;
+  }
+
+  #gallery_item_1 {
+    width: 40%;
+    top: 2%;
+    right: 2%;
+  }
+  .gallery-item-NR {
+    margin-top: 30%;
+  }
+
+  #gallery_item_NR {
+    width: 70%;
+  }
+
+  #signature_image_NR {
+    top: 80%;
+    right: 10%;
+    height: 12%;
+    width: 12%;
+  }
+
+  .frame {
+    top: 16.6%;
+    left: 16%;
+    height: 40%;
+    width: 72%;
+  }
+
+  .final-query {
+    font-size: 1.5em;
+    margin-left: 1.5em;
+    margin-top: 5%;
+    margin-right: 5em;
+    width: 80%;
+    font-weight: 500;
+  }
+
+  #btn-finish-assemble {
+    font-size: 1.2rem;
+    padding: 10px 14px;
+    font-size: 1.5em;
+    font-weight: 200;
+    margin-top: 12%;
+    margin-bottom: 12%;
+  }
+
+  .loader {
+    position: absolute;
+    top: 45%;
+    width: 8em;
+    height: 8em;
+    border-radius: 50%;
+  }
+
+  .loader span {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .loader:after {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 50%;
+  }
+
+  input[type="range"] {
+    font-size: 16px;
+    line-height: 1;
+    height: 2em;
+    width: 100%;
+  }
+
+  .intensityTitle {
+    margin-top: 1.5%;
+    font-size: 1.5rem;
+    margin-bottom: 1%;
+  }
+
+  .crop {
+    width: 100%;
+    margin-top: 90px;
+    border-radius: 30px;
+  }
+
+  .crop img {
+    width: auto;
+    object-fit: cover;
+    object-position: -357px -349px;
+    height: 750px;
+  }
+
+  .signature-scheme {
+    width: 90%;
+  }
+
+  .testToggle {
+    margin: 10%;
+  }
+
+  .toggleButton {
+    margin-top: 2%;
+  }
+
+  .signature-props {
+    margin-bottom: 2%;
+  }
+
+  #final-page {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #background-images-final {
+    width: 100%;
+    height: 100%;
+  }
+
+  #background-images-final #floating-grid-0 {
+    padding: 10vw 30vw 0 10vw;
+  }
+
+  #background-images-final #floating-grid-1 {
+    padding: 10vw 10vw 0 30vw;
+  }
+
+  #background-images-final #floating-grid-2 {
+    padding: 0 30vw 10vw 10vw;
+  }
+
+  #background-images-final #floating-grid-3 {
+    padding: 0 10vw 10vw 30vw;
+  }
+
+  #click-to-restart {
+    bottom: 5%;
+    width: 100%;
+    font-size: 2em;
+    visibility: hidden;
+  }
+
+  #wrapper-final {
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    border-radius: 1em;
+    font-size: 2.5em;
+    padding: 5%;
+  }
+
+  #heading-final {
+    font-weight: 300;
+    margin-bottom: 2%;
+  }
+
+  #final-page-gallery-img {
+    width: 7em;
+    height: auto;
+  }
+
+  #final-page-signature-img {
+    right: 17%;
+    bottom: 38%;
+    width: 1.3em;
+    height: auto;
+  }
+  #timeout-box {
+    left: 0;
+    right: 0;
+    max-width: 70%;
+    padding: 2%;
+    border-radius: 5%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    border: 1px solid var(--global-heading-color);
+  }
+  #timeout-box h1 {
+    font-size: 2em;
+  }
+  #timeout-box p {
+    font-size: 1.5em;
+  }
+  #btn-timeout {
+    font-size: 1.7em;
+    margin-bottom: 15%;
+  }
+  .signature-check-list {
+    column-count: 2;
+  }
+  .signature-check {
+    border: 1px solid gray;
+    margin: 5%;
+    padding: 2%;
+    margin-left: 3%;
+    width: 90%;
+  }
+  .signature-check-img {
+    width: 90px;
+    padding-left: 15%;
+  }
+}
+@media screen and (min-width: 390px) and (max-width: 450px) {
   h1,
   h2 {
     margin-top: 10%;
@@ -375,6 +1017,8 @@
   .sigCanvas {
     border-radius: 30px;
     padding: 0px;
+    height: 400px;
+    width: 800px;
   }
 
   #publish-title {
@@ -386,7 +1030,8 @@
   #canvas-container {
     margin-top: 90px;
     border-radius: 30px;
-    height: 200px;
+    height: 400px;
+    width: 800px;
   }
 
   .publish-image-wrapper {
@@ -502,8 +1147,11 @@
 
   .final-query {
     font-size: 1.5em;
-    margin-left: 5em;
+    margin-left: 1.5em;
+    margin-top: 5%;
     margin-right: 5em;
+    width: 80%;
+    font-weight: 500;
   }
 
   #btn-finish-assemble {
@@ -516,6 +1164,8 @@
   }
 
   .loader {
+    position: absolute;
+    top: 45%;
     width: 8em;
     height: 8em;
     border-radius: 50%;
@@ -549,7 +1199,7 @@
   }
 
   .crop {
-    width: 90%;
+    width: 100%;
     margin-top: 90px;
     border-radius: 30px;
   }
@@ -557,7 +1207,7 @@
   .crop img {
     width: auto;
     object-fit: cover;
-    object-position: -376px -548px;
+    object-position: -356px -348px;
     height: 750px;
   }
 
@@ -607,6 +1257,7 @@
     bottom: 5%;
     width: 100%;
     font-size: 2em;
+    visibility: hidden;
   }
 
   #wrapper-final {
@@ -630,7 +1281,7 @@
 
   #final-page-signature-img {
     right: 17%;
-    bottom: 31%;
+    bottom: 38%;
     width: 1.3em;
     height: auto;
   }
@@ -1125,6 +1776,7 @@
     margin-left: 5em;
     margin-right: 5em;
     margin-top: 2em;
+    font-weight: 500;
   }
 
   #btn-finish-assemble {
@@ -1787,6 +2439,7 @@
     font-size: 1.5em;
     margin-left: 5em;
     margin-right: 5em;
+    font-weight: 500;
   }
 
   #btn-finish-assemble {
@@ -2381,12 +3034,12 @@ code {
 #final_image_0 {
   position: absolute;
   top: -140px;
-  right: 72px;
+  right: 105px;
 }
 #final_image_1 {
   position: absolute;
   top: 400px;
-  right: 75px;
+  right: 105px;
 }
 
 .publish-image-wrapper {
@@ -2485,7 +3138,7 @@ code {
 
 .frame {
   position: absolute;
-  left: 21%;
+  left: 18%;
   height: 35%;
   width: 63%;
   z-index: 3;
@@ -2506,7 +3159,7 @@ code {
   position: absolute;
   font-size: small;
   top: 540px;
-  left: 328px;
+  left: 300px;
   width: 30em;
   height: 8em;
 }
@@ -2517,7 +3170,7 @@ code {
   position: absolute;
   font-size: small;
   top: 1080px;
-  left: 328px;
+  left: 300px;
   width: 30em;
   height: 8em;
 }

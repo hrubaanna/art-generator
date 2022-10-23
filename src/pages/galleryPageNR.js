@@ -13,7 +13,7 @@ class GalleryPageNR extends React.Component {
     loadingTimeout: null,
 
     NUM_IMAGES_IN_BATCH: 2,
-    TIME_TO_RELOAD: 10000,
+    TIME_TO_RELOAD: 30000,
   };
 
   componentDidMount() {
@@ -224,6 +224,9 @@ class GalleryPageNR extends React.Component {
   render() {
     return (
       <div>
+        <video autoPlay muted loop id="video-background">
+          <source src="TestPhotos/NorimberkGradient.mp4" type="video/mp4" />
+        </video>
         <img src={"TestPhotos/frame.png"} className="frame" id="frame1" />
         <img src={"TestPhotos/frame.png"} className="frame" id="frame2" />
       </div>
