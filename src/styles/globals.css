@@ -461,9 +461,7 @@
   }
 
   .facts {
-    font-size: 1.5rem;
-    margin-left: 7em;
-    margin-right: 7em;
+    visibility: hidden;
   }
 
   .prompts {

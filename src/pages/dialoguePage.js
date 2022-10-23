@@ -286,7 +286,7 @@ class DialoguePage extends React.Component {
     return (
       <div>
         <video autoPlay muted loop id="video-background">
-          <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
+          <source src="TestPhotos/NorimberkGradient.mp4" type="video/mp4" />
         </video>
         <h1 className="selection-title">
           {" "}

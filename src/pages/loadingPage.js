@@ -59,7 +59,7 @@ class LoadingPage extends React.Component {
     return (
       <div>
         <video autoPlay muted loop id="video-background">
-          <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
+          <source src="TestPhotos/NorimberkGradient.mp4" type="video/mp4" />
         </video>
         <div className="selection-title" id="generate-art">
           {this.state.headings[finalDalleAssembled.language]}

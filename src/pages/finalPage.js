@@ -91,7 +91,7 @@ class FinalPage extends React.Component {
       <div id="final-page">
         <div id="overlay">
           <video autoPlay muted loop id="video-background">
-            <source src="TestPhotos/My_Movie.mp4" type="video/mp4" />
+            <source src="TestPhotos/NorimberkGradient.mp4" type="video/mp4" />
           </video>
           <div id="wrapper-final">
             <div id="heading-final">

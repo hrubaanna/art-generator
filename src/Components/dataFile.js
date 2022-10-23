@@ -2047,22 +2047,22 @@ var Prompts = {
       ],
       //holds the guiding prompt for each dialogue stage named by stage id (such that it can be called as prompt[stage])
       1: [
-        "Buďme konkrétnější. Možností, co na plátně dělat, je nepřeberné množství. Můžete dát přednost výrazným barvám olejové barvy nebo jemnějšímu pojetí kresby tužkou. Technické náčrty a mozaiky však nejsou ze stolu! Každá forma má své kouzlo a všechny jsou vám k dispozici. A teď, který to bude?",
+        "Buďme konkrétnější. Možností, co na plátně dělat, je nepřeberné množství. Můžete dát přednost výrazným barvám olejové barvy nebo jemnějšímu pojetí kresby tužkou. Technické náčrty a mozaiky však nejsou mimo hru! Každé médium má své kouzlo a všechny jsou vám k dispozici. Co to bude?",
       ],
       2: [
-        "Jakmile víme, jak k uměleckému dílu přistupovat, můžeme je začít vyplňovat. Myslete na věci, postavy - opravdu cokoli. Renesanční umělecká díla jsou často plná lidí, abstraktní umělecká díla jsou plná tvarů a barev a některá mohou být naplněna prázdnotou. Pokračuj, sni pryč:",
+        "Jakmile víme, jak k uměleckému dílu přistupovat, můžeme je začít vyplňovat. Myslete na věci, postavy - opravdu cokoli.",
       ],
       3: [
-        "Víme, na co se zaměřujeme, ale co všechno kolem. Kde se tato scéna odehrává? Existuje vůbec nějaké nastavení? Možná jste v pořádku s tím, co jste si vybrali. To je v pořádku i pro mě.",
+        "Víme, na co se zaměřujeme, ale co všechno kolem. Kde se tato scéna odehrává? Existuje vůbec nějaké prostředí?",
       ],
       4: [
-        "Teď, když víme, co je na uměleckém díle, potřebujeme také vědět, jak to bude zobrazeno. Plátna budou často vyzařovat nějakou energii – uklidňující, energizující, mohou vás i unavit. To jde ruku v ruce s emocemi. Umělci budou často chtít prostřednictvím svého umění sdělit nějaký druh emocí. To může vyjít jemně – prostřednictvím barevných tónů a struktury, ale také explicitně – prostřednictvím děsivých výrazů nebo symboliky. Přemýšlejte o emocích a energiích, které byste chtěli zprostředkovat svým uměleckým dílem!",
+        "Teď, když víme, co je v díle, potřebujeme také vědět, jak to bude vyobrazeno. Přemýšlejte o emocích a energiích, které byste chtěli svým dílem zprostředkovat!",
       ],
       5: [
-        "Blížíme se. Ve světě umění existuje nepřeberné množství stylů – ty buď pomohou vyzdvihnout vizualitu vaší scény, nebo lépe sdělují požadované sdělení. S mou pomocí se pokuste vymyslet styly, techniky a vzhled, které vám pomohou vytvarovat vaše umělecké dílo do skutečně osobního mistrovského díla. Zamyslete se nad styly z historie, ale i současné estetiky. Možná jste průkopník a nechcete se modelovat podle žádného existujícího vzhledu, takže to není nutnost! ",
+        "Ve světě umění existuje nepřeberné množství stylů – ty buď pomohou vyzdvihnout estetiku díla, nebo jasněji komunikují požadované sdělení.",
       ],
       6: [
-        "Většina z nás bude poháněna vnější inspirací, která se často formuje v osobě nebo skupině. Máš nějakou inspiraci? Je někdo nebo něco, koho obdivujete a chcete jít v jeho stopách? Možná budete chtít dokončit své umělecké dílo ve stylu…",
+        "Většina z nás je poháněna vnější inspirací. Máte nějakou inspiraci? Je někdo nebo něco, koho obdivujete a chcete jít v jeho stopách? Možná budete chtít dokončit své umělecké dílo ve stylu…",
       ],
     },
     sculpture: {
@@ -2074,12 +2074,24 @@ var Prompts = {
         "structure_looks_CZ",
         "sculpture_art_styles_CZ",
       ],
-      1: ["sculpture stage 1 description"],
-      2: ["sculpture stage 2 description"],
-      3: ["sculpture stage 3 description"],
-      4: ["sculpture stage 4 description"],
-      5: ["sculpture stage 5 description"],
-      6: ["sculpture stage 6 description"],
+      1: [
+        "Buďme konkrétnější. Pracujete s prostorem a hmotou, formujete ji do požadované struktury a tvaru. Mám po ruce široký výběr možných cest, stačí si jen vybrat!",
+      ],
+      2: [
+        "Začněme přemýšlet o obsahu a uspořádání. Myslete na věci, postavy - opravdu cokoli.",
+      ],
+      3: [
+        "Sochy jsou prostorové objekty, které pracují s prostředím kolem sebe. Způsob, jakým pracují, aby splývaly nebo vyčnívaly, se projeví úplně jiným vnímáním díla!",
+      ],
+      4: [
+        "Teď, když víme, co je v díle, potřebujeme také vědět, jak to bude vyobrazeno. Přemýšlejte o emocích a energiích, které byste chtěli svým dílem zprostředkovat!",
+      ],
+      5: [
+        "Ve světě umění existuje nepřeberné množství stylů - ty buď pomohou vyzdvihnout estetiku díla, nebo jasněji komunikují požadované sdělení.",
+      ],
+      6: [
+        "Většina z nás je poháněna vnější inspirací. Máte nějakou inspiraci? Je někdo nebo něco, koho obdivujete a chcete jít v jeho stopách? Možná budete chtít dokončit své umělecké dílo ve stylu…",
+      ],
     },
     photography: {
       lookup: [
@@ -2090,12 +2102,22 @@ var Prompts = {
         "lighting_CZ",
         "emotions_CZ",
       ],
-      1: ["photography stage 1 description"],
-      2: ["photography stage 2 description"],
-      3: ["photography stage 3 description"],
-      4: ["photography stage 4 description"],
-      5: ["photography stage 5 description"],
-      6: ["photography stage 6 description"],
+      1: [
+        "Začněme přemýšlet o obsahu a uspořádání. Myslete na věci, postavy - opravdu cokoli.",
+      ],
+      2: ["Víme, na co se zaměřujeme, ale co všechno kolem?"],
+      3: [
+        "Fotografie je především o perspektivě. Představte si sami sebe ve vztahu k objektu/subjektu a odkud ho zachycujete!",
+      ],
+      4: [
+        "Každý fotoaparát má nastavení, se kterými lze manipulovat. To vše drasticky změní konečný výsledek naší fotografie!",
+      ],
+      5: [
+        "Osvětlení je klíčovou součástí fotografie! Všechny fotky se tvoří odraženým světlem procházejícím čočkou fotoaparátu.",
+      ],
+      6: [
+        "Přemýšlejte o emocích a energiích, které byste chtěli svým dílem zprostředkovat!",
+      ],
     },
   },
   DE: {
