@@ -2135,22 +2135,22 @@ var Prompts = {
       ],
       //holds the guiding prompt for each dialogue stage named by stage id (such that it can be called as prompt[stage])
       1: [
-        "Lasst uns genauer werden. Es gibt unendlich viele Möglichkeiten, was man auf einer Leinwand machen kann. Vielleicht bevorzugst du die ausdrucksstarken Farben von Ölfarbe oder den sanfteren Ansatz von Bleistiftzeichnungen. Technische Skizzen und Mosaike sind jedoch nicht vom Tisch! Jede Form hat ihre Magie und alle stehen Ihnen zur Verfügung. Nun, welches wird es sein?",
+        "Lasst uns genauer werden. Es gibt unendlich viele Möglichkeiten, was man auf einer Leinwand machen kann. Jede Form hat ihre Magie und alle stehen Ihnen zur Verfügung. Nun, welches wird es sein?",
       ],
       2: [
-        "Sobald wir wissen, wie wir uns dem Kunstwerk nähern, können wir damit beginnen, es auszufüllen. Denken Sie an Dinge, Charaktere – wirklich alles. Renaissance-Kunstwerke sind oft voller Menschen, abstrakte Kunstwerke sind voller Formen und Farben, und einige können einfach mit Leere gefüllt sein. Los, träume davon:",
+        "Sobald wir wissen, wie wir uns dem Kunstwerk nähern, können wir damit beginnen, es auszufüllen. Denken Sie an Dinge, Charaktere – wirklich alles.",
       ],
       3: [
-        "Wir wissen, worauf wir uns konzentrieren, aber was ist mit allem drumherum. Wo spielt diese Szene? Gibt es überhaupt eine Einstellung? Vielleicht bist du in Ordnung mit dem, was du gewählt hast. Das ist auch in Ordnung für mich.",
+        "Wir wissen, worauf wir uns konzentrieren, aber was ist mit allem drumherum. Wo spielt diese Szene? Gibt es überhaupt eine Einstellung?",
       ],
       4: [
-        "Nun, da wir wissen, was auf dem Kunstwerk zu sehen ist, müssen wir auch wissen, wie es dargestellt wird. Leinwände strahlen oft eine gewisse Energie aus – beruhigend, energetisierend, sie können sogar müde machen. Das geht mit Emotionen einher. Künstler möchten oft eine Art Emotion durch ihre Kunst vermitteln. Das kann leise herauskommen – durch Farbklänge und Struktur, aber auch explizit – durch furchterregende Ausdrücke oder Symbolik. Denken Sie an Emotionen und Energien, die Sie durch Ihr Kunstwerk vermitteln möchten!",
+        "Nun, da wir wissen, was auf dem Kunstwerk zu sehen ist, müssen wir auch wissen, wie es dargestellt wird. Denken Sie an Emotionen und Energien, die Sie durch Ihr Kunstwerk vermitteln möchten!",
       ],
       5: [
-        "Wir kommen näher. Es gibt unzählige Stile in der Welt der Kunst – diese helfen entweder, die Visualität Ihrer Szene hervorzuheben oder die gewünschte Botschaft besser zu kommunizieren. Versuchen Sie mit meiner Hilfe, Stile, Techniken und Looks zu entwickeln, die dazu beitragen, Ihr Kunstwerk zu einem wirklich persönlichen Meisterwerk zu machen. Denken Sie an Stile aus der Geschichte, aber auch an zeitgenössische Ästhetik. Vielleicht sind Sie ein Pionier und möchten sich nicht an einem bestehenden Look orientieren, also ist dies kein Muss! ",
+        "Wir kommen näher. Es gibt unzählige Stile in der Welt der Kunst – diese helfen entweder, die Visualität Ihrer Szene hervorzuheben oder die gewünschte Botschaft besser zu kommunizieren.",
       ],
       6: [
-        "Die meisten von uns werden von äußerer Inspiration getrieben, die oft in einer Person oder Gruppe Gestalt annimmt. Haben Sie eine Inspiration? Gibt es jemanden oder etwas, das Sie bewundern und in dessen Fußstapfen treten möchten? Vielleicht möchten Sie Ihr Kunstwerk im Stil von …",
+        "Die meisten von uns werden von äußerer Inspiration getrieben, die oft in einer Person oder Gruppe Gestalt annimmt. Haben Sie eine Inspiration? Vielleicht möchten Sie Ihr Kunstwerk im Stil von …",
       ],
     },
     sculpture: {
@@ -2162,12 +2162,22 @@ var Prompts = {
         "structure_looks_DE",
         "sculpture_art_styles_DE",
       ],
-      1: ["sculpture stage 1 description"],
-      2: ["sculpture stage 2 description"],
-      3: ["sculpture stage 3 description"],
-      4: ["sculpture stage 4 description"],
-      5: ["sculpture stage 5 description"],
-      6: ["sculpture stage 6 description"],
+      1: [
+        "Lasst uns genauer werden. Sie arbeiten mit Raum und Materie und formen sie in eine gewünschte Struktur und Form. Ich habe eine breite Auswahl an möglichen Wegen zur Hand, Sie müssen sich nur für einen entscheiden!",
+      ],
+      2: ["Denken Sie an Dinge, Charaktere - wirklich alles. "],
+      3: [
+        "Skulpturen sind physische 3D-Objekte, die mit dem Raum um sie herum arbeiten. Die Art und Weise, wie sie sich einfügen oder abheben, führt zu einer völlig anderen Lesart der Skulptur!",
+      ],
+      4: [
+        "Nun, da wir wissen, was in dem Kunstwerk steckt, welche Form es haben wird, müssen wir auch wissen, welche Art von Energie diese Skulptur ausstrahlen wird.",
+      ],
+      5: [
+        "Wir kommen näher. Es gibt unzählige Stile in der Welt der Kunst – diese helfen entweder, die Visualität Ihrer Szene hervorzuheben oder die gewünschte Botschaft besser zu kommunizieren.",
+      ],
+      6: [
+        "Die meisten von uns werden von äußerer Inspiration getrieben, die oft in einer Person oder Gruppe Gestalt annimmt. Haben Sie eine Inspiration? Vielleicht möchten Sie Ihr Kunstwerk im Stil von …",
+      ],
     },
     photography: {
       lookup: [
@@ -2178,12 +2188,24 @@ var Prompts = {
         "lighting_DE",
         "emotions_DE",
       ],
-      1: ["photography stage 1 description"],
-      2: ["photography stage 2 description"],
-      3: ["photography stage 3 description"],
-      4: ["photography stage 4 description"],
-      5: ["photography stage 5 description"],
-      6: ["photography stage 6 description"],
+      1: [
+        "Beginnen wir mit dem Nachdenken über den Inhalt und die Anordnung. Denken Sie an Dinge, Charaktere - wirklich alles.",
+      ],
+      2: [
+        "Wir wissen, worauf wir uns konzentrieren, aber was ist mit allem drumherum. Wo spielt diese Szene? Gibt es überhaupt eine Einstellung?",
+      ],
+      3: [
+        "Beim Fotografieren dreht sich alles um die Perspektive. Stell dir dich in Relation zum Objekt vor!",
+      ],
+      4: [
+        "Jede Kamera hat einige Einstellungen, die manipuliert werden können. All dies wird das Endergebnis unseres Fotos drastisch verändern!",
+      ],
+      5: [
+        "Die Beleuchtung ist ein entscheidender Teil der Fotografie, da alle fotografischen Funktionen auf das reflektierte Licht, das auf das Objektiv der Kamera trifft, basieren.",
+      ],
+      6: [
+        "Nun, da wir wissen, was auf dem Kunstwerk zu sehen ist, müssen wir auch wissen, wie es dargestellt wird. Denken Sie an Emotionen und Energien, die Sie durch Ihr Kunstwerk vermitteln möchten!",
+      ],
     },
   },
 };
