@@ -86,6 +86,7 @@
     width: 35%;
     border-radius: 2%;
     padding: 3%;
+    animation: fadeIn 2s;
   }
 
   li img {
@@ -1744,6 +1745,44 @@
     width: 40%;
     top: 2%;
     right: 2%;
+  }
+  .gallery-item-NR {
+    margin-top: 30%;
+  }
+
+  #gallery_item_NR {
+    width: 70%;
+  }
+
+  #signature_image_NR_0 {
+    position: absolute;
+    top: 360px;
+    right: 105px;
+    width: 90px;
+    z-index: 10;
+  }
+
+  #signature_image_NR_1 {
+    position: absolute;
+    top: 945px;
+    right: 105px;
+    width: 90px;
+    z-index: 10;
+  }
+
+  .frame {
+    left: 21%;
+    height: 35%;
+    width: 63%;
+  }
+
+  #frame1 {
+    position: absolute;
+    top: 155px;
+  }
+  #frame2 {
+    position: absolute;
+    top: 1063px;
   }
 
   .final-query {

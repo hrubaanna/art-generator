@@ -311,7 +311,7 @@ function storeResponse(userInput, stage, responses, medium, language) {
       } else if (stage == 2 && userInput.length > 0) {
         responses[language][medium][
           Object.keys(responses[language][medium])[stage - 1]
-        ].push(" vyobrazující " + userInput);
+        ].push(" " + userInput);
       } else if (stage == 3 && userInput.length > 0) {
         responses[language][medium][
           Object.keys(responses[language][medium])[stage - 1]
