@@ -1,5 +1,4 @@
 import React from "react";
-import HintCloud from "../Components/hintCloud";
 import HintCloudTest from "../Components/hintCloudTest";
 import Prompt from "../Components/prompt";
 import Link from "next/link";
@@ -41,6 +40,7 @@ class DialoguePage extends React.Component {
   state = {
     stage: 0,
     hintCloudUpdated: false,
+    largeScreen: true,
     medium: "",
     numStages: 7,
     query: "",
@@ -79,15 +79,24 @@ class DialoguePage extends React.Component {
     renderTimeoutBox: false,
 
     //TODO: for production, change to 60 seconds
-    RESET_TIME: 500000,
+    RESET_TIME: 60000,
   };
 
   //when page loads, start timer to show timeout box
   componentDidMount() {
+    this.checkScreenSize();
     if (this.state.stage) this.startInactiveTimer();
     this.resetState();
     resetResponses();
   }
+
+  checkScreenSize = () => {
+    //if screen is smaller than 450px, set largeScreen to false
+    let x = window.matchMedia("(max-width: 450px)");
+    if (x.matches) {
+      this.state.largeScreen = false;
+    }
+  };
 
   //reset state to initial values
   resetState = () => {
@@ -291,11 +300,13 @@ class DialoguePage extends React.Component {
             : null}
         </h1>
 
-        <Prompt
-          medium={this.state.medium}
-          stage={this.state.stage}
-          language={this.state.language}
-        />
+        {this.state.largeScreen ? (
+          <Prompt
+            medium={this.state.medium}
+            stage={this.state.stage}
+            language={this.state.language}
+          />
+        ) : null}
 
         {this.state.renderTimeoutBox ? (
           <TimeoutBox
@@ -307,7 +318,7 @@ class DialoguePage extends React.Component {
 
         {this.state.stage === 0 ? (
           // Buttons to select a medium
-          <div className="div-medium">
+          <div className="div-medium button-selection">
             <button
               className="btn btn-medium"
               value={"painting"}

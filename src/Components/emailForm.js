@@ -125,7 +125,7 @@ export default function EmailForm(props) {
 
   return (
     <div className="email-scheme">
-      <h1 className="selection-title">{titleText[props.lang]}</h1>
+      <h1 className="final-selection-title">{titleText[props.lang]}</h1>
 
       {!formIsVisible ? (
         <div>

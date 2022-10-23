@@ -10,8 +10,8 @@ class GalleryPageNR extends React.Component {
     DBLoaded: false,
     loadingTimeout: null,
 
-    NUM_IMAGES_IN_BATCH: 1,
-    TIME_TO_RELOAD: 100000,
+    NUM_IMAGES_IN_BATCH: 2,
+    TIME_TO_RELOAD: 1000000,
   };
 
   componentDidMount() {
@@ -148,6 +148,7 @@ class GalleryPageNR extends React.Component {
           let galleryImage = document.createElement("img");
           galleryImage.src = artpiece.img_link;
           galleryImage.className = "final-image";
+          galleryImage.id = `final_image_${index}`;
           galleryItem.appendChild(galleryImage);
 
           galleryImage.onload = () => {
@@ -157,7 +158,7 @@ class GalleryPageNR extends React.Component {
           if (artpiece.signature !== "") {
             let gallerySignature = document.createElement("img");
             gallerySignature.src = artpiece.signature;
-            gallerySignature.id = `signature_image_NR`;
+            gallerySignature.id = `signature_image_NR_${index}`;
             galleryItem.appendChild(gallerySignature);
 
             gallerySignature.onload = () => {
@@ -234,7 +235,8 @@ class GalleryPageNR extends React.Component {
   render() {
     return (
       <div>
-        <img src={"TestPhotos/frame.png"} className="frame" />
+        <img src={"TestPhotos/frame.png"} className="frame" id="frame1" />
+        <img src={"TestPhotos/frame.png"} className="frame" id="frame2" />
       </div>
     );
   }

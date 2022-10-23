@@ -4,7 +4,7 @@ const { resetResponses } = require("../Components/assembler_Obj");
 
 class TimeoutBox extends React.Component {
   state = {
-    timeRemaining: 10,
+    timeRemaining: 20,
     timerInteval: null,
     isUserThere: {
       ENG: "Are you there?",

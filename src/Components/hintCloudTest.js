@@ -5,6 +5,7 @@ class HintCloudTest extends React.Component {
   state = {
     hint_elements: [],
     current_stage_hints: [],
+    NUM_HINTS: 7,
     last_hint_selected: 7,
     selected_random_hint: null,
     text_change_timeout: null,
@@ -18,8 +19,20 @@ class HintCloudTest extends React.Component {
   };
 
   componentDidMount() {
+    this.checkWindowSize();
     this.populateHints();
   }
+
+  checkWindowSize = () => {
+    let x = window.matchMedia("(max-width: 450px)");
+    if (x.matches) {
+      //if screen is a phone screen:
+      //only show 3 hints
+      this.state.NUM_HINTS = 3;
+      //make UPDATE_HINT_INTERVAL smaller
+      this.setState({ UPDATE_HINT_INTERVAL: 3000 });
+    }
+  };
 
   componentWillUnmount() {
     clearInterval(this.state.hintInterval);
@@ -33,9 +46,7 @@ class HintCloudTest extends React.Component {
       if (this.state.selected_random_hint !== null) {
         //when stage is changes during transition, make the transition faster
         //so it does not look like the hint is being replaced twice
-        console.log("stopping transition");
         clearTimeout(this.state.text_change_timeout);
-        console.log(this.state.selected_random_hint);
         this.state.selected_random_hint.style.transition = "all 0s";
         this.state.selected_random_hint.style.backgroundColor =
           "rgba(39, 39, 39, 0.1)";
@@ -50,7 +61,7 @@ class HintCloudTest extends React.Component {
     this.generateHints();
     let hint_elements = [];
     this.state.current_stage_hints.forEach((hint, index) => {
-      if (index < 7) {
+      if (index < this.state.NUM_HINTS) {
         let hint_element = document.createElement("p");
         hint_element.innerHTML = hint;
         hint_element.className = "hint";
@@ -60,15 +71,21 @@ class HintCloudTest extends React.Component {
     });
     this.setState({ hint_elements: hint_elements });
     //add the <p> elements to the page
-    hint_elements.forEach((element, i) => {
-      if (i <= 1) {
-        document.querySelector("#leftCloud").append(element);
-      } else if (i <= 4) {
+    if (this.state.NUM_HINTS === 7) {
+      hint_elements.forEach((element, i) => {
+        if (i <= 1) {
+          document.querySelector("#leftCloud").append(element);
+        } else if (i <= 4) {
+          document.querySelector("#middleCloud").append(element);
+        } else {
+          document.querySelector("#rightCloud").append(element);
+        }
+      });
+    } else if (this.state.NUM_HINTS === 3) {
+      hint_elements.forEach((element, i) => {
         document.querySelector("#middleCloud").append(element);
-      } else {
-        document.querySelector("#rightCloud").append(element);
-      }
-    });
+      });
+    }
 
     //add event listener to hints to make them update the query
     hint_elements.forEach((element) => {

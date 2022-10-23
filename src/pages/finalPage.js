@@ -31,7 +31,7 @@ class FinalPage extends React.Component {
     },
 
     // constants
-    RESTART_INTERVAL: 20000,
+    RESTART_INTERVAL: 200000,
     SPAWN_RESTART_BUTTON_INTERVAL: 2000,
   };
 

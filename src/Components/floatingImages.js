@@ -210,18 +210,27 @@ class FloatingImages extends React.Component {
       wrapper.style.visibility = "hidden";
 
       let image = document.createElement("img");
-      let size = 10;
+      let size = 18;
 
-      if (artObject.img_link == undefined) {
-        console.log(artObject);
+      try {
+        if (artObject?.img_link) {
+          console.log(artObject);
+        }
+        image.src = artObject.img_link;
+      } catch (err) {
+        console.error(err);
+        console.log("img_link is undefined");
+        image.src = "TestPhotos/DALLE_1.png";
       }
-      image.src = artObject.img_link;
 
       image.className = "floating-image";
       image.style.width = `${size}vw`; // assume image is squared
       image.id = `floating-image-${position}`;
 
-      if (includeSignature && artObject.signature != "") {
+      if (
+        includeSignature &&
+        (artObject.signature != "" || artObject.signature == undefined)
+      ) {
         let signature = document.createElement("img");
         signature.className = "signature-image";
         signature.src = artObject.signature;

@@ -23,11 +23,23 @@ class LoadingPage extends React.Component {
       CZ: "Tvé dílo se vytváří:",
       DE: "Erstellen Sie Ihr neues Kunstwerk:",
     },
+    hideFacts: false,
   };
 
   componentDidMount() {
+    this.checkScreenSize();
     this.updateFact();
   }
+
+  checkScreenSize = () => {
+    //if screen is smaller than 450px, set largeScreen to false
+    let x = window.matchMedia("(max-width: 450px)");
+    if (x.matches) {
+      //hide facts when loading page is small
+      console.log("small screen, hiding facts");
+      this.state.hideFacts = true;
+    }
+  };
 
   updateFact = () => {
     //every 5 seconds, update the fact
@@ -59,7 +71,9 @@ class LoadingPage extends React.Component {
           lang={finalDalleAssembled.language}
         />
 
-        <div className="facts"> {this.state.funFact} </div>
+        {this.state.hideFacts ? null : (
+          <div className="facts"> {this.state.funFact} </div>
+        )}
       </div>
     );
   }

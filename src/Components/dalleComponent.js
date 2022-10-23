@@ -53,9 +53,12 @@ class DalleComponent extends React.Component {
           this.setState({ result: data.result.data }, this.displayImages);
           this.setState({ result_provided: true });
           this.setState({ task_id: data.result.data[0].task_id });
+          this.hideFinalQuery();
 
           // hide facts and change heading
-          document.querySelector(".facts").classList.add("short-fadeOut");
+          if (document.querySelector(".facts") != null) {
+            document.querySelector(".facts").classList.add("short-fadeOut");
+          }
           document.querySelector(".selection-title").innerHTML =
             this.state.selectArt[this.props.lang]; // TODO: missing translation
         })
@@ -66,6 +69,14 @@ class DalleComponent extends React.Component {
         });
     } else {
       this.setState({ error: true });
+    }
+  };
+
+  hideFinalQuery = () => {
+    //if screen size is small, hide the final query
+    let x = window.matchMedia("(max-width: 450px)");
+    if (x.matches) {
+      document.querySelector(".final-query").remove();
     }
   };
 
@@ -124,7 +135,8 @@ class DalleComponent extends React.Component {
     document.querySelectorAll(".dalle-card").forEach((card) => {
       card.style.display = "none";
     });
-    document.querySelector(".facts").remove();
+    if (document.querySelector(".facts") != null)
+      document.querySelector(".facts").remove();
 
     // create new img element
     const newImg = document.createElement("img");
@@ -140,7 +152,9 @@ class DalleComponent extends React.Component {
 
     //remove other elements from page
     document.querySelector(".selection-title").style.display = "none";
-    document.querySelector(".final-query").style.display = "none";
+    if (document.querySelector(".final-query") != null) {
+      document.querySelector(".final-query").style.display = "none";
+    }
   };
 
   render() {

@@ -37,10 +37,15 @@ class FinalPublishing extends React.Component {
       CZ: "přeskočit",
       DE: "ueberspringen",
     },
+    // publishQ: {
+    //   ENG: "Do you want to display your artwork in the Albertina Gallery among the other great artists?",
+    //   CZ: "Chcete své dílo vystavit v Galerii Albertina mezi uznávanými umělci?",
+    //   DE: "Möchten Sie Ihr Kunstwerk in der Albertina-Galerie unter den anderen großen Künstlern ausstellen?",
+    // },
     publishQ: {
-      ENG: "Do you want to display your artwork in the Albertina Gallery among the other great artists?",
-      CZ: "Chcete své dílo vystavit v Galerii Albertina mezi uznávanými umělci?",
-      DE: "DE(Chcete své dílo vystavit v Galerii Albertina mezi uznávanými umělci?)",
+      ENG: "Do you wish to display your artwork in the Blindspot Booth (7A) among the other great artists?",
+      CZ: "Chcete své dílo vystavit v Blindspot Booth (7A) mezi uznávanými umělci?",
+      DE: "Möchten Sie Ihr Kunstwerk in der Blindspot Booth (7A) unter den anderen großen Künstlern ausstellen?",
     },
     DoPublish: {
       ENG: "publish to gallery",
@@ -73,7 +78,11 @@ class FinalPublishing extends React.Component {
     signatureSrc: "",
     wantToPublish: false,
     penWidth: 3.6,
+    canvasHeight: 400,
+    canvasWidth: 800,
+    finalImgWidth: "28em",
     toggleChecked: false,
+    largeScree: true,
   };
 
   sigPad = {};
@@ -82,15 +91,31 @@ class FinalPublishing extends React.Component {
     this.sigPad.clear();
   };
 
+  compenentDidMount = () => {
+    //check screen size
+    this.checkScreenSize();
+  };
+
+  checkScreenSize = () => {
+    //if screen is smaller than 450px, set largeScreen to false
+    let x = window.matchMedia("(max-width: 450px)");
+    if (x.matches) {
+      this.state.largeScreen = false;
+      this.state.canvasHeight = 175;
+      this.state.canvasWidth = 330;
+      document.querySelector(".final-image").style.width = "20em";
+    }
+  };
+
   showFinalImage = () => {
     //show signature on image
     let finalImage = document.createElement("img");
     finalImage.src = this.props.finalImage;
+    finalImage.setAttribute("class", "final-image");
     finalImage.setAttribute(
       "style",
-      "margin: auto; display: block; border-radius: 10px; width: 28em;"
+      `margin: auto; display: block; border-radius: 10px; width: 28em;`
     );
-    finalImage.setAttribute("className", "final-image");
 
     //place final image on canvas
     document.querySelector(".publish-image-wrapper").appendChild(finalImage);
@@ -161,65 +186,70 @@ class FinalPublishing extends React.Component {
           <div id="signature-page">
             {/* <img className="final-image" src={this.props.finalImage} /> */}
             <div className="signature-scheme">
-              <h1 className="selection-title">
-                {this.state.signatureText[this.props.lang]}
-              </h1>
-              <div className="signature-props">
+              {this.state.largeScreen ? (
+                //only show signature details if screen is large
                 <div>
-                  <h2 className="intensityTitle">
-                    {this.state.sigIntensity[this.props.lang]}
-                  </h2>
-                  <input
-                    type="range"
-                    id="testRange"
-                    min="0.8"
-                    max="6.4"
-                    defaultValue={this.state.penWidth}
-                    onChange={(e) => {
-                      this.sliderChange(e.target.value);
-                    }}
-                    step="any"
-                  ></input>
-                </div>
-                <div>
-                  <h2 className="intensityTitle">
-                    {this.state.sigColor[this.props.lang]}
-                  </h2>
-                  <div className="toggleButton">
-                    <Switch
-                      onChange={this.handleToggle}
-                      checked={this.state.toggleChecked}
-                      offColor="#000000"
-                      onColor="#FFFFFF"
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      height={30}
-                      width={80}
-                      onHandleColor="#f8e1cb"
-                      offHandleColor="#f8e1cb"
-                      borderRadius={20}
-                    />
+                  <h1 className="final-selection-title">
+                    {this.state.signatureText[this.props.lang]}
+                  </h1>
+                  <div className="signature-props">
+                    <div>
+                      <h2 className="intensityTitle">
+                        {this.state.sigIntensity[this.props.lang]}
+                      </h2>
+                      <input
+                        type="range"
+                        id="testRange"
+                        min="0.8"
+                        max="6.4"
+                        defaultValue={this.state.penWidth}
+                        onChange={(e) => {
+                          this.sliderChange(e.target.value);
+                        }}
+                        step="any"
+                      ></input>
+                    </div>
+                    <div>
+                      <h2 className="intensityTitle">
+                        {this.state.sigColor[this.props.lang]}
+                      </h2>
+                      <div className="toggleButton">
+                        <Switch
+                          onChange={this.handleToggle}
+                          checked={this.state.toggleChecked}
+                          offColor="#000000"
+                          onColor="#FFFFFF"
+                          uncheckedIcon={false}
+                          checkedIcon={false}
+                          height={30}
+                          width={80}
+                          onHandleColor="#f8e1cb"
+                          offHandleColor="#f8e1cb"
+                          borderRadius={20}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
 
-              <div class="crop">
+              <div className="crop">
                 <img src={this.props.finalImage}></img>
               </div>
               <div id="canvas-container">
                 <div>
                   <SignatureCanvas
                     canvasProps={{
-                      width: 800,
-                      height: 400,
+                      width: this.state.canvasWidth,
+                      height: this.state.canvasHeight,
                       className: "sigCanvas",
                     }}
                     ref={(ref) => {
                       this.sigPad = ref;
                     }}
-                    minWidth={this.state.penWidth}
-                    maxWidth={this.state.penWidth}
-                    dotSize={this.state.penWidth}
+                    minWidth={parseInt(this.state.penWidth)}
+                    maxWidth={parseInt(this.state.penWidth)}
+                    dotSize={parseInt(this.state.penWidth)}
                   />
                 </div>
               </div>
@@ -249,7 +279,7 @@ class FinalPublishing extends React.Component {
 
         {!this.state.publishClicked ? (
           <div id="gallery-publish">
-            <div className="selection-title" id="publish-title">
+            <div className="final-selection-title" id="publish-title">
               {this.state.publishQ[this.props.lang]}
             </div>
 
