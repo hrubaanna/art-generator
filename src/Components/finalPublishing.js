@@ -99,10 +99,14 @@ class FinalPublishing extends React.Component {
   checkScreenSize = () => {
     //if screen is smaller than 450px, set largeScreen to false
     let x = window.matchMedia("(max-width: 450px)");
+    let y = window.matchMedia("(min-width: 451px) and (max-width: 1200px)");
     if (x.matches) {
       this.state.largeScreen = false;
       this.state.canvasHeight = 175;
       this.state.canvasWidth = 330;
+    } else if (y.matches) {
+      //tablet size
+      this.state.canvasWidth = 600;
     } else {
       this.state.finalImgWidth = "28em";
     }
@@ -115,7 +119,7 @@ class FinalPublishing extends React.Component {
     finalImage.setAttribute("class", "final-image");
     finalImage.setAttribute(
       "style",
-      `margin: auto; display: block; border-radius: 10px; width: ${this.state.finalImgWidth};`
+      `margin: auto; display: block; border-radius: 10px; width: ${this.state.finalImgWidth}px;`
     );
 
     //place final image on canvas
