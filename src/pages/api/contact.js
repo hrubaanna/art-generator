@@ -63,11 +63,6 @@ export default function (req, res) {
           height="30%"
           width="30%"
         />
-        <img src="TestPhotos/blindspot.png" style="margin: auto;
-        display: block;
-        padding: 5%;
-        height: 25%;
-        width: 25%;"/>
       </div>
     </div>
     `,
