@@ -266,9 +266,9 @@
   }
 
   .btn-signature {
-    padding: 0.5em 1.2em;
+    padding: 0.3em 1.2em;
     border-radius: 10em;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 200;
     margin-top: 4%;
   }
@@ -282,9 +282,9 @@
   }
 
   .btn-signature-cancel {
-    padding: 0.5em 1.2em;
+    padding: 0.2em 1.2em;
     border-radius: 10em;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 200;
     margin-top: 4%;
   }
@@ -384,7 +384,6 @@
 
   #canvas-container {
     margin-top: 90px;
-    border-radius: 30px;
     height: 400px;
     width: 800px;
   }
@@ -447,6 +446,13 @@
   .final-selection-title {
     font-size: 1.5em;
     margin: auto;
+    width: 80%;
+    color: var(--global-text-color);
+  }
+
+  #final-selection-title {
+    font-size: 1.2em;
+    margin: 8% auto -18% auto;
     width: 80%;
     color: var(--global-text-color);
   }
@@ -577,7 +583,6 @@
   .crop {
     width: 100%;
     margin-top: 90px;
-    border-radius: 30px;
   }
 
   .crop img {
@@ -588,7 +593,7 @@
   }
 
   .signature-scheme {
-    width: 90%;
+    width: 100%;
   }
 
   .testToggle {
@@ -914,8 +919,7 @@
     border-radius: 10em;
     font-size: 1.5em;
     font-weight: 200;
-    margin-top: 2%;
-    margin: 0.8em 0.6em;
+    margin-top: 4%;
   }
 
   #changeSigColor {
@@ -931,8 +935,7 @@
     border-radius: 10em;
     font-size: 1.5em;
     font-weight: 200;
-    margin-top: 2%;
-    margin: 0.8em 0.6em;
+    margin-top: 4%;
   }
 
   .btn-restart {
@@ -945,7 +948,7 @@
 
   .signature-btns {
     display: grid;
-    margin: 15%;
+    margin: 1%;
     justify-content: space-evenly;
   }
 
@@ -1097,6 +1100,13 @@
     color: var(--global-text-color);
   }
 
+  #final-selection-title {
+    font-size: 1.5em;
+    margin: 11% auto -11% auto;
+    width: 80%;
+    color: var(--global-text-color);
+  }
+
   .final-image {
     width: 20em;
   }
@@ -1202,18 +1212,17 @@
   .crop {
     width: 100%;
     margin-top: 90px;
-    border-radius: 30px;
   }
 
   .crop img {
     width: auto;
     object-fit: cover;
-    object-position: -356px -348px;
+    object-position: -315px -348px;
     height: 750px;
   }
 
   .signature-scheme {
-    width: 90%;
+    width: 100%;
   }
 
   .testToggle {
@@ -1639,6 +1648,20 @@
     border-radius: 30px;
     padding: 0px;
     width: 800px;
+  }
+
+  .final-selection-title {
+    font-size: 1.5em;
+    margin: auto;
+    width: 80%;
+    color: var(--global-text-color);
+  }
+
+  #final-selection-title {
+    font-size: 2em;
+    margin: 2% auto;
+    width: 80%;
+    color: var(--global-text-color);
   }
 
   #publish-title {
@@ -2267,6 +2290,13 @@
     color: var(--global-text-color);
   }
 
+  #final-selection-title {
+    font-size: 1.5em;
+    margin: auto;
+    width: 80%;
+    color: var(--global-text-color);
+  }
+
   #publish-title {
     margin: 4% auto 1.5% auto;
     max-width: 60%;
@@ -2282,6 +2312,7 @@
 
   #canvas-container {
     width: 83%;
+    margin-left: 8.5%;
     border-radius: 30px;
   }
 
@@ -2496,7 +2527,7 @@
   .crop img {
     width: 1024px;
     height: 1024px;
-    margin: -77% 0 0 -27%;
+    margin: -80.4% 0 0 -32%;
   }
 
   .signature-scheme {

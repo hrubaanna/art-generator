@@ -8,9 +8,9 @@ const { responses } = require("../Components/assembler_Obj");
 class FinalPublishing extends React.Component {
   state = {
     signatureText: {
-      ENG: "Add a signature to your artwork",
-      CZ: "Přidat k dílu podpis",
-      DE: "Fügen Sie Ihrem Kunstwerk eine Signatur hinzu",
+      ENG: "Draw to add your signature",
+      CZ: "Nakreslete si svůj podpis",
+      DE: "Zeichnen Sie Ihre Unterschrift",
     },
     sigIntensity: {
       ENG: "set pen intensity",
@@ -191,12 +191,12 @@ class FinalPublishing extends React.Component {
           <div id="signature-page">
             {/* <img className="final-image" src={this.props.finalImage} /> */}
             <div className="signature-scheme">
+              <h1 id="final-selection-title">
+                {this.state.signatureText[this.props.lang]}
+              </h1>
               {this.state.largeScreen ? (
                 //only show signature details if screen is large
                 <div>
-                  <h1 className="final-selection-title">
-                    {this.state.signatureText[this.props.lang]}
-                  </h1>
                   <div className="signature-props">
                     <div>
                       <h2 className="intensityTitle">
