@@ -34,8 +34,19 @@ class GalleryPageNR extends React.Component {
   removePreviousImage = () => {
     //if there were images previously shown on the screen, remove them
     let images = document.getElementsByClassName("gallery-item-NR");
-    while (images.length > 0) {
-      images[0].parentNode.removeChild(images[0]);
+    if (images.length > 0) {
+      // fadeOut current images
+      for (let i = 0; i < images.length; i++) {
+        images[i].style.opacity = "0";
+        // images.style.backgroundColor = "rgb(248, 225, 203)";
+      }
+
+      // after fadeOut remove current Images to make space for new ones
+      setTimeout(() => {
+        while (images.length > 0) {
+          images[0].parentNode.removeChild(images[0]);
+        }
+      }, 1200);
     }
   };
 
@@ -187,30 +198,6 @@ class GalleryPageNR extends React.Component {
           galleryItem.appendChild(arpieceContent);
 
           galleryList.appendChild(galleryItem);
-        } else {
-          //if image already exists, just replace its src and texts
-          let galleryImage = document.getElementClassName(`gallery_item_NR`);
-          let gallerySignature = document.getElementById(`signature_image_NR`);
-          let contentText = document.querySelector(".content_text");
-          let contentAuthour = document.querySelector(".content_author");
-
-          setTimeout(() => {
-            //replace the text and sources
-            galleryImage.src = artpiece.img_link;
-            gallerySignature.src = artpiece.signature;
-            contentText.innerHTML = artpiece.content;
-            contentAuthour.innerHTML = `Author: ${this.getArtistName(
-              artpiece
-            )}`;
-          }, 1200);
-
-          numLoaded += 2;
-
-          galleryImage.style.opacity = "0";
-
-          setTimeout(() => {
-            galleryImage.style.opacity = "1";
-          }, 1200);
         }
       });
       resolve();
