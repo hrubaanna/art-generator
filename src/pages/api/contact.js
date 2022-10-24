@@ -11,15 +11,56 @@ export default function (req, res) {
     secure: true,
   });
 
-  const greetingBlock =
-    req.body.name === "" ? "Hello, " : `Dear ${req.body.name},`;
+  let greetingBlock = "";
+  let textBlock1 = "";
+  let textBlock2 = "";
+  let textBlock3 = "";
+  let textBlock4 = "";
 
-  const blindspotLogoSrc = "TestPhotos/blindspot_logo.png";
+  const lang = req.body.lang;
+  if (lang == "ENG") {
+    greetingBlock =
+      req.body.name === ""
+        ? "Congratulations, "
+        : `Congratulations ${req.body.name},`;
+
+    textBlock1 =
+      "You have just become part of an exhibition featuring artists such as Raphael, Sandro Botticelli, Albrecht Dürer, Caspar David Friedrich, Rembrandt and Johannes Vermeer.";
+    textBlock2 =
+      " Your art will be exhibited in a unique virtual gallery that will take you away from the busy atmosphere of the it-sa fair for a while and guide you through the artworks of the Dresden State Art Collections (SKD).";
+    textBlock3 =
+      "So come and see your unique creation that combines the latest technology, art and interactivity.";
+    textBlock4 =
+      "You will find your painting at the Blindspot by Prozeta booth in Hall 7A booth 604.";
+  } else if (lang == "CZE") {
+    greetingBlock =
+      req.body.name === "" ? "Gratulujeme, " : `Gratulujeme ${req.body.name},`;
+
+    textBlock1 =
+      "Právě jste se stali součástí výstavy, kde se nachází umělci jako Raphael, Sandro Botticelli, Albrecht Dürer, Caspar David Friedrich, Rembrandt nebo Johannes Vermeer.";
+    textBlock2 =
+      "Vaše umění bude vystaveno v jedinečné virtuální galerii, která vás na chvíli odvede od rušného veletržního dění veletrhu it-sa a provede vás uměleckými díly Státních uměleckých sbírek Drážďany (SKD).";
+    textBlock3 =
+      "Přijďte se tedy podívat na váš jedinečný výtvor, jež spojuje technologii, kulturu a interaktivitu.";
+    textBlock4 =
+      "Váš obraz najdete stánku Blindspot by Prozeta v hale 7A stánek 604.";
+  } else {
+    greetingBlock = "Herzlichen Glückwunsch!";
+
+    textBlock1 =
+      "Sie sind gerade Teil einer Ausstellung geworden, in der Künstler wie Raffael, Sandro Botticelli, Albrecht Dürer, Caspar David Friedrich, Rembrandt und Johannes Vermeer vertreten sind.";
+    textBlock2 =
+      "Ihre Kunst wird in einer einzigartigen virtuellen Galerie ausgestellt, die Sie für eine Weile aus der geschäftigen Atmosphäre der it-sa herausholt und Sie durch die Kunstwerke der Staatlichen Kunstsammlungen Dresden (SKD) führt.";
+    textBlock3 =
+      "Kommen Sie also zu uns und sehen Sie sich Ihre einzigartige Kreation an, die modernste Technologie, Kunst und Interaktivität vereint.";
+    textBlock4 =
+      "Sie finden Ihr Gemälde am Stand von Blindspot by Prozeta in Halle 7A Stand 604.";
+  }
 
   const mailData = {
     from: "01aesthetics@email.cz",
     to: req.body.email,
-    subject: `Your Artwork from the Blindspot Art Generator`,
+    subject: `Blindspot by Prozeta`,
     html: `
     <div
       style="
@@ -36,20 +77,26 @@ export default function (req, res) {
           display: block;
         "
       >
-        <h1 style="padding-top: 2%; text-align: center; color: rgb(0, 171, 142)">
+        <h2 style="padding-top: 2%; text-align: center; color: rgb(0, 171, 142); ">
         ${greetingBlock}
-        </h1>
-        <h2 style="margin-top: 5%; text-align: center; color: #000000">
-          Thank you for using the Blindspot (booth 7A) art generator
         </h2>
-        <hr style="width: 70%" />
-        <p style="text-align: center; color: rgb(0, 141, 170)">
-          Take a look at the piece you created:
+        <h3 style="margin-top: 5%; text-align: center; color: #000000;">
+          ${textBlock1}
+        </h3>
+        <p style="text-align: center; color: #000000">
+        ${textBlock2}
         </p>
+        <p style="text-align: center; color: #000000>
+        ${textBlock3}
+        </p>
+        <p style="text-align: center; color: #000000>
+        ${textBlock4}
+        </p>
+        <hr style="width: 70%" />
         <p
           style="
             text-align: center;
-            color: #000000;
+            color: rgb(0,141,170);
             max-width: 70%;
             margin: auto;
           "

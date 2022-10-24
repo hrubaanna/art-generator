@@ -17,11 +17,11 @@ class GalleryPageNR extends React.Component {
   };
 
   componentDidMount() {
+    document.body.style.backgroundColor = "black";
     document.body.style.overflow = "visible";
     this.removePreviousImage();
     this.setState({ art: [] });
     this.setState({ artObjects: [] });
-    document.body.style.backgroundColor = "rgb(23, 54, 119)";
     this.displayImages();
     setInterval(() => {
       this.removePreviousImage();
@@ -36,8 +36,10 @@ class GalleryPageNR extends React.Component {
     let images = document.getElementsByClassName("gallery-item-NR");
     if (images.length > 0) {
       // fadeOut current images
+      let frames = document.getElementsByClassName("frame");
       for (let i = 0; i < images.length; i++) {
         images[i].style.opacity = "0";
+        frames[i].style.opacity = "0";
         // images.style.backgroundColor = "rgb(248, 225, 203)";
       }
 
@@ -147,6 +149,10 @@ class GalleryPageNR extends React.Component {
 
     let galleryList = document.createElement("ul");
     galleryList.style.visibility = "hidden";
+    let frames = document.getElementsByClassName("frame");
+    for (let i = 0; i < frames.length; i++) {
+      frames[i].style.opacity = "1";
+    }
 
     new Promise((resolve) => {
       this.state.artObjects.forEach((artpiece, index) => {
@@ -163,6 +169,10 @@ class GalleryPageNR extends React.Component {
           galleryImage.className = "final-image-NR";
           galleryImage.id = `final_image_${index}`;
           galleryItem.appendChild(galleryImage);
+          //frames images
+          for (let i = 0; i < frames.length; i++) {
+            frames[i].style.opacity = "1";
+          }
 
           galleryImage.onload = () => {
             numLoaded++;
@@ -207,6 +217,9 @@ class GalleryPageNR extends React.Component {
         if (numLoaded === imagesToLoad) {
           document.body.appendChild(galleryList);
           galleryList.style.visibility = "visible";
+          for (let i = 0; i < frames.length; i++) {
+            frames[i].style.opacity = "1";
+          }
           clearInterval(this.state.loadingTimeout);
         }
       }, 500);
@@ -224,9 +237,6 @@ class GalleryPageNR extends React.Component {
   render() {
     return (
       <div>
-        <video autoPlay muted loop id="video-background">
-          <source src="TestPhotos/NorimberkGradient.mp4" type="video/mp4" />
-        </video>
         <img src={"TestPhotos/frame.png"} className="frame" id="frame1" />
         <img src={"TestPhotos/frame.png"} className="frame" id="frame2" />
       </div>

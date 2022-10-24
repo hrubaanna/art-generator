@@ -50,12 +50,12 @@ class FinalPublishing extends React.Component {
     DoPublish: {
       ENG: "publish to gallery",
       CZ: "Vystavit v galerii",
-      DE: "DE Vystavit v galerii",
+      DE: "in Galerie veröffentlichen",
     },
     NotPublish: {
       ENG: "do not publish",
       CZ: "Nevystavovat",
-      DE: "DE Nevystavovat",
+      DE: "nicht veröffentlichen",
     },
     thanks: {
       ENG: "Thank you for your contribution!",
@@ -119,7 +119,7 @@ class FinalPublishing extends React.Component {
     finalImage.setAttribute("class", "final-image");
     finalImage.setAttribute(
       "style",
-      `margin: auto; display: block; border-radius: 10px; width: ${this.state.finalImgWidth}px;`
+      `border-radius: 10px; width: ${this.state.finalImgWidth}px;`
     );
 
     //place final image on canvas
