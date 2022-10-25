@@ -3268,18 +3268,23 @@ code {
   left: 20%;
 }
 
-.QR-img {
-  width: 10%;
+.NR-QR-div {
   position: fixed;
-  right: 5%;
+  width: 110px;
   bottom: 1%;
+  right: 1%;
+}
+
+.QR-img {
+  width: 80%;
+  display: block;
+  margin: auto;
 }
 
 .QR-text {
   color: white;
-  position: fixed;
-  bottom: 4%;
-  right: 2%;
+  margin-bottom: -50%;
+  font-size: 1.3em;
 }
 
 /* END gallery page NR */
