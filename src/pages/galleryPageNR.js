@@ -89,7 +89,7 @@ class GalleryPageNR extends React.Component {
   getDBRandomArt = () => {
     return new Promise((resolve, reject) => {
       // get the artwork saved in mongo DB
-      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
+      fetch(`/api/artworkNR?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
         method: "GET",
       })
         .then((res) => res.json())
@@ -237,6 +237,11 @@ class GalleryPageNR extends React.Component {
   render() {
     return (
       <div>
+        <p className="NR-text">
+          these pieces were created by you using artifical intelligence
+        </p>
+        <p className="QR-text">create your own:</p>
+        <img src={"TestPhotos/QR.png"} className="QR-img" />
         <img src={"TestPhotos/frame.png"} className="frame" id="frame1" />
         <img src={"TestPhotos/frame.png"} className="frame" id="frame2" />
       </div>

@@ -3261,6 +3261,27 @@ code {
   width: 80%;
 }
 
+.NR-text {
+  color: white;
+  position: fixed;
+  top: 0%;
+  left: 20%;
+}
+
+.QR-img {
+  width: 10%;
+  position: fixed;
+  right: 5%;
+  bottom: 1%;
+}
+
+.QR-text {
+  color: white;
+  position: fixed;
+  bottom: 4%;
+  right: 2%;
+}
+
 /* END gallery page NR */
 
 .final-query {
