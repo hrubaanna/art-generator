@@ -89,7 +89,7 @@ class GalleryPageNR extends React.Component {
   getDBRandomArt = () => {
     return new Promise((resolve, reject) => {
       // get the artwork saved in mongo DB
-      fetch(`/api/artworkNR?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
+      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
         method: "GET",
       })
         .then((res) => res.json())

@@ -42,7 +42,7 @@ async function getArt(req, res) {
     const art = await db
       .collection("art")
       .find({}, { sort: { created_at: -1 } })
-      .limit(2)
+      .limit(numDocs)
       .toArray();
 
     // const art = await db
