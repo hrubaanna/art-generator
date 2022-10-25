@@ -8,6 +8,7 @@ import React from "react";
 class GalleryPageNR extends React.Component {
   state = {
     art: [],
+    toggleArt: false,
     artObjects: [],
     DBLoaded: false,
     loadingTimeout: null,
@@ -87,9 +88,18 @@ class GalleryPageNR extends React.Component {
   };
 
   getDBRandomArt = () => {
+    let apiLink = "artwork";
+    if (this.state.toggleArt) {
+      apiLink = "artwork";
+      this.state.toggleArt = false;
+    } else {
+      apiLink = "artworkNR";
+      this.state.toggleArt = true;
+    }
+
     return new Promise((resolve, reject) => {
       // get the artwork saved in mongo DB
-      fetch(`/api/artwork?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
+      fetch(`/api/${apiLink}?q=${this.state.NUM_IMAGES_IN_BATCH}`, {
         method: "GET",
       })
         .then((res) => res.json())

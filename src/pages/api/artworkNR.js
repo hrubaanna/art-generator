@@ -41,16 +41,12 @@ async function getArt(req, res) {
     let { db } = await connectToDatabase();
     const art = await db
       .collection("art")
-      .find({}, { sort: { created_at: -1 } })
+      .find()
       .limit(numDocs)
+      .sort({ created_at: -1 })
       .toArray();
 
-    // const art = await db
-    //   .collection("art")
-    //   .aggregate([{ $sample: { size: numDocs } }])
-    //   .sort({ createdAt: -1 })
-    //   .toArray();
-
+    //.find({}, { sort: { created_at: -1 } })
     //art = { lastArt, randomArt };
 
     res.json(art);
