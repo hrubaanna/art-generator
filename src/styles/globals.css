@@ -47,7 +47,7 @@
 
 /* BLINDSPOT COLOUR SCHEME */
 /* Cyan */
-/* background-color: rgb(0, 171, 142);  */
+/* background-color: rgb(0, 171, 142); */
 /* Blue */
 /* background-color: (0, 141, 170); */
 /* Combo */
@@ -1327,7 +1327,7 @@
   }
 }
 
-/* Tablets  */
+/* Tablets */
 @media screen and (min-width: 451px) and (max-width: 1200px) {
   h1,
   h2 {
@@ -2655,7 +2655,6 @@
   }
 }
 
-html,
 body {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -3183,7 +3182,7 @@ code {
   z-index: 3;
   animation: fadeIn 1s;
   position: relative;
-  transition: all 3s;
+  transition: all 0.5s;
 }
 
 #frame1 {
@@ -3220,7 +3219,7 @@ code {
 .gallery-item-NR {
   animation: fadeIn 1s;
   position: relative;
-  transition: all 2s;
+  transition: all 0.5s;
 }
 
 #signature_image_NR {
@@ -3530,9 +3529,9 @@ input[type="range"]::-ms-track {
 #wrapper-final img {
   /* position: relative; */
   /* width: 12em;
-  height: 12em; */
+ height: 12em; */
   /* margin: 5%;
-  margin-bottom: 1%; */
+ margin-bottom: 1%; */
 }
 
 #heading-final {
@@ -3602,3 +3601,13 @@ input[type="range"]::-ms-track {
 }
 
 /* END Singature check page */
+
+#generationsDiv tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+#generationsDiv {
+  margin: auto;
+  margin-top: 5%;
+  border: 2px solid black;
+}

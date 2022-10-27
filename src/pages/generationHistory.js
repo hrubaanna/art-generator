@@ -11,7 +11,6 @@ class GenerationHistory extends React.Component {
   };
 
   componentDidMount() {
-    document.body.setAttribute("style", "overflow-y: visible !important;");
     this.loadGenerations();
   }
 
@@ -118,6 +117,13 @@ class GenerationHistory extends React.Component {
   render() {
     return (
       <div>
+        <button
+          onClick={() => {
+            document.body.style.overflowY = "visible";
+          }}
+        >
+          Povolit Scroll
+        </button>
         <table id="generationsDiv">
           <tr id="headerRow">
             <th>Content:</th>
